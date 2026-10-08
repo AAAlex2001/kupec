@@ -1,0 +1,74 @@
+@use "shared/styles/layout" as *;
+
+.account {
+  @include gutter;
+
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  padding-top: 20px;
+  padding-bottom: 32px;
+  gap: 24px;
+
+  width: 100%;
+}
+
+.content {
+  display: flex;
+  flex: 1 1 0;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 24px;
+
+  min-width: 0;
+}
+
+.head {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+
+  width: 100%;
+}
+
+.guest {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.text {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+
+  color: #70757f;
+}
+
+@media (min-width: 768px) {
+  .account {
+    padding-top: 24px;
+    padding-bottom: 40px;
+  }
+}
+
+@media (min-width: 1440px) {
+  .account {
+    flex-direction: row;
+    align-items: flex-start;
+    padding-top: 32px;
+    gap: 32px;
+  }
+
+  .account > aside {
+    flex: none;
+    width: 240px;
+  }
+}

@@ -1,0 +1,143 @@
+@use "shared/styles/colors" as *;
+
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 16px;
+
+  min-width: 0;
+}
+
+.profile {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.person {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  gap: 4px;
+
+  min-width: 0;
+}
+
+.name {
+  max-width: 100%;
+
+  font-family: "Inter";
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 20px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+
+  color: #1a1a1a;
+  overflow: hidden;
+}
+
+.city {
+  font-family: "Inter";
+  font-size: 12px;
+  line-height: 16px;
+
+  color: #70757f;
+}
+
+.nav {
+  display: none;
+}
+
+.item {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  padding: 0 12px;
+  gap: 12px;
+
+  width: 100%;
+  height: 44px;
+
+  font-family: "Inter";
+  font-size: 14px;
+  line-height: 20px;
+  text-align: left;
+  text-decoration: none;
+
+  color: #1a1a1a;
+  background: #ffffff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition:
+    color 0.15s ease,
+    background-color 0.15s ease;
+}
+
+.item:hover {
+  background: #f5f6f8;
+}
+
+.item:focus-visible {
+  outline: 2px solid $accent;
+  outline-offset: -2px;
+}
+
+.item:disabled {
+  cursor: default;
+  opacity: 0.5;
+}
+
+.icon {
+  flex: none;
+  width: 24px;
+  height: 24px;
+
+  color: #70757f;
+}
+
+.label {
+  flex: 1 1 0;
+}
+
+.danger,
+.danger .icon {
+  color: #e5243b;
+}
+
+.danger:hover {
+  background: #fff1f3;
+}
+
+.active,
+.active:hover {
+  color: $accent-text;
+  background: $accent-soft;
+}
+
+.active .icon {
+  color: $accent-text;
+}
+
+@media (min-width: 1440px) {
+  .sidebar {
+    gap: 8px;
+  }
+
+  .profile {
+    padding-bottom: 16px;
+  }
+
+  .logout,
+  .segments {
+    display: none;
+  }
+
+  .nav {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+}

@@ -1,0 +1,40 @@
+@use "shared/styles/colors" as *;
+
+.saved {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 48px 16px;
+  gap: 16px;
+
+  text-align: center;
+}
+
+.icon {
+  width: 32px;
+  height: 32px;
+
+  color: $accent;
+}
+
+.text {
+  max-width: 480px;
+
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  overflow-wrap: anywhere;
+
+  color: #70757f;
+}
+
+.buttons {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+}

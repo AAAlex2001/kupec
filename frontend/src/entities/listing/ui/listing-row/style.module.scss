@@ -1,0 +1,130 @@
+@use "shared/styles/colors" as *;
+
+.row {
+  display: grid;
+  grid-template-columns: 96px minmax(0, 1fr);
+  grid-template-areas:
+    "photo info"
+    "actions actions";
+  align-items: center;
+  padding: 8px 0;
+  gap: 12px 16px;
+
+  background: #ffffff;
+}
+
+.photo {
+  grid-area: photo;
+  position: relative;
+
+  width: 96px;
+  height: 72px;
+
+  background: #f5f6f8;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.image {
+  object-fit: cover;
+}
+
+.info {
+  grid-area: info;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+
+  min-width: 0;
+}
+
+.title {
+  max-width: 100%;
+
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 15px;
+  line-height: 20px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+
+  color: $accent-text;
+  overflow: hidden;
+}
+
+.price {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 800;
+  font-size: 18px;
+  line-height: 24px;
+
+  color: #1a1a1a;
+}
+
+.stats {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 16px;
+}
+
+.stat {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 4px;
+
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 16px;
+
+  color: #70757f;
+}
+
+.stat svg {
+  width: 14px;
+  height: 14px;
+}
+
+.actions {
+  grid-area: actions;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.actions > * {
+  flex: 1 1 calc(50% - 4px);
+}
+
+@media (min-width: 768px) {
+  .row {
+    grid-template-columns: 132px minmax(0, 1fr) 184px;
+    grid-template-areas: "photo info actions";
+  }
+
+  .photo {
+    width: 132px;
+    height: 96px;
+  }
+
+  .price {
+    font-size: 22px;
+    line-height: 28px;
+  }
+
+  .actions {
+    flex-direction: column;
+    flex-wrap: nowrap;
+  }
+
+  .actions > * {
+    flex: none;
+  }
+}

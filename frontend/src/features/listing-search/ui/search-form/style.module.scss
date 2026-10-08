@@ -1,0 +1,96 @@
+@use "shared/styles/colors" as *;
+
+.form {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+
+  min-width: 0;
+  height: 44px;
+
+  border: 2px solid $accent;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.form:focus-within {
+  box-shadow: 0 0 0 3px $accent-ring;
+}
+
+.field {
+  display: flex;
+  flex: 1 1 0;
+  flex-direction: row;
+  align-items: center;
+  padding: 0 12px;
+  gap: 8px;
+
+  min-width: 0;
+
+  cursor: text;
+}
+
+.icon {
+  flex: none;
+  width: 20px;
+  height: 20px;
+
+  color: #70757f;
+}
+
+.input {
+  flex: 1 1 0;
+
+  min-width: 0;
+
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+
+  color: #1a1a1a;
+  background: transparent;
+  border: none;
+  outline: none;
+}
+
+.input::placeholder {
+  color: #70757f;
+}
+
+.input::-webkit-search-cancel-button {
+  display: none;
+}
+
+.submit {
+  display: flex;
+  flex: none;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+
+  width: 92px;
+
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 20px;
+
+  color: #ffffff;
+  background: $accent;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+
+.submit:hover {
+  background: $accent-hover;
+}
+
+.submit:focus-visible {
+  outline: 2px solid #ffffff;
+  outline-offset: -4px;
+}

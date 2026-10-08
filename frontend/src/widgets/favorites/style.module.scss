@@ -1,0 +1,28 @@
+.favorites {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+
+  width: 100%;
+}
+
+.head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.count,
+.hint {
+  font-family: "Inter";
+  font-size: 14px;
+  line-height: 20px;
+
+  color: #70757f;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 24px 12px;
+}

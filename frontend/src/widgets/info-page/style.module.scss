@@ -1,0 +1,68 @@
+@use "shared/styles/layout" as *;
+@use "shared/styles/colors" as *;
+
+.page {
+  @include gutter;
+
+  display: flex;
+  flex-direction: column;
+  padding-top: 20px;
+  padding-bottom: 40px;
+  gap: 24px;
+}
+
+.head {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.lead,
+.ctaText {
+  font-family: "Inter";
+  font-size: 14px;
+  line-height: 20px;
+
+  color: #70757f;
+}
+
+.columns {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+
+  min-width: 0;
+  max-width: 800px;
+}
+
+.cta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 24px;
+  gap: 16px;
+
+  background: $accent-soft;
+  border-radius: 8px;
+}
+
+@media (min-width: 1440px) {
+  .columns {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+
+  .aside {
+    position: sticky;
+    top: 24px;
+    flex: none;
+
+    width: 240px;
+  }
+}

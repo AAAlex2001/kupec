@@ -1,0 +1,33 @@
+.head {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.title {
+  font-family: "Inter";
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 28px;
+  overflow-wrap: anywhere;
+
+  color: #1a1a1a;
+}
+
+.meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px 16px;
+
+  font-family: "Inter";
+  font-size: 12px;
+  line-height: 16px;
+
+  color: #70757f;
+}
+
+.place {
+  font-size: 14px;
+  line-height: 20px;
+}

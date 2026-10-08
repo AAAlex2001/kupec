@@ -1,0 +1,27 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  padding: 12px 16px;
+  gap: 4px;
+
+  border: 1px solid #f5f6f8;
+  border-radius: 16px;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.input {
+  flex: 1 1 auto;
+}
+
+.error {
+  font-family: "Inter";
+  font-size: 12px;
+  line-height: 16px;
+
+  color: #e5243b;
+}

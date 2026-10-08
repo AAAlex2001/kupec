@@ -1,0 +1,17 @@
+@use "shared/styles/colors" as *;
+
+.badge {
+  flex: none;
+  padding: 2px 7px;
+  min-width: 20px;
+
+  font-family: "Inter";
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 16px;
+  text-align: center;
+
+  color: #ffffff;
+  background: $accent;
+  border-radius: 10px;
+}

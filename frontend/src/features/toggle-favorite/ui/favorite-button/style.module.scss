@@ -1,0 +1,38 @@
+@use "shared/styles/colors" as *;
+
+.heart {
+  display: flex;
+  margin: -4px;
+  padding: 4px;
+
+  color: #1a1a1a;
+  background: transparent;
+  border: none;
+  border-radius: 100px;
+  cursor: pointer;
+  transition:
+    color 0.15s ease,
+    background-color 0.15s ease;
+}
+
+.heart svg {
+  width: 24px;
+  height: 24px;
+}
+
+.heart:hover {
+  color: $favorite;
+  background: $favorite-soft;
+}
+
+.heart:focus-visible {
+  outline: 2px solid $accent;
+}
+
+.active {
+  color: $favorite;
+}
+
+.active svg path {
+  fill: currentColor;
+}

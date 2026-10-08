@@ -1,0 +1,55 @@
+@use "shared/styles/colors" as *;
+
+.notice {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 12px;
+  gap: 8px;
+
+  border-radius: 8px;
+}
+
+.notice svg {
+  flex: none;
+  width: 20px;
+  height: 20px;
+}
+
+.text {
+  flex: 1 1 0;
+
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 16px;
+
+  color: #1a1a1a;
+}
+
+.success {
+  background: $accent-soft;
+}
+
+.success svg {
+  color: $accent-text;
+}
+
+.error {
+  background: #fff1f3;
+}
+
+.error svg,
+.error .text {
+  color: #e5243b;
+}
+
+.info {
+  background: #f5f6f8;
+}
+
+.info svg {
+  color: #70757f;
+}

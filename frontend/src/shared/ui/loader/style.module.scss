@@ -1,0 +1,24 @@
+@use "shared/styles/colors" as *;
+
+.loader {
+  display: flex;
+  flex: 1 1 auto;
+  justify-content: center;
+  align-items: center;
+  align-self: stretch;
+
+  width: 100%;
+  min-height: 240px;
+}
+
+.page {
+  min-height: 60dvh;
+}
+
+.spinner {
+  width: 32px;
+  height: 32px;
+
+  color: $accent;
+  border-width: 3px;
+}

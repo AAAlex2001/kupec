@@ -1,0 +1,53 @@
+.empty {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 32px 16px;
+  gap: 16px;
+
+  width: 100%;
+  min-height: 240px;
+}
+
+.icon {
+  display: flex;
+
+  color: #70757f;
+}
+
+.icon svg {
+  width: 24px;
+  height: 24px;
+}
+
+.title {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 24px;
+  text-align: center;
+
+  color: #1a1a1a;
+}
+
+.text {
+  max-width: 480px;
+
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  text-align: center;
+
+  color: #70757f;
+}
+
+@media (min-width: 768px) {
+  .empty {
+    padding: 32px;
+  }
+}

@@ -1,0 +1,44 @@
+@use "shared/styles/colors" as *;
+
+.avatar {
+  display: flex;
+  flex: none;
+  justify-content: center;
+  align-items: center;
+
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 24px;
+
+  color: $accent-text;
+  background: $accent-soft;
+  border-radius: 100px;
+  overflow: hidden;
+}
+
+.sm {
+  width: 28px;
+  height: 28px;
+
+  font-size: 12px;
+  line-height: 16px;
+}
+
+.md {
+  width: 48px;
+  height: 48px;
+}
+
+.lg {
+  width: 64px;
+  height: 64px;
+}
+
+.photo {
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+}

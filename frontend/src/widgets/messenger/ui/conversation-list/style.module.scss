@@ -1,0 +1,23 @@
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+
+  min-width: 0;
+}
+
+.items {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+
+  border-left: 1px solid #f5f6f8;
+}
+
+.empty {
+  font-family: "Inter";
+  font-size: 14px;
+  line-height: 20px;
+
+  color: #70757f;
+}

@@ -1,0 +1,58 @@
+@use "shared/styles/colors" as *;
+
+.segments {
+  display: flex;
+  padding: 4px;
+  gap: 4px;
+
+  background: $accent-soft;
+  border-radius: 12px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.segments::-webkit-scrollbar {
+  display: none;
+}
+
+.segment {
+  display: flex;
+  flex: 1 0 auto;
+  justify-content: center;
+  align-items: center;
+  padding: 0 16px;
+  gap: 6px;
+
+  height: 40px;
+
+  font-family: "Inter";
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  white-space: nowrap;
+  text-decoration: none;
+
+  color: #70757f;
+  border-radius: 8px;
+  transition:
+    color 0.15s ease,
+    background-color 0.15s ease;
+}
+
+.segment:hover {
+  color: #1a1a1a;
+}
+
+.segment:focus-visible {
+  outline: 2px solid $accent;
+  outline-offset: -2px;
+}
+
+.active,
+.active:hover {
+  font-weight: 600;
+
+  color: $accent-text;
+  background: #ffffff;
+  box-shadow: 0 2px 8px rgba(26, 26, 26, 0.08);
+}

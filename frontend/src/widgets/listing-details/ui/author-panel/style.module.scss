@@ -1,0 +1,66 @@
+@use "shared/styles/colors" as *;
+
+.aside {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.panel {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 24px;
+  gap: 20px;
+
+  border: 1px solid #e2e5ea;
+  border-radius: 8px;
+}
+
+.price {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+
+  font-family: "Inter";
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 24px;
+
+  color: #1a1a1a;
+}
+
+.unit {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+
+  color: #70757f;
+}
+
+.chip {
+  padding: 8px 12px;
+
+  font-family: "Inter";
+  font-size: 14px;
+  line-height: 20px;
+
+  color: $accent-text;
+  background: $accent-soft;
+  border-radius: 8px;
+}
+
+.actions {
+  display: flex;
+  flex-direction: column;
+  align-self: stretch;
+  gap: 8px;
+}
+
+.note {
+  font-family: "Inter";
+  font-size: 12px;
+  line-height: 16px;
+
+  color: #70757f;
+}

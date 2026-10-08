@@ -1,0 +1,43 @@
+.messenger {
+  display: flex;
+  gap: 24px;
+
+  width: 100%;
+}
+
+.chat {
+  display: none;
+  flex: 1 1 auto;
+  flex-direction: column;
+
+  min-width: 0;
+  height: calc(100dvh - 240px);
+  min-height: 480px;
+}
+
+.list {
+  flex: 1 1 auto;
+}
+
+.opened .chat {
+  display: flex;
+}
+
+.opened .list {
+  display: none;
+}
+
+@media (min-width: 1440px) {
+  .chat,
+  .opened .chat {
+    display: flex;
+  }
+
+  .list,
+  .opened .list {
+    display: block;
+    flex: none;
+
+    width: 260px;
+  }
+}

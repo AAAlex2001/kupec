@@ -1,0 +1,42 @@
+.carousel {
+  display: flex;
+  flex-direction: column;
+  padding-top: 20px;
+  gap: 12px;
+
+  min-width: 0;
+}
+
+.head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+
+  min-height: 32px;
+}
+
+.title {
+  font-family: "Inter";
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 22px;
+
+  color: #1a1a1a;
+}
+
+.arrows {
+  display: flex;
+  gap: 8px;
+}
+
+.slide {
+  display: flex;
+
+  min-width: 270px;
+  max-width: 270px;
+}
+
+.slide > * {
+  flex: 1 1 auto;
+}

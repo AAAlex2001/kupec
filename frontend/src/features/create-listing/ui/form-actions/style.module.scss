@@ -1,0 +1,30 @@
+.section {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 16px;
+}
+
+.terms {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 16px;
+
+  color: #70757f;
+}
+
+.buttons {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 12px;
+}
+
+@media (min-width: 768px) {
+  .buttons {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+}

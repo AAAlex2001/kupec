@@ -1,0 +1,65 @@
+@use "shared/styles/colors" as *;
+
+.field {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 0 12px;
+  gap: 8px;
+
+  min-width: 0;
+  height: 44px;
+
+  background: #ffffff;
+  border: 1px solid #e2e5ea;
+  border-radius: 8px;
+  transition: border-color 0.15s ease;
+}
+
+.field:focus-within {
+  border-color: $accent;
+}
+
+.readOnly,
+.readOnly:focus-within {
+  background: #f5f6f8;
+  border-color: #e2e5ea;
+}
+
+.invalid,
+.invalid:focus-within {
+  border-color: #e5243b;
+}
+
+.field svg {
+  flex: none;
+  width: 20px;
+  height: 20px;
+
+  color: #70757f;
+}
+
+.input {
+  flex: 1 1 auto;
+
+  width: 100%;
+  min-width: 0;
+
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  text-overflow: ellipsis;
+
+  color: #1a1a1a;
+  background: transparent;
+  border: none;
+  outline: none;
+}
+
+.input::placeholder {
+  color: #70757f;
+  opacity: 1;
+}

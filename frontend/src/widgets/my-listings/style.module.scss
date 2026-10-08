@@ -1,0 +1,31 @@
+@use "shared/styles/colors" as *;
+
+.listings {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 20px;
+
+  width: 100%;
+}
+
+.search {
+  padding: 0 16px;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 4px;
+}
+
+.hint {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 18px;
+
+  color: #70757f;
+}

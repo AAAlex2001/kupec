@@ -1,0 +1,30 @@
+.author {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+
+  min-width: 0;
+}
+
+.name {
+  font-family: "Inter";
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 20px;
+
+  color: #1a1a1a;
+}
+
+.since {
+  font-family: "Inter";
+  font-size: 12px;
+  line-height: 16px;
+
+  color: #70757f;
+}

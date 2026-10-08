@@ -1,0 +1,14 @@
+@mixin gutter {
+  padding-right: 16px;
+  padding-left: 16px;
+
+  @media (min-width: 768px) {
+    padding-right: max(24px, calc((100% - 720px) / 2));
+    padding-left: max(24px, calc((100% - 720px) / 2));
+  }
+
+  @media (min-width: 1440px) {
+    padding-right: max(40px, calc((100% - 1360px) / 2));
+    padding-left: max(40px, calc((100% - 1360px) / 2));
+  }
+}

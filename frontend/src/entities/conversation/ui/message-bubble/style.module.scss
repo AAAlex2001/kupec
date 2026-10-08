@@ -1,0 +1,44 @@
+@use "shared/styles/colors" as *;
+
+.row {
+  display: flex;
+}
+
+.mine {
+  justify-content: flex-end;
+}
+
+.bubble {
+  display: flex;
+  flex-direction: column;
+  padding: 10px 14px;
+  gap: 4px;
+
+  max-width: min(480px, 85%);
+
+  font-family: "Inter";
+
+  background: #f5f6f8;
+  border-radius: 8px;
+}
+
+.mine .bubble {
+  background: $accent-soft;
+}
+
+.text {
+  font-size: 14px;
+  line-height: 20px;
+  white-space: pre-line;
+  overflow-wrap: anywhere;
+
+  color: #1a1a1a;
+}
+
+.time {
+  font-size: 11px;
+  line-height: 16px;
+  text-align: right;
+
+  color: #70757f;
+}

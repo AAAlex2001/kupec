@@ -1,0 +1,13 @@
+.select {
+  position: relative;
+
+  min-width: 0;
+}
+
+.chevron {
+  transition: transform 0.15s ease;
+}
+
+.open .chevron {
+  transform: rotate(180deg);
+}

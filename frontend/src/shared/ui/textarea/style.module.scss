@@ -1,0 +1,37 @@
+@use "shared/styles/colors" as *;
+
+.textarea {
+  box-sizing: border-box;
+  display: block;
+  padding: 12px;
+
+  width: 100%;
+  min-height: 116px;
+
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+
+  color: #1a1a1a;
+  background: #ffffff;
+  border: 1px solid #e2e5ea;
+  border-radius: 8px;
+  outline: none;
+  resize: vertical;
+  transition: border-color 0.15s ease;
+}
+
+.textarea::placeholder {
+  color: #70757f;
+}
+
+.textarea:focus {
+  border-color: $accent;
+}
+
+.invalid,
+.invalid:focus {
+  border-color: #e5243b;
+}

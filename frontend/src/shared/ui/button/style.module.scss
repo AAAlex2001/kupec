@@ -1,0 +1,120 @@
+@use "shared/styles/colors" as *;
+
+.button {
+  box-sizing: border-box;
+  display: flex;
+  flex: none;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 0 16px;
+  gap: 8px;
+
+  height: 40px;
+
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 20px;
+  text-decoration: none;
+  white-space: nowrap;
+
+  border: 1px solid transparent;
+  border-radius: 8px;
+  cursor: pointer;
+  transition:
+    color 0.15s ease,
+    background-color 0.15s ease,
+    border-color 0.15s ease;
+}
+
+.button svg {
+  flex: none;
+  width: 24px;
+  height: 24px;
+}
+
+.button:focus-visible {
+  outline: 2px solid $accent;
+  outline-offset: 2px;
+}
+
+.button:disabled {
+  cursor: default;
+  opacity: 0.5;
+}
+
+.button.loading {
+  opacity: 1;
+}
+
+.danger {
+  color: #e5243b;
+  background: transparent;
+}
+
+.danger:hover:not(:disabled) {
+  background: #fff1f3;
+}
+
+.lg {
+  height: 44px;
+  padding: 0 20px;
+}
+
+.icon {
+  padding: 0;
+
+  width: 32px;
+  height: 32px;
+
+  border-radius: 4px;
+}
+
+.button.icon svg {
+  width: 16px;
+  height: 16px;
+}
+
+.primary {
+  color: #ffffff;
+  background: $accent;
+}
+
+.primary:hover:not(:disabled) {
+  background: $accent-hover;
+}
+
+.secondary {
+  color: $accent-text;
+  background: #f5f6f8;
+}
+
+.secondary:hover:not(:disabled) {
+  background: #e2e5ea;
+}
+
+.outline {
+  color: $accent-text;
+  background: #ffffff;
+  border-color: #e2e5ea;
+}
+
+.outline:hover:not(:disabled) {
+  border-color: $accent;
+}
+
+.outline svg {
+  width: 16px;
+  height: 16px;
+}
+
+.ghost {
+  color: $accent-text;
+  background: #ffffff;
+}
+
+.ghost:hover:not(:disabled) {
+  background: #f5f6f8;
+}

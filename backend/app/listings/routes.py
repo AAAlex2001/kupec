@@ -1,0 +1,293 @@
+from fastapi import APIRouter, Depends, HTTPException, Query, UploadFile, status
+
+from app.auth.dependencies import get_current_user, require_user
+from app.catalog.dependencies import get_category_repository
+from app.catalog.models import ListingKind
+from app.catalog.schemas import CategorySchema
+from app.catalog.services.repo import CategoryRepository
+from app.core.uploads import UploadError
+from app.listings.dependencies import (
+    get_archive_usecase,
+    get_count_view_usecase,
+    get_create_listing_usecase,
+    get_delete_listing_usecase,
+    get_delete_photo_usecase,
+    get_listing_repository,
+    get_own_listing,
+    get_published_listing,
+    get_restore_usecase,
+    get_update_listing_usecase,
+    get_upload_photo_usecase,
+    get_visitor,
+)
+from app.listings.models import (
+    SERVICE_PLACE_LABELS,
+    UNIT_LABELS,
+    UNITS_BY_KIND,
+    Listing,
+    ListingStatus,
+)
+from app.listings.schemas import (
+    ListingCountsSchema,
+    ListingCreateSchema,
+    ListingOptionsSchema,
+    ListingPageSchema,
+    ListingPhotoSchema,
+    ListingSchema,
+    MyListingsSchema,
+    OptionSchema,
+    UnitOptionSchema,
+)
+from app.listings.services.exceptions import (
+    InvalidListingError,
+    ListingStatusError,
+    PhotoNotFoundError,
+    TooManyPhotosError,
+)
+from app.listings.services.repo import ListingRepository
+from app.listings.services.usecases.count_view import CountViewUseCase
+from app.listings.services.usecases.create_listing import CreateListingUseCase
+from app.listings.services.usecases.manage_photos import (
+    DeleteListingPhotoUseCase,
+    UploadListingPhotoUseCase,
+)
+from app.listings.services.usecases.manage_status import (
+    ArchiveListingUseCase,
+    DeleteListingUseCase,
+    RestoreListingUseCase,
+)
+from app.listings.services.usecases.update_listing import UpdateListingUseCase
+from app.users.models import User
+
+router = APIRouter(prefix="/listings", tags=["listings"])
+
+
+@router.get("/options")
+async def get_options(
+    categories: CategoryRepository = Depends(get_category_repository),
+) -> ListingOptionsSchema:
+    """Справочники формы размещения: категории, единицы цены, места проведения услуг."""
+
+    items = await categories.list_all()
+
+    return ListingOptionsSchema(
+        categories=[CategorySchema.model_validate(category) for category in items],
+        units=[
+            UnitOptionSchema(code=unit, label=UNIT_LABELS[unit], kind=kind)
+            for kind, units in UNITS_BY_KIND.items()
+            for unit in units
+        ],
+        service_places=[
+            OptionSchema(code=place, label=label) for place, label in SERVICE_PLACE_LABELS.items()
+        ],
+    )
+
+
+@router.post("/photos", status_code=status.HTTP_201_CREATED)
+async def upload_photo(
+    file: UploadFile,
+    user: User = Depends(require_user),
+    usecase: UploadListingPhotoUseCase = Depends(get_upload_photo_usecase),
+) -> ListingPhotoSchema:
+    """Загрузить фото для будущего объявления. id передаётся в форме при сохранении."""
+
+    try:
+        photo = await usecase.execute(user, file)
+    except UploadError as error:
+        raise HTTPException(
+            status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
+            detail=str(error),
+        ) from error
+    except TooManyPhotosError as error:
+        raise HTTPException(
+            status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
+            detail="Слишком много загруженных фото. Сохраните объявление или удалите лишние",
+        ) from error
+
+    return ListingPhotoSchema.model_validate(photo)
+
+
+@router.delete("/photos/{photo_id}", status_code=status.HTTP_204_NO_CONTENT)
+async def delete_photo(
+    photo_id: int,
+    user: User = Depends(require_user),
+    usecase: DeleteListingPhotoUseCase = Depends(get_delete_photo_usecase),
+) -> None:
+    """Удалить загруженное фото, пока объявление не сохранено."""
+
+    try:
+        await usecase.execute(user, photo_id)
+    except PhotoNotFoundError as error:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="Фото не найдено",
+        ) from error
+
+
+@router.post("", status_code=status.HTTP_201_CREATED)
+async def create_listing(
+    payload: ListingCreateSchema,
+    user: User = Depends(require_user),
+    usecase: CreateListingUseCase = Depends(get_create_listing_usecase),
+) -> ListingSchema:
+    """Разместить объявление или сохранить черновик. Ошибки приходят по каждому полю."""
+
+    try:
+        listing = await usecase.execute(user, payload)
+    except InvalidListingError as error:
+        raise HTTPException(
+            status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
+            detail=[
+                {"loc": ["body", field], "msg": message}
+                for field, message in error.errors.items()
+            ],
+        ) from error
+
+    return ListingSchema.model_validate(listing)
+
+
+@router.get("")
+async def list_listings(
+    kind: ListingKind | None = Query(None, description="Только товары или только услуги"),
+    category: str | None = Query(None, max_length=100, description="Адрес категории"),
+    owner: int | None = Query(None, description="Только объявления этого автора"),
+    exclude: int | None = Query(None, description="Кроме этого объявления"),
+    limit: int = Query(12, ge=1, le=50),
+    offset: int = Query(0, ge=0),
+    listings: ListingRepository = Depends(get_listing_repository),
+) -> ListingPageSchema:
+    """Лента опубликованных объявлений, новые первыми."""
+
+    items, total = await listings.list_published(
+        kind, category, owner, exclude, limit, offset
+    )
+
+    return ListingPageSchema(
+        items=[ListingSchema.model_validate(item) for item in items],
+        total=total,
+    )
+
+
+@router.get("/my")
+async def list_my_listings(
+    status_filter: ListingStatus = Query(ListingStatus.PUBLISHED, alias="status"),
+    q: str | None = Query(None, max_length=100, description="Поиск по названию"),
+    user: User = Depends(require_user),
+    listings: ListingRepository = Depends(get_listing_repository),
+) -> MyListingsSchema:
+    """Свои объявления на вкладке «Активные», «Черновики» или «Снятые» и счётчики вкладок."""
+
+    items = await listings.list_for_owner(user.id, status_filter, q.strip() if q else None)
+    counts = await listings.count_by_status(user.id)
+
+    return MyListingsSchema(
+        items=[ListingSchema.model_validate(item) for item in items],
+        counts=ListingCountsSchema(**counts),
+    )
+
+
+@router.get("/{listing_id}")
+async def get_listing(
+    listing_id: int,
+    user: User | None = Depends(get_current_user),
+    listings: ListingRepository = Depends(get_listing_repository),
+) -> ListingSchema:
+    """Объявление. Черновик и снятое видит только автор."""
+
+    listing = await listings.get_by_id(listing_id)
+    is_owner = listing is not None and user is not None and listing.owner_id == user.id
+
+    if listing is None or (listing.status != ListingStatus.PUBLISHED and not is_owner):
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="Объявление не найдено",
+        )
+
+    return ListingSchema.model_validate(listing)
+
+
+@router.post("/{listing_id}/view", status_code=status.HTTP_204_NO_CONTENT)
+async def count_view(
+    listing: Listing = Depends(get_published_listing),
+    visitor: str = Depends(get_visitor),
+    user: User | None = Depends(get_current_user),
+    usecase: CountViewUseCase = Depends(get_count_view_usecase),
+) -> None:
+    """Засчитать просмотр. Один посетитель — один просмотр в сутки, автор не считается."""
+
+    await usecase.execute(listing, visitor, user.id if user else None)
+
+
+@router.put("/{listing_id}")
+async def update_listing(
+    payload: ListingCreateSchema,
+    user: User = Depends(require_user),
+    listing: Listing = Depends(get_own_listing),
+    usecase: UpdateListingUseCase = Depends(get_update_listing_usecase),
+) -> ListingSchema:
+    """Изменить своё объявление целиком. Ошибки приходят по каждому полю."""
+
+    try:
+        updated = await usecase.execute(user, listing, payload)
+    except InvalidListingError as error:
+        raise HTTPException(
+            status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
+            detail=[
+                {"loc": ["body", field], "msg": message}
+                for field, message in error.errors.items()
+            ],
+        ) from error
+
+    return ListingSchema.model_validate(updated)
+
+
+@router.post("/{listing_id}/archive")
+async def archive_listing(
+    listing: Listing = Depends(get_own_listing),
+    usecase: ArchiveListingUseCase = Depends(get_archive_usecase),
+) -> ListingSchema:
+    """Снять объявление с публикации. Его можно будет опубликовать снова."""
+
+    try:
+        archived = await usecase.execute(listing)
+    except ListingStatusError as error:
+        raise HTTPException(
+            status_code=status.HTTP_409_CONFLICT,
+            detail=str(error),
+        ) from error
+
+    return ListingSchema.model_validate(archived)
+
+
+@router.post("/{listing_id}/restore")
+async def restore_listing(
+    listing: Listing = Depends(get_own_listing),
+    usecase: RestoreListingUseCase = Depends(get_restore_usecase),
+) -> ListingSchema:
+    """Снова опубликовать снятое объявление."""
+
+    try:
+        restored = await usecase.execute(listing)
+    except ListingStatusError as error:
+        raise HTTPException(
+            status_code=status.HTTP_409_CONFLICT,
+            detail=str(error),
+        ) from error
+
+    return ListingSchema.model_validate(restored)
+
+
+@router.delete("/{listing_id}", status_code=status.HTTP_204_NO_CONTENT)
+async def delete_listing(
+    listing: Listing = Depends(get_own_listing),
+    usecase: DeleteListingUseCase = Depends(get_delete_listing_usecase),
+) -> None:
+    """Удалить черновик или снятое объявление."""
+
+    try:
+        await usecase.execute(listing)
+    except ListingStatusError as error:
+        raise HTTPException(
+            status_code=status.HTTP_409_CONFLICT,
+            detail=str(error),
+        ) from error

@@ -1,0 +1,35 @@
+.field {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 8px;
+
+  min-width: 0;
+}
+
+.label {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+
+  color: #1a1a1a;
+}
+
+.error,
+.hint {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 16px;
+}
+
+.error {
+  color: #e5243b;
+}
+
+.hint {
+  color: #70757f;
+}

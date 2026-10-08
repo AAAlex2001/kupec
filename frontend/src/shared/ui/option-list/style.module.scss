@@ -1,0 +1,72 @@
+@use "shared/styles/colors" as *;
+
+.list {
+  position: absolute;
+  top: calc(100% + 4px);
+  right: 0;
+  left: 0;
+  z-index: 20;
+
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  padding: 4px;
+  gap: 2px;
+
+  max-height: 280px;
+
+  list-style: none;
+  background: #ffffff;
+  border: 1px solid #e2e5ea;
+  border-radius: 8px;
+  box-shadow: 0 12px 32px rgba(26, 26, 26, 0.12);
+  overflow-y: auto;
+}
+
+.option {
+  display: flex;
+  flex: none;
+  flex-direction: column;
+  padding: 8px 10px;
+  gap: 2px;
+
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+
+  color: #1a1a1a;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.option:hover,
+.active {
+  background: #f5f6f8;
+}
+
+.selected,
+.selected:hover {
+  color: $accent-text;
+  background: $accent-soft;
+}
+
+.hint {
+  font-size: 12px;
+  line-height: 16px;
+
+  color: #70757f;
+}
+
+.empty {
+  padding: 8px 10px;
+
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+
+  color: #70757f;
+}

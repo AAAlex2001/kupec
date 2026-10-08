@@ -1,0 +1,109 @@
+@use "shared/styles/colors" as *;
+
+.card {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  padding: 16px;
+  gap: 8px;
+
+  background: #ffffff;
+  border-radius: 8px;
+}
+
+.flat {
+  padding: 0;
+
+  background: transparent;
+}
+
+.photo {
+  display: block;
+  position: relative;
+
+  height: 156px;
+
+  background: #f5f6f8;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.image {
+  object-fit: cover;
+}
+
+.priceRow {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 4px 0;
+  gap: 8px;
+}
+
+.price {
+  flex: 1 1 0;
+
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 24px;
+
+  color: #1a1a1a;
+}
+
+.unit {
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 16px;
+
+  color: #70757f;
+}
+
+.heart {
+  flex: none;
+  width: 24px;
+  height: 24px;
+
+  color: #1a1a1a;
+}
+
+.title {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 18px;
+  overflow-wrap: anywhere;
+  text-decoration: none;
+
+  color: $accent-text;
+}
+
+.title:hover {
+  text-decoration: underline;
+}
+
+.meta {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 16px;
+
+  color: #70757f;
+}
+
+.action {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+
+  margin-top: auto;
+}
+
+.action svg {
+  width: 16px;
+  height: 16px;
+}

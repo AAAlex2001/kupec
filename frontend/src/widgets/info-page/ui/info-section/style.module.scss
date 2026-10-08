@@ -1,0 +1,60 @@
+@use "shared/styles/colors" as *;
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+
+  scroll-margin-top: 24px;
+}
+
+.intro {
+  font-family: "Inter";
+  font-size: 14px;
+  line-height: 20px;
+
+  color: #70757f;
+}
+
+.steps {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+  gap: 12px;
+
+  list-style: none;
+  counter-reset: step;
+}
+
+.step {
+  position: relative;
+  padding-left: 36px;
+
+  font-family: "Inter";
+  font-size: 14px;
+  line-height: 24px;
+
+  color: #1a1a1a;
+  counter-increment: step;
+}
+
+.step::before {
+  content: counter(step);
+
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  width: 24px;
+  height: 24px;
+
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 24px;
+  text-align: center;
+
+  color: $accent-text;
+  background: $accent-soft;
+  border-radius: 100px;
+}

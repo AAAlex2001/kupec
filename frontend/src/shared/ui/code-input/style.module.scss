@@ -1,0 +1,52 @@
+@use "shared/styles/colors" as *;
+
+.code {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.cell {
+  box-sizing: border-box;
+  flex: 1 1 0;
+
+  min-width: 0;
+  max-width: 56px;
+  height: 56px;
+  padding: 0;
+
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 28px;
+  text-align: center;
+
+  color: #1a1a1a;
+  background: #ffffff;
+  border: 1px solid #e2e5ea;
+  border-radius: 8px;
+  outline: none;
+  caret-color: $accent;
+  transition: border-color 0.15s ease;
+}
+
+.cell:focus {
+  border-color: $accent;
+}
+
+.invalid,
+.invalid:focus {
+  border-color: #e5243b;
+}
+
+.cell:disabled {
+  background: #f5f6f8;
+}
+
+@media (min-width: 768px) {
+  .code {
+    gap: 12px;
+  }
+}

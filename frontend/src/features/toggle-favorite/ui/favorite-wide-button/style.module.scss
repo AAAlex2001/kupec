@@ -1,0 +1,9 @@
+@use "shared/styles/colors" as *;
+
+.active svg {
+  color: $favorite;
+}
+
+.active svg path {
+  fill: currentColor;
+}

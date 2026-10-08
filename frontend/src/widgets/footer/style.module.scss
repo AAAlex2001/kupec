@@ -1,0 +1,162 @@
+@use "shared/styles/layout" as *;
+@use "shared/styles/colors" as *;
+
+.footer {
+  @include gutter;
+
+  box-sizing: border-box;
+  display: flex;
+  flex: none;
+  flex-direction: column;
+  align-items: stretch;
+  padding-top: 32px;
+  padding-bottom: 24px;
+  gap: 32px;
+
+  width: 100%;
+
+  border-top: 1px solid #e2e5ea;
+}
+
+.top {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 32px;
+}
+
+.brand {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+
+  max-width: 360px;
+}
+
+.description {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+
+  color: #70757f;
+}
+
+.groups {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 32px 24px;
+}
+
+.group {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.title {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 20px;
+
+  color: #1a1a1a;
+}
+
+.links {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+
+  list-style: none;
+}
+
+.link,
+.legalLink {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  text-decoration: none;
+
+  color: #70757f;
+  transition: color 0.15s ease;
+}
+
+.link {
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.link:hover,
+.legalLink:hover {
+  color: $accent-text;
+}
+
+.link:focus-visible,
+.legalLink:focus-visible {
+  outline: 2px solid $accent;
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+.bottom {
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: flex-start;
+  padding-top: 20px;
+  gap: 12px;
+
+  border-top: 1px solid #e2e5ea;
+}
+
+.copyright,
+.legalLink {
+  font-size: 12px;
+  line-height: 16px;
+}
+
+.copyright {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+
+  color: #70757f;
+}
+
+.legal {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 24px;
+}
+
+@media (min-width: 768px) {
+  .groups {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .bottom {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
+@media (min-width: 1440px) {
+  .top {
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 64px;
+  }
+
+  .groups {
+    flex: 0 1 720px;
+    gap: 24px;
+  }
+}

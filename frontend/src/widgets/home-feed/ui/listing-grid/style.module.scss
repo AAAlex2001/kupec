@@ -1,0 +1,27 @@
+.section {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  padding-top: 20px;
+  gap: 12px;
+}
+
+.title {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 22px;
+
+  color: #1a1a1a;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 8px 12px;
+}
+
+.more {
+  width: 100%;
+}
