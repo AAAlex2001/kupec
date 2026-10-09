@@ -3,11 +3,12 @@
 import { useEffect, useState } from "react";
 import { errorMessage } from "@/shared/lib/errors";
 import { fetchConversation } from "../api/conversations";
+import { notifyRead } from "./read-event";
 import type { ConversationDetail, Message } from "./types";
 
 const REFRESH_MS = 5_000;
 
-/** Открытая переписка: обновляется раз в 5 секунд, чтобы приходили новые сообщения. */
+/** Открытая переписка: обновляется раз в 5 секунд, после загрузки сообщения считаются прочитанными. */
 export const useConversation = (id: number) => {
   const [detail, setDetail] = useState<ConversationDetail | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -18,7 +19,11 @@ export const useConversation = (id: number) => {
 
     const load = () =>
       fetchConversation(id)
-        .then((found) => active && setDetail(found))
+        .then((found) => {
+          if (!active) return;
+          setDetail(found);
+          notifyRead();
+        })
         .catch((failure) => active && setError(errorMessage(failure, "Не удалось открыть")));
 
     load();

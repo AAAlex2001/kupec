@@ -10,6 +10,20 @@
   border-radius: 8px;
 }
 
+.card {
+  padding: 16px;
+
+  background: #ffffff;
+  border-radius: 8px;
+}
+
+.plain,
+.plain .card {
+  padding: 0;
+
+  background: transparent;
+}
+
 .title {
   font-family: "Inter";
   font-style: normal;

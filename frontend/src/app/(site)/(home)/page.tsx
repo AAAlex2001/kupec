@@ -1,18 +1,20 @@
+import { getCategoryTree } from "@/entities/category/server";
+import { getLocation } from "@/entities/city/server";
 import { getListings } from "@/entities/listing/server";
-import { FEED_PAGE_SIZE, FEED_STRIP_SIZE } from "@/shared/config/feed";
-import HomeFeed from "@/widgets/home-feed";
+import { FEED_PAGE_SIZE } from "@/shared/config/feed";
+import Home from "@/widgets/home";
 
-/** Главная: подборки услуг и товаров и лента всех объявлений, первая порция — с сервера. */
+/** Главная: категории и первая порция объявлений там, где ищет посетитель, — с сервера. */
 export default async function HomePage() {
-  const [services, products, latest] = await Promise.all([
-    getListings({ kind: "service", limit: FEED_STRIP_SIZE }),
-    getListings({ kind: "product", limit: FEED_STRIP_SIZE }),
-    getListings({ limit: FEED_PAGE_SIZE }),
+  const city = await getLocation();
+  const [categories, latest] = await Promise.all([
+    getCategoryTree(),
+    getListings({ city: city?.id, limit: FEED_PAGE_SIZE }),
   ]);
 
   return (
     <main>
-      <HomeFeed services={services} products={products} latest={latest} />
+      <Home categories={categories} city={city} latest={latest} />
     </main>
   );
 }

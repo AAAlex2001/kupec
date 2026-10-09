@@ -2,6 +2,7 @@
 
 import { useEffect } from "react";
 import { countListingView } from "@/entities/listing";
+import { reportError } from "@/shared/lib/report-error";
 
 type ViewCounterProps = {
   listingId: number;
@@ -10,7 +11,7 @@ type ViewCounterProps = {
 /** Сообщает бэкенду о просмотре, когда объявление открылось в браузере. Ничего не рисует. */
 const ViewCounter = ({ listingId }: ViewCounterProps) => {
   useEffect(() => {
-    countListingView(listingId).catch(() => undefined);
+    countListingView(listingId).catch(reportError);
   }, [listingId]);
 
   return null;

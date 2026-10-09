@@ -22,10 +22,13 @@
   box-shadow: 0 12px 32px rgba(26, 26, 26, 0.12);
 }
 
-.list .item {
+.list .item,
+.list .danger {
   justify-content: flex-start;
 
   font-weight: 400;
+}
 
+.list .item {
   color: #1a1a1a;
 }

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import type { CategoryNode } from "@/entities/category";
 import type { Listing, ListingOptions } from "@/entities/listing";
 import { useUser, type User } from "@/entities/user";
 import { ListingForm, useListingForm } from "@/features/create-listing";
@@ -18,6 +19,7 @@ import styles from "./style.module.scss";
 
 type ListingEditorProps = {
   options: ListingOptions;
+  tree: CategoryNode[];
   listing?: Listing;
 };
 
@@ -33,7 +35,7 @@ const EDIT_CRUMBS = [
 ];
 
 /** Страница размещения или правки. Гостю сначала нужно войти. */
-const ListingEditor = ({ options, listing }: ListingEditorProps) => {
+const ListingEditor = ({ options, tree, listing }: ListingEditorProps) => {
   const { user, openAuth } = useUser();
 
   if (!user) {
@@ -42,19 +44,19 @@ const ListingEditor = ({ options, listing }: ListingEditorProps) => {
         <EmptyState
           icon={<PlusIcon />}
           title="Войдите, чтобы разместить объявление"
-          text="Вход по почте занимает минуту, пароль не нужен."
+          text="Вход по почте и паролю занимает минуту."
           action={<Button onClick={openAuth}>Войти</Button>}
         />
       </div>
     );
   }
 
-  return <Editor options={options} listing={listing} user={user} />;
+  return <Editor options={options} tree={tree} listing={listing} user={user} />;
 };
 
 /** Форма с предпросмотром карточки справа, а после сохранения — итог. */
-const Editor = ({ options, listing, user }: EditorProps) => {
-  const form = useListingForm(user, listing);
+const Editor = ({ options, tree, listing, user }: EditorProps) => {
+  const form = useListingForm(user, options.categories, listing);
   const [previewOpen, setPreviewOpen] = useState(false);
   const card = previewCard(form.state.fields, options, user);
 
@@ -73,7 +75,12 @@ const Editor = ({ options, listing, user }: EditorProps) => {
       <Title as="h1">{form.editing ? "Редактировать объявление" : "Разместить объявление"}</Title>
 
       <div className={styles.columns}>
-        <ListingForm form={form} options={options} onPreview={() => setPreviewOpen(true)} />
+        <ListingForm
+          form={form}
+          options={options}
+          tree={tree}
+          onPreview={() => setPreviewOpen(true)}
+        />
 
         <aside className={styles.aside}>
           <Preview card={card} />
@@ -81,7 +88,7 @@ const Editor = ({ options, listing, user }: EditorProps) => {
       </div>
 
       <Modal open={previewOpen} onClose={() => setPreviewOpen(false)} ariaLabel="Предпросмотр">
-        <Preview card={card} />
+        <Preview card={card} plain />
       </Modal>
     </div>
   );

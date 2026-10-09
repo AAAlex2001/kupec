@@ -30,4 +30,5 @@ class UserSchema(BaseModel):
     notify_messages_email: bool = Field(..., description="Новые сообщения на почту")
     notify_site: bool = Field(..., description="Уведомления на сайте")
     notify_news_email: bool = Field(..., description="Новости площадки на почту")
+    is_admin: bool = Field(..., description="Администратор площадки")
     created_at: datetime = Field(..., description="Когда зарегистрирован")

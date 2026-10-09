@@ -1,16 +1,46 @@
 .modal {
   position: fixed;
+  inset: 0;
 
-  padding: 24px;
-
-  width: min(468px, calc(100vw - 32px));
+  width: 100%;
+  height: 100%;
   max-width: none;
   max-height: none;
+
+  background: transparent;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+.frame {
+  box-sizing: border-box;
+  display: flex;
+  padding: 24px 16px;
+
+  min-height: 100%;
+}
+
+.panel {
+  position: relative;
+  box-sizing: border-box;
+  margin: auto;
+  padding: 24px;
+
+  width: min(468px, 100%);
 
   background: #ffffff;
   border-radius: 16px;
   box-shadow: 0 24px 64px rgba(26, 26, 26, 0.16);
-  overflow: visible;
+}
+
+.wide {
+  width: min(720px, 100%);
+}
+
+@media (min-width: 1440px) {
+  .wide {
+    width: min(1200px, 100%);
+  }
 }
 
 .close {

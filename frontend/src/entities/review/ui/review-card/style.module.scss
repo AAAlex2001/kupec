@@ -1,0 +1,74 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  gap: 16px;
+
+  border: 1px solid #e2e5ea;
+  border-radius: 8px;
+}
+
+.head,
+.meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.meta {
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.status,
+.author {
+  flex: none;
+
+  font-family: "Inter";
+  font-size: 12px;
+  line-height: 16px;
+
+  color: #70757f;
+}
+
+.text {
+  font-family: "Inter";
+  font-size: 14px;
+  line-height: 20px;
+  white-space: pre-line;
+  overflow-wrap: anywhere;
+
+  color: #1a1a1a;
+}
+
+.reply {
+  display: flex;
+  flex-direction: column;
+  padding: 12px;
+  gap: 8px;
+
+  font-family: "Inter";
+  font-size: 12px;
+  line-height: 16px;
+
+  color: #1a1a1a;
+  background: #f5f6f8;
+  border-radius: 8px;
+}
+
+.replyTitle {
+  font-weight: 700;
+}
+
+.replyText {
+  white-space: pre-line;
+  overflow-wrap: anywhere;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 8px;
+}

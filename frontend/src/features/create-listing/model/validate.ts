@@ -1,10 +1,38 @@
+import type { CategoryField } from "@/entities/attribute";
+import { isEmptyDraft } from "../lib/attributes";
 import type { ListingErrors, ListingFields } from "./types";
 
 const TITLE_MIN_LENGTH = 3;
 
-/** Ошибки формы по полям. Для черновика нужно только название, для публикации — всё обязательное. */
-export const validateListing = (fields: ListingFields, publish: boolean): ListingErrors => {
+/** Ошибки атрибутов: число должно быть числом, обязательные — заполнены при публикации. */
+const attributeErrors = (
+  fields: ListingFields,
+  attributeFields: CategoryField[],
+  publish: boolean,
+): ListingErrors => {
   const errors: ListingErrors = {};
+
+  for (const field of attributeFields) {
+    const draft = fields.attributes[field.slug];
+    const key = `attributes.${field.slug}` as const;
+
+    if (isEmptyDraft(draft)) {
+      if (publish && field.is_required) errors[key] = `Заполните «${field.name}»`;
+    } else if (field.type === "number" && Number.isNaN(Number(draft))) {
+      errors[key] = "Введите число";
+    }
+  }
+
+  return errors;
+};
+
+/** Ошибки формы по полям. Для черновика нужно только название, для публикации — всё обязательное. */
+export const validateListing = (
+  fields: ListingFields,
+  attributeFields: CategoryField[],
+  publish: boolean,
+): ListingErrors => {
+  const errors: ListingErrors = attributeErrors(fields, attributeFields, publish);
 
   if (fields.title.trim().length < TITLE_MIN_LENGTH) errors.title = "Введите название";
 

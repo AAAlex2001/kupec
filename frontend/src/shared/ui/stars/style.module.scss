@@ -1,0 +1,29 @@
+@use "shared/styles/colors" as *;
+
+.stars {
+  display: inline-flex;
+  flex: none;
+  gap: 4px;
+}
+
+.star {
+  color: #e2e5ea;
+}
+
+.filled {
+  color: $rating;
+}
+
+.filled path {
+  fill: currentColor;
+}
+
+.sm .star {
+  width: 12px;
+  height: 12px;
+}
+
+.md .star {
+  width: 20px;
+  height: 20px;
+}

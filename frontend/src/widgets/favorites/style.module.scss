@@ -1,3 +1,5 @@
+@use "shared/styles/layout" as *;
+
 .favorites {
   display: flex;
   flex-direction: column;
@@ -22,7 +24,5 @@
 }
 
 .grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-  gap: 24px 12px;
+  @include cards-grid;
 }

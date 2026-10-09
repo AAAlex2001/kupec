@@ -1,0 +1,59 @@
+import type { CategoryField } from "@/entities/attribute";
+import type { ListingPage, Option } from "@/entities/listing";
+import {
+  CatalogFilters,
+  filtersQuery,
+  FiltersButton,
+  SortSelect,
+  type Filters,
+} from "@/features/filter-listings";
+import ListingFeed from "@/widgets/listing-feed";
+import styles from "./style.module.scss";
+
+type ListingCatalogProps = {
+  category?: string;
+  city?: number;
+  filters: Filters;
+  fields: CategoryField[];
+  places: Option[];
+  showKind: boolean;
+  listings: ListingPage;
+};
+
+/** Объявления с фильтрами: на ПК панель слева, до ПК — кнопка «Фильтры». Сверху порядок ленты. */
+const ListingCatalog = ({
+  category,
+  city,
+  filters,
+  fields,
+  places,
+  showKind,
+  listings,
+}: ListingCatalogProps) => {
+  const query = filtersQuery(filters);
+  const panel = { filters, fields, places, showKind, ranges: listings.ranges ?? {} };
+  const count = Object.keys(filters).filter((key) => key !== "q" && key !== "sort").length;
+
+  return (
+    <div className={styles.catalog}>
+      <aside className={styles.aside}>
+        <CatalogFilters key={query} {...panel} />
+      </aside>
+
+      <div className={styles.main}>
+        <div className={styles.toolbar}>
+          <FiltersButton key={query} count={count} {...panel} />
+          <SortSelect filters={filters} />
+        </div>
+
+        <ListingFeed
+          key={`${category}-${city}-${query}`}
+          initial={listings}
+          query={{ category, city, filters: query }}
+        />
+      </div>
+    </div>
+  );
+};
+
+export default ListingCatalog;

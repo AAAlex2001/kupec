@@ -13,7 +13,7 @@ type ConversationItemProps = {
   active: boolean;
 };
 
-/** Диалог в списке: собеседник, время, объявление, последнее сообщение и непрочитанные. */
+/** Диалог в списке: собеседник, время, объявление, последнее сообщение и непрочитанные (у открытого — нет). */
 const ConversationItem = ({ conversation, active }: ConversationItemProps) => {
   const { companion, listing, unread_count } = conversation;
 
@@ -37,7 +37,7 @@ const ConversationItem = ({ conversation, active }: ConversationItemProps) => {
 
       <div className={styles.last}>
         <p className={styles.text}>{conversation.last_message_text ?? "Сообщений пока нет"}</p>
-        {unread_count > 0 && <Badge count={unread_count} />}
+        {!active && unread_count > 0 && <Badge count={unread_count} />}
       </div>
     </Link>
   );

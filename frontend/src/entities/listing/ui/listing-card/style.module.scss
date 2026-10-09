@@ -5,17 +5,7 @@
   display: flex;
   flex-direction: column;
   align-items: stretch;
-  padding: 16px;
   gap: 8px;
-
-  background: #ffffff;
-  border-radius: 8px;
-}
-
-.flat {
-  padding: 0;
-
-  background: transparent;
 }
 
 .photo {
@@ -83,6 +73,13 @@
 
 .title:hover {
   text-decoration: underline;
+}
+
+.author {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px;
 }
 
 .meta {

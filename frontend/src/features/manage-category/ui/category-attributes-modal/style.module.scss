@@ -1,0 +1,56 @@
+@use "shared/styles/colors" as *;
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.label {
+  font-family: "Inter";
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 20px;
+
+  color: #1a1a1a;
+}
+
+.hint,
+.inherited {
+  font-family: "Inter";
+  font-size: 14px;
+  line-height: 20px;
+
+  color: #70757f;
+}
+
+.link {
+  color: $accent-text;
+}
+
+.add {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.choice {
+  flex: 1 1 auto;
+
+  min-width: 0;
+}
+
+.buttons {
+  display: flex;
+  gap: 12px;
+}
+
+.buttons .button {
+  flex: 1 1 0;
+}

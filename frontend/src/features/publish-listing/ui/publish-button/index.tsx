@@ -8,22 +8,23 @@ import Button from "@/shared/ui/button";
 type PublishButtonProps = {
   children: ReactNode;
   className?: string;
+  variant?: "primary" | "ghost";
 };
 
 /** «Разместить объявление»: вошедшего ведёт на форму, гостю открывает окно входа. */
-const PublishButton = ({ children, className }: PublishButtonProps) => {
+const PublishButton = ({ children, className, variant = "primary" }: PublishButtonProps) => {
   const { user, openAuth } = useUser();
 
   if (!user) {
     return (
-      <Button className={className} onClick={openAuth}>
+      <Button className={className} variant={variant} onClick={openAuth}>
         {children}
       </Button>
     );
   }
 
   return (
-    <Button className={className} href={NEW_LISTING_PATH}>
+    <Button className={className} variant={variant} href={NEW_LISTING_PATH}>
       {children}
     </Button>
   );

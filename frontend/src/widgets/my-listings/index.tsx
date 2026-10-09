@@ -1,16 +1,16 @@
 "use client";
 
 import { useState } from "react";
-import { ListingRow, useMyListings, type ListingStatus } from "@/entities/listing";
+import { ListingRow, STATUS_TABS, useMyListings, type ListingStatus } from "@/entities/listing";
 import { ListingActions } from "@/features/manage-listing";
 import Button from "@/shared/ui/button";
 import EmptyState from "@/shared/ui/empty-state";
-import { RowsIcon, SearchIcon } from "@/shared/ui/icons";
+import { BasketIcon, SearchIcon } from "@/shared/ui/icons";
 import Input from "@/shared/ui/input";
 import Notice from "@/shared/ui/notice";
 import Loader from "@/shared/ui/loader";
 import Tabs from "@/shared/ui/tabs";
-import { EMPTY_TABS, NOTHING_FOUND, TABS } from "./data";
+import { EMPTY_TABS, NOTHING_FOUND } from "./data";
 import styles from "./style.module.scss";
 
 /** Раздел «Мои объявления»: вкладки по состоянию, поиск и список с действиями. */
@@ -25,7 +25,7 @@ const MyListings = () => {
       <Tabs
         ariaLabel="Состояние объявлений"
         value={status}
-        tabs={TABS.map((tab) => ({ ...tab, count: data?.counts[tab.value] ?? 0 }))}
+        tabs={STATUS_TABS.map((tab) => ({ ...tab, count: data?.counts[tab.value] ?? 0 }))}
         onChange={(value) => setStatus(value as ListingStatus)}
       />
 
@@ -45,7 +45,7 @@ const MyListings = () => {
 
       {data && data.items.length === 0 && (
         <EmptyState
-          icon={<RowsIcon />}
+          icon={<BasketIcon />}
           title={empty.title}
           text={empty.text}
           action={empty.action && <Button href={empty.action.href}>{empty.action.label}</Button>}

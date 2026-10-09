@@ -1,9 +1,9 @@
-import cn from "classnames";
 import Image from "next/image";
 import type { ReactNode } from "react";
 import { formatRub } from "@/shared/lib/format";
 import Button from "@/shared/ui/button";
 import { HeartIcon, MessageCircleMoreIcon } from "@/shared/ui/icons";
+import RatingLabel from "@/shared/ui/rating-label";
 import CardLink from "../card-link";
 import styles from "./style.module.scss";
 
@@ -13,12 +13,13 @@ type ListingCardProps = {
   unitLabel: string | null;
   title: string;
   author: string;
+  rating?: number;
+  reviewsCount?: number;
   place: string;
   conditions: string;
   href?: string;
   favorite?: ReactNode;
   action?: ReactNode;
-  flat?: boolean;
 };
 
 const DEFAULT_FAVORITE = <HeartIcon className={styles.heart} />;
@@ -30,21 +31,22 @@ const DEFAULT_ACTION = (
   </Button>
 );
 
-/** Карточка объявления. Сердечко и кнопку подставляют снаружи. flat — без белой подложки. */
+/** Карточка объявления без отступов: фото ровно по краю сетки. Сердечко и кнопку подставляют снаружи. */
 const ListingCard = ({
   photoUrl,
   price,
   unitLabel,
   title,
   author,
+  rating = 0,
+  reviewsCount = 0,
   place,
   conditions,
   href,
   favorite = DEFAULT_FAVORITE,
   action = DEFAULT_ACTION,
-  flat,
 }: ListingCardProps) => (
-  <article className={cn(styles.card, flat && styles.flat)}>
+  <article className={styles.card}>
     <CardLink className={styles.photo} href={href}>
       {photoUrl && (
         <Image className={styles.image} src={photoUrl} alt="" fill sizes="388px" unoptimized />
@@ -63,7 +65,10 @@ const ListingCard = ({
       {title || "Название объявления"}
     </CardLink>
 
-    <p className={styles.meta}>{author}</p>
+    <p className={styles.author}>
+      <span className={styles.meta}>{author}</span>
+      <RatingLabel rating={rating} count={reviewsCount} />
+    </p>
     <p className={styles.meta}>
       {place}
       {conditions && <br />}

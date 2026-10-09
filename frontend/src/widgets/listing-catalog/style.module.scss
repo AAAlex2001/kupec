@@ -1,0 +1,44 @@
+.catalog {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.aside {
+  display: none;
+}
+
+.main {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  gap: 16px;
+
+  min-width: 0;
+}
+
+.toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+
+@media (min-width: 1440px) {
+  .catalog {
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 32px;
+  }
+
+  .aside {
+    display: block;
+    flex: none;
+
+    width: 280px;
+  }
+
+  .toolbar {
+    justify-content: flex-end;
+  }
+}

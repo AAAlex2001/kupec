@@ -1,11 +1,20 @@
 """Проверка объявления: что нужно для черновика и что — для публикации."""
 
 from app.catalog.models import Category, ListingKind
-from app.listings.models import UNITS_BY_KIND
+from app.listings.models import ServicePlace
 from app.listings.schemas import ListingCreateSchema
-from app.listings.services.exceptions import InvalidListingError
+from app.units.models import Unit
 
 TITLE_MIN_LENGTH = 3
+
+
+def parse_places(text: str | None) -> list[str]:
+    """Места услуги из «client,online»: только известные, без повторов."""
+
+    known = {place.value for place in ServicePlace}
+    places = [place for place in (text or "").split(",") if place in known]
+
+    return list(dict.fromkeys(places))
 
 
 def clean_text(value: str | None) -> str | None:
@@ -18,9 +27,15 @@ def clean_text(value: str | None) -> str | None:
 
 
 def validate_listing(
-    payload: ListingCreateSchema, category: Category | None, photos_count: int
-) -> None:
-    """Собрать ошибки по всем полям сразу. Публикация требует больше полей, чем черновик."""
+    payload: ListingCreateSchema,
+    category: Category | None,
+    units: list[Unit],
+    photos_count: int,
+) -> dict[str, str]:
+    """Ошибки по всем полям сразу. Публикация требует больше полей, чем черновик.
+
+    units — единицы, доступные в категории объявления или, без категории, в его типе.
+    """
 
     errors: dict[str, str] = {}
 
@@ -30,8 +45,8 @@ def validate_listing(
     if category is not None and category.kind != payload.kind:
         errors["category_id"] = "Категория не подходит к типу объявления"
 
-    if payload.unit is not None and payload.unit not in UNITS_BY_KIND[payload.kind]:
-        errors["unit"] = "Единица не подходит к типу объявления"
+    if payload.unit is not None and payload.unit not in {unit.code for unit in units}:
+        errors["unit"] = "Выберите единицу из списка"
 
     if payload.kind == ListingKind.PRODUCT and payload.service_places:
         errors["service_places"] = "Место проведения указывают только у услуг"
@@ -58,5 +73,4 @@ def validate_listing(
         if payload.kind == ListingKind.SERVICE and not payload.service_places:
             errors["service_places"] = "Укажите, где проходит услуга"
 
-    if errors:
-        raise InvalidListingError(errors)
+    return errors

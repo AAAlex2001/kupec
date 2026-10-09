@@ -1,6 +1,6 @@
 import type { City } from "../model/types";
 
-const REGION = "Иркутская область";
+export const REGION = "Иркутская область";
 
 /** Название с районом для одноимённых сёл: «Култук, Слюдянский район». */
 export const cityLabel = (city: City) =>
@@ -9,3 +9,6 @@ export const cityLabel = (city: City) =>
 /** Полный адрес для карты: «Иркутская область, Ангарский район, Ангарск, улица Ленина, 5». */
 export const cityAddress = (city: City, street = "") =>
   [REGION, city.district, city.name, street.trim()].filter(Boolean).join(", ");
+
+/** Где ищем объявления: выбранный пункт или вся область. */
+export const locationName = (city: City | null) => (city ? city.name : REGION);

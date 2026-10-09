@@ -1,0 +1,19 @@
+@use "shared/styles/layout" as *;
+
+.home {
+  @include gutter;
+
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  padding-top: 20px;
+  padding-bottom: 32px;
+  gap: 20px;
+}
+
+@media (min-width: 768px) {
+  .home {
+    padding-top: 24px;
+    gap: 24px;
+  }
+}

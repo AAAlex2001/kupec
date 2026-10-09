@@ -1,30 +1,20 @@
-import type { Listing } from "@/entities/listing";
-import { CATALOG_PATH, HOME_PATH } from "@/shared/config/routes";
+import { catalogCrumbs } from "@/entities/category";
+import type { Category, Listing } from "@/entities/listing";
 import { formatDate, plural } from "@/shared/lib/format";
 import Breadcrumbs from "@/shared/ui/breadcrumbs";
 import styles from "./style.module.scss";
 
 type ListingHeadProps = {
   listing: Listing;
+  categories: Category[];
 };
 
 const VIEWS: [string, string, string] = ["просмотр", "просмотра", "просмотров"];
 
-/** Путь до объявления: «Главная / Категория / Название». */
-const listingCrumbs = (listing: Listing) => {
-  const crumbs = [{ label: "Главная", href: HOME_PATH }];
-
-  if (listing.category) {
-    crumbs.push({ label: listing.category.name, href: `${CATALOG_PATH}/${listing.category.slug}` });
-  }
-
-  return [...crumbs, { label: listing.title }];
-};
-
-/** Шапка объявления: путь, название, город, дата, просмотры и номер. */
-const ListingHead = ({ listing }: ListingHeadProps) => (
+/** Шапка объявления: полный путь по каталогу, название, город, дата, просмотры и номер. */
+const ListingHead = ({ listing, categories }: ListingHeadProps) => (
   <div className={styles.head}>
-    <Breadcrumbs items={listingCrumbs(listing)} />
+    <Breadcrumbs items={[...catalogCrumbs(categories), { label: listing.title }]} />
 
     <h1 className={styles.title}>{listing.title}</h1>
 

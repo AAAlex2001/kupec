@@ -11,7 +11,8 @@ from app.users.models import User
 class CodePurpose(StrEnum):
     """Зачем отправлен код из письма."""
 
-    LOGIN = "login"
+    VERIFY_EMAIL = "verify_email"
+    RESET_PASSWORD = "reset_password"
     CHANGE_EMAIL = "change_email"
 
 
@@ -38,7 +39,10 @@ class AuthCode(Base):
     used_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
 
     __table_args__ = (
-        CheckConstraint("purpose IN ('login', 'change_email')", name="ck_auth_codes_purpose"),
+        CheckConstraint(
+            "purpose IN ('verify_email', 'reset_password', 'change_email')",
+            name="ck_auth_codes_purpose",
+        ),
         Index("ix_auth_codes_email_purpose_created_at", "email", "purpose", "created_at"),
     )
 

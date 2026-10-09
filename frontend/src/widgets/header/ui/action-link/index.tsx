@@ -16,7 +16,7 @@ type ActionLinkProps = {
   requiresAuth?: boolean;
 };
 
-/** Пункт шапки «иконка над подписью». Закрытый раздел гостю открывает окно входа. */
+/** Пункт шапки «иконка и подпись». Закрытый раздел гостю открывает окно входа. */
 const ActionLink = ({ label, icon, href, onClick, active, requiresAuth }: ActionLinkProps) => {
   const pathname = usePathname();
   const { user, openAuth } = useUser();

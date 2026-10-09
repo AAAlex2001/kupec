@@ -1,4 +1,6 @@
+import type { AttributeValues } from "@/entities/attribute";
 import type { City } from "@/entities/city";
+import type { Unit } from "@/entities/unit";
 
 export type ListingKind = "product" | "service";
 
@@ -9,6 +11,8 @@ export type Category = {
   kind: ListingKind;
   slug: string;
   name: string;
+  image_url: string | null;
+  parent_name?: string | null;
 };
 
 export type Option = {
@@ -16,13 +20,9 @@ export type Option = {
   label: string;
 };
 
-export type UnitOption = Option & {
-  kind: ListingKind;
-};
-
 export type ListingOptions = {
   categories: Category[];
-  units: UnitOption[];
+  units: Unit[];
   service_places: Option[];
 };
 
@@ -35,6 +35,8 @@ export type ListingAuthor = {
   id: number;
   name: string | null;
   avatar_url: string | null;
+  rating: number;
+  reviews_count: number;
   created_at: string;
 };
 
@@ -56,6 +58,7 @@ export type Listing = {
   service_place_labels: string[];
   schedule: string | null;
   contact_phone: string | null;
+  attributes: AttributeValues;
   photos: ListingPhoto[];
   owner: ListingAuthor;
   views_count: number;
@@ -64,16 +67,25 @@ export type Listing = {
   published_at: string | null;
 };
 
+export type ValueRange = {
+  min: number;
+  max: number;
+};
+
 export type ListingPage = {
   items: Listing[];
   total: number;
+  ranges?: Record<string, ValueRange>;
 };
 
 export type ListingQuery = {
   kind?: ListingKind;
   category?: string;
+  city?: number;
   owner?: number;
   exclude?: number;
+  filters?: string;
+  bounds?: boolean;
   limit: number;
   offset?: number;
 };
@@ -83,6 +95,10 @@ export type ListingCounts = Record<ListingStatus, number>;
 export type MyListings = {
   items: Listing[];
   counts: ListingCounts;
+};
+
+export type AdminListingPage = MyListings & {
+  total: number;
 };
 
 export type ListingPayload = {
@@ -101,4 +117,5 @@ export type ListingPayload = {
   schedule: string | null;
   contact_phone: string | null;
   photo_ids: number[];
+  attributes: AttributeValues;
 };

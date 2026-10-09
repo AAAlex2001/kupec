@@ -1,11 +1,4 @@
-import type { ListingStatus } from "@/entities/listing";
 import { NEW_LISTING_PATH } from "@/shared/config/routes";
-
-export const TABS: { value: ListingStatus; label: string }[] = [
-  { value: "published", label: "Активные" },
-  { value: "draft", label: "Черновики" },
-  { value: "archived", label: "Снятые" },
-];
 
 export const EMPTY_TABS = {
   published: {

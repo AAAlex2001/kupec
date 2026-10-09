@@ -4,7 +4,7 @@ import styles from "./style.module.scss";
 
 type InputProps = {
   id?: string;
-  type?: "text" | "email" | "tel";
+  type?: "text" | "email" | "tel" | "password";
   value: string;
   onChange?: (value: string) => void;
   onFocus?: () => void;
@@ -15,7 +15,7 @@ type InputProps = {
   invalid?: boolean;
   autoFocus?: boolean;
   maxLength?: number;
-  inputMode?: "text" | "numeric" | "email" | "tel";
+  inputMode?: "text" | "numeric" | "decimal" | "email" | "tel";
   autoComplete?: string;
   role?: "combobox";
   ariaExpanded?: boolean;

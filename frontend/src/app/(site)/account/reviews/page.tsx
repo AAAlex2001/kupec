@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
-import { AccountEmpty } from "@/widgets/account";
+import MyReviews from "@/widgets/my-reviews";
 
 export const metadata: Metadata = {
   title: "Мои отзывы",
 };
 
 /** Отзывы, которые оставил пользователь. */
-export default function MyReviewsPage() {
-  return <AccountEmpty section="reviews" />;
+export default function ReviewsPage() {
+  return <MyReviews />;
 }

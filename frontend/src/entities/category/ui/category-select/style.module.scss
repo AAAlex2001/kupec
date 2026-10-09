@@ -1,0 +1,57 @@
+@use "shared/styles/colors" as *;
+
+.field {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  padding: 0 12px;
+  gap: 8px;
+
+  width: 100%;
+  height: 44px;
+
+  font-family: "Inter";
+  font-size: 14px;
+  line-height: 20px;
+  text-align: left;
+
+  color: #1a1a1a;
+  background: #ffffff;
+  border: 1px solid #e2e5ea;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: border-color 0.15s ease;
+}
+
+.field:hover,
+.field:focus-visible {
+  border-color: $accent;
+  outline: none;
+}
+
+.invalid,
+.invalid:focus-visible {
+  border-color: #e5243b;
+}
+
+.value {
+  flex: 1 1 auto;
+
+  min-width: 0;
+
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.placeholder {
+  color: #70757f;
+}
+
+.chevron {
+  flex: none;
+  width: 20px;
+  height: 20px;
+
+  color: #70757f;
+}

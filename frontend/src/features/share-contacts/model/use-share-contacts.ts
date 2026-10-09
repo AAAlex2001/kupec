@@ -2,6 +2,7 @@
 
 import { sendMessage, type Message } from "@/entities/conversation";
 import { useUser } from "@/entities/user";
+import { reportError } from "@/shared/lib/report-error";
 
 /** Отправить собеседнику свой телефон из профиля. Без телефона делиться нечем. */
 export const useShareContacts = (conversationId: number, onSent: (message: Message) => void) => {
@@ -11,7 +12,11 @@ export const useShareContacts = (conversationId: number, onSent: (message: Messa
   const share = async () => {
     if (!phone) return;
 
-    onSent(await sendMessage(conversationId, `Мой телефон: ${phone}`));
+    try {
+      onSent(await sendMessage(conversationId, `Мой телефон: ${phone}`));
+    } catch (failure) {
+      reportError(failure);
+    }
   };
 
   return { canShare: phone !== null, share };

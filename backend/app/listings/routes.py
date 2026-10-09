@@ -1,10 +1,12 @@
-from fastapi import APIRouter, Depends, HTTPException, Query, UploadFile, status
+from decimal import Decimal
+
+from fastapi import APIRouter, Depends, HTTPException, Query, Request, UploadFile, status
 
 from app.auth.dependencies import get_current_user, require_user
-from app.catalog.dependencies import get_category_repository
+from app.catalog.dependencies import get_category_tree
 from app.catalog.models import ListingKind
 from app.catalog.schemas import CategorySchema
-from app.catalog.services.repo import CategoryRepository
+from app.catalog.services.tree import CategoryTree
 from app.core.uploads import UploadError
 from app.listings.dependencies import (
     get_archive_usecase,
@@ -13,22 +15,18 @@ from app.listings.dependencies import (
     get_delete_listing_usecase,
     get_delete_photo_usecase,
     get_listing_repository,
-    get_own_listing,
+    get_editable_listing,
+    get_list_listings_usecase,
     get_published_listing,
     get_restore_usecase,
     get_update_listing_usecase,
     get_upload_photo_usecase,
     get_visitor,
 )
-from app.listings.models import (
-    SERVICE_PLACE_LABELS,
-    UNIT_LABELS,
-    UNITS_BY_KIND,
-    Listing,
-    ListingStatus,
-)
+from app.listings.models import SERVICE_PLACE_LABELS, Listing, ListingStatus
 from app.listings.schemas import (
     ListingCountsSchema,
+    ListingCategoryOptionSchema,
     ListingCreateSchema,
     ListingOptionsSchema,
     ListingPageSchema,
@@ -36,7 +34,7 @@ from app.listings.schemas import (
     ListingSchema,
     MyListingsSchema,
     OptionSchema,
-    UnitOptionSchema,
+    RangeSchema,
 )
 from app.listings.services.exceptions import (
     InvalidListingError,
@@ -44,9 +42,11 @@ from app.listings.services.exceptions import (
     PhotoNotFoundError,
     TooManyPhotosError,
 )
+from app.listings.services.filters import ListingFilter, ListingSort
 from app.listings.services.repo import ListingRepository
 from app.listings.services.usecases.count_view import CountViewUseCase
 from app.listings.services.usecases.create_listing import CreateListingUseCase
+from app.listings.services.usecases.list_listings import ListListingsUseCase
 from app.listings.services.usecases.manage_photos import (
     DeleteListingPhotoUseCase,
     UploadListingPhotoUseCase,
@@ -57,6 +57,10 @@ from app.listings.services.usecases.manage_status import (
     RestoreListingUseCase,
 )
 from app.listings.services.usecases.update_listing import UpdateListingUseCase
+from app.listings.services.validators import clean_text, parse_places
+from app.units.dependencies import get_unit_repository
+from app.units.schemas import UnitSchema
+from app.units.services.repo import UnitRepository
 from app.users.models import User
 
 router = APIRouter(prefix="/listings", tags=["listings"])
@@ -64,19 +68,20 @@ router = APIRouter(prefix="/listings", tags=["listings"])
 
 @router.get("/options")
 async def get_options(
-    categories: CategoryRepository = Depends(get_category_repository),
+    tree: CategoryTree = Depends(get_category_tree),
+    units: UnitRepository = Depends(get_unit_repository),
 ) -> ListingOptionsSchema:
-    """Справочники формы размещения: категории, единицы цены, места проведения услуг."""
-
-    items = await categories.list_all()
+    """Справочники формы размещения: конечные категории, единицы цены, места проведения услуг."""
 
     return ListingOptionsSchema(
-        categories=[CategorySchema.model_validate(category) for category in items],
-        units=[
-            UnitOptionSchema(code=unit, label=UNIT_LABELS[unit], kind=kind)
-            for kind, units in UNITS_BY_KIND.items()
-            for unit in units
+        categories=[
+            ListingCategoryOptionSchema(
+                **CategorySchema.model_validate(category).model_dump(),
+                parent_name=" / ".join(parent.name for parent in tree.parents_of(category)),
+            )
+            for category in tree.leaves()
         ],
+        units=[UnitSchema.model_validate(unit) for unit in await units.list_all()],
         service_places=[
             OptionSchema(code=place, label=label) for place, label in SERVICE_PLACE_LABELS.items()
         ],
@@ -95,12 +100,12 @@ async def upload_photo(
         photo = await usecase.execute(user, file)
     except UploadError as error:
         raise HTTPException(
-            status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
+            status_code=status.HTTP_422_UNPROCESSABLE_CONTENT,
             detail=str(error),
         ) from error
     except TooManyPhotosError as error:
         raise HTTPException(
-            status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
+            status_code=status.HTTP_422_UNPROCESSABLE_CONTENT,
             detail="Слишком много загруженных фото. Сохраните объявление или удалите лишние",
         ) from error
 
@@ -136,7 +141,7 @@ async def create_listing(
         listing = await usecase.execute(user, payload)
     except InvalidListingError as error:
         raise HTTPException(
-            status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
+            status_code=status.HTTP_422_UNPROCESSABLE_CONTENT,
             detail=[
                 {"loc": ["body", field], "msg": message}
                 for field, message in error.errors.items()
@@ -148,23 +153,53 @@ async def create_listing(
 
 @router.get("")
 async def list_listings(
+    request: Request,
     kind: ListingKind | None = Query(None, description="Только товары или только услуги"),
-    category: str | None = Query(None, max_length=100, description="Адрес категории"),
+    category: str | None = Query(
+        None, max_length=100, description="Адрес категории, вместе с подкатегориями"
+    ),
+    city: int | None = Query(None, description="Только в этом населённом пункте"),
     owner: int | None = Query(None, description="Только объявления этого автора"),
     exclude: int | None = Query(None, description="Кроме этого объявления"),
+    q: str | None = Query(None, max_length=100, description="Поиск по названию и описанию"),
+    price_from: Decimal | None = Query(None, ge=0, description="Цена от"),
+    price_to: Decimal | None = Query(None, ge=0, description="Цена до"),
+    place: str | None = Query(
+        None, max_length=100, description="Где оказывают услугу, любое из: «client,online»"
+    ),
+    sort: ListingSort = Query(ListingSort.NEW, description="Порядок"),
+    bounds: bool = Query(False, description="Вернуть границы ползунков цены и чисел"),
     limit: int = Query(12, ge=1, le=50),
     offset: int = Query(0, ge=0),
-    listings: ListingRepository = Depends(get_listing_repository),
+    tree: CategoryTree = Depends(get_category_tree),
+    usecase: ListListingsUseCase = Depends(get_list_listings_usecase),
 ) -> ListingPageSchema:
-    """Лента опубликованных объявлений, новые первыми."""
+    """Лента опубликованных объявлений с фильтрами.
 
-    items, total = await listings.list_published(
-        kind, category, owner, exclude, limit, offset
+    Фильтры по атрибутам категории приходят как «a.<адрес>=значение» и «a.<адрес>.from/.to».
+    """
+
+    filters = ListingFilter(
+        kind=kind,
+        city_id=city,
+        owner_id=owner,
+        exclude_id=exclude,
+        search=clean_text(q),
+        price_from=price_from,
+        price_to=price_to,
+        service_places=parse_places(place),
+        sort=sort,
+    )
+    page = await usecase.execute(
+        tree, filters, category, request.query_params, (limit, offset), bounds
     )
 
     return ListingPageSchema(
-        items=[ListingSchema.model_validate(item) for item in items],
-        total=total,
+        items=[ListingSchema.model_validate(item) for item in page.items],
+        total=page.total,
+        ranges={
+            key: RangeSchema(min=low, max=high) for key, (low, high) in page.ranges.items()
+        },
     )
 
 
@@ -221,17 +256,16 @@ async def count_view(
 @router.put("/{listing_id}")
 async def update_listing(
     payload: ListingCreateSchema,
-    user: User = Depends(require_user),
-    listing: Listing = Depends(get_own_listing),
+    listing: Listing = Depends(get_editable_listing),
     usecase: UpdateListingUseCase = Depends(get_update_listing_usecase),
 ) -> ListingSchema:
-    """Изменить своё объявление целиком. Ошибки приходят по каждому полю."""
+    """Изменить объявление целиком: автор — своё, админ — любое. Ошибки приходят по полям."""
 
     try:
-        updated = await usecase.execute(user, listing, payload)
+        updated = await usecase.execute(listing, payload)
     except InvalidListingError as error:
         raise HTTPException(
-            status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
+            status_code=status.HTTP_422_UNPROCESSABLE_CONTENT,
             detail=[
                 {"loc": ["body", field], "msg": message}
                 for field, message in error.errors.items()
@@ -243,7 +277,7 @@ async def update_listing(
 
 @router.post("/{listing_id}/archive")
 async def archive_listing(
-    listing: Listing = Depends(get_own_listing),
+    listing: Listing = Depends(get_editable_listing),
     usecase: ArchiveListingUseCase = Depends(get_archive_usecase),
 ) -> ListingSchema:
     """Снять объявление с публикации. Его можно будет опубликовать снова."""
@@ -261,7 +295,7 @@ async def archive_listing(
 
 @router.post("/{listing_id}/restore")
 async def restore_listing(
-    listing: Listing = Depends(get_own_listing),
+    listing: Listing = Depends(get_editable_listing),
     usecase: RestoreListingUseCase = Depends(get_restore_usecase),
 ) -> ListingSchema:
     """Снова опубликовать снятое объявление."""
@@ -279,7 +313,7 @@ async def restore_listing(
 
 @router.delete("/{listing_id}", status_code=status.HTTP_204_NO_CONTENT)
 async def delete_listing(
-    listing: Listing = Depends(get_own_listing),
+    listing: Listing = Depends(get_editable_listing),
     usecase: DeleteListingUseCase = Depends(get_delete_listing_usecase),
 ) -> None:
     """Удалить черновик или снятое объявление."""

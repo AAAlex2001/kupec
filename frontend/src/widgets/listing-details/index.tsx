@@ -1,4 +1,5 @@
-import type { Listing } from "@/entities/listing";
+import type { CategoryField } from "@/entities/attribute";
+import type { Category, Listing } from "@/entities/listing";
 import Carousel from "@/shared/ui/carousel";
 import Gallery from "@/shared/ui/gallery";
 import Notice from "@/shared/ui/notice";
@@ -9,20 +10,29 @@ import ListingHead from "./ui/listing-head";
 import ListingLocation from "./ui/listing-location";
 import ListingSpecs from "./ui/listing-specs";
 import SellerCard from "./ui/seller-card";
+import SellerReviews from "./ui/seller-reviews";
 import ViewCounter from "./ui/view-counter";
 import styles from "./style.module.scss";
 
 type ListingDetailsProps = {
   listing: Listing;
+  categories: Category[];
+  fields: CategoryField[];
   sellerListings: Listing[];
   similarListings: Listing[];
 };
 
-/** Страница объявления: фото, характеристики, описание, место, автор и похожие объявления. */
-const ListingDetails = ({ listing, sellerListings, similarListings }: ListingDetailsProps) => (
+/** Страница объявления: путь по каталогу, фото, характеристики, описание, место, автор и похожие. */
+const ListingDetails = ({
+  listing,
+  categories,
+  fields,
+  sellerListings,
+  similarListings,
+}: ListingDetailsProps) => (
   <div className={styles.page}>
     <ViewCounter listingId={listing.id} />
-    <ListingHead listing={listing} />
+    <ListingHead listing={listing} categories={categories} />
 
     {listing.status !== "published" && (
       <Notice tone="info">Объявление не опубликовано — его видите только вы.</Notice>
@@ -31,9 +41,10 @@ const ListingDetails = ({ listing, sellerListings, similarListings }: ListingDet
     <div className={styles.columns}>
       <div className={styles.main}>
         <Gallery photos={listing.photos.map((photo) => photo.url)} />
-        <ListingSpecs listing={listing} />
+        <ListingSpecs listing={listing} fields={fields} />
         {listing.description && <ListingDescription text={listing.description} />}
         {listing.city && <ListingLocation listing={listing} city={listing.city} />}
+        <SellerReviews listing={listing} />
       </div>
 
       <AuthorPanel listing={listing} />

@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { reportError } from "@/shared/lib/report-error";
 import { searchCities } from "../api/cities";
 import type { City } from "./types";
 
@@ -17,7 +18,7 @@ export const useCitySearch = (open: boolean, query: string) => {
     const timer = setTimeout(() => {
       searchCities(query.trim())
         .then((found) => active && setCities(found))
-        .catch(() => active && setCities([]));
+        .catch(reportError);
     }, SEARCH_DELAY);
 
     return () => {

@@ -1,1 +1,1 @@
-export { getListing, getListingOptions, getListings } from "./api/options";
+export { getListing, getListingOptions, getListings, getSimilarListings } from "./api/options";

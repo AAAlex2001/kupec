@@ -8,6 +8,9 @@ const SHORT_DAY = new Intl.DateTimeFormat("ru-RU", { day: "numeric", month: "sho
 
 const TIME = new Intl.DateTimeFormat("ru-RU", { hour: "2-digit", minute: "2-digit" });
 
+/** Число с пробелами между разрядами: «234 324». */
+export const formatNumber = (value: number) => NUMBER.format(value);
+
 /** Цена в рублях: «1 800 ₽». */
 export const formatRub = (value: number | string) => `${NUMBER.format(Number(value))} ₽`;
 

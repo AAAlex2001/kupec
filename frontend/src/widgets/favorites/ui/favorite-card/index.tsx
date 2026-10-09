@@ -6,11 +6,10 @@ type FavoriteCardProps = {
   listing: Listing;
 };
 
-/** Карточка в избранном: без подложки, с сердечком и кнопкой «Связаться». */
+/** Карточка в избранном: с сердечком и кнопкой «Связаться». */
 const FavoriteCard = ({ listing }: FavoriteCardProps) => (
   <ListingCard
     {...listingCard(listing)}
-    flat
     favorite={<FavoriteButton listingId={listing.id} />}
     action={<WriteButton listingId={listing.id} ownerId={listing.owner.id} label="Связаться" />}
   />

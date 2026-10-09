@@ -27,3 +27,19 @@ class EmailAlreadyTakenError(ValueError):
 
 class SameEmailError(ValueError):
     """Новый email совпадает с текущим."""
+
+
+class InvalidCredentialsError(ValueError):
+    """Неверная почта или пароль. Какое из двух — не уточняем."""
+
+
+class EmailNotVerifiedError(PermissionError):
+    """Почта не подтверждена кодом из письма."""
+
+
+class LoginLockedError(PermissionError):
+    """Слишком много неверных паролей: вход временно закрыт."""
+
+    def __init__(self, retry_after: int) -> None:
+        super().__init__(retry_after)
+        self.retry_after = retry_after

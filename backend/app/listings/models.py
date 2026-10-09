@@ -8,22 +8,30 @@ from sqlalchemy import (
     DateTime,
     Float,
     ForeignKey,
+    Index,
     Integer,
     Numeric,
     String,
     Text,
     func,
+    text,
 )
 from sqlalchemy.dialects.postgresql import JSONB
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
-from app.catalog.models import Category, ListingKind
+from app.catalog.models import Category
 from app.cities.models import City
 from app.core.database import Base
 from app.core.uploads import image_url
+from app.units.models import Unit
 from app.users.models import User
 
 MAX_PHOTOS = 10
+
+SEARCH_DOCUMENT = (
+    "to_tsvector('russian'::regconfig, "
+    "(COALESCE(title, ''::character varying)::text || ' '::text) || COALESCE(description, ''::text))"
+)
 
 
 class ListingStatus(StrEnum):
@@ -32,38 +40,6 @@ class ListingStatus(StrEnum):
     DRAFT = "draft"
     PUBLISHED = "published"
     ARCHIVED = "archived"
-
-
-class Unit(StrEnum):
-    """За что указана цена."""
-
-    PIECE = "piece"
-    KILOGRAM = "kg"
-    JAR = "jar"
-    LITER = "liter"
-    PACK = "pack"
-    HOUR = "hour"
-    SESSION = "session"
-    SERVICE = "service"
-    DAY = "day"
-
-
-UNIT_LABELS = {
-    Unit.PIECE: "штука",
-    Unit.KILOGRAM: "кг",
-    Unit.JAR: "банка",
-    Unit.LITER: "литр",
-    Unit.PACK: "упаковка",
-    Unit.HOUR: "час",
-    Unit.SESSION: "сеанс",
-    Unit.SERVICE: "услуга",
-    Unit.DAY: "день",
-}
-
-UNITS_BY_KIND = {
-    ListingKind.PRODUCT: (Unit.PIECE, Unit.KILOGRAM, Unit.JAR, Unit.LITER, Unit.PACK),
-    ListingKind.SERVICE: (Unit.HOUR, Unit.SESSION, Unit.SERVICE, Unit.DAY),
-}
 
 
 class ServicePlace(StrEnum):
@@ -99,7 +75,9 @@ class Listing(Base):
     description: Mapped[str | None] = mapped_column(Text)
 
     price: Mapped[Decimal | None] = mapped_column(Numeric(12, 2))
-    unit: Mapped[str | None] = mapped_column(String(16))
+    unit: Mapped[str | None] = mapped_column(
+        ForeignKey("units.code", ondelete="RESTRICT"), index=True
+    )
 
     city_id: Mapped[int | None] = mapped_column(
         ForeignKey("cities.id", ondelete="SET NULL"), index=True
@@ -110,6 +88,7 @@ class Listing(Base):
     service_places: Mapped[list[str]] = mapped_column(JSONB, default=list)
     schedule: Mapped[str | None] = mapped_column(String(200))
     contact_phone: Mapped[str | None] = mapped_column(String(32))
+    attributes: Mapped[dict] = mapped_column(JSONB, default=dict)
 
     views_count: Mapped[int] = mapped_column(Integer, default=0)
 
@@ -124,6 +103,7 @@ class Listing(Base):
     owner: Mapped[User] = relationship(lazy="joined")
     category: Mapped[Category | None] = relationship(lazy="joined")
     city: Mapped[City | None] = relationship(lazy="joined")
+    price_unit: Mapped[Unit | None] = relationship(lazy="joined")
     photos: Mapped[list["ListingPhoto"]] = relationship(
         back_populates="listing",
         lazy="selectin",
@@ -137,13 +117,33 @@ class Listing(Base):
             "status IN ('draft', 'published', 'archived')", name="ck_listings_status"
         ),
         CheckConstraint("price IS NULL OR price >= 0", name="ck_listings_price"),
+        Index(
+            "ix_listings_feed",
+            published_at.desc(),
+            id.desc(),
+            postgresql_where=text("status = 'published'"),
+        ),
+        Index("ix_listings_price", "price"),
+        Index(
+            "ix_listings_attributes",
+            "attributes",
+            postgresql_using="gin",
+            postgresql_ops={"attributes": "jsonb_path_ops"},
+        ),
+        Index(
+            "ix_listings_title_trgm",
+            "title",
+            postgresql_using="gin",
+            postgresql_ops={"title": "gin_trgm_ops"},
+        ),
+        Index("ix_listings_search", text(SEARCH_DOCUMENT), postgresql_using="gin"),
     )
 
     @property
     def unit_label(self) -> str | None:
         """Единица цены по-русски: «банка», «сеанс»."""
 
-        return UNIT_LABELS.get(self.unit) if self.unit else None
+        return self.price_unit.label if self.price_unit else None
 
     @property
     def service_place_labels(self) -> list[str]:

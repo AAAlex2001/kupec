@@ -1,0 +1,22 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.fixed {
+  font-family: "Inter";
+  font-size: 14px;
+  line-height: 20px;
+
+  color: #70757f;
+}
+
+.buttons {
+  display: flex;
+  gap: 12px;
+}
+
+.buttons .button {
+  flex: 1 1 0;
+}

@@ -1,0 +1,22 @@
+.filters {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.buttons {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+
+@media (min-width: 1440px) {
+  .buttons {
+    position: sticky;
+    bottom: 0;
+
+    padding: 16px 0;
+
+    background: #ffffff;
+  }
+}

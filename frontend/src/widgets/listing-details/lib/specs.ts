@@ -1,3 +1,4 @@
+import { formatAttributeValue, type CategoryField } from "@/entities/attribute";
 import type { Listing } from "@/entities/listing";
 
 type Spec = {
@@ -21,9 +22,16 @@ const productSpecs = (listing: Listing): Spec[] => [
   { label: "Город", value: listing.city?.name ?? "" },
 ];
 
-/** Заполненные характеристики объявления по его типу. */
-export const listingSpecs = (listing: Listing) => {
-  const specs = listing.kind === "service" ? serviceSpecs(listing) : productSpecs(listing);
+/** Характеристики из атрибутов категории: «Вес — 3 кг», «Вид — Огурцы». */
+const attributeSpecs = (listing: Listing, fields: CategoryField[]): Spec[] =>
+  fields.map((field) => ({
+    label: field.name,
+    value: formatAttributeValue(field, listing.attributes[field.slug]),
+  }));
 
-  return specs.filter((spec) => spec.value);
+/** Заполненные характеристики объявления: общие по типу, затем атрибуты категории. */
+export const listingSpecs = (listing: Listing, fields: CategoryField[]) => {
+  const common = listing.kind === "service" ? serviceSpecs(listing) : productSpecs(listing);
+
+  return [...common, ...attributeSpecs(listing, fields)].filter((spec) => spec.value);
 };

@@ -69,3 +69,40 @@
 .open .chevron {
   transform: rotate(180deg);
 }
+
+.menu {
+  position: absolute;
+  top: calc(100% + 4px);
+  right: 0;
+  left: 0;
+  z-index: 20;
+  padding: 4px;
+  background: #fff;
+  border: 1px solid #e2e5ea;
+  border-radius: 8px;
+  box-shadow: 0 12px 32px rgba(26, 26, 26, 0.12);
+}
+
+.menu > [role="listbox"] {
+  position: static;
+  border: 0;
+  box-shadow: none;
+}
+
+.search {
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 0;
+  margin-bottom: 4px;
+  padding: 10px;
+  font: inherit;
+  font-size: 14px;
+  color: #1a1a1a;
+  border: 1px solid #e2e5ea;
+  border-radius: 6px;
+  outline: none;
+}
+
+.search:focus {
+  border-color: $accent;
+}

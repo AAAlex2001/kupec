@@ -8,6 +8,8 @@ export const listingCard = (listing: Listing) => ({
   unitLabel: listing.unit_label,
   title: listing.title,
   author: listing.owner.name ?? "",
+  rating: listing.owner.rating,
+  reviewsCount: listing.owner.reviews_count,
   place: listing.city?.name ?? "",
   conditions:
     listing.kind === "service" ? listing.service_place_labels.join(" · ") : "Самовывоз",

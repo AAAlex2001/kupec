@@ -1,0 +1,29 @@
+@use "shared/styles/layout" as *;
+
+.shell {
+  display: flex;
+  flex-direction: column;
+
+  min-height: 100dvh;
+}
+
+.header {
+  @include gutter;
+
+  display: flex;
+  align-items: center;
+
+  height: 64px;
+
+  border-bottom: 1px solid #e2e5ea;
+}
+
+.main {
+  @include gutter;
+
+  display: flex;
+  flex-direction: column;
+  padding-top: 24px;
+  padding-bottom: 40px;
+  gap: 24px;
+}

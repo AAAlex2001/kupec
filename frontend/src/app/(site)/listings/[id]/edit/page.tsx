@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { getCategoryTree } from "@/entities/category/server";
 import { getListing, getListingOptions } from "@/entities/listing/server";
 import { getSessionUser, sessionHeaders } from "@/entities/user/server";
 import ListingEditor from "@/widgets/listing-editor";
@@ -13,23 +14,25 @@ type EditListingPageProps = {
   params: Promise<{ id: string }>;
 };
 
-/** Правка своего объявления. Чужое или несуществующее — 404. */
+/** Правка объявления: автором или администратором. Остальным — 404. */
 export default async function EditListingPage({ params }: EditListingPageProps) {
   const { id } = await params;
   const headers = await sessionHeaders();
   if (!headers) notFound();
 
-  const [user, listing, options] = await Promise.all([
+  const [user, listing, options, tree] = await Promise.all([
     getSessionUser(headers),
     getListing(Number(id), headers),
     getListingOptions(),
+    getCategoryTree(),
   ]);
 
-  if (!user || !listing || listing.owner.id !== user.id) notFound();
+  if (!user || !listing) notFound();
+  if (listing.owner.id !== user.id && !user.is_admin) notFound();
 
   return (
     <main>
-      <ListingEditor options={options} listing={listing} />
+      <ListingEditor options={options} tree={tree} listing={listing} />
     </main>
   );
 }

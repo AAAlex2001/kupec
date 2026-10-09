@@ -3,14 +3,15 @@
 .link {
   display: flex;
   flex: none;
-  flex-direction: column;
   align-items: center;
   padding: 0;
-  gap: 4px;
+  gap: 6px;
 
-  height: 44px;
-
+  font-family: "Inter";
+  font-size: 13px;
+  line-height: 16px;
   text-decoration: none;
+  white-space: nowrap;
 
   color: #1a1a1a;
   background: transparent;
@@ -32,15 +33,13 @@
 
 .link svg {
   flex: none;
-  width: 24px;
-  height: 24px;
+  width: 20px;
+  height: 20px;
 }
 
 .label {
-  font-family: "Inter";
-  font-style: normal;
-  font-weight: 400;
-  font-size: 12px;
-  line-height: 16px;
-  white-space: nowrap;
+  max-width: 160px;
+
+  text-overflow: ellipsis;
+  overflow: hidden;
 }

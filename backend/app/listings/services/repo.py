@@ -1,13 +1,33 @@
 """Репозитории объявлений: запросы к таблицам listings и listing_photos."""
 
+from dataclasses import replace
 from datetime import date
+from decimal import Decimal
 
-from sqlalchemy import ColumnElement, func, or_, select, update
+from sqlalchemy import ColumnElement, Numeric, case, func, literal_column, or_, select, update
 from sqlalchemy.dialects.postgresql import insert
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from app.catalog.models import Category
 from app.listings.models import Listing, ListingPhoto, ListingStatus, ListingView
+from app.listings.services.filters import ListingFilter, ListingSort
+
+SEARCH_VECTOR = literal_column(
+    "to_tsvector('russian', coalesce(listings.title, '') || ' ' || coalesce(listings.description, ''))"
+)
+
+
+def escape_like(text: str) -> str:
+    """Экранировать % и _ для поиска подстроки через LIKE."""
+
+    return text.replace("\\", "\\\\").replace("%", "\\%").replace("_", "\\_")
+
+
+def attribute_number(slug: str) -> ColumnElement:
+    """Числовое значение атрибута из JSON объявления. Там не число — NULL, а не ошибка."""
+
+    value = Listing.attributes[slug]
+
+    return case((func.jsonb_typeof(value) == "number", value.astext.cast(Numeric)), else_=None)
 
 
 class ListingRepository:
@@ -22,34 +42,16 @@ class ListingRepository:
         return await self.db.get(Listing, listing_id)
 
     async def list_published(
-        self,
-        kind: str | None,
-        category_slug: str | None,
-        owner_id: int | None,
-        exclude_id: int | None,
-        limit: int,
-        offset: int,
+        self, filters: ListingFilter, limit: int, offset: int
     ) -> tuple[list[Listing], int]:
-        """Опубликованные объявления, новые первыми, и сколько их всего под фильтром."""
+        """Опубликованные объявления в порядке фильтра и сколько их всего под фильтром."""
 
-        conditions: list[ColumnElement[bool]] = [Listing.status == ListingStatus.PUBLISHED]
-
-        if kind:
-            conditions.append(Listing.kind == kind)
-
-        if category_slug:
-            conditions.append(Listing.category.has(Category.slug == category_slug))
-
-        if owner_id:
-            conditions.append(Listing.owner_id == owner_id)
-
-        if exclude_id:
-            conditions.append(Listing.id != exclude_id)
+        conditions = self.conditions(filters)
 
         listings_stmt = (
             select(Listing)
             .where(*conditions)
-            .order_by(Listing.published_at.desc(), Listing.id.desc())
+            .order_by(*self.ordering(filters.sort))
             .limit(limit)
             .offset(offset)
         )
@@ -63,6 +65,100 @@ class ListingRepository:
             total = 0
 
         return listings, total
+
+    async def value_ranges(
+        self, filters: ListingFilter, number_slugs: list[str]
+    ) -> dict[str, tuple[Decimal, Decimal]]:
+        """Наименьшее и наибольшее значение цены и числовых атрибутов под фильтрами.
+
+        Свои диапазоны «от — до» при этом не учитываются, чтобы ползунок показывал всю выдачу.
+        Ключ цены — «price», атрибутов — их адреса. Нет ни одного значения — ключа нет.
+        """
+
+        open_filters = replace(
+            filters,
+            price_from=None,
+            price_to=None,
+            attributes=replace(filters.attributes, ranges=[]),
+        )
+        columns = {"price": Listing.price}
+        for slug in number_slugs:
+            columns[slug] = attribute_number(slug)
+
+        lows = [func.min(column) for column in columns.values()]
+        highs = [func.max(column) for column in columns.values()]
+        stmt = select(*lows, *highs).where(*self.conditions(open_filters))
+        row = (await self.db.execute(stmt)).one()
+
+        count = len(columns)
+        ranges = {}
+        for index, key in enumerate(columns):
+            if row[index] is not None:
+                ranges[key] = (row[index], row[index + count])
+
+        return ranges
+
+    def conditions(self, filters: ListingFilter) -> list[ColumnElement[bool]]:
+        """Условия WHERE ленты по фильтрам. Пустой фильтр ничего не ограничивает."""
+
+        conditions: list[ColumnElement[bool]] = [Listing.status == ListingStatus.PUBLISHED]
+
+        if filters.kind:
+            conditions.append(Listing.kind == filters.kind)
+
+        if filters.category_ids is not None:
+            conditions.append(Listing.category_id.in_(filters.category_ids))
+
+        if filters.city_id:
+            conditions.append(Listing.city_id == filters.city_id)
+
+        if filters.owner_id:
+            conditions.append(Listing.owner_id == filters.owner_id)
+
+        if filters.exclude_id:
+            conditions.append(Listing.id != filters.exclude_id)
+
+        if filters.search:
+            conditions.append(
+                or_(
+                    SEARCH_VECTOR.op("@@")(func.websearch_to_tsquery("russian", filters.search)),
+                    Listing.title.ilike(f"%{escape_like(filters.search)}%", escape="\\"),
+                )
+            )
+
+        if filters.price_from is not None:
+            conditions.append(Listing.price >= filters.price_from)
+
+        if filters.price_to is not None:
+            conditions.append(Listing.price <= filters.price_to)
+
+        if filters.service_places:
+            conditions.append(
+                or_(*[Listing.service_places.contains([place]) for place in filters.service_places])
+            )
+
+        for group in filters.attributes.groups:
+            conditions.append(or_(*[Listing.attributes.contains(value) for value in group]))
+
+        for number in filters.attributes.ranges:
+            value = attribute_number(number.slug)
+            if number.low is not None:
+                conditions.append(value >= number.low)
+            if number.high is not None:
+                conditions.append(value <= number.high)
+
+        return conditions
+
+    def ordering(self, sort: ListingSort) -> list[ColumnElement]:
+        """ORDER BY ленты: новые первыми или по цене, объявления без цены — в конце."""
+
+        if sort == ListingSort.CHEAP:
+            return [Listing.price.asc().nulls_last(), Listing.id.desc()]
+
+        if sort == ListingSort.EXPENSIVE:
+            return [Listing.price.desc().nulls_last(), Listing.id.desc()]
+
+        return [Listing.published_at.desc(), Listing.id.desc()]
 
     async def list_for_owner(
         self, owner_id: int, status: str, search: str | None

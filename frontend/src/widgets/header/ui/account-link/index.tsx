@@ -6,13 +6,13 @@ import { ACCOUNT_PATH, FAVORITES_PATH, MESSAGES_PATH } from "@/shared/config/rou
 import { UserRoundIcon } from "@/shared/ui/icons";
 import ActionLink from "../action-link";
 
-/** Пункт шапки «Войти» открывает окно входа, после входа — имя со ссылкой в кабинет. */
+/** Пункт шапки «Вход и регистрация» открывает окно входа, после входа — имя со ссылкой в кабинет. */
 const AccountLink = () => {
   const { user, openAuth } = useUser();
   const pathname = usePathname();
 
   if (!user) {
-    return <ActionLink label="Войти" icon={<UserRoundIcon />} onClick={openAuth} />;
+    return <ActionLink label="Вход и регистрация" icon={<UserRoundIcon />} onClick={openAuth} />;
   }
 
   const active =

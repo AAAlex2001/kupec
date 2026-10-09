@@ -1,3 +1,12 @@
+$cards-gap-x: 20px;
+$cards-gap-y: 32px;
+
+@mixin cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: $cards-gap-y $cards-gap-x;
+}
+
 @mixin gutter {
   padding-right: 16px;
   padding-left: 16px;

@@ -24,6 +24,9 @@ class Settings(BaseSettings):
     code_resend_seconds: int = 60
     codes_per_hour: int = 5
 
+    login_max_attempts: int = 5
+    login_lock_minutes: int = 15
+
     session_expires_days: int = 30
 
     smtp_host: str = Field("", description="Пусто — письма пишутся в лог вместо отправки")

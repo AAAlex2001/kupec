@@ -1,0 +1,36 @@
+@use "shared/styles/colors" as *;
+
+.picker {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.text {
+  font-family: "Inter";
+  font-size: 14px;
+  line-height: 20px;
+
+  color: #70757f;
+}
+
+.option {
+  display: flex;
+  padding: 8px;
+
+  text-align: left;
+
+  background: transparent;
+  border: 1px solid #e2e5ea;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: border-color 0.15s ease;
+}
+
+.option:hover {
+  border-color: $accent;
+}
+
+.option:focus-visible {
+  outline: 2px solid $accent;
+}

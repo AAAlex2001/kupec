@@ -1,11 +1,12 @@
 "use client";
 
 import { createContext, useContext, useState, type ReactNode } from "react";
+import { reportError } from "@/shared/lib/report-error";
 import { addFavorite, removeFavorite } from "../api/favorites";
 
 type FavoritesValue = {
   isFavorite: (listingId: number) => boolean;
-  toggle: (listingId: number) => void;
+  toggle: (listingId: number) => Promise<void>;
 };
 
 const FavoritesContext = createContext<FavoritesValue | null>(null);
@@ -21,15 +22,21 @@ export const FavoritesProvider = ({ initialIds, children }: FavoritesProviderPro
 
   const isFavorite = (listingId: number) => ids.includes(listingId);
 
-  const toggle = (listingId: number) => {
-    if (isFavorite(listingId)) {
-      setIds(ids.filter((id) => id !== listingId));
-      removeFavorite(listingId);
-      return;
-    }
+  const add = (listingId: number) => setIds((current) => [...current, listingId]);
+  const remove = (listingId: number) => setIds((current) => current.filter((id) => id !== listingId));
 
-    setIds([...ids, listingId]);
-    addFavorite(listingId);
+  const toggle = async (listingId: number) => {
+    const wasFavorite = isFavorite(listingId);
+    if (wasFavorite) remove(listingId);
+    else add(listingId);
+
+    try {
+      await (wasFavorite ? removeFavorite(listingId) : addFavorite(listingId));
+    } catch (failure) {
+      if (wasFavorite) add(listingId);
+      else remove(listingId);
+      reportError(failure);
+    }
   };
 
   return (
@@ -37,7 +44,7 @@ export const FavoritesProvider = ({ initialIds, children }: FavoritesProviderPro
   );
 };
 
-/** Проверить и переключить избранное. */
+/** Проверить и переключить избранное. При ошибке сердечко возвращается обратно. */
 export const useFavorites = (): FavoritesValue => {
   const value = useContext(FavoritesContext);
 

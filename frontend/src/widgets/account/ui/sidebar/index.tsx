@@ -12,19 +12,20 @@ import Badge from "@/shared/ui/badge";
 import Button from "@/shared/ui/button";
 import { LogOutIcon } from "@/shared/ui/icons";
 import SegmentedNav from "@/shared/ui/segmented-nav";
-import { ACCOUNT_SECTIONS } from "../../data";
+import { ACCOUNT_SECTIONS, ADMIN_LINK } from "../../data";
 import styles from "./style.module.scss";
 
 type SidebarProps = {
   user: User;
 };
 
-/** Меню кабинета: профиль и разделы. На ПК — список слева, до ПК — сегменты сверху. */
+/** Меню кабинета: профиль и разделы, у администратора — ещё «Админка». На ПК — список слева, до ПК — сегменты. */
 const Sidebar = ({ user }: SidebarProps) => {
   const pathname = usePathname();
   const { pending, signOut } = useLogout();
   const unread = useUnreadCount();
-  const current = ACCOUNT_SECTIONS.find(({ href }) => pathname.startsWith(href));
+  const sections = user.is_admin ? [...ACCOUNT_SECTIONS, ADMIN_LINK] : ACCOUNT_SECTIONS;
+  const current = sections.find(({ href }) => pathname.startsWith(href));
   const counts = (href: string) => (href === MESSAGES_PATH ? unread : 0);
 
   return (
@@ -49,11 +50,11 @@ const Sidebar = ({ user }: SidebarProps) => {
         className={styles.segments}
         ariaLabel="Разделы кабинета"
         current={current?.href}
-        items={ACCOUNT_SECTIONS.map(({ href, label }) => ({ href, label, count: counts(href) }))}
+        items={sections.map(({ href, label }) => ({ href, label, count: counts(href) }))}
       />
 
       <nav className={styles.nav} aria-label="Разделы кабинета">
-        {ACCOUNT_SECTIONS.map(({ href, label, Icon }) => (
+        {sections.map(({ href, label, Icon }) => (
           <Link
             key={href}
             className={cn(styles.item, href === current?.href && styles.active)}

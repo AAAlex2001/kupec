@@ -1,0 +1,39 @@
+.row {
+  display: flex;
+  align-items: center;
+  padding: 10px 12px;
+  gap: 12px;
+
+  min-height: 64px;
+
+  border-bottom: 1px solid #e2e5ea;
+}
+
+.info {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  gap: 2px;
+
+  min-width: 0;
+}
+
+.name {
+  font-family: "Inter";
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 20px;
+
+  color: #1a1a1a;
+}
+
+.meta {
+  font-family: "Inter";
+  font-size: 12px;
+  line-height: 16px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+
+  color: #70757f;
+  overflow: hidden;
+}

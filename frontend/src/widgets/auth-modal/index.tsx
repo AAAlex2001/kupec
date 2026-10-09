@@ -4,17 +4,24 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useUser, type User } from "@/entities/user";
 import { RegistrationForm } from "@/features/complete-registration";
-import { LoginForm } from "@/features/login-by-email";
+import { LoginForm } from "@/features/login";
+import { RegisterForm } from "@/features/register";
+import { ResetPasswordForm } from "@/features/reset-password";
 import Modal from "@/shared/ui/modal";
+import { SWITCHES, type AuthMode } from "./data";
+import AuthSwitch from "./ui/auth-switch";
 
-/** Окно входа и регистрации: почта, код, а новому пользователю — имя и город. */
+/** Окно входа и регистрации. Новому пользователю после входа — имя и город. */
 const AuthModal = () => {
   const router = useRouter();
   const { user, setUser, authOpen, closeAuth } = useUser();
-  const [registering, setRegistering] = useState(false);
+  const [mode, setMode] = useState<AuthMode>("login");
+  const [completing, setCompleting] = useState(false);
+  const switcher = SWITCHES[mode];
 
   const close = () => {
-    setRegistering(false);
+    setMode("login");
+    setCompleting(false);
     closeAuth();
   };
 
@@ -23,17 +30,34 @@ const AuthModal = () => {
     router.refresh();
   };
 
-  const loggedIn = (loggedUser: User) => {
-    setUser(loggedUser);
+  const signedIn = (signedUser: User) => {
+    setUser(signedUser);
 
-    if (loggedUser.name) finish();
-    else setRegistering(true);
+    if (signedUser.name) finish();
+    else setCompleting(true);
   };
+
+  if (completing && user) {
+    return (
+      <Modal open={authOpen} onClose={close} ariaLabel="Заполнение профиля">
+        <RegistrationForm user={user} onDone={finish} />
+      </Modal>
+    );
+  }
 
   return (
     <Modal open={authOpen} onClose={close} ariaLabel="Вход и регистрация">
-      {authOpen && registering && user && <RegistrationForm user={user} onDone={finish} />}
-      {authOpen && !registering && <LoginForm onSuccess={loggedIn} />}
+      {authOpen && mode === "login" && (
+        <LoginForm onSuccess={signedIn} onForgot={() => setMode("reset")} />
+      )}
+      {authOpen && mode === "register" && <RegisterForm onSuccess={signedIn} />}
+      {authOpen && mode === "reset" && <ResetPasswordForm onSuccess={signedIn} />}
+
+      <AuthSwitch
+        question={switcher.question}
+        action={switcher.action}
+        onClick={() => setMode(switcher.to)}
+      />
     </Modal>
   );
 };

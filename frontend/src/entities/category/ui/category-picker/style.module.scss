@@ -1,0 +1,63 @@
+.picker {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.searchIcon {
+  flex: none;
+  width: 20px;
+  height: 20px;
+
+  color: #70757f;
+}
+
+.body,
+.columns,
+.levels {
+  display: flex;
+
+  height: min(560px, 65dvh);
+  margin: 0 -24px;
+
+  border-top: 1px solid #e2e5ea;
+  border-bottom: 1px solid #e2e5ea;
+}
+
+.columns {
+  display: none;
+
+  overflow-x: auto;
+}
+
+.levels {
+  overflow-y: auto;
+}
+
+.path {
+  min-height: 20px;
+
+  font-family: "Inter";
+  font-size: 14px;
+  line-height: 20px;
+
+  color: #70757f;
+}
+
+.buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
+@media (min-width: 1440px) {
+  .columns {
+    display: flex;
+
+    height: min(480px, 60dvh);
+  }
+
+  .levels {
+    display: none;
+  }
+}

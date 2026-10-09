@@ -1,6 +1,7 @@
 """Сценарии фото объявления до публикации: загрузить и удалить."""
 
 from fastapi import UploadFile
+from sqlalchemy.exc import SQLAlchemyError
 
 from app.core.uploads import remove_image, save_image
 from app.listings.models import ListingPhoto
@@ -28,7 +29,7 @@ class UploadListingPhotoUseCase:
 
         try:
             return await self.photos.add(ListingPhoto(owner_id=user.id, path=path))
-        except Exception:
+        except SQLAlchemyError:
             remove_image(path)
             raise
 

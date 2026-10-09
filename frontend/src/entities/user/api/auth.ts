@@ -6,10 +6,22 @@ export type CodeSent = {
   expires_in: number;
 };
 
-/** Отправить код для входа на почту. Аккаунт создаётся при первом входе. */
-export const requestLoginCode = (email: string) =>
-  request<CodeSent>("/v1/auth/code", jsonBody("POST", { email }));
+/** Зарегистрироваться по почте и паролю. На почту приходит код подтверждения. */
+export const register = (email: string, password: string) =>
+  request<CodeSent>("/v1/auth/register", jsonBody("POST", { email, password }));
 
-/** Войти по коду из письма. Бэкенд ставит cookie сессии. */
-export const loginWithCode = (email: string, code: string) =>
-  request<User>("/v1/auth/login", jsonBody("POST", { email, code }));
+/** Подтвердить почту кодом из письма. Бэкенд ставит cookie сессии. */
+export const confirmEmail = (email: string, code: string) =>
+  request<User>("/v1/auth/register/confirm", jsonBody("POST", { email, code }));
+
+/** Войти по почте и паролю. Бэкенд ставит cookie сессии. */
+export const login = (email: string, password: string) =>
+  request<User>("/v1/auth/login", jsonBody("POST", { email, password }));
+
+/** Отправить код восстановления пароля. */
+export const requestPasswordReset = (email: string) =>
+  request<CodeSent>("/v1/auth/password/reset", jsonBody("POST", { email }));
+
+/** Задать новый пароль по коду из письма. Бэкенд ставит cookie сессии. */
+export const resetPassword = (email: string, code: string, password: string) =>
+  request<User>("/v1/auth/password/reset/confirm", jsonBody("POST", { email, code, password }));

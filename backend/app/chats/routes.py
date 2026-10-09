@@ -134,7 +134,7 @@ async def send_message(
         message = await usecase.execute(user, conversation, payload.text)
     except EmptyMessageError as error:
         raise HTTPException(
-            status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
+            status_code=status.HTTP_422_UNPROCESSABLE_CONTENT,
             detail=str(error),
         ) from error
     except BlockedError as error:

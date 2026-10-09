@@ -1,9 +1,9 @@
 "use client";
 
 import { useId } from "react";
-import type { Category, ListingKind } from "@/entities/listing";
+import { CategorySelect, type CategoryNode } from "@/entities/category";
+import type { ListingKind } from "@/entities/listing";
 import Chips from "@/shared/ui/chips";
-import Dropdown from "@/shared/ui/dropdown";
 import Field from "@/shared/ui/field";
 import Input from "@/shared/ui/input";
 import Textarea from "@/shared/ui/textarea";
@@ -13,7 +13,7 @@ import styles from "./style.module.scss";
 type MainFieldsProps = {
   fields: ListingFields;
   errors: ListingErrors;
-  categories: Category[];
+  tree: CategoryNode[];
   onChange: (changes: Partial<ListingFields>) => void;
   onKindChange: (kind: ListingKind) => void;
 };
@@ -24,16 +24,26 @@ const KINDS = [
 ];
 
 const DESCRIPTION_HINTS = {
-  product: "Укажите состав, дату приготовления, хранение и количество, если это важно для товара.",
+  product:
+    "Расскажите о состоянии, особенностях, комплекте и передаче товара. " +
+    "Для продуктов укажите состав, дату изготовления и хранение.",
   service: "Расскажите, что входит в услугу, сколько она длится и что взять с собой.",
 };
 
-/** Тип объявления, категория, название и описание. */
-const MainFields = ({ fields, errors, categories, onChange, onKindChange }: MainFieldsProps) => {
+const TITLE_PLACEHOLDERS = {
+  product: "Название, модель или вид товара",
+  service: "Название услуги: что вы предлагаете",
+};
+
+/** Тип объявления, категория, название и описание. Категория выбирается в окне по колонкам. */
+const MainFields = ({ fields, errors, tree, onChange, onKindChange }: MainFieldsProps) => {
   const id = useId();
-  const options = categories
-    .filter((category) => category.kind === fields.kind)
-    .map((category) => ({ value: String(category.id), label: category.name }));
+  const sections = tree.filter((section) => section.kind === fields.kind);
+
+  const chooseCategory = (category: CategoryNode) => {
+    if (String(category.id) === fields.categoryId) return;
+    onChange({ categoryId: String(category.id), unit: "", attributes: {} });
+  };
 
   return (
     <section className={styles.section}>
@@ -45,13 +55,12 @@ const MainFields = ({ fields, errors, categories, onChange, onKindChange }: Main
       />
 
       <Field label="Категория *" htmlFor={`${id}-category`} error={errors.categoryId}>
-        <Dropdown
+        <CategorySelect
           id={`${id}-category`}
-          value={fields.categoryId}
-          options={options}
-          onChange={(categoryId) => onChange({ categoryId })}
-          placeholder="Выберите категорию"
+          tree={sections}
+          value={fields.categoryId ? Number(fields.categoryId) : null}
           invalid={Boolean(errors.categoryId)}
+          onChange={chooseCategory}
         />
       </Field>
 
@@ -60,7 +69,7 @@ const MainFields = ({ fields, errors, categories, onChange, onKindChange }: Main
           id={`${id}-title`}
           value={fields.title}
           onChange={(title) => onChange({ title })}
-          placeholder={fields.kind === "product" ? "Солёные огурцы, банка 1 л" : "Массаж спины, 60 минут"}
+          placeholder={TITLE_PLACEHOLDERS[fields.kind]}
           invalid={Boolean(errors.title)}
           maxLength={100}
         />

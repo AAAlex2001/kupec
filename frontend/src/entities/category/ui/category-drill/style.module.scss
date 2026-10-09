@@ -1,0 +1,44 @@
+@use "shared/styles/colors" as *;
+
+.drill {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+
+  min-width: 0;
+}
+
+.back {
+  display: flex;
+  flex: none;
+  align-items: center;
+  padding: 12px 20px;
+  gap: 8px;
+
+  font-family: "Inter";
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 20px;
+  text-align: left;
+
+  color: #1a1a1a;
+  background: #f5f6f8;
+  border: none;
+  border-bottom: 1px solid #e2e5ea;
+  cursor: pointer;
+}
+
+.back:hover {
+  color: $accent-text;
+}
+
+.back:focus-visible {
+  outline: 2px solid $accent;
+  outline-offset: -2px;
+}
+
+.arrow {
+  flex: none;
+  width: 16px;
+  height: 16px;
+}

@@ -11,7 +11,6 @@ import Sidebar from "./ui/sidebar";
 import styles from "./style.module.scss";
 
 export { default as AccountSettings } from "./ui/settings";
-export { default as AccountEmpty } from "./ui/empty";
 
 type AccountProps = {
   children: ReactNode;

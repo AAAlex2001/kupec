@@ -39,12 +39,12 @@ async def update_me(
         updated = await usecase.execute(user, payload)
     except (InvalidNameError, InvalidPhoneError) as error:
         raise HTTPException(
-            status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
+            status_code=status.HTTP_422_UNPROCESSABLE_CONTENT,
             detail=str(error),
         ) from error
     except CityNotFoundError as error:
         raise HTTPException(
-            status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
+            status_code=status.HTTP_422_UNPROCESSABLE_CONTENT,
             detail="Такого города нет",
         ) from error
 
@@ -63,7 +63,7 @@ async def set_avatar(
         updated = await usecase.execute(user, file)
     except UploadError as error:
         raise HTTPException(
-            status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
+            status_code=status.HTTP_422_UNPROCESSABLE_CONTENT,
             detail=str(error),
         ) from error
 

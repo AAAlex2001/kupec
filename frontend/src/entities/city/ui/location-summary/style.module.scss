@@ -1,0 +1,30 @@
+@use "shared/styles/colors" as *;
+
+.summary {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 16px;
+
+  color: #70757f;
+}
+
+.pin {
+  flex: none;
+  width: 16px;
+  height: 16px;
+
+  color: $accent;
+}
+
+.place {
+  font-weight: 600;
+
+  color: #1a1a1a;
+}

@@ -5,6 +5,8 @@ import secrets
 from fastapi import Depends, HTTPException, Request, Response, status
 from sqlalchemy.ext.asyncio import AsyncSession
 
+from app.attributes.dependencies import get_load_fields_usecase
+from app.attributes.services.usecases.load_fields import LoadCategoryFieldsUseCase
 from app.auth.dependencies import get_current_user, require_user
 from app.catalog.dependencies import get_category_repository
 from app.catalog.services.repo import CategoryRepository
@@ -20,6 +22,7 @@ from app.listings.services.repo import (
 )
 from app.listings.services.usecases.count_view import CountViewUseCase
 from app.listings.services.usecases.create_listing import CreateListingUseCase
+from app.listings.services.usecases.list_listings import ListListingsUseCase
 from app.listings.services.usecases.manage_photos import (
     DeleteListingPhotoUseCase,
     UploadListingPhotoUseCase,
@@ -30,6 +33,8 @@ from app.listings.services.usecases.manage_status import (
     RestoreListingUseCase,
 )
 from app.listings.services.usecases.update_listing import UpdateListingUseCase
+from app.units.dependencies import get_load_units_usecase
+from app.units.services.usecases.category_units import LoadCategoryUnitsUseCase
 from app.users.models import User
 
 VISITOR_COOKIE = "visitor"
@@ -58,10 +63,12 @@ def get_create_listing_usecase(
     photos: ListingPhotoRepository = Depends(get_photo_repository),
     categories: CategoryRepository = Depends(get_category_repository),
     cities: CityRepository = Depends(get_city_repository),
+    units: LoadCategoryUnitsUseCase = Depends(get_load_units_usecase),
+    fields: LoadCategoryFieldsUseCase = Depends(get_load_fields_usecase),
 ) -> CreateListingUseCase:
     """Сценарий размещения объявления."""
 
-    return CreateListingUseCase(listings, photos, categories, cities)
+    return CreateListingUseCase(listings, photos, categories, cities, units, fields)
 
 
 def get_update_listing_usecase(
@@ -69,10 +76,21 @@ def get_update_listing_usecase(
     photos: ListingPhotoRepository = Depends(get_photo_repository),
     categories: CategoryRepository = Depends(get_category_repository),
     cities: CityRepository = Depends(get_city_repository),
+    units: LoadCategoryUnitsUseCase = Depends(get_load_units_usecase),
+    fields: LoadCategoryFieldsUseCase = Depends(get_load_fields_usecase),
 ) -> UpdateListingUseCase:
     """Сценарий правки объявления."""
 
-    return UpdateListingUseCase(listings, photos, categories, cities)
+    return UpdateListingUseCase(listings, photos, categories, cities, units, fields)
+
+
+def get_list_listings_usecase(
+    listings: ListingRepository = Depends(get_listing_repository),
+    fields: LoadCategoryFieldsUseCase = Depends(get_load_fields_usecase),
+) -> ListListingsUseCase:
+    """Сценарий ленты объявлений с фильтрами."""
+
+    return ListListingsUseCase(listings, fields)
 
 
 def get_upload_photo_usecase(
@@ -174,15 +192,15 @@ async def get_published_listing(
     return listing
 
 
-async def get_own_listing(
+async def get_editable_listing(
     listing_id: int,
     user: User = Depends(require_user),
     listings: ListingRepository = Depends(get_listing_repository),
 ) -> Listing:
-    """Своё объявление по id из пути. Чужое выглядит как несуществующее — 404."""
+    """Объявление, которое можно менять: своё, а админу — любое. Чужое выглядит как несуществующее — 404."""
 
     listing = await listings.get_by_id(listing_id)
-    if listing is None or listing.owner_id != user.id:
+    if listing is None or (listing.owner_id != user.id and not user.is_admin):
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
             detail="Объявление не найдено",

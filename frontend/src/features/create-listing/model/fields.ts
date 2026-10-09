@@ -1,5 +1,6 @@
 import type { Listing } from "@/entities/listing";
 import type { User } from "@/entities/user";
+import { attributeDrafts } from "../lib/attributes";
 import type { ListingFields } from "./types";
 
 /** Пустая форма: город и телефон берутся из профиля. */
@@ -17,6 +18,7 @@ export const emptyFields = (user: User): ListingFields => ({
   servicePlaces: [],
   schedule: "",
   contactPhone: user.phone ?? "",
+  attributes: {},
 });
 
 /** Поля формы из сохранённого объявления — для правки. */
@@ -37,4 +39,5 @@ export const listingFields = (listing: Listing): ListingFields => ({
   servicePlaces: listing.service_places,
   schedule: listing.schedule ?? "",
   contactPhone: listing.contact_phone ?? "",
+  attributes: attributeDrafts(listing.attributes),
 });

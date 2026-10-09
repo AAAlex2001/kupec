@@ -1,5 +1,6 @@
 import { jsonBody, request } from "@/shared/api";
 import type {
+  AdminListingPage,
   Listing,
   ListingPayload,
   ListingPhoto,
@@ -36,6 +37,25 @@ export const fetchMyListings = (status: ListingStatus, query: string) =>
   request<MyListings>(
     `/v1/listings/my?status=${status}&q=${encodeURIComponent(query.trim())}`,
   );
+
+/** Объявления всех пользователей для админки на вкладке и счётчики вкладок. */
+export const fetchAdminListings = (
+  status: ListingStatus,
+  query: string,
+  ownerId: number | undefined,
+  limit: number,
+  offset: number,
+) => {
+  const params = new URLSearchParams({
+    status,
+    q: query.trim(),
+    limit: String(limit),
+    offset: String(offset),
+  });
+  if (ownerId) params.set("owner", String(ownerId));
+
+  return request<AdminListingPage>(`/v1/admin/listings?${params}`);
+};
 
 /** Снять объявление с публикации. */
 export const archiveListing = (id: number) =>

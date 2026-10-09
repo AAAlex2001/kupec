@@ -1,6 +1,7 @@
 """Сценарии загрузки и удаления аватара."""
 
 from fastapi import UploadFile
+from sqlalchemy.exc import SQLAlchemyError
 
 from app.core.uploads import remove_image, save_image
 from app.users.models import User
@@ -25,7 +26,7 @@ class SetAvatarUseCase:
 
         try:
             saved = await self.users.save(user)
-        except Exception:
+        except SQLAlchemyError:
             remove_image(path)
             raise
 

@@ -1,22 +1,30 @@
 "use client";
 
 import { useReducer } from "react";
+import type { CategoryField } from "@/entities/attribute";
 import {
   createListing,
   updateListing,
+  type Category,
   type Listing,
   type ListingKind,
   type ListingPayload,
 } from "@/entities/listing";
 import type { User } from "@/entities/user";
 import { errorMessage } from "@/shared/lib/errors";
+import { attributesPayload } from "../lib/attributes";
 import { emptyFields, listingFields } from "./fields";
 import { listingFormReducer } from "./reducer";
-import type { ListingFields, SaveMode } from "./types";
+import type { AttributeDraft, ListingFields, SaveMode } from "./types";
+import { useCategoryForm } from "./use-category-form";
 import { validateListing } from "./validate";
 
-/** Тело запроса из полей формы. */
-const toPayload = (fields: ListingFields, publish: boolean): ListingPayload => ({
+/** Тело запроса из полей формы и атрибутов выбранной категории. */
+const toPayload = (
+  fields: ListingFields,
+  attributeFields: CategoryField[],
+  publish: boolean,
+): ListingPayload => ({
   kind: fields.kind,
   publish,
   category_id: fields.categoryId ? Number(fields.categoryId) : null,
@@ -32,10 +40,11 @@ const toPayload = (fields: ListingFields, publish: boolean): ListingPayload => (
   schedule: fields.kind === "service" ? fields.schedule.trim() || null : null,
   contact_phone: fields.contactPhone.trim() || null,
   photo_ids: fields.photos.map((photo) => photo.id),
+  attributes: attributesPayload(fields.attributes, attributeFields),
 });
 
-/** Форма объявления: новое или правка listing. Проверка и сохранение черновиком или с публикацией. */
-export const useListingForm = (user: User, listing?: Listing) => {
+/** Форма объявления: новое или правка listing. Атрибуты и единицы подгружаются по выбранной категории. */
+export const useListingForm = (user: User, categories: Category[], listing?: Listing) => {
   const [state, dispatch] = useReducer(listingFormReducer, {
     fields: listing ? listingFields(listing) : emptyFields(user),
     errors: {},
@@ -43,9 +52,13 @@ export const useListingForm = (user: User, listing?: Listing) => {
     error: null,
     saved: null,
   });
+  const category = useCategoryForm(categories, state.fields.categoryId);
+  const attributeFields = category.fields;
 
   const change = (changes: Partial<ListingFields>) => dispatch({ type: "fields/change", changes });
   const changeKind = (kind: ListingKind) => dispatch({ type: "kind/change", kind });
+  const changeAttribute = (slug: string, value: AttributeDraft) =>
+    dispatch({ type: "attribute/change", slug, value });
   const reset = () => dispatch({ type: "form/reset", fields: emptyFields(user) });
 
   const send = (payload: ListingPayload) =>
@@ -53,7 +66,7 @@ export const useListingForm = (user: User, listing?: Listing) => {
 
   const save = async (mode: SaveMode) => {
     const publish = mode === "publish";
-    const errors = validateListing(state.fields, publish);
+    const errors = validateListing(state.fields, attributeFields, publish);
 
     if (Object.keys(errors).length > 0) {
       dispatch({ type: "save/invalid", errors });
@@ -64,7 +77,8 @@ export const useListingForm = (user: User, listing?: Listing) => {
     dispatch({ type: "save/start", mode });
 
     try {
-      dispatch({ type: "save/success", listing: await send(toPayload(state.fields, publish)) });
+      const payload = toPayload(state.fields, attributeFields, publish);
+      dispatch({ type: "save/success", listing: await send(payload) });
     } catch (failure) {
       dispatch({ type: "save/failure", error: errorMessage(failure, "Не удалось сохранить") });
     }
@@ -72,9 +86,12 @@ export const useListingForm = (user: User, listing?: Listing) => {
 
   return {
     state,
+    attributeFields,
+    categoryUnits: category.units,
     editing: Boolean(listing),
     change,
     changeKind,
+    changeAttribute,
     reset,
     publish: () => save("publish"),
     saveDraft: () => save("draft"),

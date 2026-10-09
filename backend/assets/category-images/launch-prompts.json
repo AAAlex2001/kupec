@@ -1,0 +1,635 @@
+{
+  "tool": "built-in image_gen",
+  "template": "Use case: stylized-concept. Asset type: one isolated category illustration for the Russian marketplace Купец. Subject: {subject}. Consistent premium photorealistic 3D product render like modern Avito category thumbnails: realistic materials, soft studio lighting, tasteful pale blue accents. A compact single object cluster in three-quarter view. Entire objects fully inside the canvas, centered with generous margins, legible at 120px. True transparent alpha background. No floor, opaque backdrop, gradient, broad shadow, colored glow, text, letters, brand logos or watermarks. This is ONE category cutout, not a grid or collage. Composition must work at the bottom-right of a light grey category tile.",
+  "images": [
+    {
+      "slug": "nuts",
+      "subject": "small bowl of pine nuts walnuts and pumpkin seeds",
+      "source": "C:\\Users\\alex\\.codex\\generated_images\\01a11d1f-ab95-7483-825b-e4a3900f58da\\exec-3ff10fb8-82ac-41b8-b18c-f3973c9d2663.png",
+      "prompt": "Use case: stylized-concept. Asset type: one isolated category illustration for the Russian marketplace Купец. Subject: small bowl of pine nuts walnuts and pumpkin seeds. Consistent premium photorealistic 3D product render like modern Avito category thumbnails: realistic materials, soft studio lighting, tasteful pale blue accents. A compact single object cluster in three-quarter view. Entire objects fully inside the canvas, centered with generous margins, legible at 120px. True transparent alpha background. No floor, opaque backdrop, gradient, broad shadow, colored glow, text, letters, brand logos or watermarks. This is ONE category cutout, not a grid or collage. Composition must work at the bottom-right of a light grey category tile."
+    },
+    {
+      "slug": "semi-finished",
+      "subject": "uncooked dumplings and patties on a small wooden board",
+      "source": "C:\\Users\\alex\\.codex\\generated_images\\01a11d1f-ab95-7483-825b-e4a3900f58da\\exec-8a26573c-76bd-4038-acb1-6ca8e18ffa9d.png",
+      "prompt": "Use case: stylized-concept. Asset type: one isolated category illustration for the Russian marketplace Купец. Subject: uncooked dumplings and patties on a small wooden board. Consistent premium photorealistic 3D product render like modern Avito category thumbnails: realistic materials, soft studio lighting, tasteful pale blue accents. A compact single object cluster in three-quarter view. Entire objects fully inside the canvas, centered with generous margins, legible at 120px. True transparent alpha background. No floor, opaque backdrop, gradient, broad shadow, colored glow, text, letters, brand logos or watermarks. This is ONE category cutout, not a grid or collage. Composition must work at the bottom-right of a light grey category tile."
+    },
+    {
+      "slug": "tea-coffee",
+      "subject": "blue coffee cup coffee beans and loose tea leaves",
+      "source": "C:\\Users\\alex\\.codex\\generated_images\\01a11d1f-ab95-7483-825b-e4a3900f58da\\exec-c90fcd2b-9345-431c-b1c9-022c78958d7a.png",
+      "prompt": "Use case: stylized-concept. Asset type: one isolated category illustration for the Russian marketplace Купец. Subject: blue coffee cup coffee beans and loose tea leaves. Consistent premium photorealistic 3D product render like modern Avito category thumbnails: realistic materials, soft studio lighting, tasteful pale blue accents. A compact single object cluster in three-quarter view. Entire objects fully inside the canvas, centered with generous margins, legible at 120px. True transparent alpha background. No floor, opaque backdrop, gradient, broad shadow, colored glow, text, letters, brand logos or watermarks. This is ONE category cutout, not a grid or collage. Composition must work at the bottom-right of a light grey category tile."
+    },
+    {
+      "slug": "dried-fruits",
+      "subject": "small bowl of dried apricots raisins and prunes",
+      "source": "C:\\Users\\alex\\.codex\\generated_images\\01a11d1f-ab95-7483-825b-e4a3900f58da\\exec-00fb798e-53f8-429d-89d6-c576a20203ba.png",
+      "prompt": "Use case: stylized-concept. Asset type: one isolated category illustration for the Russian marketplace Купец. Subject: small bowl of dried apricots raisins and prunes. Consistent premium photorealistic 3D product render like modern Avito category thumbnails: realistic materials, soft studio lighting, tasteful pale blue accents. A compact single object cluster in three-quarter view. Entire objects fully inside the canvas, centered with generous margins, legible at 120px. True transparent alpha background. No floor, opaque backdrop, gradient, broad shadow, colored glow, text, letters, brand logos or watermarks. This is ONE category cutout, not a grid or collage. Composition must work at the bottom-right of a light grey category tile."
+    },
+    {
+      "slug": "eggs",
+      "subject": "six farm eggs in a small cardboard tray",
+      "source": "C:\\Users\\alex\\.codex\\generated_images\\01a11d1f-ab95-7483-825b-e4a3900f58da\\exec-ecbfa21a-c8f6-4de8-93e6-4ea13eb4aac9.png",
+      "prompt": "Use case: stylized-concept. Asset type: one isolated category illustration for the Russian marketplace Купец. Subject: six farm eggs in a small cardboard tray. Consistent premium photorealistic 3D product render like modern Avito category thumbnails: realistic materials, soft studio lighting, tasteful pale blue accents. A compact single object cluster in three-quarter view. Entire objects fully inside the canvas, centered with generous margins, legible at 120px. True transparent alpha background. No floor, opaque backdrop, gradient, broad shadow, colored glow, text, letters, brand logos or watermarks. This is ONE category cutout, not a grid or collage. Composition must work at the bottom-right of a light grey category tile."
+    },
+    {
+      "slug": "jam",
+      "subject": "jar of raspberry jam with raspberries and a wooden spoon",
+      "source": "C:\\Users\\alex\\.codex\\generated_images\\01a11d1f-ab95-7483-825b-e4a3900f58da\\exec-1a91d374-b55a-4aef-94cf-0f7791bc434f.png",
+      "prompt": "Use case: stylized-concept. Asset type: one isolated category illustration for the Russian marketplace Купец. Subject: jar of raspberry jam with raspberries and a wooden spoon. Consistent premium photorealistic 3D product render like modern Avito category thumbnails: realistic materials, soft studio lighting, tasteful pale blue accents. A compact single object cluster in three-quarter view. Entire objects fully inside the canvas, centered with generous margins, legible at 120px. True transparent alpha background. No floor, opaque backdrop, gradient, broad shadow, colored glow, text, letters, brand logos or watermarks. This is ONE category cutout, not a grid or collage. Composition must work at the bottom-right of a light grey category tile."
+    },
+    {
+      "slug": "ready-meals",
+      "subject": "lidded meal container with roasted chicken vegetables and rice",
+      "source": "C:\\Users\\alex\\.codex\\generated_images\\01a11d1f-ab95-7483-825b-e4a3900f58da\\exec-560f21f6-437a-4759-a121-3cc6b8ba296d.png",
+      "prompt": "Use case: stylized-concept. Asset type: one isolated category illustration for the Russian marketplace Купец. Subject: lidded meal container with roasted chicken vegetables and rice. Consistent premium photorealistic 3D product render like modern Avito category thumbnails: realistic materials, soft studio lighting, tasteful pale blue accents. A compact single object cluster in three-quarter view. Entire objects fully inside the canvas, centered with generous margins, legible at 120px. True transparent alpha background. No floor, opaque backdrop, gradient, broad shadow, colored glow, text, letters, brand logos or watermarks. This is ONE category cutout, not a grid or collage. Composition must work at the bottom-right of a light grey category tile."
+    },
+    {
+      "slug": "drinks",
+      "subject": "two clear bottles of berry juice and lemonade with fruit",
+      "source": "C:\\Users\\alex\\.codex\\generated_images\\01a11d1f-ab95-7483-825b-e4a3900f58da\\exec-a7555183-e123-4767-be79-b81afc797939.png",
+      "prompt": "Use case: stylized-concept. Asset type: one isolated category illustration for the Russian marketplace Купец. Subject: two clear bottles of berry juice and lemonade with fruit. Consistent premium photorealistic 3D product render like modern Avito category thumbnails: realistic materials, soft studio lighting, tasteful pale blue accents. A compact single object cluster in three-quarter view. Entire objects fully inside the canvas, centered with generous margins, legible at 120px. True transparent alpha background. No floor, opaque backdrop, gradient, broad shadow, colored glow, text, letters, brand logos or watermarks. This is ONE category cutout, not a grid or collage. Composition must work at the bottom-right of a light grey category tile."
+    },
+    {
+      "slug": "tutors",
+      "subject": "open textbook blue pencil and a small chalkboard with no writing",
+      "source": "C:\\Users\\alex\\.codex\\generated_images\\01a11d1f-ab95-7483-825b-e4a3900f58da\\exec-77bde430-daf2-43bf-9d9a-c0fd864e4eae.png",
+      "prompt": "Use case: stylized-concept. Asset type: one isolated category illustration for the Russian marketplace Купец. Subject: open textbook blue pencil and a small chalkboard with no writing. Consistent premium photorealistic 3D product render like modern Avito category thumbnails: realistic materials, soft studio lighting, tasteful pale blue accents. A compact single object cluster in three-quarter view. Entire objects fully inside the canvas, centered with generous margins, legible at 120px. True transparent alpha background. No floor, opaque backdrop, gradient, broad shadow, colored glow, text, letters, brand logos or watermarks. This is ONE category cutout, not a grid or collage. Composition must work at the bottom-right of a light grey category tile."
+    },
+    {
+      "slug": "massage",
+      "subject": "folded blue towel massage oil bottle and smooth spa stones",
+      "source": "C:\\Users\\alex\\.codex\\generated_images\\01a11d1f-ab95-7483-825b-e4a3900f58da\\exec-e26af57b-d3f0-4af4-bb9b-3ec3e7c4be9c.png",
+      "prompt": "Use case: stylized-concept. Asset type: one isolated category illustration for the Russian marketplace Купец. Subject: folded blue towel massage oil bottle and smooth spa stones. Consistent premium photorealistic 3D product render like modern Avito category thumbnails: realistic materials, soft studio lighting, tasteful pale blue accents. A compact single object cluster in three-quarter view. Entire objects fully inside the canvas, centered with generous margins, legible at 120px. True transparent alpha background. No floor, opaque backdrop, gradient, broad shadow, colored glow, text, letters, brand logos or watermarks. This is ONE category cutout, not a grid or collage. Composition must work at the bottom-right of a light grey category tile."
+    },
+    {
+      "slug": "car-repair",
+      "subject": "small polished car wheel silver wrench and diagnostic tablet",
+      "source": "C:\\Users\\alex\\.codex\\generated_images\\01a11d1f-ab95-7483-825b-e4a3900f58da\\exec-f0cf6fef-ec52-4073-b46f-5fda33185763.png",
+      "prompt": "Use case: stylized-concept. Asset type: one isolated category illustration for the Russian marketplace Купец. Subject: small polished car wheel silver wrench and diagnostic tablet. Consistent premium photorealistic 3D product render like modern Avito category thumbnails: realistic materials, soft studio lighting, tasteful pale blue accents. A compact single object cluster in three-quarter view. Entire objects fully inside the canvas, centered with generous margins, legible at 120px. True transparent alpha background. No floor, opaque backdrop, gradient, broad shadow, colored glow, text, letters, brand logos or watermarks. This is ONE category cutout, not a grid or collage. Composition must work at the bottom-right of a light grey category tile."
+    },
+    {
+      "slug": "moving",
+      "subject": "blue white delivery van with two cardboard boxes",
+      "source": "C:\\Users\\alex\\.codex\\generated_images\\01a11d1f-ab95-7483-825b-e4a3900f58da\\exec-750f93db-33a8-4c5d-9bb1-5765ea9aa46a.png",
+      "prompt": "Use case: stylized-concept. Asset type: one isolated category illustration for the Russian marketplace Купец. Subject: blue white delivery van with two cardboard boxes. Consistent premium photorealistic 3D product render like modern Avito category thumbnails: realistic materials, soft studio lighting, tasteful pale blue accents. A compact single object cluster in three-quarter view. Entire objects fully inside the canvas, centered with generous margins, legible at 120px. True transparent alpha background. No floor, opaque backdrop, gradient, broad shadow, colored glow, text, letters, brand logos or watermarks. This is ONE category cutout, not a grid or collage. Composition must work at the bottom-right of a light grey category tile."
+    },
+    {
+      "slug": "computer-help",
+      "subject": "open silver laptop and blue precision screwdriver",
+      "source": "C:\\Users\\alex\\.codex\\generated_images\\01a11d1f-ab95-7483-825b-e4a3900f58da\\exec-61a04fd3-a14e-49fc-a395-74fa5ba68e81.png",
+      "prompt": "Use case: stylized-concept. Asset type: one isolated category illustration for the Russian marketplace Купец. Subject: open silver laptop and blue precision screwdriver. Consistent premium photorealistic 3D product render like modern Avito category thumbnails: realistic materials, soft studio lighting, tasteful pale blue accents. A compact single object cluster in three-quarter view. Entire objects fully inside the canvas, centered with generous margins, legible at 120px. True transparent alpha background. No floor, opaque backdrop, gradient, broad shadow, colored glow, text, letters, brand logos or watermarks. This is ONE category cutout, not a grid or collage. Composition must work at the bottom-right of a light grey category tile."
+    },
+    {
+      "slug": "renovation",
+      "subject": "blue paint roller trowel and measuring tape",
+      "source": "C:\\Users\\alex\\.codex\\generated_images\\01a11d1f-ab95-7483-825b-e4a3900f58da\\exec-873efeac-bbfe-4694-99fa-0f65c3c61fb8.png",
+      "prompt": "Use case: stylized-concept. Asset type: one isolated category illustration for the Russian marketplace Купец. Subject: blue paint roller trowel and measuring tape. Consistent premium photorealistic 3D product render like modern Avito category thumbnails: realistic materials, soft studio lighting, tasteful pale blue accents. A compact single object cluster in three-quarter view. Entire objects fully inside the canvas, centered with generous margins, legible at 120px. True transparent alpha background. No floor, opaque backdrop, gradient, broad shadow, colored glow, text, letters, brand logos or watermarks. This is ONE category cutout, not a grid or collage. Composition must work at the bottom-right of a light grey category tile."
+    },
+    {
+      "slug": "cleaning",
+      "subject": "blue cleaning spray bottle sponge and folded microfiber cloth",
+      "source": "C:\\Users\\alex\\.codex\\generated_images\\01a11d1f-ab95-7483-825b-e4a3900f58da\\exec-4e480105-4ccd-43b7-ada2-262471175173.png",
+      "prompt": "Use case: stylized-concept. Asset type: one isolated category illustration for the Russian marketplace Купец. Subject: blue cleaning spray bottle sponge and folded microfiber cloth. Consistent premium photorealistic 3D product render like modern Avito category thumbnails: realistic materials, soft studio lighting, tasteful pale blue accents. A compact single object cluster in three-quarter view. Entire objects fully inside the canvas, centered with generous margins, legible at 120px. True transparent alpha background. No floor, opaque backdrop, gradient, broad shadow, colored glow, text, letters, brand logos or watermarks. This is ONE category cutout, not a grid or collage. Composition must work at the bottom-right of a light grey category tile."
+    },
+    {
+      "slug": "beauty",
+      "subject": "blue nail polish bottle makeup brush and silver hair scissors",
+      "source": "C:\\Users\\alex\\.codex\\generated_images\\01a11d1f-ab95-7483-825b-e4a3900f58da\\exec-89f5f8a8-fda6-4fc5-895a-b661189964ba.png",
+      "prompt": "Use case: stylized-concept. Asset type: one isolated category illustration for the Russian marketplace Купец. Subject: blue nail polish bottle makeup brush and silver hair scissors. Consistent premium photorealistic 3D product render like modern Avito category thumbnails: realistic materials, soft studio lighting, tasteful pale blue accents. A compact single object cluster in three-quarter view. Entire objects fully inside the canvas, centered with generous margins, legible at 120px. True transparent alpha background. No floor, opaque backdrop, gradient, broad shadow, colored glow, text, letters, brand logos or watermarks. This is ONE category cutout, not a grid or collage. Composition must work at the bottom-right of a light grey category tile."
+    },
+    {
+      "slug": "appliance-repair",
+      "subject": "small white blue washing machine and silver wrench",
+      "source": "C:\\Users\\alex\\.codex\\generated_images\\01a11d1f-ab95-7483-825b-e4a3900f58da\\exec-a0a93381-a5ae-4345-8e19-cbd1f922560a.png",
+      "prompt": "Use case: stylized-concept. Asset type: one isolated category illustration for the Russian marketplace Купец. Subject: small white blue washing machine and silver wrench. Consistent premium photorealistic 3D product render like modern Avito category thumbnails: realistic materials, soft studio lighting, tasteful pale blue accents. A compact single object cluster in three-quarter view. Entire objects fully inside the canvas, centered with generous margins, legible at 120px. True transparent alpha background. No floor, opaque backdrop, gradient, broad shadow, colored glow, text, letters, brand logos or watermarks. This is ONE category cutout, not a grid or collage. Composition must work at the bottom-right of a light grey category tile."
+    },
+    {
+      "slug": "other-services",
+      "subject": "blue tool bag with neat clipboard and pencil",
+      "source": "C:\\Users\\alex\\.codex\\generated_images\\01a11d1f-ab95-7483-825b-e4a3900f58da\\exec-d0aec502-224d-43ad-a777-d8d3cccfe181.png",
+      "prompt": "Use case: stylized-concept. Asset type: one isolated category illustration for the Russian marketplace Купец. Subject: blue tool bag with neat clipboard and pencil. Consistent premium photorealistic 3D product render like modern Avito category thumbnails: realistic materials, soft studio lighting, tasteful pale blue accents. A compact single object cluster in three-quarter view. Entire objects fully inside the canvas, centered with generous margins, legible at 120px. True transparent alpha background. No floor, opaque backdrop, gradient, broad shadow, colored glow, text, letters, brand logos or watermarks. This is ONE category cutout, not a grid or collage. Composition must work at the bottom-right of a light grey category tile."
+    },
+    {
+      "slug": "pet-services",
+      "subject": "pet grooming brush blue paw-shaped bowl and leash",
+      "source": "C:\\Users\\alex\\.codex\\generated_images\\01a11d1f-ab95-7483-825b-e4a3900f58da\\exec-ff9f9f4f-5655-4589-b767-c62c2a9dba5a.png",
+      "prompt": "Use case: stylized-concept. Asset type: one isolated category illustration for the Russian marketplace Купец. Subject: pet grooming brush blue paw-shaped bowl and leash. Consistent premium photorealistic 3D product render like modern Avito category thumbnails: realistic materials, soft studio lighting, tasteful pale blue accents. A compact single object cluster in three-quarter view. Entire objects fully inside the canvas, centered with generous margins, legible at 120px. True transparent alpha background. No floor, opaque backdrop, gradient, broad shadow, colored glow, text, letters, brand logos or watermarks. This is ONE category cutout, not a grid or collage. Composition must work at the bottom-right of a light grey category tile."
+    },
+    {
+      "slug": "care-services",
+      "subject": "blue house shaped figurine with folded towel and little teddy bear",
+      "source": "C:\\Users\\alex\\.codex\\generated_images\\01a11d1f-ab95-7483-825b-e4a3900f58da\\exec-e76a9b29-7e36-4e33-8a01-925508e94f98.png",
+      "prompt": "Use case: stylized-concept. Asset type: one isolated category illustration for the Russian marketplace Купец. Subject: blue house shaped figurine with folded towel and little teddy bear. Consistent premium photorealistic 3D product render like modern Avito category thumbnails: realistic materials, soft studio lighting, tasteful pale blue accents. A compact single object cluster in three-quarter view. Entire objects fully inside the canvas, centered with generous margins, legible at 120px. True transparent alpha background. No floor, opaque backdrop, gradient, broad shadow, colored glow, text, letters, brand logos or watermarks. This is ONE category cutout, not a grid or collage. Composition must work at the bottom-right of a light grey category tile."
+    },
+    {
+      "slug": "tailoring",
+      "subject": "compact sewing machine blue thread spool and scissors",
+      "source": "C:\\Users\\alex\\.codex\\generated_images\\01a11d1f-ab95-7483-825b-e4a3900f58da\\exec-d9f4c547-fc18-4384-adfb-f588f1ebac00.png",
+      "prompt": "Use case: stylized-concept. Asset type: one isolated category illustration for the Russian marketplace Купец. Subject: compact sewing machine blue thread spool and scissors. Consistent premium photorealistic 3D product render like modern Avito category thumbnails: realistic materials, soft studio lighting, tasteful pale blue accents. A compact single object cluster in three-quarter view. Entire objects fully inside the canvas, centered with generous margins, legible at 120px. True transparent alpha background. No floor, opaque backdrop, gradient, broad shadow, colored glow, text, letters, brand logos or watermarks. This is ONE category cutout, not a grid or collage. Composition must work at the bottom-right of a light grey category tile."
+    },
+    {
+      "slug": "construction",
+      "subject": "small model wooden house yellow hard hat and blueprint roll without text",
+      "source": "C:\\Users\\alex\\.codex\\generated_images\\01a11d1f-ab95-7483-825b-e4a3900f58da\\exec-68561c68-99cc-4cc4-a72c-095063647f1c.png",
+      "prompt": "Use case: stylized-concept. Asset type: one isolated category illustration for the Russian marketplace Купец. Subject: small model wooden house yellow hard hat and blueprint roll without text. Consistent premium photorealistic 3D product render like modern Avito category thumbnails: realistic materials, soft studio lighting, tasteful pale blue accents. A compact single object cluster in three-quarter view. Entire objects fully inside the canvas, centered with generous margins, legible at 120px. True transparent alpha background. No floor, opaque backdrop, gradient, broad shadow, colored glow, text, letters, brand logos or watermarks. This is ONE category cutout, not a grid or collage. Composition must work at the bottom-right of a light grey category tile."
+    },
+    {
+      "slug": "photo-video",
+      "subject": "professional camera with compact lens and small blue tripod",
+      "source": "C:\\Users\\alex\\.codex\\generated_images\\01a11d1f-ab95-7483-825b-e4a3900f58da\\exec-148341e5-1a1b-4c50-a955-ad0360ff3254.png",
+      "prompt": "Use case: stylized-concept. Asset type: one isolated category illustration for the Russian marketplace Купец. Subject: professional camera with compact lens and small blue tripod. Consistent premium photorealistic 3D product render like modern Avito category thumbnails: realistic materials, soft studio lighting, tasteful pale blue accents. A compact single object cluster in three-quarter view. Entire objects fully inside the canvas, centered with generous margins, legible at 120px. True transparent alpha background. No floor, opaque backdrop, gradient, broad shadow, colored glow, text, letters, brand logos or watermarks. This is ONE category cutout, not a grid or collage. Composition must work at the bottom-right of a light grey category tile."
+    },
+    {
+      "slug": "legal-business",
+      "subject": "blue folder neat calculator and fountain pen with blank papers",
+      "source": "C:\\Users\\alex\\.codex\\generated_images\\01a11d1f-ab95-7483-825b-e4a3900f58da\\exec-bae98136-3932-4a2c-b166-26014911eb6f.png",
+      "prompt": "Use case: stylized-concept. Asset type: one isolated category illustration for the Russian marketplace Купец. Subject: blue folder neat calculator and fountain pen with blank papers. Consistent premium photorealistic 3D product render like modern Avito category thumbnails: realistic materials, soft studio lighting, tasteful pale blue accents. A compact single object cluster in three-quarter view. Entire objects fully inside the canvas, centered with generous margins, legible at 120px. True transparent alpha background. No floor, opaque backdrop, gradient, broad shadow, colored glow, text, letters, brand logos or watermarks. This is ONE category cutout, not a grid or collage. Composition must work at the bottom-right of a light grey category tile."
+    },
+    {
+      "slug": "events",
+      "subject": "blue and pastel party balloons with neat gift box",
+      "source": "C:\\Users\\alex\\.codex\\generated_images\\01a11d1f-ab95-7483-825b-e4a3900f58da\\exec-24153e73-6fe8-4a7c-b4f2-9a8c7625157a.png",
+      "prompt": "Use case: stylized-concept. Asset type: one isolated category illustration for the Russian marketplace Купец. Subject: blue and pastel party balloons with neat gift box. Consistent premium photorealistic 3D product render like modern Avito category thumbnails: realistic materials, soft studio lighting, tasteful pale blue accents. A compact single object cluster in three-quarter view. Entire objects fully inside the canvas, centered with generous margins, legible at 120px. True transparent alpha background. No floor, opaque backdrop, gradient, broad shadow, colored glow, text, letters, brand logos or watermarks. This is ONE category cutout, not a grid or collage. Composition must work at the bottom-right of a light grey category tile."
+    },
+    {
+      "slug": "rental-services",
+      "subject": "blue cordless drill and compact tool case",
+      "source": "C:\\Users\\alex\\.codex\\generated_images\\01a11d1f-ab95-7483-825b-e4a3900f58da\\exec-ed03d9fc-1f80-4d84-9e1a-acd7a1f26ce1.png",
+      "prompt": "Use case: stylized-concept. Asset type: one isolated category illustration for the Russian marketplace Купец. Subject: blue cordless drill and compact tool case. Consistent premium photorealistic 3D product render like modern Avito category thumbnails: realistic materials, soft studio lighting, tasteful pale blue accents. A compact single object cluster in three-quarter view. Entire objects fully inside the canvas, centered with generous margins, legible at 120px. True transparent alpha background. No floor, opaque backdrop, gradient, broad shadow, colored glow, text, letters, brand logos or watermarks. This is ONE category cutout, not a grid or collage. Composition must work at the bottom-right of a light grey category tile."
+    },
+    {
+      "slug": "gardening",
+      "subject": "blue garden shears small watering can and green sapling",
+      "source": "C:\\Users\\alex\\.codex\\generated_images\\01a11d1f-ab95-7483-825b-e4a3900f58da\\exec-c062637e-7086-4228-9ce1-5859330d8941.png",
+      "prompt": "Use case: stylized-concept. Asset type: one isolated category illustration for the Russian marketplace Купец. Subject: blue garden shears small watering can and green sapling. Consistent premium photorealistic 3D product render like modern Avito category thumbnails: realistic materials, soft studio lighting, tasteful pale blue accents. A compact single object cluster in three-quarter view. Entire objects fully inside the canvas, centered with generous margins, legible at 120px. True transparent alpha background. No floor, opaque backdrop, gradient, broad shadow, colored glow, text, letters, brand logos or watermarks. This is ONE category cutout, not a grid or collage. Composition must work at the bottom-right of a light grey category tile."
+    },
+    {
+      "slug": "design-web",
+      "subject": "silver laptop with abstract blue screen and color swatch fan",
+      "source": "C:\\Users\\alex\\.codex\\generated_images\\01a11d1f-ab95-7483-825b-e4a3900f58da\\exec-d1a27db1-6960-452a-954f-3b33f389ef98.png",
+      "prompt": "Use case: stylized-concept. Asset type: one isolated category illustration for the Russian marketplace Купец. Subject: silver laptop with abstract blue screen and color swatch fan. Consistent premium photorealistic 3D product render like modern Avito category thumbnails: realistic materials, soft studio lighting, tasteful pale blue accents. A compact single object cluster in three-quarter view. Entire objects fully inside the canvas, centered with generous margins, legible at 120px. True transparent alpha background. No floor, opaque backdrop, gradient, broad shadow, colored glow, text, letters, brand logos or watermarks. This is ONE category cutout, not a grid or collage. Composition must work at the bottom-right of a light grey category tile."
+    },
+    {
+      "slug": "men-clothes",
+      "subject": "folded pale blue mens shirt and dark jeans",
+      "source": "C:\\Users\\alex\\.codex\\generated_images\\01a11d1f-ab95-7483-825b-e4a3900f58da\\exec-8153c441-7070-4bc3-bb79-a5322538b46b.png",
+      "prompt": "Use case: stylized-concept. Asset type: one isolated category illustration for the Russian marketplace Купец. Subject: folded pale blue mens shirt and dark jeans. Consistent premium photorealistic 3D product render like modern Avito category thumbnails: realistic materials, soft studio lighting, tasteful pale blue accents. A compact single object cluster in three-quarter view. Entire objects fully inside the canvas, centered with generous margins, legible at 120px. True transparent alpha background. No floor, opaque backdrop, gradient, broad shadow, colored glow, text, letters, brand logos or watermarks. This is ONE category cutout, not a grid or collage. Composition must work at the bottom-right of a light grey category tile."
+    },
+    {
+      "slug": "men-shoes",
+      "subject": "pair of polished dark blue mens shoes",
+      "source": "C:\\Users\\alex\\.codex\\generated_images\\01a11d1f-ab95-7483-825b-e4a3900f58da\\exec-156a9d1e-2257-4b30-bda1-ad88f0e402ac.png",
+      "prompt": "Use case: stylized-concept. Asset type: one isolated category illustration for the Russian marketplace Купец. Subject: pair of polished dark blue mens shoes. Consistent premium photorealistic 3D product render like modern Avito category thumbnails: realistic materials, soft studio lighting, tasteful pale blue accents. A compact single object cluster in three-quarter view. Entire objects fully inside the canvas, centered with generous margins, legible at 120px. True transparent alpha background. No floor, opaque backdrop, gradient, broad shadow, colored glow, text, letters, brand logos or watermarks. This is ONE category cutout, not a grid or collage. Composition must work at the bottom-right of a light grey category tile."
+    },
+    {
+      "slug": "watches",
+      "subject": "stylish silver wristwatch with blue dial",
+      "source": "C:\\Users\\alex\\.codex\\generated_images\\01a11d1f-ab95-7483-825b-e4a3900f58da\\exec-25cc693b-bef1-4f8a-8544-1b1b7817f35c.png",
+      "prompt": "Use case: stylized-concept. Asset type: one isolated category illustration for the Russian marketplace Купец. Subject: stylish silver wristwatch with blue dial. Consistent premium photorealistic 3D product render like modern Avito category thumbnails: realistic materials, soft studio lighting, tasteful pale blue accents. A compact single object cluster in three-quarter view. Entire objects fully inside the canvas, centered with generous margins, legible at 120px. True transparent alpha background. No floor, opaque backdrop, gradient, broad shadow, colored glow, text, letters, brand logos or watermarks. This is ONE category cutout, not a grid or collage. Composition must work at the bottom-right of a light grey category tile."
+    },
+    {
+      "slug": "bags",
+      "subject": "pale blue leather handbag and neat navy backpack",
+      "source": "C:\\Users\\alex\\.codex\\generated_images\\01a11d1f-ab95-7483-825b-e4a3900f58da\\exec-a4e2197e-662d-4440-9690-a0a07ac9f4ed.png",
+      "prompt": "Use case: stylized-concept. Asset type: one isolated category illustration for the Russian marketplace Купец. Subject: pale blue leather handbag and neat navy backpack. Consistent premium photorealistic 3D product render like modern Avito category thumbnails: realistic materials, soft studio lighting, tasteful pale blue accents. A compact single object cluster in three-quarter view. Entire objects fully inside the canvas, centered with generous margins, legible at 120px. True transparent alpha background. No floor, opaque backdrop, gradient, broad shadow, colored glow, text, letters, brand logos or watermarks. This is ONE category cutout, not a grid or collage. Composition must work at the bottom-right of a light grey category tile."
+    },
+    {
+      "slug": "accessories",
+      "subject": "blue scarf sunglasses and a neatly rolled belt",
+      "source": "C:\\Users\\alex\\.codex\\generated_images\\01a11d1f-ab95-7483-825b-e4a3900f58da\\exec-fc2e1348-533d-49bc-8ebf-ebfb768bb6f6.png",
+      "prompt": "Use case: stylized-concept. Asset type: one isolated category illustration for the Russian marketplace Купец. Subject: blue scarf sunglasses and a neatly rolled belt. Consistent premium photorealistic 3D product render like modern Avito category thumbnails: realistic materials, soft studio lighting, tasteful pale blue accents. A compact single object cluster in three-quarter view. Entire objects fully inside the canvas, centered with generous margins, legible at 120px. True transparent alpha background. No floor, opaque backdrop, gradient, broad shadow, colored glow, text, letters, brand logos or watermarks. This is ONE category cutout, not a grid or collage. Composition must work at the bottom-right of a light grey category tile."
+    },
+    {
+      "slug": "workwear",
+      "subject": "folded navy work overalls gloves and a safety helmet",
+      "source": "C:\\Users\\alex\\.codex\\generated_images\\01a11d1f-ab95-7483-825b-e4a3900f58da\\exec-27257c1f-a96d-4514-a56d-2c08acd62ebc.png",
+      "prompt": "Use case: stylized-concept. Asset type: one isolated category illustration for the Russian marketplace Купец. Subject: folded navy work overalls gloves and a safety helmet. Consistent premium photorealistic 3D product render like modern Avito category thumbnails: realistic materials, soft studio lighting, tasteful pale blue accents. A compact single object cluster in three-quarter view. Entire objects fully inside the canvas, centered with generous margins, legible at 120px. True transparent alpha background. No floor, opaque backdrop, gradient, broad shadow, colored glow, text, letters, brand logos or watermarks. This is ONE category cutout, not a grid or collage. Composition must work at the bottom-right of a light grey category tile."
+    },
+    {
+      "slug": "wedding-clothes",
+      "subject": "ivory wedding dress and elegant pale blue bow tie",
+      "source": "C:\\Users\\alex\\.codex\\generated_images\\01a11d1f-ab95-7483-825b-e4a3900f58da\\exec-e44ae053-6152-4e9c-a61b-fd6bc96cbc3a.png",
+      "prompt": "Use case: stylized-concept. Asset type: one isolated category illustration for the Russian marketplace Купец. Subject: ivory wedding dress and elegant pale blue bow tie. Consistent premium photorealistic 3D product render like modern Avito category thumbnails: realistic materials, soft studio lighting, tasteful pale blue accents. A compact single object cluster in three-quarter view. Entire objects fully inside the canvas, centered with generous margins, legible at 120px. True transparent alpha background. No floor, opaque backdrop, gradient, broad shadow, colored glow, text, letters, brand logos or watermarks. This is ONE category cutout, not a grid or collage. Composition must work at the bottom-right of a light grey category tile."
+    },
+    {
+      "slug": "women-clothes",
+      "subject": "elegant pale blue dress hanging from a simple hanger",
+      "source": "C:\\Users\\alex\\.codex\\generated_images\\01a11d1f-ab95-7483-825b-e4a3900f58da\\exec-543a8ca2-716b-4066-92b0-07d2ff366fd6.png",
+      "prompt": "Use case: stylized-concept. Asset type: one isolated category illustration for the Russian marketplace Купец. Subject: elegant pale blue dress hanging from a simple hanger. Consistent premium photorealistic 3D product render like modern Avito category thumbnails: realistic materials, soft studio lighting, tasteful pale blue accents. A compact single object cluster in three-quarter view. Entire objects fully inside the canvas, centered with generous margins, legible at 120px. True transparent alpha background. No floor, opaque backdrop, gradient, broad shadow, colored glow, text, letters, brand logos or watermarks. This is ONE category cutout, not a grid or collage. Composition must work at the bottom-right of a light grey category tile."
+    },
+    {
+      "slug": "women-shoes",
+      "subject": "pair of elegant pale blue pumps",
+      "source": "C:\\Users\\alex\\.codex\\generated_images\\01a11d1f-ab95-7483-825b-e4a3900f58da\\exec-9b1802f4-b89b-4390-9e54-8eca1368ee1d.png",
+      "prompt": "Use case: stylized-concept. Asset type: one isolated category illustration for the Russian marketplace Купец. Subject: pair of elegant pale blue pumps. Consistent premium photorealistic 3D product render like modern Avito category thumbnails: realistic materials, soft studio lighting, tasteful pale blue accents. A compact single object cluster in three-quarter view. Entire objects fully inside the canvas, centered with generous margins, legible at 120px. True transparent alpha background. No floor, opaque backdrop, gradient, broad shadow, colored glow, text, letters, brand logos or watermarks. This is ONE category cutout, not a grid or collage. Composition must work at the bottom-right of a light grey category tile."
+    },
+    {
+      "slug": "toys",
+      "subject": "wooden stacking rings small plush bunny and blue toy car",
+      "source": "C:\\Users\\alex\\.codex\\generated_images\\01a11d1f-ab95-7483-825b-e4a3900f58da\\exec-250ada1f-f26a-4360-ab1d-76cfe7383797.png",
+      "prompt": "Use case: stylized-concept. Asset type: one isolated category illustration for the Russian marketplace Купец. Subject: wooden stacking rings small plush bunny and blue toy car. Consistent premium photorealistic 3D product render like modern Avito category thumbnails: realistic materials, soft studio lighting, tasteful pale blue accents. A compact single object cluster in three-quarter view. Entire objects fully inside the canvas, centered with generous margins, legible at 120px. True transparent alpha background. No floor, opaque backdrop, gradient, broad shadow, colored glow, text, letters, brand logos or watermarks. This is ONE category cutout, not a grid or collage. Composition must work at the bottom-right of a light grey category tile."
+    },
+    {
+      "slug": "baby-clothes",
+      "subject": "pastel blue baby romper and tiny knitted hat",
+      "source": "C:\\Users\\alex\\.codex\\generated_images\\01a11d1f-ab95-7483-825b-e4a3900f58da\\exec-39c2f566-39e1-4019-9959-edda2808817f.png",
+      "prompt": "Use case: stylized-concept. Asset type: one isolated category illustration for the Russian marketplace Купец. Subject: pastel blue baby romper and tiny knitted hat. Consistent premium photorealistic 3D product render like modern Avito category thumbnails: realistic materials, soft studio lighting, tasteful pale blue accents. A compact single object cluster in three-quarter view. Entire objects fully inside the canvas, centered with generous margins, legible at 120px. True transparent alpha background. No floor, opaque backdrop, gradient, broad shadow, colored glow, text, letters, brand logos or watermarks. This is ONE category cutout, not a grid or collage. Composition must work at the bottom-right of a light grey category tile."
+    },
+    {
+      "slug": "kids-shoes",
+      "subject": "pair of small blue white childrens sneakers",
+      "source": "C:\\Users\\alex\\.codex\\generated_images\\01a11d1f-ab95-7483-825b-e4a3900f58da\\exec-915e9717-a118-4368-bdec-ee55655f6634.png",
+      "prompt": "Use case: stylized-concept. Asset type: one isolated category illustration for the Russian marketplace Купец. Subject: pair of small blue white childrens sneakers. Consistent premium photorealistic 3D product render like modern Avito category thumbnails: realistic materials, soft studio lighting, tasteful pale blue accents. A compact single object cluster in three-quarter view. Entire objects fully inside the canvas, centered with generous margins, legible at 120px. True transparent alpha background. No floor, opaque backdrop, gradient, broad shadow, colored glow, text, letters, brand logos or watermarks. This is ONE category cutout, not a grid or collage. Composition must work at the bottom-right of a light grey category tile."
+    },
+    {
+      "slug": "strollers",
+      "subject": "modern pale blue baby stroller in three quarter view",
+      "source": "C:\\Users\\alex\\.codex\\generated_images\\01a11d1f-ab95-7483-825b-e4a3900f58da\\exec-2f6a8af8-8a2c-4560-9b92-a4f344e47825.png",
+      "prompt": "Use case: stylized-concept. Asset type: one isolated category illustration for the Russian marketplace Купец. Subject: modern pale blue baby stroller in three quarter view. Consistent premium photorealistic 3D product render like modern Avito category thumbnails: realistic materials, soft studio lighting, tasteful pale blue accents. A compact single object cluster in three-quarter view. Entire objects fully inside the canvas, centered with generous margins, legible at 120px. True transparent alpha background. No floor, opaque backdrop, gradient, broad shadow, colored glow, text, letters, brand logos or watermarks. This is ONE category cutout, not a grid or collage. Composition must work at the bottom-right of a light grey category tile."
+    },
+    {
+      "slug": "other-clothes",
+      "subject": "neatly folded clothes with white sneakers in a pale blue parcel box",
+      "source": "C:\\Users\\alex\\.codex\\generated_images\\01a11d1f-ab95-7483-825b-e4a3900f58da\\exec-e856068e-304c-4e42-85ce-bc40a7ef648a.png",
+      "prompt": "Use case: stylized-concept. Asset type: one isolated category illustration for the Russian marketplace Купец. Subject: neatly folded clothes with white sneakers in a pale blue parcel box. Consistent premium photorealistic 3D product render like modern Avito category thumbnails: realistic materials, soft studio lighting, tasteful pale blue accents. A compact single object cluster in three-quarter view. Entire objects fully inside the canvas, centered with generous margins, legible at 120px. True transparent alpha background. No floor, opaque backdrop, gradient, broad shadow, colored glow, text, letters, brand logos or watermarks. This is ONE category cutout, not a grid or collage. Composition must work at the bottom-right of a light grey category tile."
+    },
+    {
+      "slug": "jewelry",
+      "subject": "silver earrings necklace and ring on a small pale blue display",
+      "source": "C:\\Users\\alex\\.codex\\generated_images\\01a11d1f-ab95-7483-825b-e4a3900f58da\\exec-baeb2cb1-358b-486e-ab6a-334245f53d94.png",
+      "prompt": "Use case: stylized-concept. Asset type: one isolated category illustration for the Russian marketplace Купец. Subject: silver earrings necklace and ring on a small pale blue display. Consistent premium photorealistic 3D product render like modern Avito category thumbnails: realistic materials, soft studio lighting, tasteful pale blue accents. A compact single object cluster in three-quarter view. Entire objects fully inside the canvas, centered with generous margins, legible at 120px. True transparent alpha background. No floor, opaque backdrop, gradient, broad shadow, colored glow, text, letters, brand logos or watermarks. This is ONE category cutout, not a grid or collage. Composition must work at the bottom-right of a light grey category tile."
+    },
+    {
+      "slug": "car-seats",
+      "subject": "modern blue child car safety seat",
+      "source": "C:\\Users\\alex\\.codex\\generated_images\\01a11d1f-ab95-7483-825b-e4a3900f58da\\exec-2758d50d-1524-4ae6-9442-598e402baabf.png",
+      "prompt": "Use case: stylized-concept. Asset type: one isolated category illustration for the Russian marketplace Купец. Subject: modern blue child car safety seat. Consistent premium photorealistic 3D product render like modern Avito category thumbnails: realistic materials, soft studio lighting, tasteful pale blue accents. A compact single object cluster in three-quarter view. Entire objects fully inside the canvas, centered with generous margins, legible at 120px. True transparent alpha background. No floor, opaque backdrop, gradient, broad shadow, colored glow, text, letters, brand logos or watermarks. This is ONE category cutout, not a grid or collage. Composition must work at the bottom-right of a light grey category tile."
+    },
+    {
+      "slug": "kids-transport",
+      "subject": "blue balance bike and small matching scooter",
+      "source": "C:\\Users\\alex\\.codex\\generated_images\\01a11d1f-ab95-7483-825b-e4a3900f58da\\exec-5c9d0283-b6e9-4531-bc2e-54b85c16d90c.png",
+      "prompt": "Use case: stylized-concept. Asset type: one isolated category illustration for the Russian marketplace Купец. Subject: blue balance bike and small matching scooter. Consistent premium photorealistic 3D product render like modern Avito category thumbnails: realistic materials, soft studio lighting, tasteful pale blue accents. A compact single object cluster in three-quarter view. Entire objects fully inside the canvas, centered with generous margins, legible at 120px. True transparent alpha background. No floor, opaque backdrop, gradient, broad shadow, colored glow, text, letters, brand logos or watermarks. This is ONE category cutout, not a grid or collage. Composition must work at the bottom-right of a light grey category tile."
+    },
+    {
+      "slug": "smartphones",
+      "subject": "two modern blue smartphones showing screen and back",
+      "source": "C:\\Users\\alex\\.codex\\generated_images\\01a11d1f-ab95-7483-825b-e4a3900f58da\\exec-6d415c6e-b33c-4556-97f3-9c2717ea81d3.png",
+      "prompt": "Use case: stylized-concept. Asset type: one isolated category illustration for the Russian marketplace Купец. Subject: two modern blue smartphones showing screen and back. Consistent premium photorealistic 3D product render like modern Avito category thumbnails: realistic materials, soft studio lighting, tasteful pale blue accents. A compact single object cluster in three-quarter view. Entire objects fully inside the canvas, centered with generous margins, legible at 120px. True transparent alpha background. No floor, opaque backdrop, gradient, broad shadow, colored glow, text, letters, brand logos or watermarks. This is ONE category cutout, not a grid or collage. Composition must work at the bottom-right of a light grey category tile."
+    },
+    {
+      "slug": "feeding",
+      "subject": "pale blue baby high chair with little bottle and bowl",
+      "source": "C:\\Users\\alex\\.codex\\generated_images\\01a11d1f-ab95-7483-825b-e4a3900f58da\\exec-c75973ce-771f-46a6-a59d-26cb8838712f.png",
+      "prompt": "Use case: stylized-concept. Asset type: one isolated category illustration for the Russian marketplace Купец. Subject: pale blue baby high chair with little bottle and bowl. Consistent premium photorealistic 3D product render like modern Avito category thumbnails: realistic materials, soft studio lighting, tasteful pale blue accents. A compact single object cluster in three-quarter view. Entire objects fully inside the canvas, centered with generous margins, legible at 120px. True transparent alpha background. No floor, opaque backdrop, gradient, broad shadow, colored glow, text, letters, brand logos or watermarks. This is ONE category cutout, not a grid or collage. Composition must work at the bottom-right of a light grey category tile."
+    },
+    {
+      "slug": "desktop-computers",
+      "subject": "compact desktop computer tower with blue screen monitor keyboard and mouse",
+      "source": "C:\\Users\\alex\\.codex\\generated_images\\01a11d1f-ab95-7483-825b-e4a3900f58da\\exec-566158f3-a79d-4847-a945-94ff22454411.png",
+      "prompt": "Use case: stylized-concept. Asset type: one isolated category illustration for the Russian marketplace Купец. Subject: compact desktop computer tower with blue screen monitor keyboard and mouse. Consistent premium photorealistic 3D product render like modern Avito category thumbnails: realistic materials, soft studio lighting, tasteful pale blue accents. A compact single object cluster in three-quarter view. Entire objects fully inside the canvas, centered with generous margins, legible at 120px. True transparent alpha background. No floor, opaque backdrop, gradient, broad shadow, colored glow, text, letters, brand logos or watermarks. This is ONE category cutout, not a grid or collage. Composition must work at the bottom-right of a light grey category tile."
+    },
+    {
+      "slug": "laptops",
+      "subject": "open slim silver laptop with abstract pale blue screen",
+      "source": "C:\\Users\\alex\\.codex\\generated_images\\01a11d1f-ab95-7483-825b-e4a3900f58da\\exec-23dc02a3-bf15-4a0a-9fa3-f76af27afada.png",
+      "prompt": "Use case: stylized-concept. Asset type: one isolated category illustration for the Russian marketplace Купец. Subject: open slim silver laptop with abstract pale blue screen. Consistent premium photorealistic 3D product render like modern Avito category thumbnails: realistic materials, soft studio lighting, tasteful pale blue accents. A compact single object cluster in three-quarter view. Entire objects fully inside the canvas, centered with generous margins, legible at 120px. True transparent alpha background. No floor, opaque backdrop, gradient, broad shadow, colored glow, text, letters, brand logos or watermarks. This is ONE category cutout, not a grid or collage. Composition must work at the bottom-right of a light grey category tile."
+    },
+    {
+      "slug": "baby-care",
+      "subject": "pale blue baby bath with folded towel and care bottle",
+      "source": "C:\\Users\\alex\\.codex\\generated_images\\01a11d1f-ab95-7483-825b-e4a3900f58da\\exec-9ba17017-4941-4b21-8081-e98e6b5ed8a1.png",
+      "prompt": "Use case: stylized-concept. Asset type: one isolated category illustration for the Russian marketplace Купец. Subject: pale blue baby bath with folded towel and care bottle. Consistent premium photorealistic 3D product render like modern Avito category thumbnails: realistic materials, soft studio lighting, tasteful pale blue accents. A compact single object cluster in three-quarter view. Entire objects fully inside the canvas, centered with generous margins, legible at 120px. True transparent alpha background. No floor, opaque backdrop, gradient, broad shadow, colored glow, text, letters, brand logos or watermarks. This is ONE category cutout, not a grid or collage. Composition must work at the bottom-right of a light grey category tile."
+    },
+    {
+      "slug": "school",
+      "subject": "blue school backpack with notebook and pencil case",
+      "source": "C:\\Users\\alex\\.codex\\generated_images\\01a11d1f-ab95-7483-825b-e4a3900f58da\\exec-27e4a87b-facd-4eda-9ed5-a7192e4559fc.png",
+      "prompt": "Use case: stylized-concept. Asset type: one isolated category illustration for the Russian marketplace Купец. Subject: blue school backpack with notebook and pencil case. Consistent premium photorealistic 3D product render like modern Avito category thumbnails: realistic materials, soft studio lighting, tasteful pale blue accents. A compact single object cluster in three-quarter view. Entire objects fully inside the canvas, centered with generous margins, legible at 120px. True transparent alpha background. No floor, opaque backdrop, gradient, broad shadow, colored glow, text, letters, brand logos or watermarks. This is ONE category cutout, not a grid or collage. Composition must work at the bottom-right of a light grey category tile."
+    },
+    {
+      "slug": "televisions",
+      "subject": "modern flat television with soft abstract blue screen",
+      "source": "C:\\Users\\alex\\.codex\\generated_images\\01a11d1f-ab95-7483-825b-e4a3900f58da\\exec-a433de8f-0793-4f3b-b807-78b36fa24ea8.png",
+      "prompt": "Use case: stylized-concept. Asset type: one isolated category illustration for the Russian marketplace Купец. Subject: modern flat television with soft abstract blue screen. Consistent premium photorealistic 3D product render like modern Avito category thumbnails: realistic materials, soft studio lighting, tasteful pale blue accents. A compact single object cluster in three-quarter view. Entire objects fully inside the canvas, centered with generous margins, legible at 120px. True transparent alpha background. No floor, opaque backdrop, gradient, broad shadow, colored glow, text, letters, brand logos or watermarks. This is ONE category cutout, not a grid or collage. Composition must work at the bottom-right of a light grey category tile."
+    },
+    {
+      "slug": "tablets",
+      "subject": "silver blue tablet with stylus",
+      "source": "C:\\Users\\alex\\.codex\\generated_images\\01a11d1f-ab95-7483-825b-e4a3900f58da\\exec-06b52f18-983e-410f-819f-b3248c1ef252.png",
+      "prompt": "Use case: stylized-concept. Asset type: one isolated category illustration for the Russian marketplace Купец. Subject: silver blue tablet with stylus. Consistent premium photorealistic 3D product render like modern Avito category thumbnails: realistic materials, soft studio lighting, tasteful pale blue accents. A compact single object cluster in three-quarter view. Entire objects fully inside the canvas, centered with generous margins, legible at 120px. True transparent alpha background. No floor, opaque backdrop, gradient, broad shadow, colored glow, text, letters, brand logos or watermarks. This is ONE category cutout, not a grid or collage. Composition must work at the bottom-right of a light grey category tile."
+    },
+    {
+      "slug": "nursery",
+      "subject": "small wooden baby crib with pastel blue bedding",
+      "source": "C:\\Users\\alex\\.codex\\generated_images\\01a11d1f-ab95-7483-825b-e4a3900f58da\\exec-f8a9b687-e6dd-4c55-86ec-40d02446b7bd.png",
+      "prompt": "Use case: stylized-concept. Asset type: one isolated category illustration for the Russian marketplace Купец. Subject: small wooden baby crib with pastel blue bedding. Consistent premium photorealistic 3D product render like modern Avito category thumbnails: realistic materials, soft studio lighting, tasteful pale blue accents. A compact single object cluster in three-quarter view. Entire objects fully inside the canvas, centered with generous margins, legible at 120px. True transparent alpha background. No floor, opaque backdrop, gradient, broad shadow, colored glow, text, letters, brand logos or watermarks. This is ONE category cutout, not a grid or collage. Composition must work at the bottom-right of a light grey category tile."
+    },
+    {
+      "slug": "photo-cameras",
+      "subject": "modern black silver camera and compact lens",
+      "source": "C:\\Users\\alex\\.codex\\generated_images\\01a11d1f-ab95-7483-825b-e4a3900f58da\\exec-179a1205-5ce2-4232-93ac-b4f26c5126d3.png",
+      "prompt": "Use case: stylized-concept. Asset type: one isolated category illustration for the Russian marketplace Купец. Subject: modern black silver camera and compact lens. Consistent premium photorealistic 3D product render like modern Avito category thumbnails: realistic materials, soft studio lighting, tasteful pale blue accents. A compact single object cluster in three-quarter view. Entire objects fully inside the canvas, centered with generous margins, legible at 120px. True transparent alpha background. No floor, opaque backdrop, gradient, broad shadow, colored glow, text, letters, brand logos or watermarks. This is ONE category cutout, not a grid or collage. Composition must work at the bottom-right of a light grey category tile."
+    },
+    {
+      "slug": "other-kids",
+      "subject": "pastel blue gift box with small teddy bear and baby accessories",
+      "source": "C:\\Users\\alex\\.codex\\generated_images\\01a11d1f-ab95-7483-825b-e4a3900f58da\\exec-21cceba4-df27-44a4-afee-c6f7f489d3b5.png",
+      "prompt": "Use case: stylized-concept. Asset type: one isolated category illustration for the Russian marketplace Купец. Subject: pastel blue gift box with small teddy bear and baby accessories. Consistent premium photorealistic 3D product render like modern Avito category thumbnails: realistic materials, soft studio lighting, tasteful pale blue accents. A compact single object cluster in three-quarter view. Entire objects fully inside the canvas, centered with generous margins, legible at 120px. True transparent alpha background. No floor, opaque backdrop, gradient, broad shadow, colored glow, text, letters, brand logos or watermarks. This is ONE category cutout, not a grid or collage. Composition must work at the bottom-right of a light grey category tile."
+    },
+    {
+      "slug": "large-appliances",
+      "subject": "white silver refrigerator and compact washing machine",
+      "source": "C:\\Users\\alex\\.codex\\generated_images\\01a11d1f-ab95-7483-825b-e4a3900f58da\\exec-1a8c94f8-c208-4a5f-889e-0325cde1659b.png",
+      "prompt": "Use case: stylized-concept. Asset type: one isolated category illustration for the Russian marketplace Купец. Subject: white silver refrigerator and compact washing machine. Consistent premium photorealistic 3D product render like modern Avito category thumbnails: realistic materials, soft studio lighting, tasteful pale blue accents. A compact single object cluster in three-quarter view. Entire objects fully inside the canvas, centered with generous margins, legible at 120px. True transparent alpha background. No floor, opaque backdrop, gradient, broad shadow, colored glow, text, letters, brand logos or watermarks. This is ONE category cutout, not a grid or collage. Composition must work at the bottom-right of a light grey category tile."
+    },
+    {
+      "slug": "gaming",
+      "subject": "unbranded white blue game console and matching controller",
+      "source": "C:\\Users\\alex\\.codex\\generated_images\\01a11d1f-ab95-7483-825b-e4a3900f58da\\exec-695b170b-1775-460e-859c-b4e792700584.png",
+      "prompt": "Use case: stylized-concept. Asset type: one isolated category illustration for the Russian marketplace Купец. Subject: unbranded white blue game console and matching controller. Consistent premium photorealistic 3D product render like modern Avito category thumbnails: realistic materials, soft studio lighting, tasteful pale blue accents. A compact single object cluster in three-quarter view. Entire objects fully inside the canvas, centered with generous margins, legible at 120px. True transparent alpha background. No floor, opaque backdrop, gradient, broad shadow, colored glow, text, letters, brand logos or watermarks. This is ONE category cutout, not a grid or collage. Composition must work at the bottom-right of a light grey category tile."
+    },
+    {
+      "slug": "small-appliances",
+      "subject": "pale blue kettle and compact blender",
+      "source": "C:\\Users\\alex\\.codex\\generated_images\\01a11d1f-ab95-7483-825b-e4a3900f58da\\exec-5d5dad81-30f9-4e33-beff-b43f9e84bd62.png",
+      "prompt": "Use case: stylized-concept. Asset type: one isolated category illustration for the Russian marketplace Купец. Subject: pale blue kettle and compact blender. Consistent premium photorealistic 3D product render like modern Avito category thumbnails: realistic materials, soft studio lighting, tasteful pale blue accents. A compact single object cluster in three-quarter view. Entire objects fully inside the canvas, centered with generous margins, legible at 120px. True transparent alpha background. No floor, opaque backdrop, gradient, broad shadow, colored glow, text, letters, brand logos or watermarks. This is ONE category cutout, not a grid or collage. Composition must work at the bottom-right of a light grey category tile."
+    },
+    {
+      "slug": "other-electronics",
+      "subject": "blue wireless router and silver electronic gadget in a neat box",
+      "source": "C:\\Users\\alex\\.codex\\generated_images\\01a11d1f-ab95-7483-825b-e4a3900f58da\\exec-34210aa1-af5d-458a-bb2e-903e84210538.png",
+      "prompt": "Use case: stylized-concept. Asset type: one isolated category illustration for the Russian marketplace Купец. Subject: blue wireless router and silver electronic gadget in a neat box. Consistent premium photorealistic 3D product render like modern Avito category thumbnails: realistic materials, soft studio lighting, tasteful pale blue accents. A compact single object cluster in three-quarter view. Entire objects fully inside the canvas, centered with generous margins, legible at 120px. True transparent alpha background. No floor, opaque backdrop, gradient, broad shadow, colored glow, text, letters, brand logos or watermarks. This is ONE category cutout, not a grid or collage. Composition must work at the bottom-right of a light grey category tile."
+    },
+    {
+      "slug": "audio",
+      "subject": "blue wireless headphones and small speaker",
+      "source": "C:\\Users\\alex\\.codex\\generated_images\\01a11d1f-ab95-7483-825b-e4a3900f58da\\exec-1a029b6d-7dff-4c08-93b2-dcbefb65e463.png",
+      "prompt": "Use case: stylized-concept. Asset type: one isolated category illustration for the Russian marketplace Купец. Subject: blue wireless headphones and small speaker. Consistent premium photorealistic 3D product render like modern Avito category thumbnails: realistic materials, soft studio lighting, tasteful pale blue accents. A compact single object cluster in three-quarter view. Entire objects fully inside the canvas, centered with generous margins, legible at 120px. True transparent alpha background. No floor, opaque backdrop, gradient, broad shadow, colored glow, text, letters, brand logos or watermarks. This is ONE category cutout, not a grid or collage. Composition must work at the bottom-right of a light grey category tile."
+    },
+    {
+      "slug": "sofas",
+      "subject": "comfortable pale blue two seat sofa with mint cushion",
+      "source": "C:\\Users\\alex\\.codex\\generated_images\\01a11d1f-ab95-7483-825b-e4a3900f58da\\exec-ffca8e14-1fd8-4899-990d-0695b2585dc4.png",
+      "prompt": "Use case: stylized-concept. Asset type: one isolated category illustration for the Russian marketplace Купец. Subject: comfortable pale blue two seat sofa with mint cushion. Consistent premium photorealistic 3D product render like modern Avito category thumbnails: realistic materials, soft studio lighting, tasteful pale blue accents. A compact single object cluster in three-quarter view. Entire objects fully inside the canvas, centered with generous margins, legible at 120px. True transparent alpha background. No floor, opaque backdrop, gradient, broad shadow, colored glow, text, letters, brand logos or watermarks. This is ONE category cutout, not a grid or collage. Composition must work at the bottom-right of a light grey category tile."
+    },
+    {
+      "slug": "beds",
+      "subject": "wooden double bed with pale blue bedding",
+      "source": "C:\\Users\\alex\\.codex\\generated_images\\01a11d1f-ab95-7483-825b-e4a3900f58da\\exec-fa7ad8e7-dc32-4fc1-abae-4bf3c37891b4.png",
+      "prompt": "Use case: stylized-concept. Asset type: one isolated category illustration for the Russian marketplace Купец. Subject: wooden double bed with pale blue bedding. Consistent premium photorealistic 3D product render like modern Avito category thumbnails: realistic materials, soft studio lighting, tasteful pale blue accents. A compact single object cluster in three-quarter view. Entire objects fully inside the canvas, centered with generous margins, legible at 120px. True transparent alpha background. No floor, opaque backdrop, gradient, broad shadow, colored glow, text, letters, brand logos or watermarks. This is ONE category cutout, not a grid or collage. Composition must work at the bottom-right of a light grey category tile."
+    },
+    {
+      "slug": "wardrobes",
+      "subject": "light oak chest of drawers and small pale blue wardrobe",
+      "source": "C:\\Users\\alex\\.codex\\generated_images\\01a11d1f-ab95-7483-825b-e4a3900f58da\\exec-2ef27961-df4e-48b9-856a-e0c9bda5469b.png",
+      "prompt": "Use case: stylized-concept. Asset type: one isolated category illustration for the Russian marketplace Купец. Subject: light oak chest of drawers and small pale blue wardrobe. Consistent premium photorealistic 3D product render like modern Avito category thumbnails: realistic materials, soft studio lighting, tasteful pale blue accents. A compact single object cluster in three-quarter view. Entire objects fully inside the canvas, centered with generous margins, legible at 120px. True transparent alpha background. No floor, opaque backdrop, gradient, broad shadow, colored glow, text, letters, brand logos or watermarks. This is ONE category cutout, not a grid or collage. Composition must work at the bottom-right of a light grey category tile."
+    },
+    {
+      "slug": "electronic-accessories",
+      "subject": "blue computer mouse keyboard and neat charging cable",
+      "source": "C:\\Users\\alex\\.codex\\generated_images\\01a11d1f-ab95-7483-825b-e4a3900f58da\\exec-21929970-8336-4109-a08e-6c692f48342a.png",
+      "prompt": "Use case: stylized-concept. Asset type: one isolated category illustration for the Russian marketplace Купец. Subject: blue computer mouse keyboard and neat charging cable. Consistent premium photorealistic 3D product render like modern Avito category thumbnails: realistic materials, soft studio lighting, tasteful pale blue accents. A compact single object cluster in three-quarter view. Entire objects fully inside the canvas, centered with generous margins, legible at 120px. True transparent alpha background. No floor, opaque backdrop, gradient, broad shadow, colored glow, text, letters, brand logos or watermarks. This is ONE category cutout, not a grid or collage. Composition must work at the bottom-right of a light grey category tile."
+    },
+    {
+      "slug": "tables-chairs",
+      "subject": "round light wooden table with pale blue chair",
+      "source": "C:\\Users\\alex\\.codex\\generated_images\\01a11d1f-ab95-7483-825b-e4a3900f58da\\exec-667be5d2-d799-45fe-9ef4-2677e17313ac.png",
+      "prompt": "Use case: stylized-concept. Asset type: one isolated category illustration for the Russian marketplace Купец. Subject: round light wooden table with pale blue chair. Consistent premium photorealistic 3D product render like modern Avito category thumbnails: realistic materials, soft studio lighting, tasteful pale blue accents. A compact single object cluster in three-quarter view. Entire objects fully inside the canvas, centered with generous margins, legible at 120px. True transparent alpha background. No floor, opaque backdrop, gradient, broad shadow, colored glow, text, letters, brand logos or watermarks. This is ONE category cutout, not a grid or collage. Composition must work at the bottom-right of a light grey category tile."
+    },
+    {
+      "slug": "home-decor",
+      "subject": "blue ceramic vase oval mirror and neat picture frame without text",
+      "source": "C:\\Users\\alex\\.codex\\generated_images\\01a11d1f-ab95-7483-825b-e4a3900f58da\\exec-a92571c3-5d56-49f6-a172-a3c012f8021b.png",
+      "prompt": "Use case: stylized-concept. Asset type: one isolated category illustration for the Russian marketplace Купец. Subject: blue ceramic vase oval mirror and neat picture frame without text. Consistent premium photorealistic 3D product render like modern Avito category thumbnails: realistic materials, soft studio lighting, tasteful pale blue accents. A compact single object cluster in three-quarter view. Entire objects fully inside the canvas, centered with generous margins, legible at 120px. True transparent alpha background. No floor, opaque backdrop, gradient, broad shadow, colored glow, text, letters, brand logos or watermarks. This is ONE category cutout, not a grid or collage. Composition must work at the bottom-right of a light grey category tile."
+    },
+    {
+      "slug": "kitchen-furniture",
+      "subject": "compact modern pale blue kitchen cabinet and wooden countertop",
+      "source": "C:\\Users\\alex\\.codex\\generated_images\\01a11d1f-ab95-7483-825b-e4a3900f58da\\exec-41406247-6568-462f-93c4-55cbf585f235.png",
+      "prompt": "Use case: stylized-concept. Asset type: one isolated category illustration for the Russian marketplace Купец. Subject: compact modern pale blue kitchen cabinet and wooden countertop. Consistent premium photorealistic 3D product render like modern Avito category thumbnails: realistic materials, soft studio lighting, tasteful pale blue accents. A compact single object cluster in three-quarter view. Entire objects fully inside the canvas, centered with generous margins, legible at 120px. True transparent alpha background. No floor, opaque backdrop, gradient, broad shadow, colored glow, text, letters, brand logos or watermarks. This is ONE category cutout, not a grid or collage. Composition must work at the bottom-right of a light grey category tile."
+    },
+    {
+      "slug": "office-furniture",
+      "subject": "modern blue ergonomic office chair beside compact desk",
+      "source": "C:\\Users\\alex\\.codex\\generated_images\\01a11d1f-ab95-7483-825b-e4a3900f58da\\exec-0673a4d8-1321-4d8e-9c6d-910bb07e7d89.png",
+      "prompt": "Use case: stylized-concept. Asset type: one isolated category illustration for the Russian marketplace Купец. Subject: modern blue ergonomic office chair beside compact desk. Consistent premium photorealistic 3D product render like modern Avito category thumbnails: realistic materials, soft studio lighting, tasteful pale blue accents. A compact single object cluster in three-quarter view. Entire objects fully inside the canvas, centered with generous margins, legible at 120px. True transparent alpha background. No floor, opaque backdrop, gradient, broad shadow, colored glow, text, letters, brand logos or watermarks. This is ONE category cutout, not a grid or collage. Composition must work at the bottom-right of a light grey category tile."
+    },
+    {
+      "slug": "body-parts",
+      "subject": "silver blue car bumper and side mirror",
+      "source": "C:\\Users\\alex\\.codex\\generated_images\\01a11d1f-ab95-7483-825b-e4a3900f58da\\exec-5b369f95-a264-4bbb-ad21-54f82f49956a.png",
+      "prompt": "Use case: stylized-concept. Asset type: one isolated category illustration for the Russian marketplace Купец. Subject: silver blue car bumper and side mirror. Consistent premium photorealistic 3D product render like modern Avito category thumbnails: realistic materials, soft studio lighting, tasteful pale blue accents. A compact single object cluster in three-quarter view. Entire objects fully inside the canvas, centered with generous margins, legible at 120px. True transparent alpha background. No floor, opaque backdrop, gradient, broad shadow, colored glow, text, letters, brand logos or watermarks. This is ONE category cutout, not a grid or collage. Composition must work at the bottom-right of a light grey category tile."
+    },
+    {
+      "slug": "other-furniture",
+      "subject": "wooden shelf with blue cushion and small decorative clock",
+      "source": "C:\\Users\\alex\\.codex\\generated_images\\01a11d1f-ab95-7483-825b-e4a3900f58da\\exec-a002668e-59b9-4f75-9fd5-734101f1fc2d.png",
+      "prompt": "Use case: stylized-concept. Asset type: one isolated category illustration for the Russian marketplace Купец. Subject: wooden shelf with blue cushion and small decorative clock. Consistent premium photorealistic 3D product render like modern Avito category thumbnails: realistic materials, soft studio lighting, tasteful pale blue accents. A compact single object cluster in three-quarter view. Entire objects fully inside the canvas, centered with generous margins, legible at 120px. True transparent alpha background. No floor, opaque backdrop, gradient, broad shadow, colored glow, text, letters, brand logos or watermarks. This is ONE category cutout, not a grid or collage. Composition must work at the bottom-right of a light grey category tile."
+    },
+    {
+      "slug": "home-textiles",
+      "subject": "folded blue blanket pillow and rolled rug",
+      "source": "C:\\Users\\alex\\.codex\\generated_images\\01a11d1f-ab95-7483-825b-e4a3900f58da\\exec-3ef42165-a5a0-4ae4-9e6a-15572578bcf7.png",
+      "prompt": "Use case: stylized-concept. Asset type: one isolated category illustration for the Russian marketplace Купец. Subject: folded blue blanket pillow and rolled rug. Consistent premium photorealistic 3D product render like modern Avito category thumbnails: realistic materials, soft studio lighting, tasteful pale blue accents. A compact single object cluster in three-quarter view. Entire objects fully inside the canvas, centered with generous margins, legible at 120px. True transparent alpha background. No floor, opaque backdrop, gradient, broad shadow, colored glow, text, letters, brand logos or watermarks. This is ONE category cutout, not a grid or collage. Composition must work at the bottom-right of a light grey category tile."
+    },
+    {
+      "slug": "lighting",
+      "subject": "elegant pale blue desk lamp and small pendant lamp",
+      "source": "C:\\Users\\alex\\.codex\\generated_images\\01a11d1f-ab95-7483-825b-e4a3900f58da\\exec-5d8522d0-1fce-42ff-9ef1-d194a7c58e6c.png",
+      "prompt": "Use case: stylized-concept. Asset type: one isolated category illustration for the Russian marketplace Купец. Subject: elegant pale blue desk lamp and small pendant lamp. Consistent premium photorealistic 3D product render like modern Avito category thumbnails: realistic materials, soft studio lighting, tasteful pale blue accents. A compact single object cluster in three-quarter view. Entire objects fully inside the canvas, centered with generous margins, legible at 120px. True transparent alpha background. No floor, opaque backdrop, gradient, broad shadow, colored glow, text, letters, brand logos or watermarks. This is ONE category cutout, not a grid or collage. Composition must work at the bottom-right of a light grey category tile."
+    },
+    {
+      "slug": "engines",
+      "subject": "clean metallic car engine with compact blue detail",
+      "source": "C:\\Users\\alex\\.codex\\generated_images\\01a11d1f-ab95-7483-825b-e4a3900f58da\\exec-d5ee83ca-bfa6-4707-b76e-0369718cb715.png",
+      "prompt": "Use case: stylized-concept. Asset type: one isolated category illustration for the Russian marketplace Купец. Subject: clean metallic car engine with compact blue detail. Consistent premium photorealistic 3D product render like modern Avito category thumbnails: realistic materials, soft studio lighting, tasteful pale blue accents. A compact single object cluster in three-quarter view. Entire objects fully inside the canvas, centered with generous margins, legible at 120px. True transparent alpha background. No floor, opaque backdrop, gradient, broad shadow, colored glow, text, letters, brand logos or watermarks. This is ONE category cutout, not a grid or collage. Composition must work at the bottom-right of a light grey category tile."
+    },
+    {
+      "slug": "auto-electrics",
+      "subject": "clean car alternator and two spark plugs",
+      "source": "C:\\Users\\alex\\.codex\\generated_images\\01a11d1f-ab95-7483-825b-e4a3900f58da\\exec-5801befe-c24c-42c7-982d-cf2b7645cd80.png",
+      "prompt": "Use case: stylized-concept. Asset type: one isolated category illustration for the Russian marketplace Купец. Subject: clean car alternator and two spark plugs. Consistent premium photorealistic 3D product render like modern Avito category thumbnails: realistic materials, soft studio lighting, tasteful pale blue accents. A compact single object cluster in three-quarter view. Entire objects fully inside the canvas, centered with generous margins, legible at 120px. True transparent alpha background. No floor, opaque backdrop, gradient, broad shadow, colored glow, text, letters, brand logos or watermarks. This is ONE category cutout, not a grid or collage. Composition must work at the bottom-right of a light grey category tile."
+    },
+    {
+      "slug": "tires",
+      "subject": "two black car tires in three quarter view",
+      "source": "C:\\Users\\alex\\.codex\\generated_images\\01a11d1f-ab95-7483-825b-e4a3900f58da\\exec-fe61e88b-42e2-4cef-b0c3-0cac9880eec9.png",
+      "prompt": "Use case: stylized-concept. Asset type: one isolated category illustration for the Russian marketplace Купец. Subject: two black car tires in three quarter view. Consistent premium photorealistic 3D product render like modern Avito category thumbnails: realistic materials, soft studio lighting, tasteful pale blue accents. A compact single object cluster in three-quarter view. Entire objects fully inside the canvas, centered with generous margins, legible at 120px. True transparent alpha background. No floor, opaque backdrop, gradient, broad shadow, colored glow, text, letters, brand logos or watermarks. This is ONE category cutout, not a grid or collage. Composition must work at the bottom-right of a light grey category tile."
+    },
+    {
+      "slug": "car-accessories",
+      "subject": "blue car phone holder dash camera and folded car mats",
+      "source": "C:\\Users\\alex\\.codex\\generated_images\\01a11d1f-ab95-7483-825b-e4a3900f58da\\exec-b62c3b7e-eb9f-4536-a846-b55f6112b098.png",
+      "prompt": "Use case: stylized-concept. Asset type: one isolated category illustration for the Russian marketplace Купец. Subject: blue car phone holder dash camera and folded car mats. Consistent premium photorealistic 3D product render like modern Avito category thumbnails: realistic materials, soft studio lighting, tasteful pale blue accents. A compact single object cluster in three-quarter view. Entire objects fully inside the canvas, centered with generous margins, legible at 120px. True transparent alpha background. No floor, opaque backdrop, gradient, broad shadow, colored glow, text, letters, brand logos or watermarks. This is ONE category cutout, not a grid or collage. Composition must work at the bottom-right of a light grey category tile."
+    },
+    {
+      "slug": "wheels",
+      "subject": "polished silver alloy car wheel with blue reflection",
+      "source": "C:\\Users\\alex\\.codex\\generated_images\\01a11d1f-ab95-7483-825b-e4a3900f58da\\exec-53fe8842-b00b-4189-9655-b82de969ddbc.png",
+      "prompt": "Use case: stylized-concept. Asset type: one isolated category illustration for the Russian marketplace Купец. Subject: polished silver alloy car wheel with blue reflection. Consistent premium photorealistic 3D product render like modern Avito category thumbnails: realistic materials, soft studio lighting, tasteful pale blue accents. A compact single object cluster in three-quarter view. Entire objects fully inside the canvas, centered with generous margins, legible at 120px. True transparent alpha background. No floor, opaque backdrop, gradient, broad shadow, colored glow, text, letters, brand logos or watermarks. This is ONE category cutout, not a grid or collage. Composition must work at the bottom-right of a light grey category tile."
+    },
+    {
+      "slug": "auto-batteries",
+      "subject": "clean blue black car battery without text",
+      "source": "C:\\Users\\alex\\.codex\\generated_images\\01a11d1f-ab95-7483-825b-e4a3900f58da\\exec-aca70b50-24cd-49f9-8f43-6a62f6b36024.png",
+      "prompt": "Use case: stylized-concept. Asset type: one isolated category illustration for the Russian marketplace Купец. Subject: clean blue black car battery without text. Consistent premium photorealistic 3D product render like modern Avito category thumbnails: realistic materials, soft studio lighting, tasteful pale blue accents. A compact single object cluster in three-quarter view. Entire objects fully inside the canvas, centered with generous margins, legible at 120px. True transparent alpha background. No floor, opaque backdrop, gradient, broad shadow, colored glow, text, letters, brand logos or watermarks. This is ONE category cutout, not a grid or collage. Composition must work at the bottom-right of a light grey category tile. Strictly ensure the surrounding canvas is transparent with alpha=0."
+    },
+    {
+      "slug": "fitness",
+      "subject": "pair of blue dumbbells rolled exercise mat and kettlebell",
+      "source": "C:\\Users\\alex\\.codex\\generated_images\\01a11d1f-ab95-7483-825b-e4a3900f58da\\exec-2e00e54b-ff57-44ef-a86e-de4660abc861.png",
+      "prompt": "Use case: stylized-concept. Asset type: one isolated category illustration for the Russian marketplace Купец. Subject: pair of blue dumbbells rolled exercise mat and kettlebell. Consistent premium photorealistic 3D product render like modern Avito category thumbnails: realistic materials, soft studio lighting, tasteful pale blue accents. A compact single object cluster in three-quarter view. Entire objects fully inside the canvas, centered with generous margins, legible at 120px. True transparent alpha background. No floor, opaque backdrop, gradient, broad shadow, colored glow, text, letters, brand logos or watermarks. This is ONE category cutout, not a grid or collage. Composition must work at the bottom-right of a light grey category tile."
+    },
+    {
+      "slug": "other-auto-parts",
+      "subject": "neat blue box containing car filter belt and small metallic parts",
+      "source": "C:\\Users\\alex\\.codex\\generated_images\\01a11d1f-ab95-7483-825b-e4a3900f58da\\exec-755b3ccb-b5d1-466a-94e2-8761dd6f63fb.png",
+      "prompt": "Use case: stylized-concept. Asset type: one isolated category illustration for the Russian marketplace Купец. Subject: neat blue box containing car filter belt and small metallic parts. Consistent premium photorealistic 3D product render like modern Avito category thumbnails: realistic materials, soft studio lighting, tasteful pale blue accents. A compact single object cluster in three-quarter view. Entire objects fully inside the canvas, centered with generous margins, legible at 120px. True transparent alpha background. No floor, opaque backdrop, gradient, broad shadow, colored glow, text, letters, brand logos or watermarks. This is ONE category cutout, not a grid or collage. Composition must work at the bottom-right of a light grey category tile. Strictly ensure the surrounding canvas is transparent with alpha=0."
+    },
+    {
+      "slug": "bicycles",
+      "subject": "modern pale blue mountain bicycle in three quarter view",
+      "source": "C:\\Users\\alex\\.codex\\generated_images\\01a11d1f-ab95-7483-825b-e4a3900f58da\\exec-d4aee6e1-c12f-45d7-b80e-b49c46d8b731.png",
+      "prompt": "Use case: stylized-concept. Asset type: one isolated category illustration for the Russian marketplace Купец. Subject: modern pale blue mountain bicycle in three quarter view. Consistent premium photorealistic 3D product render like modern Avito category thumbnails: realistic materials, soft studio lighting, tasteful pale blue accents. A compact single object cluster in three-quarter view. Entire objects fully inside the canvas, centered with generous margins, legible at 120px. True transparent alpha background. No floor, opaque backdrop, gradient, broad shadow, colored glow, text, letters, brand logos or watermarks. This is ONE category cutout, not a grid or collage. Composition must work at the bottom-right of a light grey category tile."
+    },
+    {
+      "slug": "water-sports",
+      "subject": "blue inflatable SUP board paddle and life jacket",
+      "source": "C:\\Users\\alex\\.codex\\generated_images\\01a11d1f-ab95-7483-825b-e4a3900f58da\\exec-5d35961b-f6d4-4357-90c1-58311093324e.png",
+      "prompt": "Use case: stylized-concept. Asset type: one isolated category illustration for the Russian marketplace Купец. Subject: blue inflatable SUP board paddle and life jacket. Consistent premium photorealistic 3D product render like modern Avito category thumbnails: realistic materials, soft studio lighting, tasteful pale blue accents. A compact single object cluster in three-quarter view. Entire objects fully inside the canvas, centered with generous margins, legible at 120px. True transparent alpha background. No floor, opaque backdrop, gradient, broad shadow, colored glow, text, letters, brand logos or watermarks. This is ONE category cutout, not a grid or collage. Composition must work at the bottom-right of a light grey category tile."
+    },
+    {
+      "slug": "camping",
+      "subject": "small blue camping tent rolled sleeping bag and thermos",
+      "source": "C:\\Users\\alex\\.codex\\generated_images\\01a11d1f-ab95-7483-825b-e4a3900f58da\\exec-5698b573-5b43-4bf5-8be1-cf0e23626b2e.png",
+      "prompt": "Use case: stylized-concept. Asset type: one isolated category illustration for the Russian marketplace Купец. Subject: small blue camping tent rolled sleeping bag and thermos. Consistent premium photorealistic 3D product render like modern Avito category thumbnails: realistic materials, soft studio lighting, tasteful pale blue accents. A compact single object cluster in three-quarter view. Entire objects fully inside the canvas, centered with generous margins, legible at 120px. True transparent alpha background. No floor, opaque backdrop, gradient, broad shadow, colored glow, text, letters, brand logos or watermarks. This is ONE category cutout, not a grid or collage. Composition must work at the bottom-right of a light grey category tile."
+    },
+    {
+      "slug": "music-instruments",
+      "subject": "natural wooden acoustic guitar and small blue keyboard",
+      "source": "C:\\Users\\alex\\.codex\\generated_images\\01a11d1f-ab95-7483-825b-e4a3900f58da\\exec-76eec9fa-5c6a-4835-af31-7f943764ab01.png",
+      "prompt": "Use case: stylized-concept. Asset type: one isolated category illustration for the Russian marketplace Купец. Subject: natural wooden acoustic guitar and small blue keyboard. Consistent premium photorealistic 3D product render like modern Avito category thumbnails: realistic materials, soft studio lighting, tasteful pale blue accents. A compact single object cluster in three-quarter view. Entire objects fully inside the canvas, centered with generous margins, legible at 120px. True transparent alpha background. No floor, opaque backdrop, gradient, broad shadow, colored glow, text, letters, brand logos or watermarks. This is ONE category cutout, not a grid or collage. Composition must work at the bottom-right of a light grey category tile."
+    },
+    {
+      "slug": "fishing",
+      "subject": "fishing rod reel and small blue tackle box",
+      "source": "C:\\Users\\alex\\.codex\\generated_images\\01a11d1f-ab95-7483-825b-e4a3900f58da\\exec-6b45c9b4-a5ed-4c10-9570-7e3d6abf330d.png",
+      "prompt": "Use case: stylized-concept. Asset type: one isolated category illustration for the Russian marketplace Купец. Subject: fishing rod reel and small blue tackle box. Consistent premium photorealistic 3D product render like modern Avito category thumbnails: realistic materials, soft studio lighting, tasteful pale blue accents. A compact single object cluster in three-quarter view. Entire objects fully inside the canvas, centered with generous margins, legible at 120px. True transparent alpha background. No floor, opaque backdrop, gradient, broad shadow, colored glow, text, letters, brand logos or watermarks. This is ONE category cutout, not a grid or collage. Composition must work at the bottom-right of a light grey category tile."
+    },
+    {
+      "slug": "winter-sports",
+      "subject": "blue skis ski poles and pair of silver skates",
+      "source": "C:\\Users\\alex\\.codex\\generated_images\\01a11d1f-ab95-7483-825b-e4a3900f58da\\exec-498bfae4-cf40-4100-9c2f-6b1867df0c98.png",
+      "prompt": "Use case: stylized-concept. Asset type: one isolated category illustration for the Russian marketplace Купец. Subject: blue skis ski poles and pair of silver skates. Consistent premium photorealistic 3D product render like modern Avito category thumbnails: realistic materials, soft studio lighting, tasteful pale blue accents. A compact single object cluster in three-quarter view. Entire objects fully inside the canvas, centered with generous margins, legible at 120px. True transparent alpha background. No floor, opaque backdrop, gradient, broad shadow, colored glow, text, letters, brand logos or watermarks. This is ONE category cutout, not a grid or collage. Composition must work at the bottom-right of a light grey category tile. Strictly ensure the surrounding canvas is transparent with alpha=0."
+    },
+    {
+      "slug": "board-games",
+      "subject": "blue board game box without lettering chess knight and dice",
+      "source": "C:\\Users\\alex\\.codex\\generated_images\\01a11d1f-ab95-7483-825b-e4a3900f58da\\exec-5227f977-5df6-47b7-b051-fa52afc15454.png",
+      "prompt": "Use case: stylized-concept. Asset type: one isolated category illustration for the Russian marketplace Купец. Subject: blue board game box without lettering chess knight and dice. Consistent premium photorealistic 3D product render like modern Avito category thumbnails: realistic materials, soft studio lighting, tasteful pale blue accents. A compact single object cluster in three-quarter view. Entire objects fully inside the canvas, centered with generous margins, legible at 120px. True transparent alpha background. No floor, opaque backdrop, gradient, broad shadow, colored glow, text, letters, brand logos or watermarks. This is ONE category cutout, not a grid or collage. Composition must work at the bottom-right of a light grey category tile."
+    },
+    {
+      "slug": "books",
+      "subject": "stack of elegant books with plain blue covers and an open book",
+      "source": "C:\\Users\\alex\\.codex\\generated_images\\01a11d1f-ab95-7483-825b-e4a3900f58da\\exec-c8647e2c-6732-4b24-aab0-e89b06a05e07.png",
+      "prompt": "Use case: stylized-concept. Asset type: one isolated category illustration for the Russian marketplace Купец. Subject: stack of elegant books with plain blue covers and an open book. Consistent premium photorealistic 3D product render like modern Avito category thumbnails: realistic materials, soft studio lighting, tasteful pale blue accents. A compact single object cluster in three-quarter view. Entire objects fully inside the canvas, centered with generous margins, legible at 120px. True transparent alpha background. No floor, opaque backdrop, gradient, broad shadow, colored glow, text, letters, brand logos or watermarks. This is ONE category cutout, not a grid or collage. Composition must work at the bottom-right of a light grey category tile. Strictly ensure the surrounding canvas is transparent with alpha=0."
+    },
+    {
+      "slug": "handmade",
+      "subject": "blue yarn ball wooden knitting needles and paint brushes",
+      "source": "C:\\Users\\alex\\.codex\\generated_images\\01a11d1f-ab95-7483-825b-e4a3900f58da\\exec-57d03158-b739-48da-a598-96e7822b9212.png",
+      "prompt": "Use case: stylized-concept. Asset type: one isolated category illustration for the Russian marketplace Купец. Subject: blue yarn ball wooden knitting needles and paint brushes. Consistent premium photorealistic 3D product render like modern Avito category thumbnails: realistic materials, soft studio lighting, tasteful pale blue accents. A compact single object cluster in three-quarter view. Entire objects fully inside the canvas, centered with generous margins, legible at 120px. True transparent alpha background. No floor, opaque backdrop, gradient, broad shadow, colored glow, text, letters, brand logos or watermarks. This is ONE category cutout, not a grid or collage. Composition must work at the bottom-right of a light grey category tile."
+    },
+    {
+      "slug": "tools",
+      "subject": "blue cordless drill and compact toolbox with hand tools",
+      "source": "C:\\Users\\alex\\.codex\\generated_images\\01a11d1f-ab95-7483-825b-e4a3900f58da\\exec-8838570b-284d-4257-a4c0-5c63d750dd26.png",
+      "prompt": "Use case: stylized-concept. Asset type: one isolated category illustration for the Russian marketplace Купец. Subject: blue cordless drill and compact toolbox with hand tools. Consistent premium photorealistic 3D product render like modern Avito category thumbnails: realistic materials, soft studio lighting, tasteful pale blue accents. A compact single object cluster in three-quarter view. Entire objects fully inside the canvas, centered with generous margins, legible at 120px. True transparent alpha background. No floor, opaque backdrop, gradient, broad shadow, colored glow, text, letters, brand logos or watermarks. This is ONE category cutout, not a grid or collage. Composition must work at the bottom-right of a light grey category tile."
+    },
+    {
+      "slug": "other-hobby",
+      "subject": "football blue tennis racket and skateboard",
+      "source": "C:\\Users\\alex\\.codex\\generated_images\\01a11d1f-ab95-7483-825b-e4a3900f58da\\exec-2f185b9e-f335-4053-955d-4b968c42b106.png",
+      "prompt": "Use case: stylized-concept. Asset type: one isolated category illustration for the Russian marketplace Купец. Subject: football blue tennis racket and skateboard. Consistent premium photorealistic 3D product render like modern Avito category thumbnails: realistic materials, soft studio lighting, tasteful pale blue accents. A compact single object cluster in three-quarter view. Entire objects fully inside the canvas, centered with generous margins, legible at 120px. True transparent alpha background. No floor, opaque backdrop, gradient, broad shadow, colored glow, text, letters, brand logos or watermarks. This is ONE category cutout, not a grid or collage. Composition must work at the bottom-right of a light grey category tile."
+    },
+    {
+      "slug": "garden-equipment",
+      "subject": "compact pale blue lawn mower and garden shears",
+      "source": "C:\\Users\\alex\\.codex\\generated_images\\01a11d1f-ab95-7483-825b-e4a3900f58da\\exec-ed910289-4581-4a94-af96-944ea1a97313.png",
+      "prompt": "Use case: stylized-concept. Asset type: one isolated category illustration for the Russian marketplace Купец. Subject: compact pale blue lawn mower and garden shears. Consistent premium photorealistic 3D product render like modern Avito category thumbnails: realistic materials, soft studio lighting, tasteful pale blue accents. A compact single object cluster in three-quarter view. Entire objects fully inside the canvas, centered with generous margins, legible at 120px. True transparent alpha background. No floor, opaque backdrop, gradient, broad shadow, colored glow, text, letters, brand logos or watermarks. This is ONE category cutout, not a grid or collage. Composition must work at the bottom-right of a light grey category tile."
+    },
+    {
+      "slug": "building-materials",
+      "subject": "stack of bricks wooden boards and unbranded blue paint can",
+      "source": "C:\\Users\\alex\\.codex\\generated_images\\01a11d1f-ab95-7483-825b-e4a3900f58da\\exec-e9934d1c-8b15-4261-96ac-acffcd8e6906.png",
+      "prompt": "Use case: stylized-concept. Asset type: one isolated category illustration for the Russian marketplace Купец. Subject: stack of bricks wooden boards and unbranded blue paint can. Consistent premium photorealistic 3D product render like modern Avito category thumbnails: realistic materials, soft studio lighting, tasteful pale blue accents. A compact single object cluster in three-quarter view. Entire objects fully inside the canvas, centered with generous margins, legible at 120px. True transparent alpha background. No floor, opaque backdrop, gradient, broad shadow, colored glow, text, letters, brand logos or watermarks. This is ONE category cutout, not a grid or collage. Composition must work at the bottom-right of a light grey category tile."
+    },
+    {
+      "slug": "collectibles",
+      "subject": "collectible coins in small case with vintage postcard without readable text",
+      "source": "C:\\Users\\alex\\.codex\\generated_images\\01a11d1f-ab95-7483-825b-e4a3900f58da\\exec-62a7a98d-e128-41d1-83da-46a5e00daf52.png",
+      "prompt": "Use case: stylized-concept. Asset type: one isolated category illustration for the Russian marketplace Купец. Subject: collectible coins in small case with vintage postcard without readable text. Consistent premium photorealistic 3D product render like modern Avito category thumbnails: realistic materials, soft studio lighting, tasteful pale blue accents. A compact single object cluster in three-quarter view. Entire objects fully inside the canvas, centered with generous margins, legible at 120px. True transparent alpha background. No floor, opaque backdrop, gradient, broad shadow, colored glow, text, letters, brand logos or watermarks. This is ONE category cutout, not a grid or collage. Composition must work at the bottom-right of a light grey category tile. Strictly ensure the surrounding canvas is transparent with alpha=0."
+    },
+    {
+      "slug": "pet-goods",
+      "subject": "blue pet bed food bowl and small chew toy",
+      "source": "C:\\Users\\alex\\.codex\\generated_images\\01a11d1f-ab95-7483-825b-e4a3900f58da\\exec-e9959be5-f127-41a5-aeb1-ae9e822c60ad.png",
+      "prompt": "Use case: stylized-concept. Asset type: one isolated category illustration for the Russian marketplace Купец. Subject: blue pet bed food bowl and small chew toy. Consistent premium photorealistic 3D product render like modern Avito category thumbnails: realistic materials, soft studio lighting, tasteful pale blue accents. A compact single object cluster in three-quarter view. Entire objects fully inside the canvas, centered with generous margins, legible at 120px. True transparent alpha background. No floor, opaque backdrop, gradient, broad shadow, colored glow, text, letters, brand logos or watermarks. This is ONE category cutout, not a grid or collage. Composition must work at the bottom-right of a light grey category tile."
+    },
+    {
+      "slug": "plants",
+      "subject": "lush indoor green plant in pale blue pot and small seedling",
+      "source": "C:\\Users\\alex\\.codex\\generated_images\\01a11d1f-ab95-7483-825b-e4a3900f58da\\exec-e1e440c7-c84f-4423-bfd0-54ab0cb7d4ec.png",
+      "prompt": "Use case: stylized-concept. Asset type: one isolated category illustration for the Russian marketplace Купец. Subject: lush indoor green plant in pale blue pot and small seedling. Consistent premium photorealistic 3D product render like modern Avito category thumbnails: realistic materials, soft studio lighting, tasteful pale blue accents. A compact single object cluster in three-quarter view. Entire objects fully inside the canvas, centered with generous margins, legible at 120px. True transparent alpha background. No floor, opaque backdrop, gradient, broad shadow, colored glow, text, letters, brand logos or watermarks. This is ONE category cutout, not a grid or collage. Composition must work at the bottom-right of a light grey category tile."
+    },
+    {
+      "slug": "stationery",
+      "subject": "blue notebooks pencil cup and neat office stationery",
+      "source": "C:\\Users\\alex\\.codex\\generated_images\\01a11d1f-ab95-7483-825b-e4a3900f58da\\exec-1bc2e251-b3af-4396-bc56-b1f2f1fa1b6b.png",
+      "prompt": "Use case: stylized-concept. Asset type: one isolated category illustration for the Russian marketplace Купец. Subject: blue notebooks pencil cup and neat office stationery. Consistent premium photorealistic 3D product render like modern Avito category thumbnails: realistic materials, soft studio lighting, tasteful pale blue accents. A compact single object cluster in three-quarter view. Entire objects fully inside the canvas, centered with generous margins, legible at 120px. True transparent alpha background. No floor, opaque backdrop, gradient, broad shadow, colored glow, text, letters, brand logos or watermarks. This is ONE category cutout, not a grid or collage. Composition must work at the bottom-right of a light grey category tile."
+    },
+    {
+      "slug": "household-goods",
+      "subject": "neat blue ceramic dishes storage basket and folded cleaning cloth",
+      "source": "C:\\Users\\alex\\.codex\\generated_images\\01a11d1f-ab95-7483-825b-e4a3900f58da\\exec-2f9d0a21-e269-4396-96a0-93a0c843622c.png",
+      "prompt": "Use case: stylized-concept. Asset type: one isolated category illustration for the Russian marketplace Купец. Subject: neat blue ceramic dishes storage basket and folded cleaning cloth. Consistent premium photorealistic 3D product render like modern Avito category thumbnails: realistic materials, soft studio lighting, tasteful pale blue accents. A compact single object cluster in three-quarter view. Entire objects fully inside the canvas, centered with generous margins, legible at 120px. True transparent alpha background. No floor, opaque backdrop, gradient, broad shadow, colored glow, text, letters, brand logos or watermarks. This is ONE category cutout, not a grid or collage. Composition must work at the bottom-right of a light grey category tile."
+    },
+    {
+      "slug": "business-equipment",
+      "subject": "compact silver blue point of sale terminal and barcode scanner",
+      "source": "C:\\Users\\alex\\.codex\\generated_images\\01a11d1f-ab95-7483-825b-e4a3900f58da\\exec-15033d82-3475-43da-9fee-57696d2f0008.png",
+      "prompt": "Use case: stylized-concept. Asset type: one isolated category illustration for the Russian marketplace Купец. Subject: compact silver blue point of sale terminal and barcode scanner. Consistent premium photorealistic 3D product render like modern Avito category thumbnails: realistic materials, soft studio lighting, tasteful pale blue accents. A compact single object cluster in three-quarter view. Entire objects fully inside the canvas, centered with generous margins, legible at 120px. True transparent alpha background. No floor, opaque backdrop, gradient, broad shadow, colored glow, text, letters, brand logos or watermarks. This is ONE category cutout, not a grid or collage. Composition must work at the bottom-right of a light grey category tile."
+    },
+    {
+      "slug": "misc-goods",
+      "subject": "neat open cardboard box containing blue everyday objects",
+      "source": "C:\\Users\\alex\\.codex\\generated_images\\01a11d1f-ab95-7483-825b-e4a3900f58da\\exec-d0230b72-9b5b-4a6c-ba7a-798c7e781175.png",
+      "prompt": "Use case: stylized-concept. Asset type: one isolated category illustration for the Russian marketplace Купец. Subject: neat open cardboard box containing blue everyday objects. Consistent premium photorealistic 3D product render like modern Avito category thumbnails: realistic materials, soft studio lighting, tasteful pale blue accents. A compact single object cluster in three-quarter view. Entire objects fully inside the canvas, centered with generous margins, legible at 120px. True transparent alpha background. No floor, opaque backdrop, gradient, broad shadow, colored glow, text, letters, brand logos or watermarks. This is ONE category cutout, not a grid or collage. Composition must work at the bottom-right of a light grey category tile. Strictly ensure the surrounding canvas is transparent with alpha=0."
+    },
+    {
+      "slug": "suspension",
+      "subject": "clean metallic shock absorber brake disc and brake pads",
+      "source": "C:\\Users\\alex\\.codex\\generated_images\\01a11d1f-ab95-7483-825b-e4a3900f58da\\exec-769f123a-3a28-4bf3-a895-e6abb7b61c85.png",
+      "prompt": "Use case: stylized-concept. Asset type: one isolated category illustration for the Russian marketplace Купец. Subject: clean metallic shock absorber brake disc and brake pads. Consistent premium photorealistic 3D product render like modern Avito category thumbnails: realistic materials, soft studio lighting, tasteful pale blue accents. A compact single object cluster in three-quarter view. Entire objects fully inside the canvas, centered with generous margins, legible at 120px. True transparent alpha background. No floor, opaque backdrop, gradient, broad shadow, colored glow, text, letters, brand logos or watermarks. This is ONE category cutout, not a grid or collage. Composition must work at the bottom-right of a light grey category tile. Strictly ensure the surrounding canvas is transparent with alpha=0."
+    },
+    {
+      "slug": "car-chemicals",
+      "subject": "unbranded blue motor oil canister and cleaning spray",
+      "source": "C:\\Users\\alex\\.codex\\generated_images\\01a11d1f-ab95-7483-825b-e4a3900f58da\\exec-365c421e-a5b9-4e54-b88a-7a5cd61a7515.png",
+      "prompt": "Use case: stylized-concept. Asset type: one isolated category illustration for the Russian marketplace Купец. Subject: unbranded blue motor oil canister and cleaning spray. Consistent premium photorealistic 3D product render like modern Avito category thumbnails: realistic materials, soft studio lighting, tasteful pale blue accents. A compact single object cluster in three-quarter view. Entire objects fully inside the canvas, centered with generous margins, legible at 120px. True transparent alpha background. No floor, opaque backdrop, gradient, broad shadow, colored glow, text, letters, brand logos or watermarks. This is ONE category cutout, not a grid or collage. Composition must work at the bottom-right of a light grey category tile. Strictly ensure the surrounding canvas is transparent with alpha=0."
+    }
+  ],
+  "failures": [],
+  "recovered_failures": [
+    {
+      "slug": "suspension",
+      "error": "exec_command failed: CreateProcess { message: \"Rejected(\\\"The automatic permission approval review did not finish before its deadline. Do not assume the action is unsafe based on the timeout alone. You may retry once, or ask the user for guidance or explicit approval.\\\")\" }"
+    },
+    {
+      "slug": "car-chemicals",
+      "error": "exec_command failed: CreateProcess { message: \"Rejected(\\\"The automatic permission approval review did not finish before its deadline. Do not assume the action is unsafe based on the timeout alone. You may retry once, or ask the user for guidance or explicit approval.\\\")\" }"
+    }
+  ]
+}

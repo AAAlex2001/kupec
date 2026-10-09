@@ -9,6 +9,7 @@ import styles from "./style.module.scss";
 export type MenuAction = {
   label: string;
   href?: string;
+  danger?: boolean;
   onClick?: () => void;
 };
 
@@ -30,11 +31,11 @@ const ActionMenu = ({ actions, ariaLabel }: ActionMenuProps) => {
 
       {open && (
         <div className={styles.list} role="menu">
-          {actions.map(({ label, href, onClick }) => (
+          {actions.map(({ label, href, danger, onClick }) => (
             <Button
               key={label}
-              className={styles.item}
-              variant="ghost"
+              className={danger ? styles.danger : styles.item}
+              variant={danger ? "danger" : "ghost"}
               href={href}
               onClick={() => {
                 close();

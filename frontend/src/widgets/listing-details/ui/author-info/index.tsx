@@ -1,5 +1,6 @@
 import type { ListingAuthor } from "@/entities/listing";
 import Avatar from "@/shared/ui/avatar";
+import RatingLabel from "@/shared/ui/rating-label";
 import styles from "./style.module.scss";
 
 type AuthorInfoProps = {
@@ -18,6 +19,7 @@ const AuthorInfo = ({ author }: AuthorInfoProps) => {
       <div className={styles.info}>
         <p className={styles.name}>{name}</p>
         <p className={styles.since}>Частное лицо · на сайте с {since} года</p>
+        <RatingLabel rating={author.rating} count={author.reviews_count} />
       </div>
     </div>
   );

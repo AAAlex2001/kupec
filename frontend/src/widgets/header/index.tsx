@@ -1,38 +1,36 @@
 import Link from "next/link";
+import type { CategoryNode } from "@/entities/category";
+import type { City } from "@/entities/city";
+import { LocationButton } from "@/features/choose-location";
 import { SearchForm } from "@/features/listing-search";
 import { PublishButton } from "@/features/publish-listing";
-import { POPULAR_CATEGORIES } from "@/shared/config/navigation";
+import { HOME_PATH } from "@/shared/config/routes";
 import { PlusIcon } from "@/shared/ui/icons";
 import Logo from "@/shared/ui/logo";
-import { ALL_LISTINGS_LINK, DEFAULT_CITY, HEADER_ACTIONS, HELP_LINK, PUBLISH_LABEL } from "./data";
+import { HEADER_ACTIONS, PUBLISH_LABEL, SERVICE_LINKS } from "./data";
 import AccountLink from "./ui/account-link";
 import ActionLink from "./ui/action-link";
-import CityButton from "./ui/city-button";
+import CatalogButton from "./ui/catalog-button";
 import styles from "./style.module.scss";
 
-/** Шапка сайта: город, поиск, личные разделы и категории; до ПК разделы — в нижнем баре. */
-const Header = () => (
-  <header className={styles.header}>
+type HeaderProps = {
+  city: City | null;
+  tree: CategoryNode[];
+};
+
+/** Шапка как у Авито: сверху сервисные ссылки и личные разделы, ниже — категории, поиск и регион. */
+const Header = ({ city, tree }: HeaderProps) => (
+  <>
     <div className={styles.service}>
-      <CityButton city={DEFAULT_CITY} />
+      <nav className={styles.links} aria-label="Сервис">
+        {SERVICE_LINKS.map((link) => (
+          <Link key={link.href} className={styles.link} href={link.href}>
+            {link.label}
+          </Link>
+        ))}
+      </nav>
 
-      <Link className={styles.help} href={HELP_LINK.href}>
-        {HELP_LINK.label}
-      </Link>
-    </div>
-
-    <div className={styles.main}>
-      <div className={styles.brand}>
-        <Logo href="/" ariaLabel="Купец — на главную" />
-
-        <div className={styles.mobileCity}>
-          <CityButton city={DEFAULT_CITY} />
-        </div>
-      </div>
-
-      <SearchForm className={styles.search} />
-
-      <nav className={styles.actions} aria-label="Личный раздел">
+      <nav className={styles.personal} aria-label="Личный раздел">
         {HEADER_ACTIONS.map(({ href, label, Icon, requiresAuth }) => (
           <ActionLink
             key={href}
@@ -43,26 +41,30 @@ const Header = () => (
           />
         ))}
         <AccountLink />
+        <PublishButton className={styles.publish} variant="ghost">
+          <PlusIcon />
+          {PUBLISH_LABEL}
+        </PublishButton>
       </nav>
-
-      <PublishButton className={styles.publish}>
-        <PlusIcon />
-        {PUBLISH_LABEL}
-      </PublishButton>
     </div>
 
-    <nav className={styles.categories} aria-label="Категории">
-      {POPULAR_CATEGORIES.map((category) => (
-        <Link key={category.href} className={styles.category} href={category.href}>
-          {category.label}
-        </Link>
-      ))}
+    <header className={styles.main}>
+      <div className={styles.brand}>
+        <Logo href={HOME_PATH} ariaLabel="Купец — на главную" />
 
-      <Link className={styles.all} href={ALL_LISTINGS_LINK.href}>
-        {ALL_LISTINGS_LINK.label}
-      </Link>
-    </nav>
-  </header>
+        <div className={styles.mobileCity}>
+          <LocationButton city={city} />
+        </div>
+      </div>
+
+      <CatalogButton className={styles.catalog} tree={tree} />
+      <SearchForm className={styles.search} />
+
+      <div className={styles.city}>
+        <LocationButton city={city} />
+      </div>
+    </header>
+  </>
 );
 
 export default Header;

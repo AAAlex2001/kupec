@@ -1,0 +1,39 @@
+@use "shared/styles/colors" as *;
+
+.stars {
+  display: flex;
+  gap: 4px;
+}
+
+.star {
+  display: flex;
+  padding: 0;
+
+  color: #e2e5ea;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: color 0.1s ease;
+}
+
+.star svg {
+  width: 32px;
+  height: 32px;
+}
+
+.star:focus-visible {
+  outline: 2px solid $accent;
+  border-radius: 4px;
+}
+
+.filled {
+  color: $rating;
+}
+
+.filled path {
+  fill: currentColor;
+}
+
+.invalid {
+  color: #f5b5bf;
+}

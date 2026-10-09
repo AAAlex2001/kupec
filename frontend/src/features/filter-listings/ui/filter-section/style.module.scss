@@ -1,0 +1,23 @@
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  margin: 0;
+  padding: 0;
+  min-width: 0;
+
+  border: none;
+}
+
+.title {
+  padding: 0;
+  margin-bottom: 10px;
+
+  font-family: "Inter";
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 20px;
+
+  color: #1a1a1a;
+}

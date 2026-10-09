@@ -5,9 +5,12 @@ from decimal import Decimal
 
 import pytest
 
+from app.attributes.models import Attribute, AttributeOption, AttributeType
+from app.attributes.services.fields import CategoryField
 from app.catalog.models import Category, ListingKind
+from app.catalog.services.tree import CategoryTree
 from app.cities.models import City
-from app.listings.models import Listing, ListingPhoto, ListingStatus, ServicePlace, Unit
+from app.listings.models import Listing, ListingPhoto, ListingStatus, ServicePlace
 from app.listings.schemas import ListingCreateSchema
 from app.listings.services.exceptions import (
     InvalidListingError,
@@ -27,23 +30,53 @@ from app.listings.services.usecases.manage_status import (
     DeleteListingUseCase,
     RestoreListingUseCase,
 )
+from app.units.models import Unit
 from app.users.models import User
 from tests.fakes import FakeCityRepository
 
 USER = User(id=1, email="anna@mail.ru", name="Анна")
-PICKLES = Category(id=1, kind=ListingKind.PRODUCT, slug="pickles", name="Соленья")
-MASSAGE = Category(id=2, kind=ListingKind.SERVICE, slug="massage", name="Массаж")
+FOOD = Category(id=4, kind=ListingKind.PRODUCT, slug="food", name="Продукты", is_active=True)
+PICKLES = Category(
+    id=1, parent_id=4, kind=ListingKind.PRODUCT, slug="pickles", name="Соленья", is_active=True
+)
+MASSAGE = Category(id=2, kind=ListingKind.SERVICE, slug="massage", name="Массаж", is_active=True)
 ANGARSK = City(id=3, name="Ангарск")
+JAR = Unit(id=1, code="jar", label="банка", kind=ListingKind.PRODUCT)
+SESSION = Unit(id=2, code="session", label="сеанс", kind=ListingKind.SERVICE)
+
+
+WEIGHT = Attribute(id=1, slug="ves", name="Вес", type=AttributeType.NUMBER, options=[])
+VARIETY = Attribute(
+    id=2,
+    slug="vid",
+    name="Вид",
+    type=AttributeType.SELECT,
+    options=[AttributeOption(value="ogurcy", label="Огурцы")],
+)
 
 
 class FakeCategoryRepository:
-    """Категории в словаре по id."""
+    """Продукты → Соленья и Массаж."""
 
-    def __init__(self) -> None:
-        self.items = {category.id: category for category in (PICKLES, MASSAGE)}
+    async def list_all(self) -> list[Category]:
+        return [FOOD, PICKLES, MASSAGE]
 
-    async def get_by_id(self, category_id: int) -> Category | None:
-        return self.items.get(category_id)
+
+class FakeUnitsLoader:
+    """В любой категории товаров — банка, услуг — сеанс."""
+
+    async def execute(self, tree: CategoryTree, category: Category | None, kind: str) -> list[Unit]:
+        return [JAR] if kind == ListingKind.PRODUCT else [SESSION]
+
+
+class FakeFieldsLoader:
+    """Атрибуты по id категории."""
+
+    def __init__(self, fields: dict[int, list[CategoryField]] | None = None) -> None:
+        self.fields = fields or {}
+
+    async def execute(self, tree: CategoryTree, category: Category) -> list[CategoryField]:
+        return self.fields.get(category.id, [])
 
 
 class FakePhotoRepository:
@@ -101,12 +134,18 @@ def make_photos() -> list[ListingPhoto]:
     ]
 
 
-def create(photos: list[ListingPhoto] | None = None, **fields) -> Listing:
+def create(
+    photos: list[ListingPhoto] | None = None,
+    loader: FakeFieldsLoader | None = None,
+    **fields,
+) -> Listing:
     usecase = CreateListingUseCase(
         FakeListingRepository(),
         FakePhotoRepository(photos if photos is not None else make_photos()),
         FakeCategoryRepository(),
         FakeCityRepository([ANGARSK]),
+        FakeUnitsLoader(),
+        loader or FakeFieldsLoader(),
     )
 
     return asyncio.run(usecase.execute(USER, ListingCreateSchema(**fields)))
@@ -120,7 +159,7 @@ def ready_product(**changes) -> dict:
         "title": "  Солёные огурцы, банка 1 л ",
         "description": "Без уксуса, с укропом и чесноком.",
         "price": Decimal("450"),
-        "unit": Unit.JAR,
+        "unit": JAR.code,
         "city_id": ANGARSK.id,
         "photo_ids": [11, 10],
     }
@@ -169,14 +208,14 @@ def test_zero_price_cannot_be_published() -> None:
 
 
 def test_category_and_unit_must_match_kind() -> None:
-    errors = errors_of(**ready_product(category_id=MASSAGE.id, unit=Unit.SESSION))
+    errors = errors_of(**ready_product(category_id=MASSAGE.id, unit=SESSION.code))
 
     assert set(errors) == {"category_id", "unit"}
 
 
 def test_service_needs_place_and_product_cannot_have_it() -> None:
     service = ready_product(
-        kind=ListingKind.SERVICE, category_id=MASSAGE.id, unit=Unit.SESSION
+        kind=ListingKind.SERVICE, category_id=MASSAGE.id, unit=SESSION.code
     )
 
     assert set(errors_of(**service)) == {"service_places"}
@@ -202,6 +241,12 @@ def test_unknown_category_or_city_is_rejected() -> None:
     assert set(errors_of(**ready_product(city_id=999))) == {"city_id"}
 
 
+def test_listing_goes_only_to_category_without_subcategories() -> None:
+    assert errors_of(**ready_product(category_id=FOOD.id)) == {
+        "category_id": "Выберите подкатегорию"
+    }
+
+
 def test_edit_replaces_fields_and_photos_but_keeps_publish_date() -> None:
     photos = make_photos()
     listing = create(photos, **ready_product(photo_ids=[10]))
@@ -212,10 +257,13 @@ def test_edit_replaces_fields_and_photos_but_keeps_publish_date() -> None:
         FakePhotoRepository(photos),
         FakeCategoryRepository(),
         FakeCityRepository([ANGARSK]),
+        FakeUnitsLoader(),
+        FakeFieldsLoader(),
     )
 
     changes = ready_product(title="Огурцы малосольные", photo_ids=[11])
-    asyncio.run(usecase.execute(USER, listing, ListingCreateSchema(**changes)))
+    listing.owner = USER
+    asyncio.run(usecase.execute(listing, ListingCreateSchema(**changes)))
 
     assert listing.title == "Огурцы малосольные"
     assert [photo.id for photo in listing.photos] == [11]
@@ -224,6 +272,26 @@ def test_edit_replaces_fields_and_photos_but_keeps_publish_date() -> None:
 
 def test_invalid_phone_is_reported_on_its_field() -> None:
     assert set(errors_of(**ready_product(contact_phone="123"))) == {"contact_phone"}
+
+
+def test_attribute_values_are_checked_and_foreign_keys_dropped() -> None:
+    loader = FakeFieldsLoader({PICKLES.id: [CategoryField(VARIETY, False)]})
+    values = {"vid": "ogurcy", "chuzhoy": 1}
+
+    listing = create(loader=loader, **ready_product(attributes=values))
+
+    assert listing.attributes == {"vid": "ogurcy"}
+
+
+def test_required_attribute_is_needed_only_to_publish() -> None:
+    loader = FakeFieldsLoader({PICKLES.id: [CategoryField(WEIGHT, True)]})
+
+    with pytest.raises(InvalidListingError) as error:
+        create(loader=loader, **ready_product())
+    assert set(error.value.errors) == {"attributes.ves"}
+
+    draft = create(loader=loader, **ready_product(publish=False))
+    assert draft.attributes == {}
 
 
 class FakeStatusRepository:

@@ -12,9 +12,9 @@ class CreateListingUseCase(SaveListingUseCase):
     async def execute(self, user: User, payload: ListingCreateSchema) -> Listing:
         """Вернуть сохранённое объявление. Бросает InvalidListingError с ошибками по полям."""
 
-        photos, phone = await self.check(user, payload, None)
+        checked = await self.check(user, payload, None)
 
         listing = Listing(owner_id=user.id)
-        self.fill(listing, payload, photos, phone)
+        self.fill(listing, payload, checked)
 
         return await self.listings.add(listing)

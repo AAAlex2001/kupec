@@ -1,0 +1,23 @@
+{
+  "tool": "built-in image_gen",
+  "template": "Use case: stylized-concept. Asset type: single website category illustration for Russian marketplace Купец. Subject: {subject}. Style: premium realistic 3D studio product render like modern Avito category thumbnails, soft lighting, crisp realistic materials and pale blue accent details where appropriate. One compact object cluster in a three quarter view. Fully visible objects centered with generous empty margins, legible at 120 pixels. Background: true transparent alpha, no opaque background, no gradient, no colored glow, no floor, minimal shadow. No text, branding, labels or watermark. Only this one subject, not a collage or grid.",
+  "subjects": {
+    "food": "A compact wicker basket with apples, tomatoes, fresh green lettuce, baguette and a milk bottle with pale blue cap",
+    "services": "A blue paint roller and compact blue cordless drill",
+    "clothes": "A folded pale blue sweatshirt and a pair of clean white sneakers",
+    "kids": "A friendly plush teddy bear with blue bow and pastel wooden stacking rings",
+    "electronics": "A modern blue smartphone leaning against a small open silver laptop",
+    "furniture": "A mint upholstered armchair with pale blue cushion",
+    "auto-parts": "A polished silver blue compact car in front three quarter view with one spare tire beside it",
+    "hobby": "A football with a pale blue dumbbell and a tennis racket",
+    "other-goods": "A neat open cardboard parcel box with a blue watering can and a small round blue desk clock",
+    "pickles": "Two clear glass jars of homemade pickled cucumbers and tomatoes with plain lids and fresh dill",
+    "mushrooms": "A small wicker basket containing attractive fresh porcini mushrooms",
+    "berries": "A small pale blue ceramic bowl filled with strawberries raspberries and blueberries",
+    "vegetables": "A compact produce cluster of apples a pear ripe tomato bell pepper and carrots",
+    "honey": "A small clear glass jar of golden honey with a plain wooden lid and a wooden honey dipper resting across the front",
+    "bakery": "A rustic bread loaf with two golden croissants on a small wooden board",
+    "dairy": "A glass milk bottle with plain pale blue cap beside a small wedge of cheese and a bowl of cottage cheese",
+    "meat-fish": "A neat fresh salmon fillet and a small beef steak on a compact wooden board with lemon and rosemary"
+  }
+}

@@ -1,3 +1,5 @@
+import { reportError } from "@/shared/lib/report-error";
+
 const SUGGEST_KEY = process.env.NEXT_PUBLIC_YANDEX_SUGGEST_API_KEY;
 
 const SUGGEST_URL = "https://suggest-maps.yandex.ru/v1/suggest";
@@ -40,7 +42,9 @@ export const suggestAddresses = async (text: string): Promise<AddressSuggestion[
       subtitle: item.subtitle?.text ?? "",
       full: item.address?.formatted_address ?? item.title.text,
     }));
-  } catch {
+  } catch (failure) {
+    reportError(failure);
+
     return [];
   }
 };

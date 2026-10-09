@@ -1,0 +1,61 @@
+.image {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.label {
+  font-family: "Inter";
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 20px;
+
+  color: #1a1a1a;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.preview {
+  position: relative;
+  flex: none;
+
+  width: 96px;
+  height: 64px;
+
+  background: #f5f6f8;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.preview img {
+  object-fit: contain;
+}
+
+.buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.hint,
+.error {
+  font-family: "Inter";
+  font-size: 12px;
+  line-height: 16px;
+}
+
+.hint {
+  color: #70757f;
+}
+
+.error {
+  color: #e5243b;
+}
+
+.file {
+  display: none;
+}

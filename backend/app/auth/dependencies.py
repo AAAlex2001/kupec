@@ -12,6 +12,11 @@ from app.auth.services.usecases.change_email import (
     RequestEmailChangeUseCase,
 )
 from app.auth.services.usecases.login import LoginUseCase
+from app.auth.services.usecases.register import ConfirmEmailUseCase, RegisterUseCase
+from app.auth.services.usecases.reset_password import (
+    RequestPasswordResetUseCase,
+    ResetPasswordUseCase,
+)
 from app.auth.services.usecases.send_code import SendCodeUseCase
 from app.core.config import get_settings
 from app.core.database import get_session
@@ -56,14 +61,51 @@ def get_send_code_usecase(
     return SendCodeUseCase(codes, mailer, get_settings())
 
 
-def get_login_usecase(
+def get_register_usecase(
+    users: UserRepository = Depends(get_user_repository),
+    send_code: SendCodeUseCase = Depends(get_send_code_usecase),
+) -> RegisterUseCase:
+    """Сценарий регистрации."""
+
+    return RegisterUseCase(users, send_code)
+
+
+def get_confirm_email_usecase(
     codes: AuthCodeRepository = Depends(get_code_repository),
     users: UserRepository = Depends(get_user_repository),
     sessions: SessionRepository = Depends(get_session_repository),
-) -> LoginUseCase:
-    """Сценарий входа."""
+) -> ConfirmEmailUseCase:
+    """Сценарий подтверждения почты при регистрации."""
 
-    return LoginUseCase(codes, users, sessions, get_settings())
+    return ConfirmEmailUseCase(codes, users, sessions, get_settings())
+
+
+def get_login_usecase(
+    users: UserRepository = Depends(get_user_repository),
+    sessions: SessionRepository = Depends(get_session_repository),
+) -> LoginUseCase:
+    """Сценарий входа по паролю."""
+
+    return LoginUseCase(users, sessions, get_settings())
+
+
+def get_request_password_reset_usecase(
+    users: UserRepository = Depends(get_user_repository),
+    send_code: SendCodeUseCase = Depends(get_send_code_usecase),
+) -> RequestPasswordResetUseCase:
+    """Сценарий запроса кода восстановления пароля."""
+
+    return RequestPasswordResetUseCase(users, send_code)
+
+
+def get_reset_password_usecase(
+    codes: AuthCodeRepository = Depends(get_code_repository),
+    users: UserRepository = Depends(get_user_repository),
+    sessions: SessionRepository = Depends(get_session_repository),
+) -> ResetPasswordUseCase:
+    """Сценарий нового пароля по коду."""
+
+    return ResetPasswordUseCase(codes, users, sessions, get_settings())
 
 
 def get_request_email_change_usecase(
@@ -137,6 +179,18 @@ async def require_user(session: Session = Depends(require_session)) -> User:
     """Пользователь текущего входа. Без входа — 401."""
 
     return session.user
+
+
+async def require_admin(user: User = Depends(require_user)) -> User:
+    """Администратор. Остальным — 403."""
+
+    if not user.is_admin:
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="Нужны права администратора",
+        )
+
+    return user
 
 
 async def get_current_user(

@@ -1,0 +1,36 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 20px;
+}
+
+.rating {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.label {
+  font-family: "Inter";
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 20px;
+
+  color: #1a1a1a;
+}
+
+.error,
+.hint {
+  font-family: "Inter";
+  font-size: 12px;
+  line-height: 16px;
+}
+
+.error {
+  color: #e5243b;
+}
+
+.hint {
+  color: #70757f;
+}

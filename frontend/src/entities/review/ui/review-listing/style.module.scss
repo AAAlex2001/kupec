@@ -1,0 +1,62 @@
+@use "shared/styles/colors" as *;
+
+.listing {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  min-width: 0;
+}
+
+.photo {
+  position: relative;
+  flex: none;
+
+  width: 88px;
+  height: 64px;
+
+  background: #f5f6f8;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.image {
+  object-fit: cover;
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+
+  min-width: 0;
+
+  font-family: "Inter";
+}
+
+.title,
+.removed {
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 20px;
+  text-decoration: none;
+}
+
+.title {
+  color: $accent-text;
+}
+
+.title:hover {
+  text-decoration: underline;
+}
+
+.removed {
+  color: #70757f;
+}
+
+.seller {
+  font-size: 12px;
+  line-height: 16px;
+
+  color: #70757f;
+}

@@ -1,3 +1,4 @@
+import { reportError } from "@/shared/lib/report-error";
 import type { Coordinates } from "./types";
 
 const GEOCODER_KEY = process.env.NEXT_PUBLIC_YANDEX_GEOCODER_API_KEY;
@@ -31,7 +32,9 @@ const findFirst = async (query: string): Promise<GeoObject | null> => {
     const data: GeocoderResponse = await response.json();
 
     return data.response.GeoObjectCollection.featureMember[0]?.GeoObject ?? null;
-  } catch {
+  } catch (failure) {
+    reportError(failure);
+
     return null;
   }
 };

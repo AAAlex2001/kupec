@@ -1,16 +1,25 @@
-"""Тесты входа по коду и смены почты без БД."""
+"""Тесты регистрации, входа по паролю, восстановления пароля и смены почты без БД."""
 
 import asyncio
 from datetime import datetime, timedelta, timezone
 
 import pytest
 
-from app.auth.models import CodePurpose
-from app.auth.schemas import CodeConfirmSchema, CodeRequestSchema, LoginSchema
+from app.auth.schemas import (
+    CodeConfirmSchema,
+    CodeRequestSchema,
+    EmailCodeSchema,
+    LoginSchema,
+    PasswordResetSchema,
+    RegisterSchema,
+)
 from app.auth.services.exceptions import (
     CodeExpiredError,
     EmailAlreadyTakenError,
+    EmailNotVerifiedError,
     InvalidCodeError,
+    InvalidCredentialsError,
+    LoginLockedError,
     SameEmailError,
     TooManyCodesError,
 )
@@ -19,6 +28,11 @@ from app.auth.services.usecases.change_email import (
     RequestEmailChangeUseCase,
 )
 from app.auth.services.usecases.login import LoginUseCase
+from app.auth.services.usecases.register import ConfirmEmailUseCase, RegisterUseCase
+from app.auth.services.usecases.reset_password import (
+    RequestPasswordResetUseCase,
+    ResetPasswordUseCase,
+)
 from app.auth.services.usecases.send_code import SendCodeUseCase
 from app.auth.services.validators import check_code_limit, wait_message
 from app.core.tokens import hash_session_token
@@ -32,6 +46,7 @@ from tests.fakes import (
 )
 
 EMAIL = "anna@mail.ru"
+PASSWORD = "огурцы-2026"
 
 
 class Auth:
@@ -45,15 +60,30 @@ class Auth:
         self.mailer = FakeMailer()
         self.send_code = SendCodeUseCase(self.codes, self.mailer, self.settings)
 
-    def send_login_code(self, email: str = EMAIL) -> str:
-        asyncio.run(self.send_code.execute(email, CodePurpose.LOGIN))
+    def register(self, email: str = EMAIL, password: str = PASSWORD) -> str:
+        """Зарегистрироваться и вернуть код из письма."""
+
+        usecase = RegisterUseCase(self.users, self.send_code)
+        asyncio.run(usecase.execute(RegisterSchema(email=email, password=password)))
 
         return self.mailer.last_code()
 
-    def login(self, code: str, email: str = EMAIL) -> tuple[User, str]:
-        usecase = LoginUseCase(self.codes, self.users, self.sessions, self.settings)
+    def confirm(self, code: str, email: str = EMAIL) -> tuple[User, str]:
+        usecase = ConfirmEmailUseCase(self.codes, self.users, self.sessions, self.settings)
 
-        return asyncio.run(usecase.execute(LoginSchema(email=email, code=code)))
+        return asyncio.run(usecase.execute(EmailCodeSchema(email=email, code=code)))
+
+    def login(self, password: str = PASSWORD, email: str = EMAIL) -> tuple[User, str]:
+        usecase = LoginUseCase(self.users, self.sessions, self.settings)
+
+        return asyncio.run(usecase.execute(LoginSchema(email=email, password=password)))
+
+    def signed_up(self, email: str = EMAIL) -> User:
+        """Пользователь, который зарегистрировался и подтвердил почту."""
+
+        user, _ = self.confirm(self.register(email), email)
+
+        return user
 
     def allow_resend(self) -> None:
         """Сдвинуть выданные коды в прошлое, чтобы не ждать паузу между письмами."""
@@ -66,22 +96,24 @@ def wrong(code: str) -> str:
     return f"{(int(code) + 1) % 1_000_000:06d}"
 
 
-def test_code_is_mailed_and_stored_only_as_hash() -> None:
+def test_register_stores_password_hash_and_mails_code() -> None:
     auth = Auth()
 
-    code = auth.send_login_code()
+    code = auth.register()
+    user = auth.users.items[1]
 
     assert auth.mailer.sent[0][0] == EMAIL
-    assert len(auth.codes.items) == 1
     assert auth.codes.items[0].code_hash != code
+    assert user.password_hash is not None and PASSWORD not in user.password_hash
+    assert user.email_verified is False
 
 
 def test_code_cannot_be_requested_again_right_away() -> None:
     auth = Auth()
-    auth.send_login_code()
+    auth.register()
 
     with pytest.raises(TooManyCodesError) as error:
-        auth.send_login_code()
+        auth.register()
 
     assert 0 < error.value.retry_after <= 60
     assert len(auth.mailer.sent) == 1
@@ -102,79 +134,112 @@ def test_wait_message_shows_minutes_for_long_waits() -> None:
     assert wait_message(715) == "Новый код можно запросить через 12 мин"
 
 
-def test_first_login_creates_user_without_name() -> None:
+def test_confirmed_email_opens_session() -> None:
     auth = Auth()
-    code = auth.send_login_code()
 
-    user, token = auth.login(code, email="ANNA@mail.ru")
+    user, token = auth.confirm(auth.register(email="ANNA@mail.ru"))
 
-    assert (user.email, user.name) == (EMAIL, None)
+    assert user.email == EMAIL
+    assert user.email_verified is True
     assert auth.sessions.items[0].token_hash == hash_session_token(token)
-    assert auth.sessions.items[0].token_hash != token
 
 
-def test_next_login_returns_the_same_user() -> None:
+def test_verified_email_cannot_be_registered_again() -> None:
     auth = Auth()
-    first, _ = auth.login(auth.send_login_code())
+    auth.signed_up()
     auth.allow_resend()
 
-    second, _ = auth.login(auth.send_login_code())
-
-    assert second.id == first.id
-    assert len(auth.users.items) == 1
-    assert len(auth.sessions.items) == 2
+    with pytest.raises(EmailAlreadyTakenError):
+        auth.register()
 
 
-def test_code_works_only_once() -> None:
+def test_login_needs_right_password_and_confirmed_email() -> None:
     auth = Auth()
-    code = auth.send_login_code()
-    auth.login(code)
+    auth.register()
 
-    with pytest.raises(CodeExpiredError):
-        auth.login(code)
+    with pytest.raises(EmailNotVerifiedError):
+        auth.login()
+
+    auth.confirm(auth.mailer.last_code())
+
+    with pytest.raises(InvalidCredentialsError):
+        auth.login("не тот пароль")
+
+    with pytest.raises(InvalidCredentialsError):
+        auth.login(email="nobody@mail.ru")
+
+    user, _ = auth.login()
+    assert user.email == EMAIL
+
+
+def test_login_locks_after_too_many_wrong_passwords() -> None:
+    auth = Auth()
+    auth.signed_up()
+
+    for _ in range(auth.settings.login_max_attempts):
+        with pytest.raises(InvalidCredentialsError):
+            auth.login("не тот пароль")
+
+    with pytest.raises(LoginLockedError):
+        auth.login()
 
 
 def test_wrong_code_burns_attempts_then_code_dies() -> None:
     auth = Auth()
-    code = auth.send_login_code()
+    code = auth.register()
 
     with pytest.raises(InvalidCodeError) as error:
-        auth.login(wrong(code))
+        auth.confirm(wrong(code))
     assert error.value.attempts_left == 4
 
     for _ in range(3):
         with pytest.raises(InvalidCodeError):
-            auth.login(wrong(code))
+            auth.confirm(wrong(code))
 
     with pytest.raises(CodeExpiredError):
-        auth.login(wrong(code))
+        auth.confirm(wrong(code))
 
     with pytest.raises(CodeExpiredError):
-        auth.login(code)
+        auth.confirm(code)
 
 
-def test_expired_code_is_rejected() -> None:
+def test_code_for_one_email_does_not_confirm_another() -> None:
     auth = Auth()
-    code = auth.send_login_code()
-    auth.codes.items[0].expires_at = datetime.now(timezone.utc) - timedelta(seconds=1)
+    code = auth.register()
 
     with pytest.raises(CodeExpiredError):
-        auth.login(code)
+        auth.confirm(code, email="other@mail.ru")
 
 
-def test_code_for_one_email_does_not_open_another() -> None:
+def test_password_reset_sets_new_password() -> None:
     auth = Auth()
-    code = auth.send_login_code()
+    auth.signed_up()
+    auth.allow_resend()
 
-    with pytest.raises(CodeExpiredError):
-        auth.login(code, email="other@mail.ru")
+    asyncio.run(RequestPasswordResetUseCase(auth.users, auth.send_code).execute(EMAIL))
+    reset = ResetPasswordUseCase(auth.codes, auth.users, auth.sessions, auth.settings)
+    payload = PasswordResetSchema(email=EMAIL, code=auth.mailer.last_code(), password="новый-пароль")
+    asyncio.run(reset.execute(payload))
+
+    with pytest.raises(InvalidCredentialsError):
+        auth.login()
+
+    user, _ = auth.login("новый-пароль")
+    assert user.email == EMAIL
+
+
+def test_password_reset_for_unknown_email_sends_nothing() -> None:
+    auth = Auth()
+
+    asyncio.run(RequestPasswordResetUseCase(auth.users, auth.send_code).execute("nobody@mail.ru"))
+
+    assert auth.mailer.sent == []
 
 
 def test_email_change_rejects_current_and_taken_addresses() -> None:
     auth = Auth()
-    user, _ = auth.login(auth.send_login_code())
-    auth.allow_resend()
-    auth.login(auth.send_login_code("taken@mail.ru"), email="taken@mail.ru")
+    user = auth.signed_up()
+    auth.signed_up("taken@mail.ru")
     usecase = RequestEmailChangeUseCase(auth.users, auth.send_code)
 
     with pytest.raises(SameEmailError):
@@ -186,7 +251,7 @@ def test_email_change_rejects_current_and_taken_addresses() -> None:
 
 def test_email_changes_after_code_from_new_address() -> None:
     auth = Auth()
-    user, _ = auth.login(auth.send_login_code())
+    user = auth.signed_up()
     request = RequestEmailChangeUseCase(auth.users, auth.send_code)
     confirm = ConfirmEmailChangeUseCase(auth.codes, auth.users, auth.settings)
 

@@ -1,0 +1,24 @@
+@use "shared/styles/colors" as *;
+
+.rating {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+
+  font-family: "Inter";
+  font-size: 12px;
+  line-height: 16px;
+
+  color: #70757f;
+}
+
+.star {
+  width: 12px;
+  height: 12px;
+
+  color: $rating;
+}
+
+.star path {
+  fill: currentColor;
+}

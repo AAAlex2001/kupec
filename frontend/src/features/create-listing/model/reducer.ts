@@ -20,8 +20,26 @@ export const listingFormReducer = (
     case "kind/change":
       return {
         ...state,
-        fields: { ...state.fields, kind: action.kind, categoryId: "", unit: "", servicePlaces: [] },
+        fields: {
+          ...state.fields,
+          kind: action.kind,
+          categoryId: "",
+          unit: "",
+          servicePlaces: [],
+          attributes: {},
+        },
         errors: {},
+        error: null,
+      };
+
+    case "attribute/change":
+      return {
+        ...state,
+        fields: {
+          ...state.fields,
+          attributes: { ...state.fields.attributes, [action.slug]: action.value },
+        },
+        errors: withoutErrors(state.errors, [`attributes.${action.slug}`]),
         error: null,
       };
 

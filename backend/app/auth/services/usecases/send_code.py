@@ -10,12 +10,14 @@ from app.core.mail import Mailer
 from app.core.tokens import create_code, hash_code
 
 SUBJECTS = {
-    CodePurpose.LOGIN: "Код для входа в Купец",
+    CodePurpose.VERIFY_EMAIL: "Подтверждение почты в Купце",
+    CodePurpose.RESET_PASSWORD: "Восстановление пароля в Купце",
     CodePurpose.CHANGE_EMAIL: "Подтверждение новой почты в Купце",
 }
 
 TEXTS = {
-    CodePurpose.LOGIN: "Ваш код для входа: {code}",
+    CodePurpose.VERIFY_EMAIL: "Код для подтверждения почты: {code}",
+    CodePurpose.RESET_PASSWORD: "Код для восстановления пароля: {code}",
     CodePurpose.CHANGE_EMAIL: "Код для подтверждения новой почты: {code}",
 }
 
