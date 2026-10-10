@@ -4,6 +4,7 @@ const DESCRIPTION_LENGTH = 160;
 
 /** Фирменные обложки публичных страниц. Категории используют свои картинки из каталога. */
 export const OG_COVERS = {
+  about: { url: "/og/about.jpg", width: 1200, height: 630, alt: `${SITE_NAME} — о площадке` },
   home: { url: "/og/home.jpg", width: 1200, height: 630, alt: `${SITE_NAME} — частные объявления по всей России` },
   posts: { url: "/og/posts.jpg", width: 1200, height: 630, alt: `${SITE_NAME} — публикации пользователей` },
   search: { url: "/og/search.jpg", width: 1200, height: 630, alt: `${SITE_NAME} — поиск товаров и услуг` },

@@ -1,4 +1,5 @@
 import {
+  ABOUT_PATH,
   BLOG_PATH,
   FAVORITES_PATH,
   FEED_PATH,
@@ -27,6 +28,14 @@ export const MEDIA_LINKS = [
 ];
 
 export const FOOTER_GROUPS = [
+  {
+    title: "О нас",
+    links: [
+      { label: "О Купце", href: ABOUT_PATH },
+      { label: "Новости", href: NEWS_PATH },
+      { label: "Блог", href: BLOG_PATH },
+    ],
+  },
   {
     title: "Личный кабинет",
     links: [

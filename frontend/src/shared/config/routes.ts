@@ -6,6 +6,7 @@ export const NEW_LISTING_PATH = "/listings/new";
 export const listingPath = (id: number) => `/listings/${id}`;
 export const editListingPath = (id: number) => `/listings/${id}/edit`;
 export const HELP_PATH = "/help";
+export const ABOUT_PATH = "/about";
 export const userPath = (id: number) => `/users/${id}`;
 export const FEED_PATH = "/posts";
 export const postPath = (id: number) => `${FEED_PATH}/${id}`;

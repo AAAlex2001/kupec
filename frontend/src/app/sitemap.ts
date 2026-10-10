@@ -2,6 +2,7 @@ import type { MetadataRoute } from "next";
 import { categorySlugs, getCategoryTree } from "@/entities/category/server";
 import { getSitemap } from "@/shared/api/sitemap";
 import {
+  ABOUT_PATH,
   BLOG_PATH,
   categoryPath,
   FEED_PATH,
@@ -21,6 +22,7 @@ import { absoluteUrl } from "@/shared/lib/seo";
 export const dynamic = "force-dynamic";
 
 const STATIC_PATHS = [
+  ABOUT_PATH,
   HOME_PATH,
   FEED_PATH,
   NEWS_PATH,

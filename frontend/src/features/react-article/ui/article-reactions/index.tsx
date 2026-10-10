@@ -3,18 +3,17 @@
 import cn from "classnames";
 import type { Article } from "@/entities/article";
 import Button from "@/shared/ui/button";
-import { HeartIcon, MessageCircleIcon, ShareIcon } from "@/shared/ui/icons";
+import { HeartIcon, ShareIcon } from "@/shared/ui/icons";
 import Notice from "@/shared/ui/notice";
 import { useArticleReactions } from "../../model/use-article-reactions";
 import styles from "./style.module.scss";
 
 type ArticleReactionsProps = {
   article: Article;
-  commentsHref: string;
 };
 
-/** Панель под статьёй: лайк, комментарии — к обсуждению ниже, и «Поделиться». */
-const ArticleReactions = ({ article, commentsHref }: ArticleReactionsProps) => {
+/** Панель под статьёй: лайк и копирование ссылки. */
+const ArticleReactions = ({ article }: ArticleReactionsProps) => {
   const reactions = useArticleReactions(article);
   const likeLabel = reactions.liked ? "Убрать лайк" : "Нравится";
 
@@ -32,10 +31,6 @@ const ArticleReactions = ({ article, commentsHref }: ArticleReactionsProps) => {
             <span className={styles.count}>{reactions.likes}</span>
           </Button>
 
-          <Button variant="tool" ariaLabel="Комментарии" href={commentsHref}>
-            <MessageCircleIcon />
-            <span className={styles.count}>{article.comments_count}</span>
-          </Button>
         </div>
 
         <Button variant="tool" ariaLabel="Поделиться" onClick={reactions.share}>

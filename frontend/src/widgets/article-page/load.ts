@@ -1,7 +1,7 @@
 import type { Article } from "@/entities/article";
 import { getArticles } from "@/entities/article/server";
 
-const RELATED_COUNT = 3;
+const RELATED_COUNT = 10;
 
 /** «Читайте также»: свежие статьи того же раздела без текущей. */
 export const loadRelated = async (article: Article) => {

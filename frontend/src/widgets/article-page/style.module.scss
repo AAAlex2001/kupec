@@ -20,6 +20,16 @@
   max-width: 760px;
 }
 
+.columns {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.aside {
+  min-width: 0;
+}
+
 .head {
   display: flex;
   flex-direction: column;
@@ -60,10 +70,20 @@
   line-height: 26px;
 
   color: #1a1a1a;
+  text-align: justify;
 }
 
 .text {
   @include rich-text;
+
+  p {
+    text-align: justify;
+  }
+
+  h2,
+  h3 {
+    scroll-margin-top: 100px;
+  }
 }
 
 .related {
@@ -76,35 +96,25 @@
   border-top: 1px solid #e2e5ea;
 }
 
-.relatedTitle {
-  font-family: "Inter";
-  font-weight: 700;
-  font-size: 20px;
-  line-height: 28px;
-
-  color: #1a1a1a;
-}
-
-.grid {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr);
-  gap: 16px;
-}
-
-@media (min-width: 768px) {
-  .grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 20px;
-  }
-}
-
 @media (min-width: 1440px) {
+  .columns {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+
+  .aside {
+    position: sticky;
+    top: 100px;
+    flex: none;
+    width: 240px;
+  }
+
+  .columns:has(.aside) + .discussion {
+    margin-left: 272px;
+  }
   .page {
     padding-top: 32px;
     padding-bottom: 56px;
   }
 
-  .grid {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
 }
