@@ -3,7 +3,7 @@
 from fastapi import UploadFile
 from sqlalchemy.exc import SQLAlchemyError
 
-from app.core.uploads import remove_image, save_image
+from app.core.uploads import remove_file, save_image
 from app.listings.models import ListingPhoto
 from app.listings.services.exceptions import PhotoNotFoundError, TooManyPhotosError
 from app.listings.services.repo import ListingPhotoRepository
@@ -30,7 +30,7 @@ class UploadListingPhotoUseCase:
         try:
             return await self.photos.add(ListingPhoto(owner_id=user.id, path=path))
         except SQLAlchemyError:
-            remove_image(path)
+            remove_file(path)
             raise
 
 
@@ -49,4 +49,4 @@ class DeleteListingPhotoUseCase:
 
         path = photo.path
         await self.photos.delete(photo)
-        remove_image(path)
+        remove_file(path)

@@ -1,0 +1,23 @@
+@use "shared/styles/colors" as *;
+
+.liked svg {
+  color: $favorite;
+  fill: $favorite;
+}
+
+.count,
+.error {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 16px;
+}
+
+.count {
+  color: #70757f;
+}
+
+.error {
+  color: #e5243b;
+}

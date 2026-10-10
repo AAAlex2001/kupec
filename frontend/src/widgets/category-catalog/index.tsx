@@ -31,7 +31,7 @@ const CategoryCatalog = ({ page, city, filters, places, listings }: CategoryCata
 
       <ListingCatalog
         category={category.slug}
-        city={city?.id}
+        city={city}
         filters={filters}
         fields={fields}
         places={places}

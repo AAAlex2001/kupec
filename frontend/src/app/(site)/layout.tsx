@@ -24,7 +24,7 @@ export default async function SiteLayout({ children }: { children: React.ReactNo
       <FavoritesProvider key={user?.id ?? "guest"} initialIds={favoriteIds}>
         <Header city={location} tree={tree} />
         {children}
-        <Footer />
+        <Footer categories={tree} />
         <TabBar />
         <AuthModal />
       </FavoritesProvider>

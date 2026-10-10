@@ -1,0 +1,71 @@
+.comment {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  padding: 16px 0;
+  gap: 12px;
+
+  border-bottom: 1px solid #e2e5ea;
+}
+
+.head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.author {
+  display: flex;
+  flex: 1 1 auto;
+  align-items: center;
+  gap: 12px;
+
+  min-width: 0;
+
+  text-decoration: none;
+}
+
+.author:hover .name {
+  text-decoration: underline;
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+
+  min-width: 0;
+}
+
+.name {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 20px;
+
+  color: #1a1a1a;
+}
+
+.date,
+.reply {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 20px;
+
+  color: #70757f;
+}
+
+.text {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  white-space: pre-line;
+  overflow-wrap: anywhere;
+
+  color: #1a1a1a;
+}

@@ -1,0 +1,72 @@
+@use "shared/styles/colors" as *;
+@use "shared/styles/layout" as *;
+
+.page {
+  @include gutter;
+
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 48px;
+  padding-bottom: 64px;
+  gap: 16px;
+
+  width: 100%;
+
+  text-align: center;
+}
+
+.code {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+
+  font-family: "Inter";
+  font-weight: 800;
+  font-size: 96px;
+  line-height: 1;
+
+  color: #1a1a1a;
+}
+
+.basket {
+  width: 88px;
+  height: 88px;
+
+  color: $accent;
+}
+
+.text {
+  max-width: 440px;
+
+  font-family: "Inter";
+  font-size: 15px;
+  line-height: 22px;
+
+  color: #70757f;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding-top: 8px;
+  gap: 12px;
+}
+
+@media (min-width: 768px) {
+  .page {
+    padding-top: 80px;
+    padding-bottom: 96px;
+  }
+
+  .code {
+    font-size: 144px;
+  }
+
+  .basket {
+    width: 128px;
+    height: 128px;
+  }
+}

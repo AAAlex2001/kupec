@@ -1,0 +1,19 @@
+.toolbar {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  padding: 6px;
+  gap: 4px;
+
+  background: #f5f6f8;
+  border-radius: 8px;
+}
+
+.divider {
+  width: 1px;
+  height: 20px;
+
+  background: #dce0e7;
+}

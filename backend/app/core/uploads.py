@@ -1,5 +1,6 @@
-"""Сохранение загруженных картинок в каталог media на сервере."""
+"""Сохранение загруженных картинок и видео в каталог media на сервере."""
 
+import shutil
 from io import BytesIO
 from pathlib import Path
 from uuid import uuid4
@@ -13,10 +14,11 @@ MEGABYTE = 1024 * 1024
 IMAGE_MAX_SIZE_BYTES = 10 * MEGABYTE
 IMAGE_EXTENSIONS = {"JPEG": ".jpg", "PNG": ".png", "WEBP": ".webp"}
 JPEG_QUALITY = 90
+VIDEO_MAX_SIZE_BYTES = 100 * MEGABYTE
 
 
 class UploadError(ValueError):
-    """Файл не подходит: это не картинка или превышен размер."""
+    """Файл не подходит: неверный формат или превышен размер."""
 
 
 def detect_extension(content: bytes) -> str:
@@ -71,14 +73,38 @@ async def save_image(file: UploadFile, folder: str) -> str:
     return f"{folder}/{filename}"
 
 
-def remove_image(path: str) -> None:
-    """Удалить файл картинки. Если его уже нет на диске, молчим: цель достигнута."""
+async def save_video(file: UploadFile, folder: str) -> str:
+    """Сохранить видео MP4 или MOV с айфона в папку внутри media. Возвращает путь относительно media.
+
+    MOV — тот же контейнер, что MP4, поэтому файл сохраняется с расширением .mp4: так его играют все браузеры.
+    """
+
+    if file.size is None or file.size > VIDEO_MAX_SIZE_BYTES:
+        raise UploadError(f"Видео больше {VIDEO_MAX_SIZE_BYTES // MEGABYTE} МБ")
+
+    head = await file.read(12)
+    if head[4:8] != b"ftyp":
+        raise UploadError("Допустимо только видео MP4 или MOV")
+
+    directory = Path(get_settings().media_dir) / folder
+    directory.mkdir(parents=True, exist_ok=True)
+
+    filename = f"{uuid4().hex}.mp4"
+    await file.seek(0)
+    with (directory / filename).open("wb") as output:
+        shutil.copyfileobj(file.file, output)
+
+    return f"{folder}/{filename}"
+
+
+def remove_file(path: str) -> None:
+    """Удалить файл из media. Если его уже нет на диске, молчим: цель достигнута."""
 
     (Path(get_settings().media_dir) / path).unlink(missing_ok=True)
 
 
-def image_url(path: str | None) -> str | None:
-    """Адрес картинки для сайта по пути внутри media."""
+def media_url(path: str | None) -> str | None:
+    """Адрес файла для сайта по пути внутри media."""
 
     if path is None:
         return None

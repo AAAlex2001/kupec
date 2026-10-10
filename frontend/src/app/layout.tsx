@@ -1,22 +1,23 @@
 import type { Metadata, Viewport } from "next";
-import { SITE_DESCRIPTION, SITE_NAME, SITE_URL } from "@/shared/config/site";
+import { SITE_DESCRIPTION, SITE_NAME, SITE_TITLE, SITE_URL } from "@/shared/config/site";
+import { OG_BASE } from "@/shared/lib/seo";
 import "./globals.scss";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: `${SITE_NAME} — объявления Иркутской области`,
+    default: SITE_TITLE,
     template: `%s | ${SITE_NAME}`,
   },
   description: SITE_DESCRIPTION,
   openGraph: {
+    ...OG_BASE,
     type: "website",
-    siteName: SITE_NAME,
-    locale: "ru_RU",
     url: SITE_URL,
-    title: `${SITE_NAME} — объявления Иркутской области`,
+    title: SITE_TITLE,
     description: SITE_DESCRIPTION,
   },
+  twitter: { card: "summary_large_image" },
 };
 
 export const viewport: Viewport = {

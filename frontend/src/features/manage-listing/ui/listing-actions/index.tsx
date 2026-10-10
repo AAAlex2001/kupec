@@ -25,7 +25,7 @@ const ListingActions = ({ listing, onDone }: ListingActionsProps) => {
       </Button>
 
       {listing.status === "published" && (
-        <Button variant="ghost" loading={pending === "archive"} onClick={archive}>
+        <Button variant="danger" loading={pending === "archive"} onClick={archive}>
           В архив
         </Button>
       )}

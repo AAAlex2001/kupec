@@ -118,3 +118,23 @@
 .ghost:hover:not(:disabled) {
   background: #f5f6f8;
 }
+
+.tool {
+  color: #70757f;
+  background: transparent;
+  border-radius: 8px;
+}
+
+.tool:hover:not(:disabled) {
+  background: #e2e5ea;
+}
+
+.tool[aria-pressed="true"] {
+  color: $accent-text;
+  background: $accent-soft;
+}
+
+.button.tool svg {
+  width: 24px;
+  height: 24px;
+}

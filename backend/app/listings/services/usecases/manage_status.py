@@ -2,7 +2,7 @@
 
 from datetime import datetime, timezone
 
-from app.core.uploads import remove_image
+from app.core.uploads import remove_file
 from app.listings.models import Listing, ListingStatus
 from app.listings.services.exceptions import ListingStatusError
 from app.listings.services.repo import ListingRepository
@@ -59,4 +59,4 @@ class DeleteListingUseCase:
         await self.listings.delete(listing)
 
         for path in paths:
-            remove_image(path)
+            remove_file(path)

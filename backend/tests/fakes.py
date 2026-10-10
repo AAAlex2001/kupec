@@ -6,6 +6,7 @@ from datetime import datetime
 from app.auth.models import AuthCode, Session
 from app.cities.models import City
 from app.core.config import Settings
+from app.notifications.models import Notification
 from app.users.models import User
 
 
@@ -146,3 +147,13 @@ class FakeSessionRepository:
 
     async def delete_all_for_user(self, user_id: int) -> None:
         self.items = [session for session in self.items if session.user_id != user_id]
+
+
+class FakeNotify:
+    """Складывает уведомления в список вместо базы."""
+
+    def __init__(self) -> None:
+        self.sent: list[Notification] = []
+
+    async def execute(self, notification: Notification) -> None:
+        self.sent.append(notification)

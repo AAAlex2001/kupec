@@ -8,6 +8,7 @@ from app.catalog.schemas import CategorySchema
 from app.catalog.services.tree import CategoryTree
 from app.cities.schemas import CitySchema
 from app.listings.schemas import ListingCountsSchema, ListingSchema
+from app.posts.schemas import PostCountsSchema, PostSchema, ReportSchema
 from app.reviews.schemas import ReviewCountsSchema, ReviewSchema
 
 
@@ -77,3 +78,26 @@ class AdminReviewTextSchema(BaseModel):
     """Новый текст отзыва от модератора."""
 
     text: str | None = Field(None, max_length=2000, description="Текст отзыва")
+
+
+class AdminPostPageSchema(BaseModel):
+    """Посты на вкладке модерации и счётчики вкладок."""
+
+    items: list[PostSchema]
+    total: int = Field(..., description="Сколько постов на вкладке")
+    counts: PostCountsSchema
+
+
+class ReportCountsSchema(BaseModel):
+    """Сколько жалоб в каждом состоянии."""
+
+    open: int = Field(0, description="Ждут модератора")
+    resolved: int = Field(0, description="Рассмотрены")
+
+
+class AdminReportPageSchema(BaseModel):
+    """Жалобы на вкладке и счётчики вкладок."""
+
+    items: list[ReportSchema]
+    total: int = Field(..., description="Сколько жалоб на вкладке")
+    counts: ReportCountsSchema

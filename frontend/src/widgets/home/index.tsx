@@ -15,7 +15,13 @@ const Home = ({ categories, city, latest }: HomeProps) => (
   <div className={styles.home}>
     <CategoryTiles categories={categories} ariaLabel="Категории" />
     <LocationSummary city={city} total={latest.total} />
-    <ListingFeed key={city?.id ?? "region"} title="Все объявления" initial={latest} query={{ city: city?.id }} />
+    <ListingFeed
+      key={city?.id ?? "country"}
+      title="Все объявления"
+      city={city}
+      initial={latest}
+      query={{ city: city?.id }}
+    />
   </div>
 );
 

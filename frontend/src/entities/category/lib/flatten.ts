@@ -1,4 +1,4 @@
-import type { AdminCategory } from "../model/types";
+import type { AdminCategory, CategoryNode } from "../model/types";
 
 export type CategoryLine = {
   category: AdminCategory;
@@ -11,3 +11,7 @@ export const flattenCategories = (nodes: AdminCategory[], depth = 0): CategoryLi
     { category, depth },
     ...flattenCategories(category.children, depth + 1),
   ]);
+
+/** Адреса всех категорий дерева — для карты сайта. */
+export const categorySlugs = (nodes: CategoryNode[]): string[] =>
+  nodes.flatMap((category) => [category.slug, ...categorySlugs(category.children)]);

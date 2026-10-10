@@ -1,0 +1,42 @@
+@use "shared/styles/colors" as *;
+@use "shared/styles/rich-text" as *;
+
+.editor {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.body {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.field {
+  @include rich-text;
+
+  box-sizing: border-box;
+  padding: 12px;
+
+  min-height: 160px;
+
+  background: #ffffff;
+  border: 1px solid #e2e5ea;
+  border-radius: 8px;
+  outline: none;
+  transition: border-color 0.15s ease;
+}
+
+.field:focus {
+  border-color: $accent;
+}
+
+.field :global(p.is-editor-empty:first-child)::before {
+  content: attr(data-placeholder);
+  float: left;
+  height: 0;
+
+  color: #70757f;
+  pointer-events: none;
+}

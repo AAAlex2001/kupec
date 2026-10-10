@@ -1,7 +1,8 @@
 import type { CategoryField } from "@/entities/attribute";
-import type { Category, Listing } from "@/entities/listing";
+import { listingJsonLd, type Category, type Listing } from "@/entities/listing";
 import Carousel from "@/shared/ui/carousel";
 import Gallery from "@/shared/ui/gallery";
+import JsonLd from "@/shared/ui/json-ld";
 import Notice from "@/shared/ui/notice";
 import FeedCard from "@/widgets/feed-card";
 import AuthorPanel from "./ui/author-panel";
@@ -22,7 +23,7 @@ type ListingDetailsProps = {
   similarListings: Listing[];
 };
 
-/** Страница объявления: путь по каталогу, фото, характеристики, описание, место, автор и похожие. */
+/** Страница объявления: путь по каталогу, фото, характеристики, описание, место, автор и похожие. Разметка schema.org — для поисковиков. */
 const ListingDetails = ({
   listing,
   categories,
@@ -31,6 +32,7 @@ const ListingDetails = ({
   similarListings,
 }: ListingDetailsProps) => (
   <div className={styles.page}>
+    <JsonLd data={listingJsonLd(listing)} />
     <ViewCounter listingId={listing.id} />
     <ListingHead listing={listing} categories={categories} />
 

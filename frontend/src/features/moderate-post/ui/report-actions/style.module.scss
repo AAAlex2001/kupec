@@ -1,0 +1,18 @@
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 8px;
+}
+
+.error {
+  flex-basis: 100%;
+
+  font-family: "Inter";
+  font-size: 12px;
+  line-height: 16px;
+  text-align: right;
+
+  color: #e5243b;
+}

@@ -28,6 +28,7 @@ export {
 } from "./api/listings";
 export { fetchListings } from "./api/feed";
 export { listingCard } from "./lib/card";
+export { listingCover, listingDescription, listingJsonLd } from "./lib/seo";
 export { STATUS_TABS } from "./lib/status";
 export { useMyListings } from "./model/use-my-listings";
 export { default as ListingCard } from "./ui/listing-card";

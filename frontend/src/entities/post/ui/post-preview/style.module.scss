@@ -1,0 +1,73 @@
+@use "shared/styles/rich-text" as *;
+
+.preview {
+  display: flex;
+  flex-direction: column;
+  padding: 12px;
+  gap: 12px;
+
+  text-decoration: none;
+
+  background: #ffffff;
+  border: 1px solid #e2e5ea;
+  border-radius: 8px;
+  transition: border-color 0.15s ease;
+}
+
+.preview:hover {
+  border-color: #c9ced6;
+}
+
+.cover {
+  position: relative;
+
+  aspect-ratio: 4 / 3;
+
+  background: #f5f6f8;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.image {
+  object-fit: cover;
+}
+
+.text {
+  @include rich-text;
+
+  display: -webkit-box;
+
+  font-size: 14px;
+  line-height: 20px;
+
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+}
+
+.meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+
+  margin-top: auto;
+
+  font-family: "Inter";
+  font-size: 13px;
+  line-height: 16px;
+
+  color: #70757f;
+}
+
+.counts {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.icon {
+  width: 16px;
+  height: 16px;
+  margin-left: 6px;
+}

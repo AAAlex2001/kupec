@@ -20,7 +20,10 @@
 }
 
 .tab {
+  display: inline-flex;
   flex: none;
+  align-items: center;
+  gap: 6px;
   margin-bottom: -1px;
   padding: 0;
 

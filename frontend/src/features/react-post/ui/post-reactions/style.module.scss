@@ -1,0 +1,33 @@
+@use "shared/styles/colors" as *;
+
+.reactions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.panel {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.count {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 16px;
+
+  color: #70757f;
+}
+
+.liked svg {
+  color: $favorite;
+  fill: $favorite;
+}
+
+.saved svg {
+  color: $rating;
+  fill: $rating;
+}

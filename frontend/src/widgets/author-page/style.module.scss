@@ -1,0 +1,27 @@
+@use "shared/styles/layout" as *;
+
+.page {
+  @include gutter;
+
+  display: flex;
+  flex-direction: column;
+  padding-top: 20px;
+  padding-bottom: 32px;
+  gap: 24px;
+}
+
+.empty {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+
+  color: #70757f;
+}
+
+@media (min-width: 1440px) {
+  .page {
+    padding-top: 32px;
+  }
+}

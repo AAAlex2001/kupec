@@ -1,18 +1,10 @@
 @use "shared/styles/colors" as *;
 
-.thumbs {
-  display: flex;
-  gap: 12px;
-
-  overflow-x: auto;
-  scrollbar-width: none;
-}
-
 .thumb {
   position: relative;
-  flex: none;
 
-  width: 120px;
+  min-width: 120px;
+  max-width: 120px;
   height: 80px;
   padding: 0;
 

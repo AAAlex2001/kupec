@@ -11,6 +11,7 @@ type SearchPageProps = {
 
 export const metadata: Metadata = {
   title: "Поиск",
+  robots: { index: false, follow: true },
 };
 
 /** Поиск по объявлениям: запрос q и фильтры из адреса, первая порция — с сервера. */

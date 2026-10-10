@@ -1,0 +1,105 @@
+@use "shared/styles/colors" as *;
+@use "shared/styles/layout" as *;
+
+.layout {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 16px;
+
+  width: 100%;
+}
+
+.standalone {
+  @include gutter;
+
+  box-sizing: border-box;
+  padding-top: 20px;
+  padding-bottom: 32px;
+}
+
+.content {
+  flex: 1 1 0;
+
+  min-width: 0;
+}
+
+.nav {
+  display: none;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  padding: 0 12px;
+  gap: 12px;
+
+  height: 44px;
+
+  border-radius: 8px;
+
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  text-decoration: none;
+
+  color: #1a1a1a;
+  transition:
+    color 0.15s ease,
+    background-color 0.15s ease;
+}
+
+.icon {
+  flex: none;
+  width: 24px;
+  height: 24px;
+
+  color: #70757f;
+  transition: color 0.15s ease;
+}
+
+.item:hover {
+  background: #f5f6f8;
+}
+
+.item.active {
+  font-weight: 500;
+
+  color: $accent-text;
+  background: $accent-soft;
+}
+
+.item.active .icon {
+  color: $accent-text;
+}
+
+@media (min-width: 1440px) {
+  .layout {
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 32px;
+  }
+
+  .layout .segments {
+    display: none;
+  }
+
+  .standalone {
+    padding-top: 32px;
+    padding-bottom: 48px;
+  }
+
+  .nav {
+    position: sticky;
+    top: 100px;
+
+    display: flex;
+    flex: none;
+    flex-direction: column;
+    gap: 4px;
+
+    width: 240px;
+  }
+}

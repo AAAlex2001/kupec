@@ -1,0 +1,14 @@
+@use "shared/styles/rich-text" as *;
+
+.text {
+  @include rich-text;
+}
+
+.video {
+  position: relative;
+
+  aspect-ratio: 16 / 9;
+
+  border-radius: 8px;
+  overflow: hidden;
+}

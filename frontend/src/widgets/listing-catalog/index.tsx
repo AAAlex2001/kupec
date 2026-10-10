@@ -1,4 +1,5 @@
 import type { CategoryField } from "@/entities/attribute";
+import type { City } from "@/entities/city";
 import type { ListingPage, Option } from "@/entities/listing";
 import {
   CatalogFilters,
@@ -12,7 +13,7 @@ import styles from "./style.module.scss";
 
 type ListingCatalogProps = {
   category?: string;
-  city?: number;
+  city: City | null;
   filters: Filters;
   fields: CategoryField[];
   places: Option[];
@@ -47,9 +48,10 @@ const ListingCatalog = ({
         </div>
 
         <ListingFeed
-          key={`${category}-${city}-${query}`}
+          key={`${category}-${city?.id}-${query}`}
+          city={city}
           initial={listings}
-          query={{ category, city, filters: query }}
+          query={{ category, city: city?.id, filters: query }}
         />
       </div>
     </div>

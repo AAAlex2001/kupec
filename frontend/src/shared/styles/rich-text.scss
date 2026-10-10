@@ -1,0 +1,34 @@
+@use "shared/styles/colors" as *;
+
+@mixin rich-text {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  overflow-wrap: anywhere;
+  font-synthesis: style;
+
+  color: #1a1a1a;
+
+  p {
+    min-height: 24px;
+  }
+
+  p + p {
+    margin-top: 8px;
+  }
+
+  blockquote {
+    margin: 8px 0;
+    padding-left: 12px;
+
+    color: #70757f;
+    border-left: 3px solid #dce0e7;
+  }
+
+  a {
+    color: $accent-text;
+    text-decoration: underline;
+  }
+}

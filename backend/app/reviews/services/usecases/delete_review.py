@@ -1,6 +1,6 @@
 """Сценарий удаления отзыва: автором или модератором."""
 
-from app.core.uploads import remove_image
+from app.core.uploads import remove_file
 from app.reviews.models import Review
 from app.reviews.services.repo import ReviewRepository
 
@@ -21,4 +21,4 @@ class DeleteReviewUseCase:
         await self.reviews.refresh_seller_rating(seller_id)
 
         for path in paths:
-            remove_image(path)
+            remove_file(path)

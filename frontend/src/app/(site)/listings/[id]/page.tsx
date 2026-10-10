@@ -2,8 +2,11 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { cache } from "react";
 import { getCategoryPage } from "@/entities/category/server";
+import { listingCover, listingDescription } from "@/entities/listing";
 import { getListing, getListings, getSimilarListings } from "@/entities/listing/server";
 import { sessionHeaders } from "@/entities/user/server";
+import { listingPath } from "@/shared/config/routes";
+import { OG_BASE, ogImages } from "@/shared/lib/seo";
 import ListingDetails from "@/widgets/listing-details";
 
 type ListingPageProps = {
@@ -29,11 +32,28 @@ const loadCategory = async (slug: string | undefined) => {
   };
 };
 
-/** Название объявления во вкладке браузера. */
+/** Заголовок, описание, фото для превью ссылки и адрес страницы. Неопубликованное не индексируется. */
 export async function generateMetadata({ params }: ListingPageProps): Promise<Metadata> {
   const listing = await loadListing(Number((await params).id));
+  if (!listing) return { title: "Объявление не найдено", robots: { index: false } };
 
-  return { title: listing?.title ?? "Объявление не найдено" };
+  const description = listingDescription(listing);
+  const cover = listingCover(listing);
+
+  return {
+    title: listing.title,
+    description,
+    alternates: { canonical: listingPath(listing.id) },
+    robots: { index: listing.status === "published" },
+    openGraph: {
+      ...OG_BASE,
+      type: "website",
+      title: listing.title,
+      description,
+      url: listingPath(listing.id),
+      images: ogImages(cover),
+    },
+  };
 }
 
 /** Страница объявления с путём по каталогу и подборками «Ещё от продавца» и «Похожие». */

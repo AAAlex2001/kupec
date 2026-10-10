@@ -3,6 +3,15 @@
 import type { AdminCategory } from "@/entities/category";
 import ActionMenu, { type MenuAction } from "@/shared/ui/action-menu";
 import ConfirmModal from "@/shared/ui/confirm-modal";
+import {
+  ChevronDownIcon,
+  ChevronUpIcon,
+  PencilIcon,
+  PlusIcon,
+  RulerIcon,
+  SlidersIcon,
+  TrashIcon,
+} from "@/shared/ui/icons";
 import { useCategoryActions } from "../../model/use-category-actions";
 import CategoryAttributesModal from "../category-attributes-modal";
 import CategoryModal from "../category-modal";
@@ -23,15 +32,21 @@ const CategoryActions = ({ category, tree, onDone }: CategoryActionsProps) => {
   const canHaveChildren = category.listings_count === 0;
 
   const items: MenuAction[] = [
-    { label: "Изменить", onClick: () => actions.setDialog("edit") },
+    { label: "Изменить", Icon: PencilIcon, onClick: () => actions.setDialog("edit") },
     ...(canHaveChildren
-      ? [{ label: "Добавить подкатегорию", onClick: () => actions.setDialog("child") }]
+      ? [
+          {
+            label: "Добавить подкатегорию",
+            Icon: PlusIcon,
+            onClick: () => actions.setDialog("child"),
+          },
+        ]
       : []),
-    { label: "Атрибуты", onClick: () => actions.setDialog("attributes") },
-    { label: "Единицы цены", onClick: () => actions.setDialog("units") },
-    { label: "Выше", onClick: actions.moveUp },
-    { label: "Ниже", onClick: actions.moveDown },
-    { label: "Удалить", danger: true, onClick: () => actions.setDialog("delete") },
+    { label: "Атрибуты", Icon: SlidersIcon, onClick: () => actions.setDialog("attributes") },
+    { label: "Единицы цены", Icon: RulerIcon, onClick: () => actions.setDialog("units") },
+    { label: "Выше", Icon: ChevronUpIcon, onClick: actions.moveUp },
+    { label: "Ниже", Icon: ChevronDownIcon, onClick: actions.moveDown },
+    { label: "Удалить", Icon: TrashIcon, danger: true, onClick: () => actions.setDialog("delete") },
   ];
 
   return (

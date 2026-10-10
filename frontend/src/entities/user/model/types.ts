@@ -14,6 +14,17 @@ export type User = {
   created_at: string;
 };
 
+export type PublicUser = {
+  id: number;
+  name: string | null;
+  avatar_url: string | null;
+  city: City | null;
+  rating: number;
+  reviews_count: number;
+  created_at: string;
+  following: boolean;
+};
+
 export type AdminUser = {
   id: number;
   email: string;

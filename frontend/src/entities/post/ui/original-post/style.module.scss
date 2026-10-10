@@ -1,0 +1,12 @@
+@use "shared/styles/colors" as *;
+
+.original {
+  display: flex;
+  flex-direction: column;
+  padding: 16px;
+  gap: 12px;
+
+  background: $accent-soft;
+  border: 1px solid $accent;
+  border-radius: 8px;
+}

@@ -5,7 +5,7 @@ from sqlalchemy.exc import SQLAlchemyError
 
 from app.catalog.models import Category
 from app.catalog.services.repo import CategoryRepository
-from app.core.uploads import remove_image, save_image
+from app.core.uploads import remove_file, save_image
 
 CATEGORIES_FOLDER = "categories"
 
@@ -27,11 +27,11 @@ class SetCategoryImageUseCase:
         try:
             saved = await self.categories.save(category)
         except SQLAlchemyError:
-            remove_image(path)
+            remove_file(path)
             raise
 
         if old_path is not None:
-            remove_image(old_path)
+            remove_file(old_path)
 
         return saved
 
@@ -51,6 +51,6 @@ class RemoveCategoryImageUseCase:
         saved = await self.categories.save(category)
 
         if old_path is not None:
-            remove_image(old_path)
+            remove_file(old_path)
 
         return saved

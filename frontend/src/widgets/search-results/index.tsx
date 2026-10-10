@@ -26,7 +26,7 @@ const SearchResults = ({ city, filters, listings }: SearchResultsProps) => {
       </div>
 
       <ListingCatalog
-        city={city?.id}
+        city={city}
         filters={filters}
         fields={[]}
         places={[]}

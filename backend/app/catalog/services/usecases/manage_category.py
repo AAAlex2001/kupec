@@ -4,7 +4,7 @@ from app.catalog.models import Category
 from app.catalog.services.exceptions import CategoryInUseError
 from app.catalog.services.repo import CategoryRepository
 from app.catalog.services.tree import CategoryTree
-from app.core.uploads import remove_image
+from app.core.uploads import remove_file
 
 
 class MoveCategoryUseCase:
@@ -51,4 +51,4 @@ class DeleteCategoryUseCase:
         await self.categories.delete(category)
 
         if image_path is not None:
-            remove_image(image_path)
+            remove_file(image_path)

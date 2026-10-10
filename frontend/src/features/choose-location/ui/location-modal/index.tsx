@@ -2,7 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import { useId } from "react";
-import { CitySelect, REGION, saveLocation, type City } from "@/entities/city";
+import { CitySelect, COUNTRY, saveLocation, type City } from "@/entities/city";
 import Button from "@/shared/ui/button";
 import Field from "@/shared/ui/field";
 import Modal from "@/shared/ui/modal";
@@ -15,7 +15,7 @@ type LocationModalProps = {
   onClose: () => void;
 };
 
-/** Окно «Где искать»: населённый пункт с поиском или вся область. Выбор сразу обновляет страницу. */
+/** Окно «Где искать»: населённый пункт с поиском или вся Россия. Выбор сразу обновляет страницу. */
 const LocationModal = ({ open, city, onClose }: LocationModalProps) => {
   const id = useId();
   const router = useRouter();
@@ -36,7 +36,7 @@ const LocationModal = ({ open, city, onClose }: LocationModalProps) => {
         </Field>
 
         <Button variant="secondary" disabled={city === null} onClick={() => choose(null)}>
-          Вся {REGION}
+          Вся {COUNTRY}
         </Button>
       </div>
     </Modal>

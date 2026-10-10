@@ -4,7 +4,7 @@ from sqlalchemy import Boolean, CheckConstraint, ForeignKey, Integer, String
 from sqlalchemy.orm import Mapped, mapped_column
 
 from app.core.database import Base
-from app.core.uploads import image_url
+from app.core.uploads import media_url
 
 
 class ListingKind(StrEnum):
@@ -42,4 +42,4 @@ class Category(Base):
     def image_url(self) -> str | None:
         """Адрес картинки для плитки."""
 
-        return image_url(self.image_path)
+        return media_url(self.image_path)

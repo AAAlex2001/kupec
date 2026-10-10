@@ -15,7 +15,7 @@ from sqlalchemy import (
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from app.core.database import Base
-from app.core.uploads import image_url
+from app.core.uploads import media_url
 from app.listings.models import Listing
 from app.users.models import User
 
@@ -118,4 +118,4 @@ class ReviewPhoto(Base):
     def url(self) -> str | None:
         """Адрес фото для сайта."""
 
-        return image_url(self.path)
+        return media_url(self.path)

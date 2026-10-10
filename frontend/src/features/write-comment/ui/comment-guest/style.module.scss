@@ -1,0 +1,21 @@
+.guest {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px;
+  gap: 12px;
+
+  background: #f5f6f8;
+  border-radius: 8px;
+}
+
+.text {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+
+  color: #1a1a1a;
+}

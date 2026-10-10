@@ -1,7 +1,6 @@
-import { redirect } from "next/navigation";
-import { SETTINGS_PATH } from "@/shared/config/routes";
+import { AccountHome } from "@/widgets/account";
 
-/** Вход в кабинет ведёт в настройки, пока других разделов нет. */
+/** Вход в кабинет: до ПК — список разделов, на ПК — настройки. */
 export default function AccountPage() {
-  redirect(SETTINGS_PATH);
+  return <AccountHome />;
 }

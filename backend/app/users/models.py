@@ -5,7 +5,7 @@ from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from app.cities.models import City
 from app.core.database import Base
-from app.core.uploads import image_url
+from app.core.uploads import media_url
 
 
 class User(Base):
@@ -35,6 +35,7 @@ class User(Base):
     is_admin: Mapped[bool] = mapped_column(Boolean, default=False)
     rating: Mapped[float] = mapped_column(Float, default=0)
     reviews_count: Mapped[int] = mapped_column(Integer, default=0)
+    following_seen_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
 
     created_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True), server_default=func.now()
@@ -49,4 +50,4 @@ class User(Base):
     def avatar_url(self) -> str | None:
         """Адрес аватара для сайта."""
 
-        return image_url(self.avatar_path)
+        return media_url(self.avatar_path)

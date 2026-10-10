@@ -12,7 +12,7 @@ type CarouselProps = {
   children: ReactNode;
 };
 
-/** Лента карточек с заголовком на Keen Slider. Стрелки видны, только когда есть куда листать. */
+/** Лента карточек с заголовком на Keen Slider. Стрелки «влево» и «вправо» видны сразу, у края — неактивны. */
 const Carousel = ({ title, children }: CarouselProps) => {
   const { sliderRef, canPrev, canNext, prev, next } = useCarousel();
 
@@ -22,16 +22,12 @@ const Carousel = ({ title, children }: CarouselProps) => {
         <h2 className={styles.title}>{title}</h2>
 
         <div className={styles.arrows}>
-          {canPrev && (
-            <Button variant="secondary" size="icon" ariaLabel="Назад" onClick={prev}>
-              <ArrowLeftIcon />
-            </Button>
-          )}
-          {canNext && (
-            <Button variant="secondary" size="icon" ariaLabel="Вперёд" onClick={next}>
-              <ArrowRightIcon />
-            </Button>
-          )}
+          <Button variant="secondary" size="icon" ariaLabel="Назад" disabled={!canPrev} onClick={prev}>
+            <ArrowLeftIcon />
+          </Button>
+          <Button variant="secondary" size="icon" ariaLabel="Вперёд" disabled={!canNext} onClick={next}>
+            <ArrowRightIcon />
+          </Button>
         </div>
       </div>
 

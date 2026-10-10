@@ -4,6 +4,7 @@ import { useState } from "react";
 import { deleteUnit, type Unit } from "@/entities/unit";
 import { errorMessage } from "@/shared/lib/errors";
 import ActionMenu from "@/shared/ui/action-menu";
+import { PencilIcon, TrashIcon } from "@/shared/ui/icons";
 import ConfirmModal from "@/shared/ui/confirm-modal";
 import UnitModal from "../unit-modal";
 
@@ -44,8 +45,8 @@ const UnitActions = ({ unit, onDone }: UnitActionsProps) => {
       <ActionMenu
         ariaLabel={`Действия с единицей «${unit.label}»`}
         actions={[
-          { label: "Изменить", onClick: () => setDialog("edit") },
-          { label: "Удалить", danger: true, onClick: () => setDialog("delete") },
+          { label: "Изменить", Icon: PencilIcon, onClick: () => setDialog("edit") },
+          { label: "Удалить", Icon: TrashIcon, danger: true, onClick: () => setDialog("delete") },
         ]}
       />
 

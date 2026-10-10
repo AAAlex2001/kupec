@@ -1,0 +1,61 @@
+.section {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.title {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 20px;
+
+  color: #1a1a1a;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+
+  width: 100%;
+}
+
+.grid:empty {
+  display: none;
+}
+
+.tile {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  aspect-ratio: 224 / 200;
+
+  background: #f5f6f8;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.remove {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+}
+
+.file {
+  display: none;
+}
+
+.error {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 16px;
+
+  color: #e5243b;
+}

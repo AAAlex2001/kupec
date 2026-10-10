@@ -32,3 +32,18 @@ class UserSchema(BaseModel):
     notify_news_email: bool = Field(..., description="Новости площадки на почту")
     is_admin: bool = Field(..., description="Администратор площадки")
     created_at: datetime = Field(..., description="Когда зарегистрирован")
+
+
+class PublicUserSchema(BaseModel):
+    """Открытый профиль автора: без почты, телефона и настроек."""
+
+    model_config = ConfigDict(from_attributes=True)
+
+    id: int = Field(..., description="ID пользователя")
+    name: str | None = Field(None, description="Имя")
+    avatar_url: str | None = Field(None, description="Аватар")
+    city: CitySchema | None = Field(None, description="Город")
+    rating: float = Field(..., description="Средняя оценка")
+    reviews_count: int = Field(..., description="Опубликованных отзывов о нём")
+    created_at: datetime = Field(..., description="Когда зарегистрирован")
+    following: bool = Field(False, description="Вы подписаны на автора")

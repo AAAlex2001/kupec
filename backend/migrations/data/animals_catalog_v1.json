@@ -1,0 +1,383 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "slug": "animals",
+      "name": "Животные",
+      "parent": null,
+      "kind": "product",
+      "sort_order": 9,
+      "image_subject": "Животные",
+      "attributes": [
+        "bargain"
+      ],
+      "units": [
+        "piece",
+        "head"
+      ]
+    },
+    {
+      "slug": "dogs",
+      "name": "Собаки",
+      "parent": "animals",
+      "kind": "product",
+      "sort_order": 0,
+      "image_subject": "Собаки",
+      "attributes": [
+        "animal-sex",
+        "animal-age-months",
+        "animal-breed",
+        "animal-documents",
+        "animal-vaccinated",
+        "animal-neutered"
+      ],
+      "units": [
+        "piece",
+        "pair"
+      ]
+    },
+    {
+      "slug": "cats",
+      "name": "Кошки",
+      "parent": "animals",
+      "kind": "product",
+      "sort_order": 1,
+      "image_subject": "Кошки",
+      "attributes": [
+        "animal-sex",
+        "animal-age-months",
+        "animal-breed",
+        "animal-documents",
+        "animal-vaccinated",
+        "animal-neutered"
+      ],
+      "units": [
+        "piece",
+        "pair"
+      ]
+    },
+    {
+      "slug": "birds",
+      "name": "Птицы",
+      "parent": "animals",
+      "kind": "product",
+      "sort_order": 2,
+      "image_subject": "Птицы",
+      "attributes": [
+        "animal-sex",
+        "animal-age-months",
+        "animal-breed",
+        "animal-documents"
+      ],
+      "units": [
+        "piece",
+        "pair"
+      ]
+    },
+    {
+      "slug": "aquarium",
+      "name": "Рыбки и аквариумистика",
+      "parent": "animals",
+      "kind": "product",
+      "sort_order": 3,
+      "image_subject": "Рыбки и аквариумистика",
+      "attributes": [
+        "pet-kind",
+        "animal-breed",
+        "condition"
+      ],
+      "units": [
+        "piece",
+        "set",
+        "pair"
+      ]
+    },
+    {
+      "slug": "small-pets",
+      "name": "Мелкие животные",
+      "parent": "animals",
+      "kind": "product",
+      "sort_order": 4,
+      "image_subject": "Мелкие животные",
+      "attributes": [
+        "animal-sex",
+        "animal-age-months",
+        "animal-breed",
+        "animal-documents",
+        "animal-vaccinated"
+      ],
+      "units": [
+        "piece",
+        "pair"
+      ]
+    },
+    {
+      "slug": "farm-animals",
+      "name": "Сельскохозяйственные животные",
+      "parent": "animals",
+      "kind": "product",
+      "sort_order": 5,
+      "image_subject": "Сельскохозяйственные животные",
+      "attributes": [
+        "animal-sex",
+        "animal-age-months",
+        "animal-breed",
+        "animal-documents",
+        "animal-vaccinated"
+      ],
+      "units": [
+        "head",
+        "piece"
+      ]
+    },
+    {
+      "slug": "pet-supplies",
+      "name": "Товары для животных",
+      "parent": "animals",
+      "kind": "product",
+      "sort_order": 6,
+      "image_subject": "Товары для животных",
+      "attributes": [
+        "condition",
+        "pet-goods-type",
+        "pet-kind",
+        "brand-name"
+      ],
+      "units": [
+        "piece",
+        "pack",
+        "kg",
+        "set"
+      ]
+    }
+  ],
+  "attributes": [
+    {
+      "slug": "condition",
+      "name": "Состояние",
+      "type": "select",
+      "unit": null,
+      "is_filterable": true,
+      "options": [
+        {
+          "value": "novoe",
+          "label": "Новое"
+        },
+        {
+          "value": "b-u",
+          "label": "Б/у"
+        },
+        {
+          "value": "novoe-s-birkoy",
+          "label": "Новое с биркой"
+        },
+        {
+          "value": "dlya-vosstanovleniya-ili-na-zapchasti",
+          "label": "Для восстановления или на запчасти"
+        }
+      ]
+    },
+    {
+      "slug": "brand-name",
+      "name": "Бренд",
+      "type": "text",
+      "unit": null,
+      "is_filterable": false,
+      "options": []
+    },
+    {
+      "slug": "bargain",
+      "name": "Возможен торг",
+      "type": "boolean",
+      "unit": null,
+      "is_filterable": true,
+      "options": []
+    },
+    {
+      "slug": "pet-kind",
+      "name": "Для какого питомца",
+      "type": "select",
+      "unit": null,
+      "is_filterable": true,
+      "options": [
+        {
+          "value": "sobaki",
+          "label": "Собаки"
+        },
+        {
+          "value": "koshki",
+          "label": "Кошки"
+        },
+        {
+          "value": "gryzuny",
+          "label": "Грызуны"
+        },
+        {
+          "value": "ptitsy",
+          "label": "Птицы"
+        },
+        {
+          "value": "ryby",
+          "label": "Рыбы"
+        },
+        {
+          "value": "reptilii",
+          "label": "Рептилии"
+        },
+        {
+          "value": "drugie",
+          "label": "Другие"
+        }
+      ]
+    },
+    {
+      "slug": "pet-goods-type",
+      "name": "Товар для питомца",
+      "type": "select",
+      "unit": null,
+      "is_filterable": true,
+      "options": [
+        {
+          "value": "korm",
+          "label": "Корм"
+        },
+        {
+          "value": "miska",
+          "label": "Миска"
+        },
+        {
+          "value": "lezhanka",
+          "label": "Лежанка"
+        },
+        {
+          "value": "kletka",
+          "label": "Клетка"
+        },
+        {
+          "value": "akvarium",
+          "label": "Аквариум"
+        },
+        {
+          "value": "perenoska",
+          "label": "Переноска"
+        },
+        {
+          "value": "povodok-i-osheynik",
+          "label": "Поводок и ошейник"
+        },
+        {
+          "value": "odezhda",
+          "label": "Одежда"
+        },
+        {
+          "value": "igrushka",
+          "label": "Игрушка"
+        },
+        {
+          "value": "gigiena",
+          "label": "Гигиена"
+        },
+        {
+          "value": "aksessuary",
+          "label": "Аксессуары"
+        }
+      ]
+    },
+    {
+      "slug": "animal-sex",
+      "name": "Пол животного",
+      "type": "select",
+      "unit": null,
+      "is_filterable": true,
+      "options": [
+        {
+          "value": "male",
+          "label": "Самец",
+          "sort_order": 0
+        },
+        {
+          "value": "female",
+          "label": "Самка",
+          "sort_order": 1
+        },
+        {
+          "value": "unknown",
+          "label": "Не определён",
+          "sort_order": 2
+        }
+      ]
+    },
+    {
+      "slug": "animal-age-months",
+      "name": "Возраст",
+      "type": "number",
+      "unit": "мес.",
+      "is_filterable": true,
+      "options": []
+    },
+    {
+      "slug": "animal-breed",
+      "name": "Порода / вид",
+      "type": "text",
+      "unit": null,
+      "is_filterable": false,
+      "options": []
+    },
+    {
+      "slug": "animal-vaccinated",
+      "name": "Прививки",
+      "type": "boolean",
+      "unit": null,
+      "is_filterable": true,
+      "options": []
+    },
+    {
+      "slug": "animal-documents",
+      "name": "Документы",
+      "type": "boolean",
+      "unit": null,
+      "is_filterable": true,
+      "options": []
+    },
+    {
+      "slug": "animal-neutered",
+      "name": "Стерилизация",
+      "type": "boolean",
+      "unit": null,
+      "is_filterable": true,
+      "options": []
+    }
+  ],
+  "units": [
+    {
+      "code": "piece",
+      "label": "штука",
+      "kind": "product"
+    },
+    {
+      "code": "kg",
+      "label": "кг",
+      "kind": "product"
+    },
+    {
+      "code": "pack",
+      "label": "упаковка",
+      "kind": "product"
+    },
+    {
+      "code": "set",
+      "label": "комплект",
+      "kind": "product"
+    },
+    {
+      "code": "pair",
+      "label": "пара",
+      "kind": "product"
+    },
+    {
+      "code": "head",
+      "label": "голова",
+      "kind": "product"
+    }
+  ]
+}

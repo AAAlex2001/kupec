@@ -1,22 +1,24 @@
-import { POPULAR_CATEGORIES } from "@/shared/config/navigation";
 import {
   FAVORITES_PATH,
+  FEED_PATH,
   HELP_PATH,
   HOME_PATH,
   MESSAGES_PATH,
   MY_LISTINGS_PATH,
+  MY_POSTS_PATH,
   MY_REVIEWS_PATH,
+  NEW_POST_PATH,
   PRIVACY_PATH,
+  REPOSTS_PATH,
   RULES_PATH,
+  SAVED_POSTS_PATH,
   SETTINGS_PATH,
   TERMS_PATH,
 } from "@/shared/config/routes";
 
+export const ALL_LISTINGS_LINK = { label: "Все объявления", href: HOME_PATH };
+
 export const FOOTER_GROUPS = [
-  {
-    title: "Категории",
-    links: [...POPULAR_CATEGORIES, { label: "Все объявления", href: HOME_PATH }],
-  },
   {
     title: "Личный кабинет",
     links: [
@@ -25,6 +27,16 @@ export const FOOTER_GROUPS = [
       { label: "Избранное", href: FAVORITES_PATH },
       { label: "Мои отзывы", href: MY_REVIEWS_PATH },
       { label: "Настройки", href: SETTINGS_PATH },
+    ],
+  },
+  {
+    title: "Публикации",
+    links: [
+      { label: "Лента", href: FEED_PATH },
+      { label: "Написать пост", href: NEW_POST_PATH },
+      { label: "Мои публикации", href: MY_POSTS_PATH },
+      { label: "Сохранённое", href: SAVED_POSTS_PATH },
+      { label: "Репосты", href: REPOSTS_PATH },
     ],
   },
   {
@@ -41,4 +53,4 @@ export const LEGAL_LINKS = [
   { label: "Конфиденциальность", href: PRIVACY_PATH },
 ];
 
-export const COPYRIGHT = "Частные объявления Иркутской области";
+export const COPYRIGHT = "Частные объявления по всей России";

@@ -3,7 +3,7 @@
 from fastapi import UploadFile
 from sqlalchemy.exc import SQLAlchemyError
 
-from app.core.uploads import remove_image, save_image
+from app.core.uploads import remove_file, save_image
 from app.users.models import User
 from app.users.services.repo import UserRepository
 
@@ -27,11 +27,11 @@ class SetAvatarUseCase:
         try:
             saved = await self.users.save(user)
         except SQLAlchemyError:
-            remove_image(path)
+            remove_file(path)
             raise
 
         if old_path is not None:
-            remove_image(old_path)
+            remove_file(old_path)
 
         return saved
 
@@ -51,6 +51,6 @@ class RemoveAvatarUseCase:
         saved = await self.users.save(user)
 
         if old_path is not None:
-            remove_image(old_path)
+            remove_file(old_path)
 
         return saved

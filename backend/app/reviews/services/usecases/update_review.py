@@ -1,6 +1,6 @@
 """Сценарий правки своего отзыва."""
 
-from app.core.uploads import remove_image
+from app.core.uploads import remove_file
 from app.reviews.models import Review
 from app.reviews.schemas import ReviewSaveSchema
 from app.reviews.services.usecases.save_review import SaveReviewUseCase
@@ -20,6 +20,6 @@ class UpdateReviewUseCase(SaveReviewUseCase):
         await self.reviews.refresh_seller_rating(review.seller_id)
 
         for path in removed_paths:
-            remove_image(path)
+            remove_file(path)
 
         return saved

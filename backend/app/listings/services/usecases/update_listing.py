@@ -1,6 +1,6 @@
 """Сценарий правки объявления: автором или администратором."""
 
-from app.core.uploads import remove_image
+from app.core.uploads import remove_file
 from app.listings.models import Listing
 from app.listings.schemas import ListingCreateSchema
 from app.listings.services.usecases.save_listing import SaveListingUseCase
@@ -19,6 +19,6 @@ class UpdateListingUseCase(SaveListingUseCase):
         saved = await self.listings.save(listing)
 
         for path in removed_paths:
-            remove_image(path)
+            remove_file(path)
 
         return saved

@@ -1,0 +1,48 @@
+@use "shared/styles/colors" as *;
+
+.item {
+  display: flex;
+  align-items: center;
+  padding: 12px;
+  gap: 12px;
+
+  text-decoration: none;
+
+  border-radius: 8px;
+  transition: background-color 0.15s ease;
+}
+
+.item:hover {
+  background: #f5f6f8;
+}
+
+.unread {
+  background: $accent-soft;
+}
+
+.text {
+  flex: 1 1 auto;
+
+  min-width: 0;
+
+  font-family: "Inter";
+  font-size: 14px;
+  line-height: 20px;
+  overflow-wrap: anywhere;
+
+  color: #1a1a1a;
+}
+
+.name {
+  font-weight: 600;
+}
+
+.time {
+  flex: none;
+
+  font-family: "Inter";
+  font-size: 13px;
+  line-height: 16px;
+
+  color: #70757f;
+}

@@ -5,14 +5,15 @@ import styles from "./style.module.scss";
 type CloseButtonProps = {
   onClick: () => void;
   ariaLabel?: string;
+  dark?: boolean;
   className?: string;
 };
 
-/** Круглая кнопка с крестиком для закрытия окон. */
-const CloseButton = ({ onClick, ariaLabel = "Закрыть", className }: CloseButtonProps) => (
+/** Круглая кнопка с крестиком: закрыть окно, а тёмная поверх фото — удалить его. */
+const CloseButton = ({ onClick, ariaLabel = "Закрыть", dark, className }: CloseButtonProps) => (
   <button
     type="button"
-    className={cn(styles.close, className)}
+    className={cn(styles.close, dark && styles.dark, className)}
     aria-label={ariaLabel}
     onClick={onClick}
   >

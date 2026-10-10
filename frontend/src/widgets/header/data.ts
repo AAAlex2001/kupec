@@ -1,7 +1,14 @@
-import { FAVORITES_PATH, HELP_PATH, MESSAGES_PATH, RULES_PATH } from "@/shared/config/routes";
+import {
+  FAVORITES_PATH,
+  FEED_PATH,
+  HELP_PATH,
+  MESSAGES_PATH,
+  RULES_PATH,
+} from "@/shared/config/routes";
 import { HeartIcon, MessageCircleIcon } from "@/shared/ui/icons";
 
 export const SERVICE_LINKS = [
+  { label: "Публикации", href: FEED_PATH },
   { label: "Помощь", href: HELP_PATH },
   { label: "Правила площадки", href: RULES_PATH },
 ];

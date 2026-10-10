@@ -1,0 +1,51 @@
+.report {
+  display: flex;
+  flex-direction: column;
+  padding: 16px;
+  gap: 12px;
+
+  border: 1px solid #e2e5ea;
+  border-radius: 8px;
+}
+
+.meta {
+  font-family: "Inter";
+  font-size: 13px;
+  line-height: 16px;
+
+  color: #70757f;
+}
+
+.reason {
+  padding: 12px;
+
+  font-family: "Inter";
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 20px;
+  overflow-wrap: anywhere;
+
+  color: #e5243b;
+  background: #fff1f3;
+  border-radius: 8px;
+}
+
+.comment {
+  display: flex;
+  flex-direction: column;
+  padding: 12px;
+  gap: 8px;
+
+  border: 1px solid #e2e5ea;
+  border-radius: 8px;
+}
+
+.text {
+  font-family: "Inter";
+  font-size: 15px;
+  line-height: 22px;
+  white-space: pre-line;
+  overflow-wrap: anywhere;
+
+  color: #1a1a1a;
+}

@@ -4,6 +4,7 @@ import { useState } from "react";
 import { deleteAttribute, type Attribute } from "@/entities/attribute";
 import { errorMessage } from "@/shared/lib/errors";
 import ActionMenu from "@/shared/ui/action-menu";
+import { PencilIcon, TrashIcon } from "@/shared/ui/icons";
 import ConfirmModal from "@/shared/ui/confirm-modal";
 import AttributeModal from "../attribute-modal";
 
@@ -44,8 +45,8 @@ const AttributeActions = ({ attribute, onDone }: AttributeActionsProps) => {
       <ActionMenu
         ariaLabel={`Действия с атрибутом «${attribute.name}»`}
         actions={[
-          { label: "Изменить", onClick: () => setDialog("edit") },
-          { label: "Удалить", danger: true, onClick: () => setDialog("delete") },
+          { label: "Изменить", Icon: PencilIcon, onClick: () => setDialog("edit") },
+          { label: "Удалить", Icon: TrashIcon, danger: true, onClick: () => setDialog("delete") },
         ]}
       />
 

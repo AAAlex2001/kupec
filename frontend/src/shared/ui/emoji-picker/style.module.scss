@@ -1,0 +1,87 @@
+@use "shared/styles/colors" as *;
+
+.picker {
+  display: flex;
+  flex-direction: column;
+  padding: 8px;
+  gap: 8px;
+
+  width: 320px;
+  height: 340px;
+
+  background: #ffffff;
+  border: 1px solid #e2e5ea;
+  border-radius: 8px;
+  box-shadow: 0 8px 24px rgba(26, 26, 26, 0.12);
+}
+
+.search {
+  box-sizing: border-box;
+  padding: 0 12px;
+
+  height: 36px;
+
+  font-family: "Inter";
+  font-size: 14px;
+  line-height: 20px;
+
+  color: #1a1a1a;
+  background: #f5f6f8;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  outline: none;
+}
+
+.search:focus {
+  border-color: $accent;
+}
+
+.viewport {
+  flex: 1 1 auto;
+}
+
+.status {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  height: 100%;
+
+  font-family: "Inter";
+  font-size: 13px;
+  line-height: 16px;
+
+  color: #70757f;
+}
+
+.picker :global([frimousse-category-header]) {
+  padding: 8px 4px 4px;
+
+  font-family: "Inter";
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 16px;
+
+  color: #70757f;
+  background: #ffffff;
+}
+
+.picker :global([frimousse-emoji]) {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 36px;
+  height: 36px;
+
+  font-size: 22px;
+
+  background: transparent;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.picker :global([frimousse-emoji][data-active]) {
+  background: #f5f6f8;
+}

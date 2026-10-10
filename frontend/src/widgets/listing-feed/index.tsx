@@ -1,10 +1,12 @@
 "use client";
 
+import type { City } from "@/entities/city";
 import type { ListingPage } from "@/entities/listing";
+import { ChangeLocationButton } from "@/features/choose-location";
 import { PublishButton } from "@/features/publish-listing";
 import Button from "@/shared/ui/button";
 import EmptyState from "@/shared/ui/empty-state";
-import { BasketIcon, SearchIcon } from "@/shared/ui/icons";
+import { BasketIcon, PlusIcon, SearchIcon } from "@/shared/ui/icons";
 import Notice from "@/shared/ui/notice";
 import FeedCard from "@/widgets/feed-card";
 import { useListingFeed, type FeedQuery } from "./model/use-listing-feed";
@@ -12,12 +14,13 @@ import styles from "./style.module.scss";
 
 type ListingFeedProps = {
   title?: string;
+  city: City | null;
   initial: ListingPage;
   query: FeedQuery;
 };
 
-/** Сетка объявлений с «Показать ещё». Пусто — подсказка сменить фильтры или разместить первое объявление. */
-const ListingFeed = ({ title, initial, query }: ListingFeedProps) => {
+/** Сетка объявлений с «Показать ещё». Пусто — подсказка сменить фильтры, регион или разместить первое объявление. */
+const ListingFeed = ({ title, city, initial, query }: ListingFeedProps) => {
   const { page, loadingMore, error, loadMore } = useListingFeed(initial, query);
 
   if (page.total === 0 && query.filters) {
@@ -36,7 +39,15 @@ const ListingFeed = ({ title, initial, query }: ListingFeedProps) => {
         icon={<BasketIcon />}
         title="Объявлений пока нет"
         text="Станьте первым: разместите товар или услугу — это бесплатно."
-        action={<PublishButton>Разместить объявление</PublishButton>}
+        action={
+          <div className={styles.actions}>
+            <PublishButton>
+              <PlusIcon />
+              Разместить объявление
+            </PublishButton>
+            <ChangeLocationButton city={city} />
+          </div>
+        }
       />
     );
   }

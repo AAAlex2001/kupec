@@ -3,7 +3,7 @@
 from fastapi import UploadFile
 from sqlalchemy.exc import SQLAlchemyError
 
-from app.core.uploads import remove_image, save_image
+from app.core.uploads import remove_file, save_image
 from app.reviews.models import ReviewPhoto
 from app.reviews.services.exceptions import ReviewPhotoNotFoundError, TooManyReviewPhotosError
 from app.reviews.services.repo import ReviewPhotoRepository
@@ -30,7 +30,7 @@ class UploadReviewPhotoUseCase:
         try:
             return await self.photos.add(ReviewPhoto(owner_id=user.id, path=path))
         except SQLAlchemyError:
-            remove_image(path)
+            remove_file(path)
             raise
 
 
@@ -49,4 +49,4 @@ class DeleteReviewPhotoUseCase:
 
         path = photo.path
         await self.photos.delete(photo)
-        remove_image(path)
+        remove_file(path)

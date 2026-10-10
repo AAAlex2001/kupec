@@ -1,0 +1,41 @@
+@use "shared/styles/colors" as *;
+
+.reply {
+  display: flex;
+  flex-direction: column;
+  padding: 16px;
+  gap: 12px;
+
+  background: #f5f6f8;
+  border-radius: 8px;
+}
+
+.to {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 20px;
+
+  color: $accent-text;
+}
+
+.quote {
+  padding: 12px;
+
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  overflow-wrap: anywhere;
+
+  color: #70757f;
+  border: 1px solid #e2e5ea;
+  border-radius: 8px;
+}
+
+.buttons {
+  display: flex;
+  gap: 12px;
+}

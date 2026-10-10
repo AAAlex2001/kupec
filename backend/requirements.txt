@@ -11,4 +11,5 @@ email-validator==2.3.0
 pillow==12.2.0
 aiosmtplib==5.1.1
 argon2-cffi==25.1.0
+nh3==0.3.7
 pytest==9.0.3

@@ -6,6 +6,8 @@ import { getLocation } from "@/entities/city/server";
 import { getListingOptions, getListings } from "@/entities/listing/server";
 import { filtersQuery, pickFilters } from "@/features/filter-listings";
 import { FEED_PAGE_SIZE } from "@/shared/config/feed";
+import { categoryPath } from "@/shared/config/routes";
+import { OG_BASE, ogImages } from "@/shared/lib/seo";
 import CategoryCatalog from "@/widgets/category-catalog";
 
 type CatalogPageProps = {
@@ -16,11 +18,27 @@ type CatalogPageProps = {
 /** Категория по адресу. Один запрос на страницу. */
 const loadCategory = cache((slug: string) => getCategoryPage(slug));
 
-/** Название категории во вкладке браузера. */
+/** Название, описание и картинка категории. Адрес страницы — без фильтров, чтобы поисковик не плодил копии. */
 export async function generateMetadata({ params }: CatalogPageProps): Promise<Metadata> {
   const page = await loadCategory((await params).slug);
+  if (!page) return { title: "Категория не найдена", robots: { index: false } };
 
-  return { title: page?.category.name ?? "Категория не найдена" };
+  const { category } = page;
+  const description = `${category.name} по всей России: объявления от частных продавцов и мастеров на «Купце».`;
+
+  return {
+    title: category.name,
+    description,
+    alternates: { canonical: categoryPath(category.slug) },
+    openGraph: {
+      ...OG_BASE,
+      type: "website",
+      title: category.name,
+      description,
+      url: categoryPath(category.slug),
+      images: ogImages(category.image_url),
+    },
+  };
 }
 
 /** Каталог категории: подкатегории, фильтры из адреса и первая порция объявлений. */

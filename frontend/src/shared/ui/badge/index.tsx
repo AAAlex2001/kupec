@@ -4,7 +4,7 @@ type BadgeProps = {
   count: number;
 };
 
-/** Синий счётчик: непрочитанные сообщения и т.п. */
+/** Красный счётчик: непрочитанные сообщения, новые посты в подписках и т.п. */
 const Badge = ({ count }: BadgeProps) => <span className={styles.badge}>{count}</span>;
 
 export default Badge;

@@ -15,12 +15,13 @@ type TextModalProps = {
   initial?: string;
   submitLabel: string;
   pending: boolean;
+  error?: string | null;
   danger?: boolean;
   onSubmit: (text: string) => void;
   onClose: () => void;
 };
 
-/** Окно с одним многострочным полем: причина отклонения, новый текст и т.п. */
+/** Окно с одним многострочным полем: причина отклонения, жалоба, новый текст и т.п. Ошибка — под полем. */
 const TextModal = ({
   open,
   title,
@@ -28,6 +29,7 @@ const TextModal = ({
   initial = "",
   submitLabel,
   pending,
+  error,
   danger,
   onSubmit,
   onClose,
@@ -46,7 +48,7 @@ const TextModal = ({
       >
         <Title>{title}</Title>
 
-        <Field label={label} htmlFor={id}>
+        <Field label={label} htmlFor={id} error={error}>
           <Textarea id={id} value={text} onChange={setText} maxLength={2000} />
         </Field>
 

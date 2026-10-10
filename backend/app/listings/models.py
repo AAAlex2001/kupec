@@ -22,7 +22,7 @@ from sqlalchemy.orm import Mapped, mapped_column, relationship
 from app.catalog.models import Category
 from app.cities.models import City
 from app.core.database import Base
-from app.core.uploads import image_url
+from app.core.uploads import media_url
 from app.units.models import Unit
 from app.users.models import User
 
@@ -195,4 +195,4 @@ class ListingPhoto(Base):
     def url(self) -> str | None:
         """Адрес фото для сайта."""
 
-        return image_url(self.path)
+        return media_url(self.path)
