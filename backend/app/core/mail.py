@@ -20,8 +20,8 @@ class Mailer:
     def __init__(self, settings: Settings) -> None:
         self.settings = settings
 
-    async def send(self, to: str, subject: str, text: str) -> None:
-        """Отправить текстовое письмо. Ошибку SMTP превращает в MailError."""
+    async def send(self, to: str, subject: str, text: str, html: str) -> None:
+        """Отправить письмо в HTML и простым текстом. Ошибку SMTP превращает в MailError."""
 
         if not self.settings.smtp_host:
             logger.warning("Письмо для %s: %s\n%s", to, subject, text)
@@ -32,6 +32,7 @@ class Mailer:
         message["To"] = to
         message["Subject"] = subject
         message.set_content(text)
+        message.add_alternative(html, subtype="html")
 
         try:
             await aiosmtplib.send(

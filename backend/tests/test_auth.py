@@ -5,6 +5,7 @@ from datetime import datetime, timedelta, timezone
 
 import pytest
 
+from app.auth.models import CodePurpose
 from app.auth.schemas import (
     CodeConfirmSchema,
     CodeRequestSchema,
@@ -23,6 +24,7 @@ from app.auth.services.exceptions import (
     SameEmailError,
     TooManyCodesError,
 )
+from app.auth.services.letters import code_letter
 from app.auth.services.usecases.change_email import (
     ConfirmEmailChangeUseCase,
     RequestEmailChangeUseCase,
@@ -106,6 +108,16 @@ def test_register_stores_password_hash_and_mails_code() -> None:
     assert auth.codes.items[0].code_hash != code
     assert user.password_hash is not None and PASSWORD not in user.password_hash
     assert user.email_verified is False
+
+
+def test_code_letter_has_code_logo_and_site_link() -> None:
+    letter = code_letter(CodePurpose.RESET_PASSWORD, "123456", 10, "https://kupecmarket.ru/")
+
+    assert letter.subject == "Восстановление пароля в Купце"
+    assert "123456" in letter.text and "123456" in letter.html
+    assert 'src="https://kupecmarket.ru/email/logo.png"' in letter.html
+    assert "Код действует 10 минут" in letter.html
+    assert "$" not in letter.html
 
 
 def test_code_cannot_be_requested_again_right_away() -> None:

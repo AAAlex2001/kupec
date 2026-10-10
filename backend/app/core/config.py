@@ -35,6 +35,12 @@ class Settings(BaseSettings):
     smtp_password: str = ""
     smtp_from: str = "Купец <no-reply@kupec.local>"
 
+    site_url: str = Field(
+        "http://localhost:3000",
+        validation_alias="NEXT_PUBLIC_SITE_URL",
+        description="Адрес сайта для ссылок и логотипа в письмах",
+    )
+
 
 @lru_cache
 def get_settings() -> Settings:

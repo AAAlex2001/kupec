@@ -3,25 +3,12 @@
 from datetime import datetime, timedelta, timezone
 
 from app.auth.models import AuthCode, CodePurpose
+from app.auth.services.letters import code_letter
 from app.auth.services.repo import AuthCodeRepository
 from app.auth.services.validators import HOUR, check_code_limit
 from app.core.config import Settings
 from app.core.mail import Mailer
 from app.core.tokens import create_code, hash_code
-
-SUBJECTS = {
-    CodePurpose.VERIFY_EMAIL: "Подтверждение почты в Купце",
-    CodePurpose.RESET_PASSWORD: "Восстановление пароля в Купце",
-    CodePurpose.CHANGE_EMAIL: "Подтверждение новой почты в Купце",
-}
-
-TEXTS = {
-    CodePurpose.VERIFY_EMAIL: "Код для подтверждения почты: {code}",
-    CodePurpose.RESET_PASSWORD: "Код для восстановления пароля: {code}",
-    CodePurpose.CHANGE_EMAIL: "Код для подтверждения новой почты: {code}",
-}
-
-FOOTER = "Код действует {minutes} минут. Если вы его не запрашивали, просто удалите письмо."
 
 
 class SendCodeUseCase:
@@ -44,9 +31,9 @@ class SendCodeUseCase:
 
         code = create_code()
         minutes = self.settings.code_expires_minutes
-        text = TEXTS[purpose].format(code=code) + "\n\n" + FOOTER.format(minutes=minutes)
+        letter = code_letter(purpose, code, minutes, self.settings.site_url)
 
-        await self.mailer.send(email, SUBJECTS[purpose], text)
+        await self.mailer.send(email, letter.subject, letter.text, letter.html)
 
         await self.codes.add(
             AuthCode(

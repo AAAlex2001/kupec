@@ -23,15 +23,15 @@ class FakeMailer:
     """Складывает письма в список вместо отправки."""
 
     def __init__(self) -> None:
-        self.sent: list[tuple[str, str, str]] = []
+        self.sent: list[tuple[str, str, str, str]] = []
 
-    async def send(self, to: str, subject: str, text: str) -> None:
-        self.sent.append((to, subject, text))
+    async def send(self, to: str, subject: str, text: str, html: str) -> None:
+        self.sent.append((to, subject, text, html))
 
     def last_code(self) -> str:
         """Код из последнего письма."""
 
-        _, _, text = self.sent[-1]
+        _, _, text, _ = self.sent[-1]
         match = re.search(r"\d{6}", text)
         assert match is not None
 
