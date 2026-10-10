@@ -1,0 +1,47 @@
+@use "shared/styles/layout" as *;
+@use "shared/styles/colors" as *;
+
+.page {
+  @include gutter;
+  display: flex;
+  flex-direction: column;
+  padding-top: 24px;
+  padding-bottom: 48px;
+  gap: 28px;
+  min-width: 0;
+}
+
+.head {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-width: 820px;
+}
+
+.eyebrow {
+  font: 600 12px/18px "Inter";
+  color: $accent-text;
+}
+
+.lead { font: 400 16px/26px "Inter"; color: #70757f; }
+.revision { font: 400 12px/18px "Inter"; color: #70757f; }
+.columns { display: flex; flex-direction: column; gap: 32px; min-width: 0; }
+.contents { display: flex; flex-direction: column; gap: 10px; padding: 20px; background: #f5f6f8; border-radius: 16px; }
+.contentsTitle { font: 600 14px/20px "Inter"; color: #1a1a1a; }
+.contents a, .related a { font: 400 13px/20px "Inter"; color: $accent-text; text-decoration: none; }
+.contents a:hover, .related a:hover { text-decoration: underline; }
+.article { display: flex; flex-direction: column; gap: 36px; max-width: 820px; min-width: 0; }
+.section { display: flex; flex-direction: column; gap: 14px; scroll-margin-top: 100px; overflow-wrap: anywhere; }
+.section p, .details { font: 400 14px/24px "Inter"; color: #34383f; }
+.details { display: flex; flex-direction: column; gap: 4px; padding: 20px; background: #f5f6f8; border-radius: 12px; }
+.details dt { margin-top: 12px; color: #70757f; font-size: 12px; }
+.details dt:first-child { margin-top: 0; }
+.details dd { margin: 0; }
+.details a { color: $accent-text; }
+.related { display: flex; flex-direction: column; gap: 12px; }
+
+@media (min-width: 1024px) {
+  .columns { flex-direction: row; align-items: flex-start; gap: 48px; }
+  .contents { position: sticky; top: 100px; flex: 0 0 240px; }
+  .article { flex: 1 1 auto; }
+}

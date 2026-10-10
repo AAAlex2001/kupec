@@ -8,6 +8,7 @@ import {
   MY_POSTS_PATH,
   MY_REVIEWS_PATH,
   NEW_POST_PATH,
+  PERSONAL_DATA_PATH,
   PRIVACY_PATH,
   REPOSTS_PATH,
   RULES_PATH,
@@ -50,7 +51,8 @@ export const FOOTER_GROUPS = [
 
 export const LEGAL_LINKS = [
   { label: "Пользовательское соглашение", href: TERMS_PATH },
-  { label: "Конфиденциальность", href: PRIVACY_PATH },
+  { label: "Политика конфиденциальности", href: PRIVACY_PATH },
+  { label: "Обработка персональных данных", href: PERSONAL_DATA_PATH },
 ];
 
 export const COPYRIGHT = "Частные объявления по всей России";

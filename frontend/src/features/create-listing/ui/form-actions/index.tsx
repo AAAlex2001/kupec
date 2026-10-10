@@ -1,3 +1,5 @@
+import Link from "next/link";
+import { PERSONAL_DATA_PATH, RULES_PATH, TERMS_PATH } from "@/shared/config/routes";
 import Button from "@/shared/ui/button";
 import Notice from "@/shared/ui/notice";
 import type { ListingFormState } from "../../model/types";
@@ -25,7 +27,9 @@ const FormActions = ({ state, editing, onPublish, onSaveDraft, onPreview }: Form
       )}
 
       <p className={styles.terms}>
-        Публикуя объявление, вы соглашаетесь с Правилами площадки. Поля с * обязательны.
+        Публикуя объявление, вы принимаете <Link href={RULES_PATH}>Правила площадки</Link> и{" "}
+        <Link href={TERMS_PATH}>пользовательское соглашение</Link>.
+        {" "}<Link href={PERSONAL_DATA_PATH}>Обработка персональных данных</Link>. Поля с * обязательны.
       </p>
 
       <div className={styles.buttons}>

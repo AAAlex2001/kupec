@@ -8,14 +8,17 @@ import {
   HOME_PATH,
   listingPath,
   postPath,
+  PERSONAL_DATA_PATH,
+  PRIVACY_PATH,
   RULES_PATH,
+  TERMS_PATH,
   userPath,
 } from "@/shared/config/routes";
 import { absoluteUrl } from "@/shared/lib/seo";
 
 export const dynamic = "force-dynamic";
 
-const STATIC_PATHS = [HOME_PATH, FEED_PATH, HELP_PATH, RULES_PATH];
+const STATIC_PATHS = [HOME_PATH, FEED_PATH, HELP_PATH, RULES_PATH, TERMS_PATH, PRIVACY_PATH, PERSONAL_DATA_PATH];
 
 /** Карта сайта: главная, справка, категории, объявления, публикации и авторы. Кабинета и админки здесь нет. */
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {

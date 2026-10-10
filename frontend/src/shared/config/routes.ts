@@ -42,3 +42,4 @@ export const adminUserPath = (id: number) => `${ADMIN_USERS_PATH}/${id}`;
 export const RULES_PATH = "/rules";
 export const TERMS_PATH = "/terms";
 export const PRIVACY_PATH = "/privacy";
+export const PERSONAL_DATA_PATH = "/personal-data";

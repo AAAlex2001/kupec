@@ -2,8 +2,20 @@ import { SITE_NAME, SITE_URL } from "@/shared/config/site";
 
 const DESCRIPTION_LENGTH = 160;
 
-/** Общая картинка превью ссылки: логотип и корзинка. */
-export const OG_IMAGE = { url: "/og.png", width: 1200, height: 630, alt: SITE_NAME };
+/** Фирменные обложки публичных страниц. Категории используют свои картинки из каталога. */
+export const OG_COVERS = {
+  home: { url: "/og/home.jpg", width: 1200, height: 630, alt: `${SITE_NAME} — частные объявления по всей России` },
+  posts: { url: "/og/posts.jpg", width: 1200, height: 630, alt: `${SITE_NAME} — публикации пользователей` },
+  search: { url: "/og/search.jpg", width: 1200, height: 630, alt: `${SITE_NAME} — поиск товаров и услуг` },
+  help: { url: "/og/help.jpg", width: 1200, height: 630, alt: `${SITE_NAME} — помощь` },
+  rules: { url: "/og/rules.jpg", width: 1200, height: 630, alt: `${SITE_NAME} — правила площадки` },
+  terms: { url: "/og/terms.jpg", width: 1200, height: 630, alt: `${SITE_NAME} — пользовательское соглашение` },
+  privacy: { url: "/og/privacy.jpg", width: 1200, height: 630, alt: `${SITE_NAME} — политика конфиденциальности` },
+  personalData: { url: "/og/personal-data.jpg", width: 1200, height: 630, alt: `${SITE_NAME} — обработка персональных данных` },
+};
+
+/** Общая обложка для страниц без собственной картинки. */
+export const OG_IMAGE = OG_COVERS.home;
 
 /** Общее для превью ссылок всех страниц: Next заменяет openGraph страницы целиком, а не дополняет корневой. */
 export const OG_BASE = { siteName: SITE_NAME, locale: "ru_RU", images: [OG_IMAGE] };

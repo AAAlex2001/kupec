@@ -1,7 +1,9 @@
 "use client";
 
+import Link from "next/link";
 import { EmailField, PasswordField, type User } from "@/entities/user";
 import { PASSWORD_ERROR } from "@/shared/lib/email";
+import { PERSONAL_DATA_PATH, PRIVACY_PATH, TERMS_PATH } from "@/shared/config/routes";
 import Button from "@/shared/ui/button";
 import CodeStep from "@/shared/ui/code-step";
 import Notice from "@/shared/ui/notice";
@@ -56,6 +58,12 @@ const RegisterForm = ({ onSuccess }: RegisterFormProps) => {
       />
 
       {form.error && <Notice tone="error">{form.error}</Notice>}
+
+      <p className={styles.hint}>
+        Создавая аккаунт, вы принимаете <Link href={TERMS_PATH} target="_blank" rel="noopener noreferrer">пользовательское соглашение</Link>.
+        Информация об обработке данных: <Link href={PRIVACY_PATH} target="_blank" rel="noopener noreferrer">конфиденциальность</Link> и{" "}
+        <Link href={PERSONAL_DATA_PATH} target="_blank" rel="noopener noreferrer">политика обработки персональных данных</Link>.
+      </p>
 
       <Button type="submit" loading={form.pending}>
         Зарегистрироваться
