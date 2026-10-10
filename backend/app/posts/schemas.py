@@ -7,6 +7,7 @@ from pydantic import BaseModel, ConfigDict, Field
 
 from app.listings.models import ListingStatus
 from app.posts.models import (
+    MAX_AI_INSTRUCTION,
     MAX_COMMENT_LENGTH,
     MAX_POST_HTML,
     MAX_POST_LISTINGS,
@@ -217,6 +218,21 @@ class CommentThreadPageSchema(BaseModel):
     items: list[CommentThreadSchema]
     total: int = Field(..., description="Сколько веток всего")
     comments_count: int = Field(..., description="Сколько комментариев у поста вместе с ответами")
+
+
+class AssistantRequestSchema(BaseModel):
+    """Просьба к ИИ-помощнику и текущий текст поста."""
+
+    instruction: str = Field(
+        ..., min_length=2, max_length=MAX_AI_INSTRUCTION, description="Что сделать с текстом"
+    )
+    html: str = Field("", max_length=MAX_POST_HTML, description="Текущий текст поста в HTML")
+
+
+class AssistantAnswerSchema(BaseModel):
+    """Текст поста от ИИ-помощника — только теги редактора."""
+
+    html: str = Field(..., description="Готовый текст в HTML")
 
 
 class ReportSaveSchema(BaseModel):

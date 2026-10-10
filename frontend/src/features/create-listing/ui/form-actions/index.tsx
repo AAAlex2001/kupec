@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { PERSONAL_DATA_PATH, RULES_PATH, TERMS_PATH } from "@/shared/config/routes";
 import Button from "@/shared/ui/button";
+import LegalNote from "@/shared/ui/legal-note";
 import Notice from "@/shared/ui/notice";
 import type { ListingFormState } from "../../model/types";
 import styles from "./style.module.scss";
@@ -26,11 +27,21 @@ const FormActions = ({ state, editing, onPublish, onSaveDraft, onPreview }: Form
         <Notice tone="info">Публикуем объявление. Пожалуйста, не закрывайте страницу.</Notice>
       )}
 
-      <p className={styles.terms}>
-        Публикуя объявление, вы принимаете <Link href={RULES_PATH}>Правила площадки</Link> и{" "}
-        <Link href={TERMS_PATH}>пользовательское соглашение</Link>.
-        {" "}<Link href={PERSONAL_DATA_PATH}>Обработка персональных данных</Link>. Поля с * обязательны.
-      </p>
+      <LegalNote>
+        Публикуя объявление, вы принимаете{" "}
+        <Link href={RULES_PATH} target="_blank" rel="noopener noreferrer">
+          правила площадки
+        </Link>{" "}
+        и{" "}
+        <Link href={TERMS_PATH} target="_blank" rel="noopener noreferrer">
+          пользовательское соглашение
+        </Link>
+        , а также соглашаетесь на{" "}
+        <Link href={PERSONAL_DATA_PATH} target="_blank" rel="noopener noreferrer">
+          обработку персональных данных
+        </Link>
+        . Поля со звёздочкой * обязательны.
+      </LegalNote>
 
       <div className={styles.buttons}>
         <Button

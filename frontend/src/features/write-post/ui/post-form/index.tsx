@@ -8,6 +8,7 @@ import MediaPicker from "@/shared/ui/media-picker";
 import Notice from "@/shared/ui/notice";
 import TextEditor from "@/shared/ui/text-editor";
 import { usePostForm } from "../../model/use-post-form";
+import { AI_PANEL } from "../ai-panel";
 import ListingPicker from "../listing-picker";
 import styles from "./style.module.scss";
 
@@ -38,6 +39,7 @@ const PostForm = ({ post }: PostFormProps) => {
         placeholder="Что у вас нового?"
         value={form.html}
         limit={MAX_LENGTH}
+        panel={AI_PANEL}
         onChange={form.setHtml}
       />
 

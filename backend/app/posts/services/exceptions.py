@@ -19,3 +19,15 @@ class PostMediaNotFoundError(LookupError):
 
 class TooManyPostMediaError(ValueError):
     """Загружено слишком много файлов, ещё не привязанных к посту."""
+
+
+class TooManyAiRequestsError(ValueError):
+    """Лимит запросов к ИИ на час исчерпан. retry_after — через сколько секунд можно снова."""
+
+    def __init__(self, retry_after: int) -> None:
+        super().__init__(retry_after)
+        self.retry_after = retry_after
+
+
+class EmptyAiAnswerError(ValueError):
+    """Модель ответила, но после очистки в ответе не осталось текста."""

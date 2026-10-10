@@ -138,3 +138,22 @@
   width: 24px;
   height: 24px;
 }
+
+.chip {
+  justify-content: flex-start;
+  padding: 0 8px;
+
+  height: 28px;
+
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 16px;
+
+  color: #1a1a1a;
+  background: transparent;
+  border-radius: 6px;
+}
+
+.chip:hover:not(:disabled) {
+  background: #f5f6f8;
+}

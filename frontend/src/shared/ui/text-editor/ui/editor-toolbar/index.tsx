@@ -3,16 +3,20 @@
 import { useEditorState, type Editor } from "@tiptap/react";
 import Button from "@/shared/ui/button";
 import { addEmoji, TOOLS } from "../../tools";
+import type { EditorPanel } from "../../types";
 import EmojiButton from "../emoji-button";
 import LinkButton from "../link-button";
 import styles from "./style.module.scss";
 
 type EditorToolbarProps = {
   editor: Editor;
+  panel?: EditorPanel;
+  panelOpen: boolean;
+  onPanelToggle: () => void;
 };
 
-/** Панель редактора: оформление, цитата, ссылка и смайлики. Включённое оформление подсвечено. */
-const EditorToolbar = ({ editor }: EditorToolbarProps) => {
+/** Панель редактора: дополнительная панель, оформление, цитата, ссылка и смайлики. Включённое подсвечено. */
+const EditorToolbar = ({ editor, panel, panelOpen, onPanelToggle }: EditorToolbarProps) => {
   const active = useEditorState({
     editor,
     selector: ({ editor: current }): Record<string, boolean> => ({
@@ -26,6 +30,18 @@ const EditorToolbar = ({ editor }: EditorToolbarProps) => {
 
   return (
     <div className={styles.toolbar} role="toolbar" aria-label="Оформление текста">
+      {panel && (
+        <Button
+          variant="tool"
+          size="icon"
+          ariaLabel={panel.label}
+          ariaPressed={panelOpen}
+          onClick={onPanelToggle}
+        >
+          <panel.Icon />
+        </Button>
+      )}
+
       {TOOLS.map(({ name, label, Icon, run }) => (
         <Button
           key={name}
@@ -40,9 +56,6 @@ const EditorToolbar = ({ editor }: EditorToolbarProps) => {
       ))}
 
       <LinkButton editor={editor} active={active.link} />
-
-      <span className={styles.divider} aria-hidden="true" />
-
       <EmojiButton onSelect={(emoji) => addEmoji(editor, emoji)} />
     </div>
   );

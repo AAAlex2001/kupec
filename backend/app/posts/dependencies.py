@@ -4,12 +4,15 @@ from fastapi import Depends, HTTPException, status
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.auth.dependencies import get_current_user, require_user
+from app.core.ai import AiClient
+from app.core.config import get_settings
 from app.core.database import get_session
 from app.follows.dependencies import get_follow_repository
 from app.follows.services.repo import FollowRepository
 from app.notifications.dependencies import get_notify_usecase
 from app.notifications.services.usecases.notify import NotifyUseCase
 from app.posts.models import Post, PostComment, PostReport, PostStatus
+from app.posts.services.ai_repo import AiRequestRepository
 from app.posts.services.comment_repo import CommentLikeRepository, PostCommentRepository
 from app.posts.services.report_repo import PostReportRepository
 from app.posts.services.repo import (
@@ -31,6 +34,7 @@ from app.posts.services.usecases.manage_media import (
 )
 from app.posts.services.usecases.moderate_post import DismissReportUseCase, SetPostStatusUseCase
 from app.posts.services.usecases.update_post import UpdatePostUseCase
+from app.posts.services.usecases.write_with_ai import WritePostWithAiUseCase
 from app.users.models import User
 
 
@@ -99,6 +103,24 @@ def get_load_threads_usecase(
     """Сценарий веток комментариев постранично."""
 
     return LoadThreadsUseCase(comments, likes)
+
+
+def get_ai_request_repository(
+    session: AsyncSession = Depends(get_session),
+) -> AiRequestRepository:
+    """Репозиторий запросов к ИИ с сессией текущего запроса."""
+
+    return AiRequestRepository(session)
+
+
+def get_write_with_ai_usecase(
+    requests: AiRequestRepository = Depends(get_ai_request_repository),
+) -> WritePostWithAiUseCase:
+    """Сценарий ИИ-помощника постов."""
+
+    settings = get_settings()
+
+    return WritePostWithAiUseCase(AiClient(settings), requests, settings)
 
 
 def get_report_repository(

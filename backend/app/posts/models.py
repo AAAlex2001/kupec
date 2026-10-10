@@ -24,6 +24,7 @@ MAX_POST_LISTINGS = 5
 MAX_POST_HTML = 30000
 MAX_COMMENT_LENGTH = 2000
 MAX_REPORT_LENGTH = 500
+MAX_AI_INSTRUCTION = 1000
 
 PUBLISHED_ONLY = text("status = 'published'")
 ROOTS_ONLY = text("parent_id IS NULL")
@@ -288,3 +289,18 @@ class PostReport(Base):
     __table_args__ = (
         CheckConstraint("status IN ('open', 'resolved')", name="ck_post_reports_status"),
     )
+
+
+class AiRequest(Base):
+    """Запрос к ИИ-помощнику постов. Хранится только время — для лимита запросов в час."""
+
+    __tablename__ = "ai_requests"
+
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
+
+    user_id: Mapped[int] = mapped_column(ForeignKey("users.id", ondelete="CASCADE"))
+    created_at: Mapped[datetime] = mapped_column(
+        DateTime(timezone=True), server_default=func.now()
+    )
+
+    __table_args__ = (Index("ix_ai_requests_user_created", user_id, created_at),)

@@ -62,6 +62,16 @@ export const updatePost = (id: number, payload: PostPayload) =>
 /** Удалить свой пост. */
 export const deletePost = (id: number) => request<void>(`/v1/posts/${id}`, { method: "DELETE" });
 
+/** ИИ-помощник: текст поста по просьбе автора. Отдаёт HTML для редактора. */
+export const writePostWithAi = async (instruction: string, html: string) => {
+  const answer = await request<{ html: string }>(
+    "/v1/posts/assistant",
+    jsonBody("POST", { instruction, html }),
+  );
+
+  return answer.html;
+};
+
 /** Поставить или убрать лайк. */
 export const togglePostLike = (id: number, liked: boolean) =>
   request<PostLikes>(`/v1/posts/${id}/like`, { method: liked ? "POST" : "DELETE" });

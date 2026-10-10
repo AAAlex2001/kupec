@@ -1,8 +1,11 @@
+import logging
+import math
 from datetime import datetime, timezone
 
 from fastapi import APIRouter, Depends, HTTPException, Query, UploadFile, status
 
 from app.auth.dependencies import get_current_user, require_user
+from app.core.ai import AiError
 from app.core.uploads import UploadError
 from app.posts.dependencies import (
     get_comment,
@@ -26,9 +29,12 @@ from app.posts.dependencies import (
     get_update_post_usecase,
     get_upload_post_media_usecase,
     get_visible_post,
+    get_write_with_ai_usecase,
 )
 from app.posts.models import MediaKind, Post, PostComment, PostReport, PostStatus
 from app.posts.schemas import (
+    AssistantAnswerSchema,
+    AssistantRequestSchema,
     CommentEditSchema,
     CommentSaveSchema,
     CommentSchema,
@@ -46,9 +52,11 @@ from app.posts.schemas import (
 from app.posts.services.comment_repo import CommentLikeRepository, PostCommentRepository
 from app.posts.services.exceptions import (
     CommentNotFoundError,
+    EmptyAiAnswerError,
     EmptyPostError,
     PostListingNotFoundError,
     PostMediaNotFoundError,
+    TooManyAiRequestsError,
     TooManyPostMediaError,
 )
 from app.posts.services.report_repo import PostReportRepository
@@ -65,9 +73,12 @@ from app.posts.services.usecases.manage_media import (
     UploadPostMediaUseCase,
 )
 from app.posts.services.usecases.update_post import UpdatePostUseCase
+from app.posts.services.usecases.write_with_ai import WritePostWithAiUseCase
 from app.users.dependencies import get_user_repository
 from app.users.models import User
 from app.users.services.repo import UserRepository
+
+logger = logging.getLogger(__name__)
 
 router = APIRouter(prefix="/posts", tags=["posts"])
 
@@ -112,6 +123,32 @@ async def delete_media(
             status_code=status.HTTP_404_NOT_FOUND,
             detail="Файл не найден",
         ) from error
+
+
+@router.post("/assistant")
+async def write_with_ai(
+    payload: AssistantRequestSchema,
+    user: User = Depends(require_user),
+    usecase: WritePostWithAiUseCase = Depends(get_write_with_ai_usecase),
+) -> AssistantAnswerSchema:
+    """ИИ-помощник: пишет пост по просьбе автора или переделывает текущий текст."""
+
+    try:
+        html = await usecase.execute(user, payload.instruction, payload.html)
+    except TooManyAiRequestsError as error:
+        raise HTTPException(
+            status_code=status.HTTP_429_TOO_MANY_REQUESTS,
+            detail=f"Лимит запросов к ИИ исчерпан. Попробуйте через {math.ceil(error.retry_after / 60)} мин",
+            headers={"Retry-After": str(error.retry_after)},
+        ) from error
+    except (AiError, EmptyAiAnswerError) as error:
+        logger.warning("ИИ-помощник не ответил: %s", error)
+        raise HTTPException(
+            status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
+            detail="ИИ-помощник сейчас не отвечает. Попробуйте ещё раз чуть позже",
+        ) from error
+
+    return AssistantAnswerSchema(html=html)
 
 
 @router.get("/feed")

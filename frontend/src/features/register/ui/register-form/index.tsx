@@ -6,6 +6,7 @@ import { PASSWORD_ERROR } from "@/shared/lib/email";
 import { PERSONAL_DATA_PATH, PRIVACY_PATH, TERMS_PATH } from "@/shared/config/routes";
 import Button from "@/shared/ui/button";
 import CodeStep from "@/shared/ui/code-step";
+import LegalNote from "@/shared/ui/legal-note";
 import Notice from "@/shared/ui/notice";
 import Title from "@/shared/ui/title";
 import { useRegister } from "../../model/use-register";
@@ -59,26 +60,21 @@ const RegisterForm = ({ onSuccess }: RegisterFormProps) => {
 
       {form.error && <Notice tone="error">{form.error}</Notice>}
 
-      <p className={styles.consent}>
+      <LegalNote>
         Создавая аккаунт, вы принимаете{" "}
-        <Link className={styles.link} href={TERMS_PATH} target="_blank" rel="noopener noreferrer">
+        <Link href={TERMS_PATH} target="_blank" rel="noopener noreferrer">
           пользовательское соглашение
         </Link>{" "}
         и{" "}
-        <Link className={styles.link} href={PRIVACY_PATH} target="_blank" rel="noopener noreferrer">
+        <Link href={PRIVACY_PATH} target="_blank" rel="noopener noreferrer">
           политику конфиденциальности
         </Link>
         , а также соглашаетесь на{" "}
-        <Link
-          className={styles.link}
-          href={PERSONAL_DATA_PATH}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
+        <Link href={PERSONAL_DATA_PATH} target="_blank" rel="noopener noreferrer">
           обработку персональных данных
         </Link>
         .
-      </p>
+      </LegalNote>
 
       <Button type="submit" loading={form.pending}>
         Зарегистрироваться

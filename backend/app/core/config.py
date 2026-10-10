@@ -35,6 +35,11 @@ class Settings(BaseSettings):
     smtp_password: str = ""
     smtp_from: str = "Купец <no-reply@kupec.local>"
 
+    proxyapi_key: str = Field("", description="Ключ ProxyAPI. Пусто — ИИ-помощник выключен")
+    ai_base_url: str = "https://api.proxyapi.ru/v1"
+    ai_model: str = "deepseek/deepseek-v3.2"
+    ai_requests_per_hour: int = Field(30, ge=1, description="Запросов к ИИ на человека в час")
+
     site_url: str = Field(
         "http://localhost:3000",
         validation_alias="NEXT_PUBLIC_SITE_URL",

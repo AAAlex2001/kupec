@@ -1,0 +1,107 @@
+@use "shared/styles/colors" as *;
+
+.panel {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 16px;
+}
+
+.bar {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 0 4px 0 16px;
+  gap: 12px;
+
+  height: 40px;
+
+  background: #ffffff;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  box-shadow: 0 4px 16px rgba(47, 103, 195, 0.14);
+  transition: border-color 0.15s ease;
+}
+
+.bar:focus-within {
+  border-color: $accent;
+}
+
+.input {
+  flex: 1 1 auto;
+
+  min-width: 0;
+  padding: 0;
+
+  font-family: "Inter";
+  font-size: 14px;
+  line-height: 17px;
+
+  color: #1a1a1a;
+  background: transparent;
+  border: none;
+  outline: none;
+}
+
+.input::placeholder {
+  color: #a3a9b2;
+}
+
+.quick {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.label {
+  font-family: "Inter";
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 15px;
+
+  color: #1a1a1a;
+}
+
+.actions {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 4px 8px;
+}
+
+.dot {
+  flex: none;
+  width: 6px;
+  height: 6px;
+
+  background: rgba(59, 130, 246, 0.4);
+  border-radius: 50%;
+}
+
+.status,
+.error {
+  font-family: "Inter";
+  font-size: 13px;
+  line-height: 18px;
+}
+
+.status {
+  color: #70757f;
+}
+
+.error {
+  color: #e5243b;
+}
+
+.applied {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 16px;
+}
+
+@media (min-width: 768px) {
+  .actions {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}

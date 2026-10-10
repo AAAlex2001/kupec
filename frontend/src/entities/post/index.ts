@@ -34,6 +34,7 @@ export {
   togglePostSave,
   updatePost,
   uploadPostMedia,
+  writePostWithAi,
 } from "./api/posts";
 export {
   dismissReport,

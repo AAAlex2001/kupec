@@ -52,3 +52,4 @@ export { RepostIcon } from "./repost-icon";
 export { FlagIcon } from "./flag-icon";
 export { BellIcon } from "./bell-icon";
 export { ShieldIcon } from "./shield-icon";
+export { AiEditIcon } from "./ai-edit-icon";

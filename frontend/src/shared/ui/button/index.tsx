@@ -7,7 +7,7 @@ import styles from "./style.module.scss";
 type ButtonProps = {
   children: ReactNode;
   type?: "button" | "submit";
-  variant?: "primary" | "secondary" | "outline" | "ghost" | "danger" | "tool";
+  variant?: "primary" | "secondary" | "outline" | "ghost" | "danger" | "tool" | "chip";
   size?: "md" | "lg" | "icon";
   disabled?: boolean;
   loading?: boolean;
@@ -18,7 +18,7 @@ type ButtonProps = {
   ariaPressed?: boolean;
 };
 
-/** Кнопка: синяя, серая, в рамке, текстовая, красная или кнопка панели. size: 40px, 44px или квадрат под иконку. */
+/** Кнопка: синяя, серая, в рамке, текстовая, красная, кнопка панели или мелкая «чип». size: 40px, 44px или квадрат под иконку. */
 const Button = ({
   children,
   type = "button",
