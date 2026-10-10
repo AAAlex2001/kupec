@@ -1,0 +1,48 @@
+{
+  "version": 1,
+  "categories": [
+    {"slug": "services", "name": "Услуги", "parent": null, "kind": "service", "sort_order": 1, "image_subject": null, "attributes": [], "units": []},
+    {"slug": "fitness-training", "name": "Фитнес и тренировки", "parent": "services", "kind": "service", "sort_order": 20, "image_subject": "blue kettlebell dumbbell and rolled exercise mat", "attributes": ["training-discipline", "training-goal", "training-location", "service-format", "session-minutes"], "units": ["training", "hour", "fitness-membership"]},
+    {"slug": "personal-training", "name": "Персональные тренировки", "parent": "fitness-training", "kind": "service", "sort_order": 0, "image_subject": "chrome blue dumbbells sports water bottle and stopwatch", "attributes": [], "units": ["training", "hour", "fitness-membership"]},
+    {"slug": "group-training", "name": "Групповые занятия", "parent": "fitness-training", "kind": "service", "sort_order": 1, "image_subject": "blue aerobic step platforms resistance band and light dumbbells", "attributes": [], "units": ["training", "hour", "fitness-membership"]},
+    {"slug": "yoga-pilates", "name": "Йога и пилатес", "parent": "fitness-training", "kind": "service", "sort_order": 2, "image_subject": "blue yoga mat lavender blocks and stretching strap", "attributes": [], "units": ["training", "hour", "fitness-membership"]}
+  ],
+  "attributes": [
+    {"slug": "training-discipline", "name": "Направление тренировок", "type": "multiselect", "unit": null, "is_filterable": true, "options": [
+      {"value": "fitness", "label": "Фитнес"},
+      {"value": "strength", "label": "Силовые тренировки"},
+      {"value": "functional", "label": "Функциональные тренировки"},
+      {"value": "cardio", "label": "Кардиотренировки"},
+      {"value": "yoga", "label": "Йога"},
+      {"value": "pilates", "label": "Пилатес"},
+      {"value": "stretching", "label": "Стретчинг"},
+      {"value": "other", "label": "Другое"}
+    ]},
+    {"slug": "training-goal", "name": "Цель занятий", "type": "multiselect", "unit": null, "is_filterable": true, "options": [
+      {"value": "general-fitness", "label": "Поддержание формы"},
+      {"value": "weight-loss", "label": "Снижение веса"},
+      {"value": "muscle", "label": "Набор мышечной массы"},
+      {"value": "endurance", "label": "Выносливость"},
+      {"value": "flexibility", "label": "Гибкость и подвижность"},
+      {"value": "sports-preparation", "label": "Подготовка к соревнованиям"}
+    ]},
+    {"slug": "training-location", "name": "Место занятий", "type": "multiselect", "unit": null, "is_filterable": true, "options": [
+      {"value": "gym", "label": "В зале или студии"},
+      {"value": "client-home", "label": "У клиента дома"},
+      {"value": "outdoors", "label": "На открытом воздухе"},
+      {"value": "online", "label": "Онлайн"}
+    ]},
+    {"slug": "service-format", "name": "Формат", "type": "select", "unit": null, "is_filterable": true, "options": [
+      {"value": "individualno", "label": "Индивидуально"},
+      {"value": "v-gruppe", "label": "В группе"},
+      {"value": "onlayn", "label": "Онлайн"},
+      {"value": "ochno", "label": "Очно"}
+    ]},
+    {"slug": "session-minutes", "name": "Длительность занятия или сеанса", "type": "number", "unit": "мин", "is_filterable": true, "options": []}
+  ],
+  "units": [
+    {"code": "training", "label": "тренировка", "kind": "service"},
+    {"code": "hour", "label": "час", "kind": "service"},
+    {"code": "fitness-membership", "label": "абонемент", "kind": "service"}
+  ]
+}
