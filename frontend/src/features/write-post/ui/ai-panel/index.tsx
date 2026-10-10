@@ -3,6 +3,7 @@
 import { useEditorState, type Editor } from "@tiptap/react";
 import Button from "@/shared/ui/button";
 import { AiEditIcon, SendIcon } from "@/shared/ui/icons";
+import Input from "@/shared/ui/input";
 import type { EditorPanel } from "@/shared/ui/text-editor";
 import { AI_ACTIONS } from "../../lib/ai-actions";
 import { useAiPanel } from "../../model/use-ai-panel";
@@ -22,32 +23,32 @@ const AiPanel = ({ editor }: AiPanelProps) => {
 
   return (
     <div className={styles.panel}>
-      <div className={styles.bar}>
-        <input
-          className={styles.input}
-          value={panel.instruction}
-          placeholder={placeholder}
-          aria-label="Просьба к ИИ"
-          maxLength={1000}
-          disabled={panel.pending}
-          onChange={(event) => panel.setInstruction(event.target.value)}
-          onKeyDown={(event) => {
-            if (event.key !== "Enter") return;
-            event.preventDefault();
-            panel.run(panel.instruction);
-          }}
-        />
-        <Button
-          variant="tool"
-          size="icon"
-          ariaLabel="Отправить"
-          loading={panel.pending}
-          disabled={!panel.instruction.trim()}
-          onClick={() => panel.run(panel.instruction)}
-        >
-          <SendIcon />
-        </Button>
-      </div>
+      <Input
+        className={styles.bar}
+        value={panel.instruction}
+        placeholder={placeholder}
+        ariaLabel="Просьба к ИИ"
+        maxLength={1000}
+        disabled={panel.pending}
+        onChange={panel.setInstruction}
+        onKeyDown={(event) => {
+          if (event.key !== "Enter") return;
+          event.preventDefault();
+          panel.run(panel.instruction);
+        }}
+        suffix={
+          <Button
+            variant="tool"
+            size="icon"
+            ariaLabel="Отправить"
+            loading={panel.pending}
+            disabled={!panel.instruction.trim()}
+            onClick={() => panel.run(panel.instruction)}
+          >
+            {!panel.pending && <SendIcon />}
+          </Button>
+        }
+      />
 
       <div className={styles.quick}>
         <p className={styles.label}>Быстрые действия</p>

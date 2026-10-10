@@ -53,3 +53,5 @@ export { FlagIcon } from "./flag-icon";
 export { BellIcon } from "./bell-icon";
 export { ShieldIcon } from "./shield-icon";
 export { AiEditIcon } from "./ai-edit-icon";
+export { Heading2Icon } from "./heading2-icon";
+export { Heading3Icon } from "./heading3-icon";

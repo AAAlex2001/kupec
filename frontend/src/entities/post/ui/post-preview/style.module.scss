@@ -43,6 +43,14 @@
   overflow: hidden;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 3;
+
+  h2,
+  h3 {
+    margin: 0;
+
+    font-size: inherit;
+    line-height: inherit;
+  }
 }
 
 .meta {

@@ -15,11 +15,13 @@ type EditorToolbarProps = {
   onPanelToggle: () => void;
 };
 
-/** Панель редактора: дополнительная панель, оформление, цитата, ссылка и смайлики. Включённое подсвечено. */
+/** Панель редактора: дополнительная панель, заголовки, оформление, цитата, ссылка и смайлики. Включённое подсвечено. */
 const EditorToolbar = ({ editor, panel, panelOpen, onPanelToggle }: EditorToolbarProps) => {
   const active = useEditorState({
     editor,
     selector: ({ editor: current }): Record<string, boolean> => ({
+      heading2: current.isActive("heading", { level: 2 }),
+      heading3: current.isActive("heading", { level: 3 }),
       bold: current.isActive("bold"),
       italic: current.isActive("italic"),
       underline: current.isActive("underline"),

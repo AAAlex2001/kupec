@@ -12,6 +12,7 @@ type InputProps = {
   onKeyDown?: (event: KeyboardEvent<HTMLInputElement>) => void;
   placeholder?: string;
   readOnly?: boolean;
+  disabled?: boolean;
   invalid?: boolean;
   autoFocus?: boolean;
   maxLength?: number;
@@ -37,6 +38,7 @@ const Input = ({
   onKeyDown,
   placeholder,
   readOnly,
+  disabled,
   invalid,
   autoFocus,
   maxLength,
@@ -62,6 +64,7 @@ const Input = ({
       value={value}
       placeholder={placeholder}
       readOnly={readOnly}
+      disabled={disabled}
       autoFocus={autoFocus}
       maxLength={maxLength}
       inputMode={inputMode}

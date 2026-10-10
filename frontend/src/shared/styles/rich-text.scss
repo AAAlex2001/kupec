@@ -19,6 +19,32 @@
     margin-top: 8px;
   }
 
+  h2,
+  h3 {
+    font-weight: 700;
+
+    color: #1a1a1a;
+  }
+
+  h2 {
+    margin: 20px 0 8px;
+
+    font-size: 20px;
+    line-height: 28px;
+  }
+
+  h3 {
+    margin: 16px 0 8px;
+
+    font-size: 18px;
+    line-height: 24px;
+  }
+
+  h2:first-child,
+  h3:first-child {
+    margin-top: 0;
+  }
+
   blockquote {
     margin: 8px 0;
     padding-left: 12px;

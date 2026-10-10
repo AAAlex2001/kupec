@@ -44,7 +44,7 @@ const RepostForm = ({ post }: RepostFormProps) => {
       {form.error && <Notice tone="error">{form.error}</Notice>}
 
       <div className={styles.actions}>
-        <Button variant="secondary" href={FEED_PATH}>
+        <Button variant="ghost" href={FEED_PATH}>
           Отмена
         </Button>
         <Button type="submit" loading={form.pending}>

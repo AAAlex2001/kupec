@@ -1,7 +1,26 @@
 import type { Editor } from "@tiptap/react";
-import { BoldIcon, ItalicIcon, QuoteIcon, UnderlineIcon } from "@/shared/ui/icons";
+import {
+  BoldIcon,
+  Heading2Icon,
+  Heading3Icon,
+  ItalicIcon,
+  QuoteIcon,
+  UnderlineIcon,
+} from "@/shared/ui/icons";
 
 export const TOOLS = [
+  {
+    name: "heading2",
+    label: "Заголовок",
+    Icon: Heading2Icon,
+    run: (editor: Editor) => editor.chain().focus().toggleHeading({ level: 2 }).run(),
+  },
+  {
+    name: "heading3",
+    label: "Подзаголовок",
+    Icon: Heading3Icon,
+    run: (editor: Editor) => editor.chain().focus().toggleHeading({ level: 3 }).run(),
+  },
   {
     name: "bold",
     label: "Жирный",

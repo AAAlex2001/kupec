@@ -45,9 +45,11 @@ def write(answer: str, html: str = "", requests: FakeAiRequests | None = None) -
 
 
 def test_answer_keeps_only_editor_tags() -> None:
-    html = write('<h2>Мёд</h2><p>Свежий <strong>липовый</strong></p><script>alert(1)</script>')
+    html = write(
+        "<h1>Пасека</h1><h2>Мёд</h2><p>Свежий <strong>липовый</strong></p><script>alert(1)</script>"
+    )
 
-    assert html == "Мёд<p>Свежий <strong>липовый</strong></p>"
+    assert html == "Пасека<h2>Мёд</h2><p>Свежий <strong>липовый</strong></p>"
 
 
 def test_code_fence_and_plain_text_become_paragraphs() -> None:

@@ -2,7 +2,7 @@
 
 import nh3
 
-ALLOWED_TAGS = {"p", "br", "strong", "em", "u", "blockquote", "a"}
+ALLOWED_TAGS = {"p", "br", "h2", "h3", "strong", "em", "u", "blockquote", "a"}
 ALLOWED_ATTRIBUTES = {"a": {"href"}}
 ALLOWED_SCHEMES = {"http", "https"}
 

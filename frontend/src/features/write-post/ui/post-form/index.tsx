@@ -57,13 +57,13 @@ const PostForm = ({ post }: PostFormProps) => {
       {form.error && <Notice tone="error">{form.error}</Notice>}
 
       <div className={styles.actions}>
-        <Button variant="secondary" href={MY_POSTS_PATH}>
+        <Button variant="ghost" href={MY_POSTS_PATH}>
           Отмена
         </Button>
 
         <div className={styles.save}>
           <Button
-            variant="ghost"
+            variant="secondary"
             loading={form.pending === "draft"}
             disabled={form.empty || form.pending !== null}
             onClick={() => form.save(true)}

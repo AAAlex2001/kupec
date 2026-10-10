@@ -2,6 +2,7 @@ import Blockquote from "@tiptap/extension-blockquote";
 import Bold from "@tiptap/extension-bold";
 import Document from "@tiptap/extension-document";
 import HardBreak from "@tiptap/extension-hard-break";
+import Heading from "@tiptap/extension-heading";
 import Italic from "@tiptap/extension-italic";
 import Link from "@tiptap/extension-link";
 import Paragraph from "@tiptap/extension-paragraph";
@@ -15,6 +16,7 @@ export const editorExtensions = (placeholder: string, limit: number) => [
   Paragraph,
   Text,
   HardBreak,
+  Heading.configure({ levels: [2, 3] }),
   Bold,
   Italic,
   Underline,
