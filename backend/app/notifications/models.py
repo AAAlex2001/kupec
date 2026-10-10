@@ -14,6 +14,7 @@ from sqlalchemy import (
 )
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
+from app.articles.models import Article
 from app.core.database import Base
 from app.users.models import User
 
@@ -41,6 +42,9 @@ class Notification(Base):
     post_id: Mapped[int | None] = mapped_column(
         ForeignKey("posts.id", ondelete="CASCADE"), index=True
     )
+    article_id: Mapped[int | None] = mapped_column(
+        ForeignKey("articles.id", ondelete="CASCADE"), index=True
+    )
     comment_id: Mapped[int | None] = mapped_column(
         ForeignKey("post_comments.id", ondelete="CASCADE"), index=True
     )
@@ -51,6 +55,13 @@ class Notification(Base):
     )
 
     actor: Mapped[User] = relationship(foreign_keys=[actor_id], lazy="joined")
+    article: Mapped[Article | None] = relationship(lazy="joined")
+
+    @property
+    def article_path(self) -> str | None:
+        """Адрес статьи, если уведомление про комментарий к ней."""
+
+        return self.article.path if self.article else None
 
     __table_args__ = (
         CheckConstraint(

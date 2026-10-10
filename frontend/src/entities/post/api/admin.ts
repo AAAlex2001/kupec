@@ -5,6 +5,17 @@ import type { AdminPostPage, Post, PostStatus, ReportPage, ReportStatus } from "
 export const fetchAdminPosts = (status: PostStatus, limit: number, offset: number) =>
   request<AdminPostPage>(`/v1/admin/posts?status=${status}&limit=${limit}&offset=${offset}`);
 
+/** Посты одного пользователя для админки: опубликованные, черновики или скрытые, без репостов. */
+export const fetchAdminUserPosts = (
+  userId: number,
+  status: PostStatus,
+  limit: number,
+  offset: number,
+) =>
+  request<AdminPostPage>(
+    `/v1/admin/users/${userId}/posts?status=${status}&limit=${limit}&offset=${offset}`,
+  );
+
 /** Скрыть пост из ленты. */
 export const hidePost = (id: number) =>
   request<Post>(`/v1/admin/posts/${id}/hide`, { method: "POST" });

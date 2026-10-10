@@ -2,12 +2,12 @@
 
 import { useRouter } from "next/navigation";
 import { postJsonLd, type Post } from "@/entities/post";
-import { FEED_PATH, POST_COMMENTS_ANCHOR } from "@/shared/config/routes";
+import { COMMENTS_ANCHOR, FEED_PATH } from "@/shared/config/routes";
 import Button from "@/shared/ui/button";
 import { ArrowLeftIcon } from "@/shared/ui/icons";
 import JsonLd from "@/shared/ui/json-ld";
 import Title from "@/shared/ui/title";
-import PostComments from "@/widgets/post-comments";
+import Comments from "@/widgets/comments";
 import { PostItem } from "@/widgets/post-list";
 import styles from "./style.module.scss";
 
@@ -31,7 +31,11 @@ const PostPage = ({ post }: PostPageProps) => {
       <Title as="h1">Публикация</Title>
 
       <PostItem post={post} onDeleted={() => router.push(FEED_PATH)} />
-      <PostComments id={POST_COMMENTS_ANCHOR} post={post} />
+      <Comments
+        id={COMMENTS_ANCHOR}
+        target={{ kind: "posts", id: post.id }}
+        count={post.comments_count}
+      />
     </div>
   );
 };

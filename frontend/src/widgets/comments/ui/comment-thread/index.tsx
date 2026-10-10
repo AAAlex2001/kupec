@@ -1,12 +1,12 @@
 "use client";
 
-import type { Comment, Thread } from "@/entities/comment";
+import type { Comment, CommentTarget, Thread } from "@/entities/comment";
 import { ReplyForm } from "@/features/write-comment";
 import CommentItem from "../comment-item";
 import styles from "./style.module.scss";
 
 type CommentThreadProps = {
-  postId: number;
+  target: CommentTarget;
   thread: Thread;
   replyTo: Comment | null;
   onReply: (comment: Comment) => void;
@@ -15,7 +15,7 @@ type CommentThreadProps = {
 };
 
 /** Корневой комментарий, а внутри него — ветка ответов с чертой слева и форма ответа, если отвечают в этой ветке. */
-const CommentThread = ({ postId, thread, replyTo, onReply, onSent, onCancel }: CommentThreadProps) => {
+const CommentThread = ({ target, thread, replyTo, onReply, onSent, onCancel }: CommentThreadProps) => {
   const root = thread.comment;
   const replying = replyTo !== null && (replyTo.id === root.id || replyTo.parent_id === root.id);
   const open = thread.replies.length > 0 || replying;
@@ -29,7 +29,7 @@ const CommentThread = ({ postId, thread, replyTo, onReply, onSent, onCancel }: C
           ))}
 
           {replying && (
-            <ReplyForm postId={postId} replyTo={replyTo} onSent={onSent} onCancel={onCancel} />
+            <ReplyForm target={target} replyTo={replyTo} onSent={onSent} onCancel={onCancel} />
           )}
         </div>
       )}

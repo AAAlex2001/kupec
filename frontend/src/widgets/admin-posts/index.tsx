@@ -1,7 +1,14 @@
 "use client";
 
 import { useState } from "react";
-import { fetchAdminPosts, PostCard, type AdminPostPage, type Post, type PostStatus } from "@/entities/post";
+import {
+  fetchAdminPosts,
+  fetchAdminUserPosts,
+  PostCard,
+  type AdminPostPage,
+  type Post,
+  type PostStatus,
+} from "@/entities/post";
 import { PostModeration } from "@/features/moderate-post";
 import { usePaged } from "@/shared/lib/use-paged";
 import Button from "@/shared/ui/button";
@@ -16,23 +23,39 @@ const TABS: { value: PostStatus; label: string }[] = [
   { value: "hidden", label: "Скрытые" },
 ];
 
+const AUTHOR_TABS: { value: PostStatus; label: string }[] = [
+  { value: "published", label: "Опубликованные" },
+  { value: "draft", label: "Черновики" },
+  { value: "hidden", label: "Скрытые" },
+];
+
 const PAGE_SIZE = 20;
 
-/** Админка «Публикации»: посты по вкладкам, скрыть, вернуть или удалить. */
-const AdminPosts = () => {
+type AdminPostsProps = {
+  authorId?: number;
+};
+
+/** Админка «Публикации»: посты по вкладкам, скрыть, вернуть или удалить.
+ *
+ * authorId — только посты этого пользователя, с черновиками; для страницы пользователя, без своего заголовка.
+ */
+const AdminPosts = ({ authorId }: AdminPostsProps) => {
   const [status, setStatus] = useState<PostStatus>("published");
-  const list = usePaged<Post, AdminPostPage>(status, (offset) =>
-    fetchAdminPosts(status, PAGE_SIZE, offset),
+  const list = usePaged<Post, AdminPostPage>(`${authorId ?? "all"}-${status}`, (offset) =>
+    authorId
+      ? fetchAdminUserPosts(authorId, status, PAGE_SIZE, offset)
+      : fetchAdminPosts(status, PAGE_SIZE, offset),
   );
+  const tabs = authorId ? AUTHOR_TABS : TABS;
 
   return (
     <section className={styles.section}>
-      <Title as="h1">Публикации</Title>
+      {!authorId && <Title as="h1">Публикации</Title>}
 
       <Tabs
         ariaLabel="Состояние публикаций"
         value={status}
-        tabs={TABS.map((tab) => ({ ...tab, count: list.page?.counts[tab.value] ?? 0 }))}
+        tabs={tabs.map((tab) => ({ ...tab, count: list.page?.counts[tab.value] ?? 0 }))}
         onChange={(value) => setStatus(value as PostStatus)}
       />
 

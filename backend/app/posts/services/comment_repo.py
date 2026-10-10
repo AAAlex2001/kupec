@@ -1,9 +1,10 @@
-"""Репозитории комментариев: запросы к таблицам post_comments и comment_likes."""
+"""Репозитории комментариев к постам и статьям: запросы к таблицам post_comments и comment_likes."""
 
-from sqlalchemy import delete, func, select, update
+from sqlalchemy import ColumnElement, delete, func, select, update
 from sqlalchemy.dialects.postgresql import insert
 from sqlalchemy.ext.asyncio import AsyncSession
 
+from app.articles.models import Article
 from app.posts.models import CommentLike, Post, PostComment
 
 
@@ -19,11 +20,14 @@ class PostCommentRepository:
         return await self.db.get(PostComment, comment_id)
 
     async def list_roots(
-        self, post_id: int, limit: int, offset: int
+        self, owner: ColumnElement[bool], limit: int, offset: int
     ) -> tuple[list[PostComment], int]:
-        """Корневые комментарии поста по порядку написания и сколько их всего."""
+        """Корневые комментарии поста или статьи по порядку написания и сколько их всего.
 
-        conditions = [PostComment.post_id == post_id, PostComment.parent_id.is_(None)]
+        owner — чьи комментарии: PostComment.post_id == id или PostComment.article_id == id.
+        """
+
+        conditions = [owner, PostComment.parent_id.is_(None)]
         stmt = (
             select(PostComment)
             .where(*conditions)
@@ -51,11 +55,11 @@ class PostCommentRepository:
         return list(result.unique().scalars().all())
 
     async def add(self, comment: PostComment) -> PostComment:
-        """Сохранить новый комментарий и пересчитать комментарии поста."""
+        """Сохранить новый комментарий и пересчитать комментарии поста или статьи."""
 
         self.db.add(comment)
         await self.db.commit()
-        await self.refresh_post_count(comment.post_id)
+        await self.refresh_count(comment.post_id, comment.article_id)
 
         return await self.reload(comment.id)
 
@@ -67,20 +71,27 @@ class PostCommentRepository:
         return await self.reload(comment.id)
 
     async def delete(self, comment: PostComment) -> None:
-        """Удалить комментарий вместе с его веткой и пересчитать комментарии поста."""
+        """Удалить комментарий вместе с его веткой и пересчитать комментарии поста или статьи."""
 
         post_id = comment.post_id
+        article_id = comment.article_id
         await self.db.delete(comment)
         await self.db.commit()
-        await self.refresh_post_count(post_id)
+        await self.refresh_count(post_id, article_id)
 
-    async def refresh_post_count(self, post_id: int) -> None:
-        """Пересчитать, сколько комментариев у поста."""
+    async def refresh_count(self, post_id: int | None, article_id: int | None) -> None:
+        """Пересчитать, сколько комментариев у поста или у статьи."""
 
-        count = select(func.count()).select_from(PostComment).where(PostComment.post_id == post_id)
-        await self.db.execute(
-            update(Post).where(Post.id == post_id).values(comments_count=count.scalar_subquery())
-        )
+        if post_id is not None:
+            count = select(func.count()).where(PostComment.post_id == post_id).scalar_subquery()
+            await self.db.execute(update(Post).where(Post.id == post_id).values(comments_count=count))
+
+        if article_id is not None:
+            count = select(func.count()).where(PostComment.article_id == article_id).scalar_subquery()
+            await self.db.execute(
+                update(Article).where(Article.id == article_id).values(comments_count=count)
+            )
+
         await self.db.commit()
 
     async def refresh_likes(self, comment_id: int) -> int:

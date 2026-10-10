@@ -9,8 +9,13 @@ export const HELP_PATH = "/help";
 export const userPath = (id: number) => `/users/${id}`;
 export const FEED_PATH = "/posts";
 export const postPath = (id: number) => `${FEED_PATH}/${id}`;
-export const POST_COMMENTS_ANCHOR = "comments";
-export const postCommentsPath = (id: number) => `${postPath(id)}#${POST_COMMENTS_ANCHOR}`;
+export const COMMENTS_ANCHOR = "comments";
+export const postCommentsPath = (id: number) => `${postPath(id)}#${COMMENTS_ANCHOR}`;
+export const BLOG_PATH = "/blog";
+export const NEWS_PATH = "/news";
+export const articlePath = (section: string, slug: string) => `/${section}/${slug}`;
+export const articleCommentsPath = (section: string, slug: string) =>
+  `${articlePath(section, slug)}#${COMMENTS_ANCHOR}`;
 
 export const ACCOUNT_PATH = "/account";
 export const MY_LISTINGS_PATH = "/account/listings";
@@ -38,6 +43,9 @@ export const ADMIN_CATEGORIES_PATH = "/admin/categories";
 export const ADMIN_ATTRIBUTES_PATH = "/admin/attributes";
 export const ADMIN_UNITS_PATH = "/admin/units";
 export const adminUserPath = (id: number) => `${ADMIN_USERS_PATH}/${id}`;
+export const ADMIN_ARTICLES_PATH = "/admin/articles";
+export const NEW_ARTICLE_PATH = "/admin/articles/new";
+export const adminArticlePath = (id: number) => `${ADMIN_ARTICLES_PATH}/${id}`;
 
 export const RULES_PATH = "/rules";
 export const TERMS_PATH = "/terms";

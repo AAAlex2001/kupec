@@ -1,0 +1,36 @@
+@use "shared/styles/colors" as *;
+
+.reactions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 8px 0;
+
+  border-top: 1px solid #e2e5ea;
+  border-bottom: 1px solid #e2e5ea;
+}
+
+.panel {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.count {
+  font-family: "Inter";
+  font-size: 13px;
+  line-height: 16px;
+
+  color: #70757f;
+}
+
+.liked svg {
+  color: $favorite;
+  fill: $favorite;
+}

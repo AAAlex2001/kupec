@@ -1,6 +1,7 @@
 "use client";
 
 import { useId } from "react";
+import type { CommentTarget } from "@/entities/comment";
 import { useUser } from "@/entities/user";
 import Button from "@/shared/ui/button";
 import Field from "@/shared/ui/field";
@@ -12,15 +13,15 @@ import styles from "./style.module.scss";
 const MAX_LENGTH = 2000;
 
 type CommentFormProps = {
-  postId: number;
+  target: CommentTarget;
   onSent: () => void;
 };
 
-/** Новый комментарий к публикации: поле и «Отправить комментарий». Гостю — предложение войти. */
-const CommentForm = ({ postId, onSent }: CommentFormProps) => {
+/** Новый комментарий к посту или статье: поле и «Отправить комментарий». Гостю — предложение войти. */
+const CommentForm = ({ target, onSent }: CommentFormProps) => {
   const { user } = useUser();
   const id = useId();
-  const form = useCommentForm(postId, null, onSent);
+  const form = useCommentForm(target, null, onSent);
 
   if (!user) return <CommentGuest />;
 
@@ -32,7 +33,7 @@ const CommentForm = ({ postId, onSent }: CommentFormProps) => {
         form.send();
       }}
     >
-      <Field label="Новый комментарий к публикации" htmlFor={id} error={form.error}>
+      <Field label="Новый комментарий" htmlFor={id} error={form.error}>
         <Textarea
           id={id}
           value={form.text}

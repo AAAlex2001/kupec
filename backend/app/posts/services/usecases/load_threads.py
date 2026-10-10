@@ -1,6 +1,8 @@
-"""Сценарий веток комментариев постранично."""
+"""Сценарий веток комментариев постранично — у поста или у статьи."""
 
-from app.posts.models import Post, PostComment
+from sqlalchemy import ColumnElement
+
+from app.posts.models import PostComment
 from app.posts.schemas import CommentSchema, CommentThreadPageSchema, CommentThreadSchema
 from app.posts.services.comment_repo import CommentLikeRepository, PostCommentRepository
 from app.users.models import User
@@ -22,11 +24,19 @@ class LoadThreadsUseCase:
         return await self.likes.liked_ids(user.id, [item.id for item in items])
 
     async def execute(
-        self, post: Post, user: User | None, limit: int, offset: int
+        self,
+        owner: ColumnElement[bool],
+        comments_count: int,
+        user: User | None,
+        limit: int,
+        offset: int,
     ) -> CommentThreadPageSchema:
-        """Ветки комментариев, сколько веток всего и сколько комментариев у поста."""
+        """Ветки комментариев, сколько веток всего и сколько комментариев всего.
 
-        roots, total = await self.comments.list_roots(post.id, limit, offset)
+        owner — чьи комментарии: PostComment.post_id == id или PostComment.article_id == id.
+        """
+
+        roots, total = await self.comments.list_roots(owner, limit, offset)
         replies = await self.comments.list_replies([root.id for root in roots])
         liked = await self.liked(user, [*roots, *replies])
 
@@ -42,6 +52,4 @@ class LoadThreadsUseCase:
             for root in roots
         ]
 
-        return CommentThreadPageSchema(
-            items=threads, total=total, comments_count=post.comments_count
-        )
+        return CommentThreadPageSchema(items=threads, total=total, comments_count=comments_count)

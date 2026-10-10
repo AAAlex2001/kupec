@@ -4,6 +4,8 @@ import {
   Heading2Icon,
   Heading3Icon,
   ItalicIcon,
+  ListIcon,
+  ListOrderedIcon,
   QuoteIcon,
   UnderlineIcon,
 } from "@/shared/ui/icons";
@@ -38,6 +40,18 @@ export const TOOLS = [
     label: "Подчёркнутый",
     Icon: UnderlineIcon,
     run: (editor: Editor) => editor.chain().focus().toggleUnderline().run(),
+  },
+  {
+    name: "bulletList",
+    label: "Список",
+    Icon: ListIcon,
+    run: (editor: Editor) => editor.chain().focus().toggleBulletList().run(),
+  },
+  {
+    name: "orderedList",
+    label: "Нумерованный список",
+    Icon: ListOrderedIcon,
+    run: (editor: Editor) => editor.chain().focus().toggleOrderedList().run(),
   },
   {
     name: "blockquote",

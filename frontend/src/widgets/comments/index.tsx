@@ -1,8 +1,13 @@
 "use client";
 
 import { useState } from "react";
-import { fetchThreads, type Comment, type Thread, type ThreadPage } from "@/entities/comment";
-import type { Post } from "@/entities/post";
+import {
+  fetchThreads,
+  type Comment,
+  type CommentTarget,
+  type Thread,
+  type ThreadPage,
+} from "@/entities/comment";
 import { CommentForm } from "@/features/write-comment";
 import { usePaged } from "@/shared/lib/use-paged";
 import { useScrollToHash } from "@/shared/lib/use-scroll-to-hash";
@@ -15,15 +20,16 @@ import styles from "./style.module.scss";
 
 const PAGE_SIZE = 10;
 
-type PostCommentsProps = {
+type CommentsProps = {
   id: string;
-  post: Post;
+  target: CommentTarget;
+  count: number;
 };
 
-/** Комментарии к публикации: счётчик, форма, ветки с ответами и «Загрузить ещё». По ссылке с #id прокручивается сюда. */
-const PostComments = ({ id, post }: PostCommentsProps) => {
-  const threads = usePaged<Thread, ThreadPage>(String(post.id), (offset) =>
-    fetchThreads(post.id, PAGE_SIZE, offset),
+/** Обсуждение поста или статьи: счётчик, форма, ветки с ответами и «Загрузить ещё». По ссылке с #id прокручивается сюда. */
+const Comments = ({ id, target, count }: CommentsProps) => {
+  const threads = usePaged<Thread, ThreadPage>(`${target.kind}-${target.id}`, (offset) =>
+    fetchThreads(target, PAGE_SIZE, offset),
   );
   const [replyTo, setReplyTo] = useState<Comment | null>(null);
   useScrollToHash(id, threads.items !== null);
@@ -35,9 +41,9 @@ const PostComments = ({ id, post }: PostCommentsProps) => {
 
   return (
     <section id={id} className={styles.comments}>
-      <Title as="h2">Комментарии · {threads.page?.comments_count ?? post.comments_count}</Title>
+      <Title as="h2">Комментарии · {threads.page?.comments_count ?? count}</Title>
 
-      <CommentForm postId={post.id} onSent={sent} />
+      <CommentForm target={target} onSent={sent} />
 
       {threads.error && <Notice tone="error">{threads.error}</Notice>}
       {!threads.items && !threads.error && <Loader />}
@@ -46,7 +52,7 @@ const PostComments = ({ id, post }: PostCommentsProps) => {
         {threads.items?.map((thread) => (
           <CommentThread
             key={thread.comment.id}
-            postId={post.id}
+            target={target}
             thread={thread}
             replyTo={replyTo}
             onReply={setReplyTo}
@@ -65,4 +71,4 @@ const PostComments = ({ id, post }: PostCommentsProps) => {
   );
 };
 
-export default PostComments;
+export default Comments;

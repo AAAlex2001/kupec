@@ -25,6 +25,8 @@ const EditorToolbar = ({ editor, panel, panelOpen, onPanelToggle }: EditorToolba
       bold: current.isActive("bold"),
       italic: current.isActive("italic"),
       underline: current.isActive("underline"),
+      bulletList: current.isActive("bulletList"),
+      orderedList: current.isActive("orderedList"),
       blockquote: current.isActive("blockquote"),
       link: current.isActive("link"),
     }),

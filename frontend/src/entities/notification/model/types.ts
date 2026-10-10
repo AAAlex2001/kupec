@@ -5,6 +5,7 @@ export type Notification = {
   kind: NotificationKind;
   actor: { id: number; name: string | null; avatar_url: string | null };
   post_id: number | null;
+  article_path: string | null;
   read: boolean;
   created_at: string;
 };

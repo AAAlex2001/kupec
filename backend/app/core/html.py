@@ -1,8 +1,21 @@
-"""Очистка текста поста из редактора."""
+"""Очистка текста из редактора: постов и статей."""
 
 import nh3
 
-ALLOWED_TAGS = {"p", "br", "h2", "h3", "strong", "em", "u", "blockquote", "a"}
+ALLOWED_TAGS = {
+    "p",
+    "br",
+    "h2",
+    "h3",
+    "strong",
+    "em",
+    "u",
+    "blockquote",
+    "ul",
+    "ol",
+    "li",
+    "a",
+}
 ALLOWED_ATTRIBUTES = {"a": {"href"}}
 ALLOWED_SCHEMES = {"http", "https"}
 

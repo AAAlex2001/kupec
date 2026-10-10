@@ -1,0 +1,48 @@
+.cover {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.title {
+  font-family: "Inter";
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 20px;
+
+  color: #1a1a1a;
+}
+
+.hint {
+  font-family: "Inter";
+  font-size: 13px;
+  line-height: 18px;
+
+  color: #70757f;
+}
+
+.preview {
+  position: relative;
+
+  width: 100%;
+  max-width: 480px;
+  aspect-ratio: 16 / 9;
+
+  background: #f5f6f8;
+  border-radius: 8px;
+  overflow: hidden;
+
+  img {
+    object-fit: cover;
+  }
+}
+
+.buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.file {
+  display: none;
+}

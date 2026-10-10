@@ -7,7 +7,7 @@ from app.notifications.services.usecases.notify import NotifyUseCase
 from app.posts.models import Post, PostStatus
 from app.posts.schemas import RepostSaveSchema
 from app.posts.services.repo import PostRepository
-from app.posts.services.validators import clean_html
+from app.core.html import clean_html
 from app.users.models import User
 
 

@@ -1,5 +1,6 @@
 """Все модели приложения в одном месте, чтобы их видели Alembic и SQLAlchemy."""
 
+from app.articles.models import Article, ArticleLike
 from app.attributes.models import Attribute, AttributeOption, CategoryAttribute
 from app.auth.models import AuthCode, Session
 from app.catalog.models import Category
@@ -26,6 +27,8 @@ from app.users.models import User
 
 __all__ = [
     "Base",
+    "Article",
+    "ArticleLike",
     "Attribute",
     "AttributeOption",
     "CategoryAttribute",

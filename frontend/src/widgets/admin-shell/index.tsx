@@ -3,6 +3,7 @@
 import { usePathname } from "next/navigation";
 import type { ReactNode } from "react";
 import {
+  ADMIN_ARTICLES_PATH,
   ADMIN_ATTRIBUTES_PATH,
   ADMIN_CATEGORIES_PATH,
   ADMIN_LISTINGS_PATH,
@@ -23,6 +24,7 @@ const SECTIONS = [
   { href: ADMIN_REVIEWS_PATH, label: "Отзывы" },
   { href: ADMIN_POSTS_PATH, label: "Публикации" },
   { href: ADMIN_REPORTS_PATH, label: "Жалобы" },
+  { href: ADMIN_ARTICLES_PATH, label: "Статьи" },
   { href: ADMIN_CATEGORIES_PATH, label: "Категории" },
   { href: ADMIN_ATTRIBUTES_PATH, label: "Атрибуты" },
   { href: ADMIN_UNITS_PATH, label: "Единицы" },

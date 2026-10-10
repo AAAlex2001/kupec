@@ -1,7 +1,7 @@
 "use client";
 
 import { useId } from "react";
-import type { Comment } from "@/entities/comment";
+import type { Comment, CommentTarget } from "@/entities/comment";
 import Button from "@/shared/ui/button";
 import Field from "@/shared/ui/field";
 import Textarea from "@/shared/ui/textarea";
@@ -11,16 +11,16 @@ import styles from "./style.module.scss";
 const MAX_LENGTH = 2000;
 
 type ReplyFormProps = {
-  postId: number;
+  target: CommentTarget;
   replyTo: Comment;
   onSent: () => void;
   onCancel: () => void;
 };
 
 /** Ответ на комментарий: кому, цитата, поле «Ваш ответ», «Отправить ответ» и «Отмена». */
-const ReplyForm = ({ postId, replyTo, onSent, onCancel }: ReplyFormProps) => {
+const ReplyForm = ({ target, replyTo, onSent, onCancel }: ReplyFormProps) => {
   const id = useId();
-  const form = useCommentForm(postId, replyTo.id, onSent);
+  const form = useCommentForm(target, replyTo.id, onSent);
 
   return (
     <form

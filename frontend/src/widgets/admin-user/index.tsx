@@ -9,6 +9,7 @@ import Notice from "@/shared/ui/notice";
 import RatingLabel from "@/shared/ui/rating-label";
 import Title from "@/shared/ui/title";
 import AdminListings from "@/widgets/admin-listings";
+import AdminPosts from "@/widgets/admin-posts";
 import { useAdminUser } from "./model/use-admin-user";
 import styles from "./style.module.scss";
 
@@ -16,7 +17,7 @@ type AdminUserProps = {
   userId: number;
 };
 
-/** Пользователь в админке: контакты, рейтинг и все его объявления с действиями. */
+/** Пользователь в админке: контакты, рейтинг, все его объявления и публикации с действиями. */
 const AdminUser = ({ userId }: AdminUserProps) => {
   const { user, error } = useAdminUser(userId);
 
@@ -46,6 +47,9 @@ const AdminUser = ({ userId }: AdminUserProps) => {
 
       <Title>Объявления</Title>
       <AdminListings ownerId={user.id} />
+
+      <Title>Публикации</Title>
+      <AdminPosts authorId={user.id} />
     </div>
   );
 };

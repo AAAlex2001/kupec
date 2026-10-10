@@ -40,6 +40,11 @@ class Settings(BaseSettings):
     ai_model: str = "deepseek/deepseek-v3.2"
     ai_requests_per_hour: int = Field(30, ge=1, description="Запросов к ИИ на человека в час")
 
+    indexnow_key: str = Field(
+        "4bdf9933a4d2d0f9511613b9188be059",
+        description="Ключ IndexNow. Публичный: тот же лежит файлом /<ключ>.txt на сайте",
+    )
+
     site_url: str = Field(
         "http://localhost:3000",
         validation_alias="NEXT_PUBLIC_SITE_URL",

@@ -45,6 +45,20 @@
     margin-top: 0;
   }
 
+  ul,
+  ol {
+    margin: 8px 0;
+    padding-left: 24px;
+  }
+
+  li + li {
+    margin-top: 4px;
+  }
+
+  li p {
+    min-height: 0;
+  }
+
   blockquote {
     margin: 8px 0;
     padding-left: 12px;

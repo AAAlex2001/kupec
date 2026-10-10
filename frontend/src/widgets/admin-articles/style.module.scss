@@ -1,0 +1,72 @@
+@use "shared/styles/colors" as *;
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.head {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+
+.empty {
+  font-family: "Inter";
+  font-size: 14px;
+  line-height: 20px;
+
+  color: #70757f;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+  list-style: none;
+}
+
+.row {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 14px 16px;
+
+  text-decoration: none;
+
+  background: #ffffff;
+  border: 1px solid #e2e5ea;
+  border-radius: 8px;
+  transition: border-color 0.15s ease;
+}
+
+.row:hover {
+  border-color: $accent;
+}
+
+.row:focus-visible {
+  outline: 2px solid $accent;
+  outline-offset: 2px;
+}
+
+.title {
+  font-family: "Inter";
+  font-weight: 600;
+  font-size: 15px;
+  line-height: 22px;
+
+  color: #1a1a1a;
+}
+
+.meta {
+  font-family: "Inter";
+  font-size: 13px;
+  line-height: 18px;
+
+  color: #70757f;
+  overflow-wrap: anywhere;
+}

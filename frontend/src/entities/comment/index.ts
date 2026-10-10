@@ -1,4 +1,11 @@
-export type { Comment, CommentLikes, CommentPayload, Thread, ThreadPage } from "./model/types";
+export type {
+  Comment,
+  CommentLikes,
+  CommentPayload,
+  CommentTarget,
+  Thread,
+  ThreadPage,
+} from "./model/types";
 export {
   createComment,
   deleteComment,

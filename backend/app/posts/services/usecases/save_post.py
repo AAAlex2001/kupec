@@ -11,7 +11,7 @@ from app.posts.services.exceptions import (
     PostMediaNotFoundError,
 )
 from app.posts.services.repo import PostMediaRepository, PostRepository
-from app.posts.services.validators import clean_html, has_text
+from app.core.html import clean_html, has_text
 
 
 class SavePostUseCase:

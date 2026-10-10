@@ -1,0 +1,32 @@
+.seo {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 20px;
+
+  background: #f5f6f8;
+  border-radius: 12px;
+}
+
+.head {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.title {
+  font-family: "Inter";
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 24px;
+
+  color: #1a1a1a;
+}
+
+.hint {
+  font-family: "Inter";
+  font-size: 13px;
+  line-height: 18px;
+
+  color: #70757f;
+}

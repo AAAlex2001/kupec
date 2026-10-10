@@ -5,6 +5,7 @@ from datetime import datetime
 from sqlalchemy import select, union
 from sqlalchemy.ext.asyncio import AsyncSession
 
+from app.articles.models import Article, ArticleStatus
 from app.listings.models import Listing, ListingStatus
 from app.posts.models import Post, PostStatus
 
@@ -42,6 +43,19 @@ class SitemapRepository:
         result = await self.db.execute(stmt)
 
         return [(row.id, row.updated_at) for row in result.all()]
+
+    async def articles(self) -> list[tuple[str, datetime]]:
+        """Опубликованные статьи блога и новости: адрес и когда изменены."""
+
+        stmt = (
+            select(Article)
+            .where(Article.status == ArticleStatus.PUBLISHED)
+            .order_by(Article.published_at.desc())
+            .limit(SITEMAP_LIMIT)
+        )
+        result = await self.db.execute(stmt)
+
+        return [(article.path, article.updated_at) for article in result.scalars().all()]
 
     async def authors(self) -> list[int]:
         """Авторы, у которых есть опубликованные объявления или посты."""

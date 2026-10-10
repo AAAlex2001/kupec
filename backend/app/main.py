@@ -4,9 +4,11 @@ from fastapi import FastAPI, Request, Response
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 
+from app.admin import article_routes as admin_articles
 from app.admin import catalog_routes as admin_catalog
 from app.admin import post_routes as admin_posts
 from app.admin import routes as admin
+from app.articles import routes as articles
 from app.auth import routes as auth
 from app.catalog import routes as catalog
 from app.chats import routes as chats
@@ -73,6 +75,8 @@ app.include_router(admin_catalog.router, prefix="/api/v1")
 app.include_router(admin_posts.router, prefix="/api/v1")
 app.include_router(notifications.router, prefix="/api/v1")
 app.include_router(seo.router, prefix="/api/v1")
+app.include_router(articles.router, prefix="/api/v1")
+app.include_router(admin_articles.router, prefix="/api/v1")
 
 Path(settings.media_dir).mkdir(parents=True, exist_ok=True)
 app.mount(MEDIA_URL, StaticFiles(directory=settings.media_dir), name="media")

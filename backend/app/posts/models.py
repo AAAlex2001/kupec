@@ -160,16 +160,22 @@ class PostSave(Base):
 
 
 class PostComment(Base):
-    """Комментарий к посту. Ответы собираются в ветку под корневым комментарием.
+    """Комментарий к посту или к статье блога и новостей — ровно к чему-то одному.
 
-    parent_id — корень ветки, reply_to_id — комментарий, на который отвечают.
+    Ответы собираются в ветку под корневым комментарием: parent_id — корень ветки,
+    reply_to_id — комментарий, на который отвечают.
     """
 
     __tablename__ = "post_comments"
 
     id: Mapped[int] = mapped_column(Integer, primary_key=True)
 
-    post_id: Mapped[int] = mapped_column(ForeignKey("posts.id", ondelete="CASCADE"), index=True)
+    post_id: Mapped[int | None] = mapped_column(
+        ForeignKey("posts.id", ondelete="CASCADE"), index=True
+    )
+    article_id: Mapped[int | None] = mapped_column(
+        ForeignKey("articles.id", ondelete="CASCADE"), index=True
+    )
     author_id: Mapped[int] = mapped_column(ForeignKey("users.id", ondelete="CASCADE"), index=True)
     parent_id: Mapped[int | None] = mapped_column(
         ForeignKey("post_comments.id", ondelete="CASCADE")
@@ -191,9 +197,19 @@ class PostComment(Base):
     )
 
     __table_args__ = (
+        CheckConstraint(
+            "(post_id IS NULL) <> (article_id IS NULL)", name="ck_post_comments_target"
+        ),
         Index(
             "ix_post_comments_roots",
             post_id,
+            created_at,
+            id,
+            postgresql_where=ROOTS_ONLY,
+        ),
+        Index(
+            "ix_post_comments_article_roots",
+            article_id,
             created_at,
             id,
             postgresql_where=ROOTS_ONLY,

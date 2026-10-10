@@ -412,7 +412,9 @@ async def list_comments(
 ) -> CommentThreadPageSchema:
     """Ветки комментариев по порядку написания: корневой комментарий и все ответы в нём. Открыты всем."""
 
-    return await usecase.execute(post, user, limit, offset)
+    return await usecase.execute(
+        PostComment.post_id == post.id, post.comments_count, user, limit, offset
+    )
 
 
 @router.post("/{post_id}/comments", status_code=status.HTTP_201_CREATED)

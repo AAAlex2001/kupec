@@ -3,14 +3,14 @@ import type { CategoryNode } from "@/entities/category";
 import { categoryPath, HOME_PATH } from "@/shared/config/routes";
 import { SITE_DESCRIPTION, SITE_NAME } from "@/shared/config/site";
 import Logo from "@/shared/ui/logo";
-import { ALL_LISTINGS_LINK, COPYRIGHT, FOOTER_GROUPS, LEGAL_LINKS } from "./data";
+import { ALL_LISTINGS_LINK, COPYRIGHT, FOOTER_GROUPS, LEGAL_LINKS, MEDIA_LINKS } from "./data";
 import styles from "./style.module.scss";
 
 type FooterProps = {
   categories: CategoryNode[];
 };
 
-/** Подвал по разделам: о площадке, категории с главной, кабинет, публикации, помощь и правовая информация. */
+/** Подвал: о площадке с «Новостями» и «Блогом», категории с главной, кабинет, публикации, помощь и правовая информация. */
 const Footer = ({ categories }: FooterProps) => {
   const categoryLinks = categories.map(({ name, slug }) => ({ label: name, href: categoryPath(slug) }));
   const groups = [
@@ -24,6 +24,14 @@ const Footer = ({ categories }: FooterProps) => {
         <div className={styles.brand}>
           <Logo href={HOME_PATH} ariaLabel={`${SITE_NAME} — на главную`} size="sm" />
           <p className={styles.description}>{SITE_DESCRIPTION}</p>
+
+          <nav className={styles.media} aria-label="Статьи">
+            {MEDIA_LINKS.map(({ label, href }) => (
+              <Link key={href} className={styles.mediaLink} href={href}>
+                {label}
+              </Link>
+            ))}
+          </nav>
         </div>
 
         <div className={styles.groups}>

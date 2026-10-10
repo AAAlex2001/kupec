@@ -1,4 +1,4 @@
-import { postCommentsPath, postPath, userPath } from "@/shared/config/routes";
+import { COMMENTS_ANCHOR, postCommentsPath, postPath, userPath } from "@/shared/config/routes";
 import type { Notification, NotificationKind } from "../model/types";
 
 const TEXTS: Record<NotificationKind, string> = {
@@ -14,6 +14,7 @@ export const notificationText = (notification: Notification) => TEXTS[notificati
 
 /** Куда ведёт уведомление: к комментариям поста, к посту или к тому, кто подписался. */
 export const notificationHref = (notification: Notification) => {
+  if (notification.article_path) return `${notification.article_path}#${COMMENTS_ANCHOR}`;
   if (notification.post_id === null) return userPath(notification.actor.id);
   if (notification.kind === "comment" || notification.kind === "reply") {
     return postCommentsPath(notification.post_id);

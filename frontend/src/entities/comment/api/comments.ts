@@ -1,13 +1,22 @@
 import { jsonBody, request } from "@/shared/api";
-import type { Comment, CommentLikes, CommentPayload, ThreadPage } from "../model/types";
+import type {
+  Comment,
+  CommentLikes,
+  CommentPayload,
+  CommentTarget,
+  ThreadPage,
+} from "../model/types";
+
+/** Адрес комментариев поста или статьи: /v1/posts/5/comments или /v1/articles/7/comments. */
+const commentsUrl = (target: CommentTarget) => `/v1/${target.kind}/${target.id}/comments`;
 
 /** Страница веток комментариев: корневой комментарий и ответы в нём. */
-export const fetchThreads = (postId: number, limit: number, offset: number) =>
-  request<ThreadPage>(`/v1/posts/${postId}/comments?limit=${limit}&offset=${offset}`);
+export const fetchThreads = (target: CommentTarget, limit: number, offset: number) =>
+  request<ThreadPage>(`${commentsUrl(target)}?limit=${limit}&offset=${offset}`);
 
 /** Написать комментарий или ответ. */
-export const createComment = (postId: number, payload: CommentPayload) =>
-  request<Comment>(`/v1/posts/${postId}/comments`, jsonBody("POST", payload));
+export const createComment = (target: CommentTarget, payload: CommentPayload) =>
+  request<Comment>(commentsUrl(target), jsonBody("POST", payload));
 
 /** Изменить текст своего комментария. */
 export const updateComment = (id: number, text: string) =>

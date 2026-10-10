@@ -39,6 +39,7 @@ export {
 export {
   dismissReport,
   fetchAdminPosts,
+  fetchAdminUserPosts,
   fetchReports,
   hidePost,
   removeComment,

@@ -1,3 +1,9 @@
+/** К чему комментарии: к посту или к статье блога и новостей. */
+export type CommentTarget = {
+  kind: "posts" | "articles";
+  id: number;
+};
+
 export type Comment = {
   id: number;
   author: { id: number; name: string | null; avatar_url: string | null };

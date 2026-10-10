@@ -1,11 +1,15 @@
 "use client";
 
 import { useState } from "react";
-import { createComment } from "@/entities/comment";
+import { createComment, type CommentTarget } from "@/entities/comment";
 import { errorMessage } from "@/shared/lib/errors";
 
-/** Текст комментария или ответа и отправка. После отправки поле очищается. */
-export const useCommentForm = (postId: number, replyToId: number | null, onSent: () => void) => {
+/** Текст комментария или ответа к посту или статье и отправка. После отправки поле очищается. */
+export const useCommentForm = (
+  target: CommentTarget,
+  replyToId: number | null,
+  onSent: () => void,
+) => {
   const [text, setText] = useState("");
   const [pending, setPending] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -15,7 +19,7 @@ export const useCommentForm = (postId: number, replyToId: number | null, onSent:
     setError(null);
 
     try {
-      await createComment(postId, { text: text.trim(), reply_to_id: replyToId });
+      await createComment(target, { text: text.trim(), reply_to_id: replyToId });
       setText("");
       onSent();
     } catch (failure) {

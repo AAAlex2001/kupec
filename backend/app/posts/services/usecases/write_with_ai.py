@@ -8,7 +8,7 @@ from app.core.ai import AiClient
 from app.core.config import Settings
 from app.posts.services.ai_repo import AiRequestRepository
 from app.posts.services.exceptions import EmptyAiAnswerError, TooManyAiRequestsError
-from app.posts.services.validators import clean_html, has_text
+from app.core.html import clean_html, has_text
 from app.users.models import User
 
 HOUR = timedelta(hours=1)

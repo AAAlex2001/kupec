@@ -43,6 +43,26 @@ async def list_posts(
     )
 
 
+@router.get("/users/{user_id}/posts")
+async def list_user_posts(
+    user_id: int,
+    status_filter: PostStatus = Query(PostStatus.PUBLISHED, alias="status"),
+    limit: int = Query(20, ge=1, le=100),
+    offset: int = Query(0, ge=0),
+    posts: PostRepository = Depends(get_post_repository),
+) -> AdminPostPageSchema:
+    """Посты пользователя без репостов: опубликованные, черновики и скрытые — со счётчиками вкладок."""
+
+    items, total = await posts.list_for_author(user_id, status_filter, limit, offset)
+    counts = await posts.count_for_author(user_id)
+
+    return AdminPostPageSchema(
+        items=[PostSchema.model_validate(item) for item in items],
+        total=total,
+        counts=PostCountsSchema(**counts),
+    )
+
+
 @router.post("/posts/{post_id}/hide")
 async def hide_post(
     post: Post = Depends(get_post),

@@ -24,7 +24,7 @@ from app.posts.services.exceptions import (
 from app.posts.services.usecases.create_comment import CreateCommentUseCase
 from app.posts.services.usecases.create_post import CreatePostUseCase
 from app.posts.services.usecases.create_repost import CreateRepostUseCase
-from app.posts.services.validators import clean_html
+from app.core.html import clean_html
 from app.users.models import User
 from tests.fakes import FakeNotify
 

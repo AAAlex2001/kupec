@@ -24,6 +24,7 @@ class NotificationSchema(BaseModel):
     kind: NotificationKind = Field(..., description="Комментарий, ответ, лайк, репост или подписка")
     actor: NotificationActorSchema = Field(..., description="Кто")
     post_id: int | None = Field(None, description="К какому посту")
+    article_path: str | None = Field(None, description="К какой статье: /news/slug или /blog/slug")
     read: bool = Field(..., description="Прочитано")
     created_at: datetime = Field(..., description="Когда")
 

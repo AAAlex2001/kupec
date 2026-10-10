@@ -1,0 +1,110 @@
+@use "shared/styles/layout" as *;
+@use "shared/styles/rich-text" as *;
+
+.page {
+  @include gutter;
+
+  display: flex;
+  flex-direction: column;
+  padding-top: 20px;
+  padding-bottom: 40px;
+  gap: 24px;
+}
+
+.article {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  width: 100%;
+  max-width: 760px;
+}
+
+.head {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.discussion {
+  width: 100%;
+  max-width: 760px;
+}
+
+.date {
+  font-family: "Inter";
+  font-size: 14px;
+  line-height: 20px;
+
+  color: #70757f;
+}
+
+.cover {
+  position: relative;
+
+  aspect-ratio: 16 / 9;
+
+  background: #f5f6f8;
+  border-radius: 12px;
+  overflow: hidden;
+
+  img {
+    object-fit: cover;
+  }
+}
+
+.lead {
+  font-family: "Inter";
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 26px;
+
+  color: #1a1a1a;
+}
+
+.text {
+  @include rich-text;
+}
+
+.related {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+
+  padding-top: 24px;
+
+  border-top: 1px solid #e2e5ea;
+}
+
+.relatedTitle {
+  font-family: "Inter";
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 28px;
+
+  color: #1a1a1a;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 16px;
+}
+
+@media (min-width: 768px) {
+  .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
+  }
+}
+
+@media (min-width: 1440px) {
+  .page {
+    padding-top: 32px;
+    padding-bottom: 56px;
+  }
+
+  .grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}

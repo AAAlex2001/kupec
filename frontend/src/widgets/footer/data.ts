@@ -1,4 +1,5 @@
 import {
+  BLOG_PATH,
   FAVORITES_PATH,
   FEED_PATH,
   HELP_PATH,
@@ -8,6 +9,7 @@ import {
   MY_POSTS_PATH,
   MY_REVIEWS_PATH,
   NEW_POST_PATH,
+  NEWS_PATH,
   PERSONAL_DATA_PATH,
   PRIVACY_PATH,
   REPOSTS_PATH,
@@ -18,6 +20,11 @@ import {
 } from "@/shared/config/routes";
 
 export const ALL_LISTINGS_LINK = { label: "Все объявления", href: HOME_PATH };
+
+export const MEDIA_LINKS = [
+  { label: "Новости", href: NEWS_PATH },
+  { label: "Блог", href: BLOG_PATH },
+];
 
 export const FOOTER_GROUPS = [
   {
