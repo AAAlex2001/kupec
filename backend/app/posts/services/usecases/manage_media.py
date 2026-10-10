@@ -3,7 +3,7 @@
 from fastapi import UploadFile
 from sqlalchemy.exc import SQLAlchemyError
 
-from app.core.uploads import remove_file, save_image, save_video
+from app.core.uploads import MEGABYTE, remove_file, save_image, save_video
 from app.posts.models import MediaKind, PostMedia
 from app.posts.services.exceptions import PostMediaNotFoundError, TooManyPostMediaError
 from app.posts.services.repo import PostMediaRepository
@@ -11,6 +11,7 @@ from app.users.models import User
 
 POSTS_FOLDER = "posts"
 MAX_FREE_MEDIA = 30
+MAX_MEDIA_SIZE_BYTES = 50 * MEGABYTE
 
 
 class UploadPostMediaUseCase:
@@ -26,9 +27,9 @@ class UploadPostMediaUseCase:
             raise TooManyPostMediaError(user.id)
 
         if kind == MediaKind.VIDEO:
-            path = await save_video(file, POSTS_FOLDER)
+            path = await save_video(file, POSTS_FOLDER, MAX_MEDIA_SIZE_BYTES)
         else:
-            path = await save_image(file, POSTS_FOLDER)
+            path = await save_image(file, POSTS_FOLDER, MAX_MEDIA_SIZE_BYTES)
 
         try:
             return await self.media.add(PostMedia(owner_id=user.id, kind=kind, path=path))

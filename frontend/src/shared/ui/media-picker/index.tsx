@@ -59,7 +59,7 @@ const MediaPicker = ({ title, files, max, upload, remove, onChange }: MediaPicke
         ref={inputRef}
         className={styles.file}
         type="file"
-        accept="image/jpeg,image/png,image/webp,video/mp4,video/quicktime"
+        accept="image/jpeg,image/png,image/webp,video/mp4,video/quicktime,.jpg,.jpeg,.png,.webp,.mp4,.mov"
         multiple
         onChange={(event) => {
           uploader.upload(Array.from(event.target.files ?? []));

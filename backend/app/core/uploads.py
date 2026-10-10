@@ -14,7 +14,6 @@ MEGABYTE = 1024 * 1024
 IMAGE_MAX_SIZE_BYTES = 10 * MEGABYTE
 IMAGE_EXTENSIONS = {"JPEG": ".jpg", "PNG": ".png", "WEBP": ".webp"}
 JPEG_QUALITY = 90
-VIDEO_MAX_SIZE_BYTES = 100 * MEGABYTE
 
 
 class UploadError(ValueError):
@@ -54,12 +53,12 @@ def strip_metadata(content: bytes) -> bytes:
     return output.getvalue()
 
 
-async def save_image(file: UploadFile, folder: str) -> str:
-    """Сохранить картинку в папку внутри media. Возвращает путь относительно media."""
+async def save_image(file: UploadFile, folder: str, max_size: int = IMAGE_MAX_SIZE_BYTES) -> str:
+    """Сохранить картинку не больше max_size байт в папку внутри media. Возвращает путь относительно media."""
 
-    content = await file.read(IMAGE_MAX_SIZE_BYTES + 1)
-    if len(content) > IMAGE_MAX_SIZE_BYTES:
-        raise UploadError(f"Файл больше {IMAGE_MAX_SIZE_BYTES // MEGABYTE} МБ")
+    content = await file.read(max_size + 1)
+    if len(content) > max_size:
+        raise UploadError(f"Фото больше {max_size // MEGABYTE} МБ")
 
     extension = detect_extension(content)
     cleaned = strip_metadata(content)
@@ -73,14 +72,14 @@ async def save_image(file: UploadFile, folder: str) -> str:
     return f"{folder}/{filename}"
 
 
-async def save_video(file: UploadFile, folder: str) -> str:
-    """Сохранить видео MP4 или MOV с айфона в папку внутри media. Возвращает путь относительно media.
+async def save_video(file: UploadFile, folder: str, max_size: int) -> str:
+    """Сохранить видео MP4 или MOV с айфона не больше max_size байт. Возвращает путь относительно media.
 
     MOV — тот же контейнер, что MP4, поэтому файл сохраняется с расширением .mp4: так его играют все браузеры.
     """
 
-    if file.size is None or file.size > VIDEO_MAX_SIZE_BYTES:
-        raise UploadError(f"Видео больше {VIDEO_MAX_SIZE_BYTES // MEGABYTE} МБ")
+    if file.size is None or file.size > max_size:
+        raise UploadError(f"Видео больше {max_size // MEGABYTE} МБ")
 
     head = await file.read(12)
     if head[4:8] != b"ftyp":
