@@ -3,6 +3,8 @@
 .spacer {
   flex: none;
 
+  background: $footer;
+
   height: calc(88px + env(safe-area-inset-bottom));
 }
 
