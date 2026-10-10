@@ -46,43 +46,6 @@
   color: #4b515b;
 }
 
-.media {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-}
-
-.mediaLink {
-  display: flex;
-  align-items: center;
-  padding: 0 14px;
-
-  height: 36px;
-
-  font-family: "Inter";
-  font-weight: 600;
-  font-size: 14px;
-  line-height: 20px;
-  text-decoration: none;
-
-  color: $accent-text;
-  background: #ffffff;
-  border-radius: 8px;
-  transition:
-    color 0.15s ease,
-    background-color 0.15s ease;
-}
-
-.mediaLink:hover {
-  color: #ffffff;
-  background: $accent;
-}
-
-.mediaLink:focus-visible {
-  outline: 2px solid $accent;
-  outline-offset: 2px;
-}
-
 .groups {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));

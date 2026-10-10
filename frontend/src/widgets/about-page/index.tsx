@@ -13,7 +13,7 @@ import JsonLd from "@/shared/ui/json-ld";
 import Title from "@/shared/ui/title";
 import styles from "./style.module.scss";
 
-export const ABOUT_TITLE = "О Купце";
+export const ABOUT_TITLE = "О проекте";
 export const ABOUT_DESCRIPTION = "Купец — площадка частных объявлений по всей России. Находите товары и услуги рядом, делитесь полезным и общайтесь напрямую.";
 
 const possibilities = [

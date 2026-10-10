@@ -22,16 +22,11 @@ import {
 
 export const ALL_LISTINGS_LINK = { label: "Все объявления", href: HOME_PATH };
 
-export const MEDIA_LINKS = [
-  { label: "Новости", href: NEWS_PATH },
-  { label: "Блог", href: BLOG_PATH },
-];
-
 export const FOOTER_GROUPS = [
   {
-    title: "О нас",
+    title: "О проекте",
     links: [
-      { label: "О Купце", href: ABOUT_PATH },
+      { label: "О проекте", href: ABOUT_PATH },
       { label: "Новости", href: NEWS_PATH },
       { label: "Блог", href: BLOG_PATH },
     ],

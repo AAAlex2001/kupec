@@ -1,16 +1,33 @@
 @use "shared/styles/colors" as *;
 
+:global(html):has(.contents) {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :global(html):has(.contents) {
+    scroll-behavior: auto;
+  }
+}
+
 .contents {
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
   padding: 16px;
   gap: 4px;
+
+  max-height: calc(100dvh - 124px);
+  overflow-y: auto;
+  overscroll-behavior-y: contain;
+  scrollbar-width: thin;
 
   background: #f5f6f8;
   border-radius: 8px;
 }
 
 .title {
+  flex: none;
   padding-bottom: 4px;
 
   font-family: "Inter";
@@ -22,6 +39,7 @@
 }
 
 .link {
+  flex: none;
   padding: 6px 0;
 
   font-family: "Inter";
