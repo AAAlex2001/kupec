@@ -1,0 +1,85 @@
+name: kupec
+
+x-backend: &backend
+  build: ./backend
+  image: kupec-backend
+  env_file: .env
+  environment:
+    DATABASE_URL: postgresql+asyncpg://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db:5432/${POSTGRES_DB}
+    MEDIA_DIR: /app/media
+  volumes:
+    - media:/app/media
+
+services:
+  db:
+    image: postgres:17-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    volumes:
+      - postgres:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  migrate:
+    <<: *backend
+    command: alembic upgrade head
+    restart: "no"
+    depends_on:
+      db:
+        condition: service_healthy
+
+  backend:
+    <<: *backend
+    restart: unless-stopped
+    deploy:
+      replicas: 3
+    depends_on:
+      migrate:
+        condition: service_completed_successfully
+
+  frontend:
+    build:
+      context: ./frontend
+      args:
+        API_INTERNAL_URL: http://backend:8000/api
+        NEXT_PUBLIC_SITE_URL: ${NEXT_PUBLIC_SITE_URL}
+        NEXT_PUBLIC_YANDEX_MAPS_API_KEY: ${NEXT_PUBLIC_YANDEX_MAPS_API_KEY}
+        NEXT_PUBLIC_YANDEX_GEOCODER_API_KEY: ${NEXT_PUBLIC_YANDEX_GEOCODER_API_KEY}
+        NEXT_PUBLIC_YANDEX_SUGGEST_API_KEY: ${NEXT_PUBLIC_YANDEX_SUGGEST_API_KEY}
+        NEXT_PUBLIC_LIGHTGALLERY_LICENSE_KEY: ${NEXT_PUBLIC_LIGHTGALLERY_LICENSE_KEY}
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      API_INTERNAL_URL: http://backend:8000/api
+    depends_on:
+      - backend
+
+  caddy:
+    image: caddy:2-alpine
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+      - "443:443/udp"
+    environment:
+      DOMAIN: ${DOMAIN}
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - media:/srv/media:ro
+      - caddy_data:/data
+      - caddy_config:/config
+    depends_on:
+      - backend
+      - frontend
+
+volumes:
+  postgres:
+  media:
+  caddy_data:
+  caddy_config:

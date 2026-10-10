@@ -7,7 +7,7 @@ MEDIA_URL = "/media"
 
 
 class Settings(BaseSettings):
-    model_config = SettingsConfigDict(env_file=".env", extra="ignore")
+    model_config = SettingsConfigDict(env_file="../.env", extra="ignore")
 
     database_url: str
     db_pool_size: int = Field(20, ge=1, description="Постоянных соединений с БД на процесс")
