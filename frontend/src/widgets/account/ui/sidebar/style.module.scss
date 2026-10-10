@@ -156,98 +156,18 @@
   background: #fff1f3;
 }
 
-.highlighted {
-  position: relative;
-  isolation: isolate;
-  background: linear-gradient(105deg, #f0f8ff, #f7f3ff 65%, #fff3fd);
-}
-
-.highlighted::before {
-  position: absolute;
-  inset: 0;
-  z-index: -1;
-
-  background: linear-gradient(105deg, #e6f3ff, #eee7ff 65%, #fce8fa);
-  border-radius: inherit;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.25s ease;
-  content: "";
-}
-
-.highlighted:hover {
-  background: linear-gradient(105deg, #f0f8ff, #f7f3ff 65%, #fff3fd);
-}
-
-.highlighted:hover::before {
-  opacity: 1;
-}
-
-.highlighted.active::before {
-  content: none;
-}
-
-.highlighted .label {
-  font-weight: 500;
-  color: #6f64a8;
-}
-
-.highlighted .icon,
-.highlighted .chevron {
-  color: #9a8fcf;
-}
-
-.sparkles {
+.tag {
   flex: none;
-  width: 32px;
-  height: 28px;
-  pointer-events: none;
-  filter: drop-shadow(0 0 3px rgba(146, 100, 246, 0.25));
-}
+  padding: 3px 8px;
 
-.sparkles svg {
-  display: block;
-  width: 100%;
-  height: 100%;
-}
+  font-family: "Inter";
+  font-weight: 600;
+  font-size: 11px;
+  line-height: 16px;
 
-.sparkleOne,
-.sparkleTwo,
-.sparkleThree {
-  transform-box: fill-box;
-  transform-origin: center;
-  animation: sparkle 3.6s ease-in-out infinite;
-}
-
-.sparkleTwo {
-  animation-delay: -1.2s;
-}
-
-.sparkleThree {
-  animation-delay: -2.4s;
-}
-
-@keyframes sparkle {
-  0%, 100% {
-    opacity: 0.55;
-    transform: scale(0.85);
-  }
-  50% {
-    opacity: 1;
-    transform: scale(1.1);
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .highlighted::before {
-    transition: none;
-  }
-
-  .sparkleOne,
-  .sparkleTwo,
-  .sparkleThree {
-    animation: none;
-  }
+  color: $accent-text;
+  background: $accent-soft;
+  border-radius: 4px;
 }
 
 .active,
@@ -257,21 +177,12 @@
 }
 
 .active .icon,
-.active .chevron,
-.active .label {
+.active .chevron {
   color: $accent-text;
 }
 
-.highlighted.active,
-.highlighted.active:hover {
-  color: #6f64a8;
-  background: linear-gradient(105deg, #eee8ff, #eee7ff 65%, #fce8fa);
-}
-
-.highlighted.active .icon,
-.highlighted.active .chevron,
-.highlighted.active .label {
-  color: #6f64a8;
+.active .tag {
+  background: #ffffff;
 }
 
 @media (min-width: 1440px) {

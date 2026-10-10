@@ -18,6 +18,7 @@ import {
   HeartIcon,
   MessageCircleIcon,
   SettingsIcon,
+  ShieldIcon,
   StarIcon,
 } from "@/shared/ui/icons";
 import type { IconProps } from "@/shared/ui/icons/types";
@@ -27,7 +28,7 @@ export type AccountSection = {
   label: string;
   Icon: ComponentType<IconProps>;
   ownTitle?: boolean;
-  highlighted?: boolean;
+  tag?: string;
   paths?: string[];
   action?: { label: string; href: string };
 };
@@ -48,10 +49,10 @@ export const ACCOUNT_SECTIONS: AccountSection[] = [
     label: "Публикации",
     Icon: FileTextIcon,
     ownTitle: true,
-    highlighted: true,
+    tag: "Новое",
     paths: [POSTS_PATH],
   },
   { href: SETTINGS_PATH, label: "Настройки", Icon: SettingsIcon },
 ];
 
-export const ADMIN_LINK: AccountSection = { href: ADMIN_PATH, label: "Админка", Icon: SettingsIcon };
+export const ADMIN_LINK: AccountSection = { href: ADMIN_PATH, label: "Админка", Icon: ShieldIcon };

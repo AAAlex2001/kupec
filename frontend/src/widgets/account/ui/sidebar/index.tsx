@@ -55,24 +55,16 @@ const Sidebar = ({ user }: SidebarProps) => {
       </div>
 
       <nav className={styles.nav} aria-label="Разделы кабинета">
-        {sections.map(({ href, label, Icon, highlighted }) => (
+        {sections.map(({ href, label, Icon, tag }) => (
           <Link
             key={href}
-            className={cn(styles.item, highlighted && styles.highlighted, href === current?.href && styles.active)}
+            className={cn(styles.item, href === current?.href && styles.active)}
             href={href}
             aria-current={href === current?.href ? "page" : undefined}
           >
             <Icon className={styles.icon} />
             <span className={styles.label}>{label}</span>
-            {highlighted && (
-              <span className={styles.sparkles} aria-hidden="true">
-                <svg viewBox="0 0 32 28" fill="none">
-                  <path className={styles.sparkleOne} fill="#9b63f4" d="m19 2 2 6 6 2-6 2-2 6-2-6-6-2 6-2 2-6Z" />
-                  <path className={styles.sparkleTwo} fill="#3fb7ff" d="m7 13 1.4 4.6L13 19l-4.6 1.4L7 25l-1.4-4.6L1 19l4.6-1.4L7 13Z" />
-                  <path className={styles.sparkleThree} fill="#db62e5" d="m27 18 1 3 3 1-3 1-1 3-1-3-3-1 3-1 1-3Z" />
-                </svg>
-              </span>
-            )}
+            {tag && <span className={styles.tag}>{tag}</span>}
             {counts(href) > 0 && <Badge count={counts(href)} />}
             <ChevronRightIcon className={styles.chevron} />
           </Link>
