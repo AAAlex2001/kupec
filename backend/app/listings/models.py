@@ -64,9 +64,9 @@ class Listing(Base):
 
     id: Mapped[int] = mapped_column(Integer, primary_key=True)
 
-    owner_id: Mapped[int] = mapped_column(ForeignKey("users.id", ondelete="CASCADE"), index=True)
+    owner_id: Mapped[int] = mapped_column(ForeignKey("users.id", ondelete="CASCADE"))
     kind: Mapped[str] = mapped_column(String(16))
-    status: Mapped[str] = mapped_column(String(16), default=ListingStatus.DRAFT, index=True)
+    status: Mapped[str] = mapped_column(String(16), default=ListingStatus.DRAFT)
 
     category_id: Mapped[int | None] = mapped_column(
         ForeignKey("categories.id", ondelete="RESTRICT"), index=True
@@ -123,6 +123,22 @@ class Listing(Base):
             id.desc(),
             postgresql_where=text("status = 'published'"),
         ),
+        Index(
+            "ix_listings_category_feed",
+            category_id,
+            published_at.desc(),
+            id.desc(),
+            postgresql_where=text("status = 'published'"),
+        ),
+        Index(
+            "ix_listings_city_feed",
+            city_id,
+            published_at.desc(),
+            id.desc(),
+            postgresql_where=text("status = 'published'"),
+        ),
+        Index("ix_listings_owner_updated", owner_id, status, updated_at.desc(), id.desc()),
+        Index("ix_listings_status_updated", status, updated_at.desc(), id.desc()),
         Index("ix_listings_price", "price"),
         Index(
             "ix_listings_attributes",

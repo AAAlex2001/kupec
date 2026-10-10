@@ -1,7 +1,17 @@
 from datetime import datetime
 from enum import StrEnum
 
-from sqlalchemy import Boolean, CheckConstraint, DateTime, ForeignKey, Integer, String, func
+from sqlalchemy import (
+    Boolean,
+    CheckConstraint,
+    DateTime,
+    ForeignKey,
+    Index,
+    Integer,
+    String,
+    func,
+    text,
+)
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from app.core.database import Base
@@ -25,12 +35,14 @@ class Notification(Base):
 
     id: Mapped[int] = mapped_column(Integer, primary_key=True)
 
-    user_id: Mapped[int] = mapped_column(ForeignKey("users.id", ondelete="CASCADE"), index=True)
-    actor_id: Mapped[int] = mapped_column(ForeignKey("users.id", ondelete="CASCADE"))
+    user_id: Mapped[int] = mapped_column(ForeignKey("users.id", ondelete="CASCADE"))
+    actor_id: Mapped[int] = mapped_column(ForeignKey("users.id", ondelete="CASCADE"), index=True)
     kind: Mapped[str] = mapped_column(String(16))
-    post_id: Mapped[int | None] = mapped_column(ForeignKey("posts.id", ondelete="CASCADE"))
+    post_id: Mapped[int | None] = mapped_column(
+        ForeignKey("posts.id", ondelete="CASCADE"), index=True
+    )
     comment_id: Mapped[int | None] = mapped_column(
-        ForeignKey("post_comments.id", ondelete="CASCADE")
+        ForeignKey("post_comments.id", ondelete="CASCADE"), index=True
     )
     read: Mapped[bool] = mapped_column(Boolean, default=False)
 
@@ -45,4 +57,7 @@ class Notification(Base):
             "kind IN ('comment', 'reply', 'like', 'repost', 'follow')",
             name="ck_notifications_kind",
         ),
+        Index("ix_notifications_user_feed", user_id, created_at.desc(), id.desc()),
+        Index("ix_notifications_unread", user_id, postgresql_where=text("read IS false")),
+        Index("ix_notifications_dedupe", user_id, actor_id, kind),
     )

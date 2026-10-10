@@ -1,6 +1,6 @@
 from datetime import datetime
 
-from sqlalchemy import Boolean, DateTime, Float, ForeignKey, Integer, String, func
+from sqlalchemy import Boolean, DateTime, Float, ForeignKey, Index, Integer, String, func
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from app.cities.models import City
@@ -45,6 +45,8 @@ class User(Base):
     )
 
     city: Mapped[City | None] = relationship(lazy="joined")
+
+    __table_args__ = (Index("ix_users_created_at", created_at.desc(), id.desc()),)
 
     @property
     def avatar_url(self) -> str | None:

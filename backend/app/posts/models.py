@@ -1,7 +1,17 @@
 from datetime import datetime
 from enum import StrEnum
 
-from sqlalchemy import CheckConstraint, DateTime, ForeignKey, Integer, String, Text, func
+from sqlalchemy import (
+    CheckConstraint,
+    DateTime,
+    ForeignKey,
+    Index,
+    Integer,
+    String,
+    Text,
+    func,
+    text,
+)
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from app.core.database import Base
@@ -14,6 +24,9 @@ MAX_POST_LISTINGS = 5
 MAX_POST_HTML = 30000
 MAX_COMMENT_LENGTH = 2000
 MAX_REPORT_LENGTH = 500
+
+PUBLISHED_ONLY = text("status = 'published'")
+ROOTS_ONLY = text("parent_id IS NULL")
 
 
 class ReportStatus(StrEnum):
@@ -48,7 +61,7 @@ class Post(Base):
 
     id: Mapped[int] = mapped_column(Integer, primary_key=True)
 
-    author_id: Mapped[int] = mapped_column(ForeignKey("users.id", ondelete="CASCADE"), index=True)
+    author_id: Mapped[int] = mapped_column(ForeignKey("users.id", ondelete="CASCADE"))
     repost_of_id: Mapped[int | None] = mapped_column(
         ForeignKey("posts.id", ondelete="CASCADE"), index=True
     )
@@ -83,6 +96,18 @@ class Post(Base):
 
     __table_args__ = (
         CheckConstraint("status IN ('draft', 'published', 'hidden')", name="ck_posts_status"),
+        Index(
+            "ix_posts_feed",
+            func.coalesce(published_at, created_at).desc(),
+            id.desc(),
+            postgresql_where=PUBLISHED_ONLY,
+        ),
+        Index(
+            "ix_posts_author_feed",
+            author_id,
+            func.coalesce(published_at, created_at).desc(),
+            id.desc(),
+        ),
     )
 
 
@@ -146,10 +171,10 @@ class PostComment(Base):
     post_id: Mapped[int] = mapped_column(ForeignKey("posts.id", ondelete="CASCADE"), index=True)
     author_id: Mapped[int] = mapped_column(ForeignKey("users.id", ondelete="CASCADE"), index=True)
     parent_id: Mapped[int | None] = mapped_column(
-        ForeignKey("post_comments.id", ondelete="CASCADE"), index=True
+        ForeignKey("post_comments.id", ondelete="CASCADE")
     )
     reply_to_id: Mapped[int | None] = mapped_column(
-        ForeignKey("post_comments.id", ondelete="SET NULL")
+        ForeignKey("post_comments.id", ondelete="SET NULL"), index=True
     )
 
     text: Mapped[str] = mapped_column(Text)
@@ -162,6 +187,17 @@ class PostComment(Base):
     author: Mapped[User] = relationship(lazy="joined")
     reply_to: Mapped["PostComment | None"] = relationship(
         remote_side=[id], foreign_keys=[reply_to_id], lazy="joined", join_depth=1
+    )
+
+    __table_args__ = (
+        Index(
+            "ix_post_comments_roots",
+            post_id,
+            created_at,
+            id,
+            postgresql_where=ROOTS_ONLY,
+        ),
+        Index("ix_post_comments_replies", parent_id, created_at, id),
     )
 
     @property

@@ -6,11 +6,13 @@ from sqlalchemy import (
     CheckConstraint,
     DateTime,
     ForeignKey,
+    Index,
     Integer,
     String,
     Text,
     UniqueConstraint,
     func,
+    text,
 )
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
@@ -22,6 +24,8 @@ from app.users.models import User
 MAX_REVIEW_PHOTOS = 10
 MAX_REVIEW_LENGTH = 2000
 ANONYMOUS_NAME = "Покупатель"
+
+PUBLISHED_ONLY = text("status = 'published'")
 
 
 class ReviewStatus(StrEnum):
@@ -52,7 +56,7 @@ class Review(Base):
     text: Mapped[str | None] = mapped_column(Text)
     anonymous: Mapped[bool] = mapped_column(Boolean, default=False)
 
-    status: Mapped[str] = mapped_column(String(16), default=ReviewStatus.PENDING, index=True)
+    status: Mapped[str] = mapped_column(String(16), default=ReviewStatus.PENDING)
     reject_reason: Mapped[str | None] = mapped_column(String(300))
 
     reply_text: Mapped[str | None] = mapped_column(Text)
@@ -81,6 +85,14 @@ class Review(Base):
         CheckConstraint(
             "status IN ('pending', 'published', 'rejected')", name="ck_reviews_status"
         ),
+        Index(
+            "ix_reviews_seller_published",
+            seller_id,
+            created_at.desc(),
+            id.desc(),
+            postgresql_where=PUBLISHED_ONLY,
+        ),
+        Index("ix_reviews_status_updated", status, updated_at, id),
     )
 
     @property
