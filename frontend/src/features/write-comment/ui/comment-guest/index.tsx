@@ -11,7 +11,7 @@ const CommentGuest = () => {
   return (
     <div className={styles.guest}>
       <p className={styles.text}>Войдите, чтобы оставить комментарий.</p>
-      <Button variant="secondary" onClick={openAuth}>
+      <Button variant="primary" onClick={openAuth}>
         Войти
       </Button>
     </div>
