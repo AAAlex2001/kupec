@@ -5,6 +5,7 @@ from pathlib import Path
 import sqlalchemy as sa
 from PIL import Image
 
+from app.units.schemas import UnitCreateSchema
 from migrations.data import launch_catalog_v1 as launch
 from migrations.data.fitness_catalog_v1 import apply_catalog, load_catalog
 
@@ -54,7 +55,7 @@ def test_fitness_migration_is_additive_and_repeatable() -> None:
             codes = set(connection.scalars(sa.select(launch.units.c.code).join(
                 launch.category_units, launch.units.c.id == launch.category_units.c.unit_id
             ).where(launch.category_units.c.category_id == rows[slug].id)))
-            assert codes == {"training", "hour", "fitness-membership"}
+            assert codes == {"training", "hour", "fitness-pass"}
         field_slugs = set(connection.scalars(sa.select(launch.attributes.c.slug).join(
             launch.category_attributes,
             launch.attributes.c.id == launch.category_attributes.c.attribute_id,
@@ -66,6 +67,8 @@ def test_fitness_migration_is_additive_and_repeatable() -> None:
 
 def test_fitness_catalog_has_transparent_covers_and_valid_fields() -> None:
     data = launch.validate_catalog(load_catalog())
+    for unit in data["units"]:
+        UnitCreateSchema.model_validate(unit)
     assets = Path(__file__).resolve().parents[1] / "assets" / "category-images"
     for category in data["categories"]:
         if category["slug"] == "services":

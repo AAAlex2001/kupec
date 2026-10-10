@@ -2,10 +2,10 @@
   "version": 1,
   "categories": [
     {"slug": "services", "name": "Услуги", "parent": null, "kind": "service", "sort_order": 1, "image_subject": null, "attributes": [], "units": []},
-    {"slug": "fitness-training", "name": "Фитнес и тренировки", "parent": "services", "kind": "service", "sort_order": 20, "image_subject": "blue kettlebell dumbbell and rolled exercise mat", "attributes": ["training-discipline", "training-goal", "training-location", "service-format", "session-minutes"], "units": ["training", "hour", "fitness-membership"]},
-    {"slug": "personal-training", "name": "Персональные тренировки", "parent": "fitness-training", "kind": "service", "sort_order": 0, "image_subject": "chrome blue dumbbells sports water bottle and stopwatch", "attributes": [], "units": ["training", "hour", "fitness-membership"]},
-    {"slug": "group-training", "name": "Групповые занятия", "parent": "fitness-training", "kind": "service", "sort_order": 1, "image_subject": "blue aerobic step platforms resistance band and light dumbbells", "attributes": [], "units": ["training", "hour", "fitness-membership"]},
-    {"slug": "yoga-pilates", "name": "Йога и пилатес", "parent": "fitness-training", "kind": "service", "sort_order": 2, "image_subject": "blue yoga mat lavender blocks and stretching strap", "attributes": [], "units": ["training", "hour", "fitness-membership"]}
+    {"slug": "fitness-training", "name": "Фитнес и тренировки", "parent": "services", "kind": "service", "sort_order": 20, "image_subject": "blue kettlebell dumbbell and rolled exercise mat", "attributes": ["training-discipline", "training-goal", "training-location", "service-format", "session-minutes"], "units": ["training", "hour", "fitness-pass"]},
+    {"slug": "personal-training", "name": "Персональные тренировки", "parent": "fitness-training", "kind": "service", "sort_order": 0, "image_subject": "chrome blue dumbbells sports water bottle and stopwatch", "attributes": [], "units": ["training", "hour", "fitness-pass"]},
+    {"slug": "group-training", "name": "Групповые занятия", "parent": "fitness-training", "kind": "service", "sort_order": 1, "image_subject": "blue aerobic step platforms resistance band and light dumbbells", "attributes": [], "units": ["training", "hour", "fitness-pass"]},
+    {"slug": "yoga-pilates", "name": "Йога и пилатес", "parent": "fitness-training", "kind": "service", "sort_order": 2, "image_subject": "blue yoga mat lavender blocks and stretching strap", "attributes": [], "units": ["training", "hour", "fitness-pass"]}
   ],
   "attributes": [
     {"slug": "training-discipline", "name": "Направление тренировок", "type": "multiselect", "unit": null, "is_filterable": true, "options": [
@@ -43,6 +43,6 @@
   "units": [
     {"code": "training", "label": "тренировка", "kind": "service"},
     {"code": "hour", "label": "час", "kind": "service"},
-    {"code": "fitness-membership", "label": "абонемент", "kind": "service"}
+    {"code": "fitness-pass", "label": "абонемент", "kind": "service"}
   ]
 }
