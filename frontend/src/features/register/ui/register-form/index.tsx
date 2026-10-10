@@ -59,10 +59,25 @@ const RegisterForm = ({ onSuccess }: RegisterFormProps) => {
 
       {form.error && <Notice tone="error">{form.error}</Notice>}
 
-      <p className={styles.hint}>
-        Создавая аккаунт, вы принимаете <Link href={TERMS_PATH} target="_blank" rel="noopener noreferrer">пользовательское соглашение</Link>.
-        Информация об обработке данных: <Link href={PRIVACY_PATH} target="_blank" rel="noopener noreferrer">конфиденциальность</Link> и{" "}
-        <Link href={PERSONAL_DATA_PATH} target="_blank" rel="noopener noreferrer">политика обработки персональных данных</Link>.
+      <p className={styles.consent}>
+        Создавая аккаунт, вы принимаете{" "}
+        <Link className={styles.link} href={TERMS_PATH} target="_blank" rel="noopener noreferrer">
+          пользовательское соглашение
+        </Link>{" "}
+        и{" "}
+        <Link className={styles.link} href={PRIVACY_PATH} target="_blank" rel="noopener noreferrer">
+          политику конфиденциальности
+        </Link>
+        , а также соглашаетесь на{" "}
+        <Link
+          className={styles.link}
+          href={PERSONAL_DATA_PATH}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          обработку персональных данных
+        </Link>
+        .
       </p>
 
       <Button type="submit" loading={form.pending}>

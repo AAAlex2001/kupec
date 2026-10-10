@@ -15,7 +15,7 @@ const ResendButton = ({ seconds, disabled, onClick }: ResendButtonProps) => {
   const left = useCountdown(seconds);
 
   return (
-    <Button variant="outline" disabled={disabled || left > 0} onClick={onClick}>
+    <Button variant="secondary" disabled={disabled || left > 0} onClick={onClick}>
       <MessageCircleMoreIcon />
       {left > 0 ? `Отправить повторно через ${left} с` : "Отправить код повторно"}
     </Button>
