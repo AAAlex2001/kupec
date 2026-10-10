@@ -1,4 +1,4 @@
-"""Привязать обложки первых статей из assets/article-covers, сохранив обложки из админки."""
+"""Привязать обложки статей из assets/article-covers, сохранив обложки из админки."""
 
 import asyncio
 import hashlib

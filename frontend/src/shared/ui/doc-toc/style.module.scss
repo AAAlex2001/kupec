@@ -27,6 +27,7 @@
 }
 
 .title {
+  display: none;
   flex: none;
   padding-bottom: 4px;
 
@@ -36,6 +37,71 @@
   line-height: 20px;
 
   color: #1a1a1a;
+}
+
+.toggle {
+  display: flex;
+  flex: none;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: #1a1a1a;
+  font-family: "Inter";
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 20px;
+  text-align: left;
+  cursor: pointer;
+}
+
+.toggle:focus-visible {
+  outline: 2px solid $accent;
+  outline-offset: 4px;
+}
+
+.arrow {
+  width: 8px;
+  height: 8px;
+  margin-right: 2px;
+  border-right: 2px solid currentColor;
+  border-bottom: 2px solid currentColor;
+  transform: rotate(45deg);
+  transition: transform 0.2s ease;
+}
+
+.toggle[aria-expanded="true"] .arrow {
+  transform: rotate(225deg);
+}
+
+.list {
+  display: none;
+  flex-direction: column;
+  flex: none;
+  gap: 4px;
+}
+
+.expanded {
+  display: flex;
+  padding-top: 8px;
+}
+
+@media (min-width: 1440px) {
+  .title {
+    display: block;
+  }
+
+  .toggle {
+    display: none;
+  }
+
+  .list {
+    display: flex;
+    padding-top: 0;
+  }
 }
 
 .link {

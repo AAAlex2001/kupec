@@ -39,4 +39,24 @@
 
 .slide > * {
   flex: 1 1 auto;
+  min-width: 0;
+}
+
+.wide .slide {
+  min-width: min(320px, calc(100vw - 48px));
+  max-width: min(320px, calc(100vw - 48px));
+}
+
+@media (min-width: 768px) {
+  .wide .slide {
+    min-width: 360px;
+    max-width: 360px;
+  }
+}
+
+@media (min-width: 1440px) {
+  .wide .slide {
+    min-width: 420px;
+    max-width: 420px;
+  }
 }

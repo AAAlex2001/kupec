@@ -11,6 +11,9 @@ const backendOrigin = (process.env.API_INTERNAL_URL ?? "http://127.0.0.1:8000/ap
 
 const nextConfig: NextConfig = {
   output: "standalone",
+  images: {
+    qualities: [75, 95],
+  },
   sassOptions: {
     loadPaths: [path.join(process.cwd(), "src")],
   },

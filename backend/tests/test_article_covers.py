@@ -1,4 +1,4 @@
-"""Обложки десяти первых статей: комплектность и безопасный повторный импорт."""
+"""Обложки статей: комплектность и безопасный повторный импорт."""
 
 import asyncio
 import json
@@ -10,10 +10,15 @@ from PIL import Image
 from scripts import import_article_covers as covers
 
 
-def test_every_initial_article_has_wide_cover() -> None:
-    articles = Path(__file__).resolve().parents[1] / "migrations" / "data" / "articles_v1"
-    slugs = {json.loads(path.read_text(encoding="utf-8"))["slug"] for path in articles.glob("*.json")}
-    assert len(slugs) == 10
+def test_every_seed_article_has_wide_cover() -> None:
+    data = Path(__file__).resolve().parents[1] / "migrations" / "data"
+    initial = [
+        json.loads(path.read_text(encoding="utf-8"))
+        for path in (data / "articles_v1").glob("*.json")
+    ]
+    new = json.loads((data / "articles_v2.json").read_text(encoding="utf-8"))
+    slugs = {item["slug"] for item in [*initial, *new]}
+    assert len(slugs) == 30
     assert slugs == {path.stem for path in covers.ASSETS.glob("*.webp")}
     for slug in slugs:
         with Image.open(covers.ASSETS / f"{slug}.webp") as image:

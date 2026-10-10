@@ -82,7 +82,7 @@ const ArticlePage = ({ article, related }: ArticlePageProps) => {
 
       {related.length > 0 && (
         <div className={styles.related}>
-          <Carousel title="Читайте также">
+          <Carousel cardSize="wide" title="Читайте также">
             {related.map((item) => (
               <ArticleCard key={item.id} article={item} />
             ))}

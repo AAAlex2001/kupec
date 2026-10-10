@@ -10,14 +10,15 @@ import styles from "./style.module.scss";
 type CarouselProps = {
   title: string;
   children: ReactNode;
+  cardSize?: "default" | "wide";
 };
 
 /** Лента карточек с заголовком на Keen Slider. Стрелки «влево» и «вправо» видны сразу, у края — неактивны. */
-const Carousel = ({ title, children }: CarouselProps) => {
+const Carousel = ({ title, children, cardSize = "default" }: CarouselProps) => {
   const { sliderRef, canPrev, canNext, prev, next } = useCarousel();
 
   return (
-    <section className={styles.carousel}>
+    <section className={`${styles.carousel} ${cardSize === "wide" ? styles.wide : ""}`}>
       <div className={styles.head}>
         <h2 className={styles.title}>{title}</h2>
 

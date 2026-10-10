@@ -9,27 +9,15 @@ import {
 import { absoluteUrl } from "@/shared/lib/seo";
 import Breadcrumbs from "@/shared/ui/breadcrumbs";
 import Button from "@/shared/ui/button";
+import Faq from "@/shared/ui/faq";
 import JsonLd from "@/shared/ui/json-ld";
 import Title from "@/shared/ui/title";
+import { aboutQuestions } from "./content";
 import styles from "./style.module.scss";
 
 export const ABOUT_TITLE = "О проекте";
-export const ABOUT_DESCRIPTION = "Купец — площадка частных объявлений по всей России. Находите товары и услуги рядом, делитесь полезным и общайтесь напрямую.";
-
-const possibilities = [
-  {
-    title: "Вещи находят новый дом",
-    text: "Одежда, техника, мебель и другие полезные вещи могут пригодиться кому-то ещё. Расскажите о них в объявлении.",
-  },
-  {
-    title: "Мастера находят клиентов",
-    text: "От ремонта и домашних продуктов до занятий с тренером: здесь можно предложить свои услуги и найти специалиста рядом.",
-  },
-  {
-    title: "Люди делятся опытом",
-    text: "Публикуйте истории, обсуждайте интересное и читайте новости и блог с советами для покупателей и продавцов.",
-  },
-];
+export const ABOUT_DESCRIPTION =
+  "Купец — площадка частных объявлений по всей России. Находите товары и услуги рядом, делитесь полезным и общайтесь напрямую.";
 
 const AboutPage = () => (
   <div className={styles.page}>
@@ -40,84 +28,124 @@ const AboutPage = () => (
         name: ABOUT_TITLE,
         description: ABOUT_DESCRIPTION,
         url: absoluteUrl(ABOUT_PATH),
+        inLanguage: "ru-RU",
       }}
     />
-    <Breadcrumbs
-      items={[{ label: "Главная", href: HOME_PATH }, { label: ABOUT_TITLE }]}
-    />
+    <div className={styles.breadcrumbs}>
+      <Breadcrumbs
+        items={[{ label: "Главная", href: HOME_PATH }, { label: ABOUT_TITLE }]}
+      />
+    </div>
+
     <section className={styles.hero}>
-      <div className={styles.copy}>
+      <div className={styles.heroCopy}>
         <span className={styles.eyebrow}>Знакомьтесь, Купец</span>
         <Title as="h1" className={styles.heading}>
-          Полезные вещи.<br />
-          Хорошие люди.<br />
-          Рядом с вами.
+          Хорошие вещи и люди.<br />
+          Ближе, чем кажется.
         </Title>
-        <p>{ABOUT_DESCRIPTION}</p>
-        <div className={styles.actions}>
-          <Button href={HOME_PATH}>Найти что-нибудь нужное</Button>
-          <Button href={NEW_LISTING_PATH} variant="outline">
-            Разместить объявление
-          </Button>
-        </div>
+        <p>Находим нужное, делимся полезным и помогаем друг другу каждый день.</p>
       </div>
       <Image
         className={styles.heroImage}
-        src="/images/about/neighborhood.webp"
-        alt="Миниатюрный город с домами, товарами и корзиной покупок"
-        width={1600}
-        height={900}
+        src="/images/about/hero-v3.webp"
+        alt="Маленький город на голубом полушарии: люди, дома и вещи, которые объединяют соседей"
+        width={1774}
+        height={887}
         preload
-        sizes="(min-width: 1024px) 55vw, 100vw"
+        quality={95}
+        sizes="100vw"
       />
     </section>
-    <section className={styles.section}>
-      <Title>Больше возможностей для каждого дня</Title>
-      <div className={styles.cards}>
-        {possibilities.map(({ title, text }, index) => (
-          <article key={title} className={styles.card}>
-            <span className={styles.number}>0{index + 1}</span>
-            <h3>{title}</h3>
-            <p>{text}</p>
-          </article>
-        ))}
-      </div>
-    </section>
-    <section className={styles.story}>
-      <Image
-        className={styles.storyImage}
-        src="/images/about/everyday.webp"
-        alt="Корзина и повседневные вещи, соединённые голубой лентой"
-        width={1600}
-        height={900}
-        sizes="(min-width: 1024px) 45vw, 100vw"
-      />
-      <div className={styles.copy}>
+
+    <div className={styles.content}>
+      <section className={styles.mission}>
         <span className={styles.eyebrow}>Наша идея</span>
-        <Title>У каждого есть что предложить</Title>
+        <Title className={styles.missionTitle}>
+          У каждого есть <span>что предложить.</span><br />
+          А рядом — тот, кому это нужно.
+        </Title>
         <p>
-          Вещь, которой вы больше не пользуетесь. Навык, который поможет соседу. История, которая окажется полезной другим. Купец помогает всему этому найти своего человека.
+          Мы создаём место, где вещи находят новый дом, мастера — клиентов,
+          а люди — полезные знакомства. Всё начинается с простого объявления.
         </p>
-        <p>
-          Вы выбираете свой город, находите объявления и связываетесь с автором напрямую. Условия покупки, встречи или услуги обсуждаете между собой.
-        </p>
-        <Button href={FEED_PATH} variant="secondary">
-          Посмотреть публикации
-        </Button>
+      </section>
+
+      <section className={styles.story}>
+        <Image
+          className={styles.storyImage}
+          src="/images/about/neighborhood.webp"
+          alt="Миниатюрный город с домами, товарами и корзиной покупок"
+          width={1600}
+          height={900}
+          sizes="(min-width: 1024px) 50vw, 100vw"
+        />
+        <div className={styles.copy}>
+          <span className={styles.eyebrow}>Что мы делаем</span>
+          <Title>Помогаем найти своё рядом</Title>
+          <p>
+            Домашние продукты, мебель, техника, одежда или помощь специалиста —
+            на Купце можно найти товары и услуги для самых разных задач.
+          </p>
+          <p>
+            Выберите город, откройте нужную категорию и свяжитесь с автором
+            объявления. О цене, встрече и деталях услуги вы договариваетесь напрямую.
+          </p>
+          <Button href={HOME_PATH} variant="outline">
+            Посмотреть объявления
+          </Button>
+        </div>
+      </section>
+
+      <section className={`${styles.story} ${styles.reverse}`}>
+        <Image
+          className={styles.storyImage}
+          src="/images/about/everyday.webp"
+          alt="Повседневные вещи, соединённые голубой лентой"
+          width={1600}
+          height={900}
+          sizes="(min-width: 1024px) 50vw, 100vw"
+        />
+        <div className={styles.copy}>
+          <span className={styles.eyebrow}>Больше, чем объявления</span>
+          <Title>Общение, из которого вырастает полезное</Title>
+          <p>
+            У каждого есть история, совет или опыт, которым хочется поделиться.
+            Публикации помогают рассказать об этом и обсудить интересное с другими.
+          </p>
+          <p>
+            А в новостях и блоге можно найти подсказки: как подготовить объявление,
+            проверить вещь перед покупкой и договориться о безопасной встрече.
+          </p>
+          <Button href={FEED_PATH} variant="outline">
+            Читать публикации
+          </Button>
+        </div>
+      </section>
+
+      <div className={styles.faqSection}>
+        <Image
+          className={styles.storyImage}
+          src="/images/about/faq.webp"
+          alt="Корзина и облака диалога со знаком вопроса"
+          width={1599}
+          height={900}
+          sizes="(min-width: 1024px) 40vw, 100vw"
+        />
+        <Faq questions={aboutQuestions} />
       </div>
-    </section>
-    <section className={styles.invitation}>
-      <Title>Начните с простого</Title>
-      <p>
-        Посмотрите, что предлагают рядом, или разместите своё первое объявление. А если нужна подсказка — загляните в помощь.
-      </p>
-      <div className={styles.actions}>
-        <Button href={NEW_LISTING_PATH}>Разместить объявление</Button>
-        <Button href={HELP_PATH} variant="outline">
-          Как всё устроено
-        </Button>
-      </div>
-    </section>
+
+      <section className={styles.invitation}>
+        <Title>Начните с простого</Title>
+        <p>Найдите что-нибудь нужное или расскажите о том, что можете предложить.</p>
+        <div className={styles.actions}>
+          <Button href={NEW_LISTING_PATH}>Разместить объявление</Button>
+          <Button href={HELP_PATH} variant="outline">
+            Как всё устроено
+          </Button>
+        </div>
+      </section>
+    </div>
   </div>
 );
 

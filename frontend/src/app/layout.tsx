@@ -36,7 +36,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ru">
+    <html lang="ru" data-scroll-behavior="smooth">
       <body>
         <Script id="yandex-metrika" strategy="beforeInteractive">{`
           (function(m,e,t,r,i,k,a){
