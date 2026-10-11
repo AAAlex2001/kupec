@@ -42,7 +42,6 @@ class Settings(BaseSettings):
 
     telegram_bot_token: str = Field("", description="Токен бота из BotFather. Пусто — кросспостинг выключен")
     telegram_bot_username: str = Field("", description="Имя бота без @ для ссылки t.me/<имя>")
-    telegram_webhook_secret: str = Field("", description="Секрет, которым Telegram подписывает webhook")
     telegram_proxy: str = Field("", description="HTTP-прокси до Telegram: http://логин:пароль@хост:порт. Пусто — напрямую")
 
     indexnow_key: str = Field(

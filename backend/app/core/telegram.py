@@ -1,4 +1,4 @@
-"""Запросы к Telegram Bot API: текст, фото и видео в канал."""
+"""Запросы к Telegram Bot API: текст, фото и видео в канал, события бота."""
 
 import json
 from dataclasses import dataclass
@@ -9,6 +9,7 @@ from app.core.config import Settings
 
 API_URL = "https://api.telegram.org"
 TIMEOUT_SECONDS = 120
+POLL_SECONDS = 50
 
 
 class TelegramError(Exception):
@@ -76,8 +77,14 @@ class TelegramClient:
 
         await self.call("sendMediaGroup", {"chat_id": chat_id, "media": json.dumps(media)}, files)
 
-    async def set_webhook(self, url: str, secret: str) -> None:
-        """Сообщить Telegram адрес, куда присылать события бота."""
+    async def delete_webhook(self) -> None:
+        """Снять webhook: пока он включён, Telegram не отдаёт события через getUpdates."""
+
+        await self.call("deleteWebhook", {})
+
+    async def get_updates(self, offset: int) -> list[dict]:
+        """Новые события бота после offset. Если их нет, Telegram держит запрос до 50 секунд."""
 
         updates = json.dumps(["message", "my_chat_member"])
-        await self.call("setWebhook", {"url": url, "secret_token": secret, "allowed_updates": updates})
+
+        return await self.call("getUpdates", {"offset": offset, "timeout": POLL_SECONDS, "allowed_updates": updates})

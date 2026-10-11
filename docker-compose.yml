@@ -43,6 +43,14 @@ services:
       migrate:
         condition: service_completed_successfully
 
+  telegram-bot:
+    <<: *backend
+    command: python -m app.telegram.polling
+    restart: unless-stopped
+    depends_on:
+      migrate:
+        condition: service_completed_successfully
+
   frontend:
     build:
       context: ./frontend

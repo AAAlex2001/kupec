@@ -1,19 +1,12 @@
-import hmac
-import logging
-
-from fastapi import APIRouter, Body, Depends, Header, HTTPException, status
+from fastapi import APIRouter, Depends, status
 
 from app.auth.dependencies import require_user
 from app.core.config import get_settings
-from app.core.telegram import TelegramError
-from app.telegram.dependencies import get_handle_update_usecase, get_link_repository
+from app.telegram.dependencies import get_link_repository
 from app.telegram.schemas import TelegramLinkSchema
 from app.telegram.services.link_token import create_link_token
 from app.telegram.services.repo import TelegramLinkRepository
-from app.telegram.services.usecases.handle_update import HandleUpdateUseCase
 from app.users.models import User
-
-logger = logging.getLogger(__name__)
 
 router = APIRouter(prefix="/telegram", tags=["telegram"])
 
@@ -49,23 +42,3 @@ async def delete_link(
     """Отключить Telegram: посты больше не уходят в канал."""
 
     await links.delete(user.id)
-
-
-@router.post("/webhook")
-async def webhook(
-    update: dict = Body(...),
-    secret: str = Header("", alias="X-Telegram-Bot-Api-Secret-Token"),
-    usecase: HandleUpdateUseCase = Depends(get_handle_update_usecase),
-) -> dict[str, bool]:
-    """События бота от Telegram. Принимаются только с секретом, заданным при setWebhook."""
-
-    expected = get_settings().telegram_webhook_secret
-    if not expected or not hmac.compare_digest(secret, expected):
-        raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="Неверный секрет")
-
-    try:
-        await usecase.execute(update)
-    except TelegramError as error:
-        logger.warning("Бот не ответил в Telegram: %s", error)
-
-    return {"ok": True}
