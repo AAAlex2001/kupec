@@ -78,7 +78,7 @@ const PhotoPicker = ({ title, photos, max, error, upload, remove, onChange }: Ph
         ref={inputRef}
         className={styles.file}
         type="file"
-        accept="image/jpeg,image/png,image/webp"
+        accept="image/jpeg,image/png,image/webp,.jpg,.jpeg,.png,.webp"
         multiple
         onChange={(event) => {
           uploader.upload(Array.from(event.target.files ?? []));

@@ -17,6 +17,7 @@ import Title from "@/shared/ui/title";
 import Comments from "@/widgets/comments";
 import styles from "./style.module.scss";
 import { articleContents } from "./contents";
+import ViewCounter from "./ui/view-counter";
 
 export { loadRelated } from "./load";
 
@@ -25,14 +26,16 @@ type ArticlePageProps = {
   related: ArticleCardData[];
 };
 
-/** Статья: путь по разделам, заголовок, дата, обложка, текст и «Читайте также». Разметка schema.org — для поисковиков. */
+/** Статья: путь по разделам, заголовок, дата, обложка, текст, реакции, обсуждение и «Читайте также». Разметка schema.org — для поисковиков. */
 const ArticlePage = ({ article, related }: ArticlePageProps) => {
   const section = ARTICLE_SECTIONS[article.section];
   const contents = articleContents(article.html);
+  const hasContents = contents.items.length > 0;
 
   return (
     <div className={styles.page}>
       <JsonLd data={articleJsonLd(article)} />
+      <ViewCounter articleId={article.id} />
 
       <Breadcrumbs
         items={[
@@ -43,7 +46,7 @@ const ArticlePage = ({ article, related }: ArticlePageProps) => {
       />
 
       <div className={styles.columns}>
-        {contents.items.length > 0 && (
+        {hasContents && (
           <aside className={styles.aside}>
             <DocToc items={contents.items} />
           </aside>
@@ -57,6 +60,12 @@ const ArticlePage = ({ article, related }: ArticlePageProps) => {
               </time>
             )}
           </header>
+
+          {hasContents && (
+            <div className={styles.inlineContents}>
+              <DocToc items={contents.items} />
+            </div>
+          )}
 
           {article.cover_url && (
             <div className={styles.cover}>

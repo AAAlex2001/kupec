@@ -41,6 +41,7 @@ class ArticleCardSchema(BaseModel):
     published_at: datetime | None = Field(None, description="Когда опубликована")
     likes_count: int = Field(..., description="Сколько лайков")
     comments_count: int = Field(..., description="Сколько комментариев вместе с ответами")
+    views_count: int = Field(..., description="Сколько раз смотрели")
 
 
 class ArticleSchema(ArticleCardSchema):

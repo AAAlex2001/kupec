@@ -1,10 +1,12 @@
-"""Репозитории статей: запросы к таблицам articles и article_likes."""
+"""Репозитории статей: запросы к таблицам articles, article_likes и article_views."""
+
+from datetime import date
 
 from sqlalchemy import ColumnElement, delete, func, select, update
 from sqlalchemy.dialects.postgresql import insert
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from app.articles.models import Article, ArticleLike, ArticleStatus
+from app.articles.models import Article, ArticleLike, ArticleStatus, ArticleView
 
 
 class ArticleRepository:
@@ -48,6 +50,16 @@ class ArticleRepository:
         await self.db.commit()
 
         return await self.db.scalar(select(Article.likes_count).where(Article.id == article_id)) or 0
+
+    async def add_view(self, article_id: int) -> None:
+        """Засчитать просмотр статьи."""
+
+        await self.db.execute(
+            update(Article)
+            .where(Article.id == article_id)
+            .values(views_count=Article.views_count + 1)
+        )
+        await self.db.commit()
 
     async def list_published(
         self, section: str, limit: int, offset: int
@@ -147,3 +159,22 @@ class ArticleLikeRepository:
         """Поставил ли пользователь лайк статье."""
 
         return await self.db.get(ArticleLike, (user_id, article_id)) is not None
+
+
+class ArticleViewRepository:
+    """Доступ к таблице article_views. Коммит — вместе со счётчиком статьи."""
+
+    def __init__(self, db: AsyncSession) -> None:
+        self.db = db
+
+    async def add_once(self, article_id: int, visitor: str, day: date) -> bool:
+        """Записать просмотр за день. False — этот посетитель сегодня уже смотрел."""
+
+        stmt = (
+            insert(ArticleView)
+            .values(article_id=article_id, visitor=visitor, viewed_on=day)
+            .on_conflict_do_nothing()
+        )
+        result = await self.db.execute(stmt)
+
+        return result.rowcount == 1

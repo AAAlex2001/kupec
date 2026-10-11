@@ -2,7 +2,7 @@ from decimal import Decimal
 
 from fastapi import APIRouter, Depends, HTTPException, Query, Request, UploadFile, status
 
-from app.auth.dependencies import get_current_user, require_user
+from app.auth.dependencies import get_current_user, get_visitor, require_user
 from app.catalog.dependencies import get_category_tree
 from app.catalog.models import ListingKind
 from app.catalog.schemas import CategorySchema
@@ -21,7 +21,6 @@ from app.listings.dependencies import (
     get_restore_usecase,
     get_update_listing_usecase,
     get_upload_photo_usecase,
-    get_visitor,
 )
 from app.listings.models import SERVICE_PLACE_LABELS, Listing, ListingStatus
 from app.listings.schemas import (

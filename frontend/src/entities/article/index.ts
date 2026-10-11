@@ -18,8 +18,8 @@ export {
   updateArticle,
   uploadArticleCover,
 } from "./api/admin";
-export { toggleArticleLike } from "./api/articles";
-export { articleMetadata, pageNumberFrom, sectionMetadata } from "./lib/metadata";
+export { countArticleView, fetchArticles, toggleArticleLike } from "./api/articles";
+export { articleMetadata, sectionMetadata } from "./lib/metadata";
 export { ARTICLE_SECTION_TABS, ARTICLE_SECTIONS } from "./lib/sections";
 export { articleDescription, articleJsonLd, articleTitle } from "./lib/seo";
 export { default as ArticleCard } from "./ui/article-card";

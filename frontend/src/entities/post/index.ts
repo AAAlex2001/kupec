@@ -16,6 +16,7 @@ export type {
   RepostedPost,
 } from "./model/types";
 export {
+  countPostView,
   createPost,
   deletePost,
   deletePostMedia,
@@ -50,6 +51,7 @@ export { postCover } from "./lib/cover";
 export { postDescription, postJsonLd, postTitle } from "./lib/seo";
 export { useMyPostCounts } from "./model/use-my-post-counts";
 export { usePost } from "./model/use-post";
+export { usePostView } from "./model/use-post-view";
 export { default as OriginalPost } from "./ui/original-post";
 export { default as PostCard } from "./ui/post-card";
 export { default as PostListing } from "./ui/post-listing";

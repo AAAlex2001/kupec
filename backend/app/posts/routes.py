@@ -4,13 +4,14 @@ from datetime import datetime, timezone
 
 from fastapi import APIRouter, Depends, HTTPException, Query, UploadFile, status
 
-from app.auth.dependencies import get_current_user, require_user
+from app.auth.dependencies import get_current_user, get_visitor, require_user
 from app.core.ai import AiError
 from app.core.uploads import UploadError
 from app.posts.dependencies import (
     get_comment,
     get_comment_like_repository,
     get_comment_repository,
+    get_count_post_view_usecase,
     get_create_comment_usecase,
     get_create_post_usecase,
     get_create_repost_usecase,
@@ -61,6 +62,7 @@ from app.posts.services.exceptions import (
 )
 from app.posts.services.report_repo import PostReportRepository
 from app.posts.services.repo import PostLikeRepository, PostRepository, PostSaveRepository
+from app.posts.services.usecases.count_view import CountPostViewUseCase
 from app.posts.services.usecases.create_comment import CreateCommentUseCase
 from app.posts.services.usecases.create_post import CreatePostUseCase
 from app.posts.services.usecases.create_repost import CreateRepostUseCase
@@ -459,6 +461,18 @@ async def repost(
     """Репостнуть публикацию: просто или с комментарием."""
 
     return PostSchema.model_validate(await usecase.execute(user, post, payload))
+
+
+@router.post("/{post_id}/view", status_code=status.HTTP_204_NO_CONTENT)
+async def count_post_view(
+    post: Post = Depends(get_published_post),
+    visitor: str = Depends(get_visitor),
+    user: User | None = Depends(get_current_user),
+    usecase: CountPostViewUseCase = Depends(get_count_post_view_usecase),
+) -> None:
+    """Засчитать просмотр. Один посетитель — один просмотр в сутки, автор не считается."""
+
+    await usecase.execute(post, visitor, user.id if user else None)
 
 
 @router.post("/{post_id}/like")

@@ -5,24 +5,21 @@ import type { Article, ArticleSection } from "../model/types";
 import { ARTICLE_SECTIONS } from "./sections";
 import { articleDescription, articleTitle } from "./seo";
 
-/** Номер страницы раздела из ?page=: всё, что не число от 1, — первая страница. */
-export const pageNumberFrom = (value: string | string[] | undefined) => {
-  const number = Number(Array.isArray(value) ? value[0] : value);
-
-  return Number.isInteger(number) && number > 1 ? number : 1;
-};
-
-/** Метаданные раздела: своя страница у каждой ?page, canonical без ?page у первой. */
-export const sectionMetadata = (section: ArticleSection, pageNumber: number): Metadata => {
+/** Метаданные раздела «Новости» или «Блог». */
+export const sectionMetadata = (section: ArticleSection): Metadata => {
   const meta = ARTICLE_SECTIONS[section];
-  const path = pageNumber > 1 ? `${meta.path}?page=${pageNumber}` : meta.path;
-  const title = pageNumber > 1 ? `${meta.title} — страница ${pageNumber}` : meta.title;
 
   return {
-    title,
+    title: meta.title,
     description: meta.description,
-    alternates: { canonical: path },
-    openGraph: { ...OG_BASE, type: "website", title, description: meta.description, url: path },
+    alternates: { canonical: meta.path },
+    openGraph: {
+      ...OG_BASE,
+      type: "website",
+      title: meta.title,
+      description: meta.description,
+      url: meta.path,
+    },
   };
 };
 

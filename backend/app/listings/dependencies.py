@@ -1,18 +1,15 @@
-"""Объявления: репозитории, фабрики сценариев, посетитель и загрузка объявления по id из пути."""
+"""Объявления: репозитории, фабрики сценариев и загрузка объявления по id из пути."""
 
-import secrets
-
-from fastapi import Depends, HTTPException, Request, Response, status
+from fastapi import Depends, HTTPException, status
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.attributes.dependencies import get_load_fields_usecase
 from app.attributes.services.usecases.load_fields import LoadCategoryFieldsUseCase
-from app.auth.dependencies import get_current_user, require_user
+from app.auth.dependencies import require_user
 from app.catalog.dependencies import get_category_repository
 from app.catalog.services.repo import CategoryRepository
 from app.cities.dependencies import get_city_repository
 from app.cities.services.repo import CityRepository
-from app.core.config import get_settings
 from app.core.database import get_session
 from app.listings.models import Listing, ListingStatus
 from app.listings.services.repo import (
@@ -36,11 +33,6 @@ from app.listings.services.usecases.update_listing import UpdateListingUseCase
 from app.units.dependencies import get_load_units_usecase
 from app.units.services.usecases.category_units import LoadCategoryUnitsUseCase
 from app.users.models import User
-
-VISITOR_COOKIE = "visitor"
-VISITOR_MAX_AGE = 60 * 60 * 24 * 365
-VISITOR_TOKEN_MAX_LENGTH = 40
-
 
 def get_listing_repository(
     session: AsyncSession = Depends(get_session),
@@ -148,32 +140,6 @@ def get_count_view_usecase(
     """Сценарий подсчёта просмотра."""
 
     return CountViewUseCase(listings, views)
-
-
-def get_visitor(
-    request: Request,
-    response: Response,
-    user: User | None = Depends(get_current_user),
-) -> str:
-    """Кто смотрит: вошедший — по id, гость — по cookie visitor. Новому гостю cookie ставится."""
-
-    if user is not None:
-        return f"user:{user.id}"
-
-    token = request.cookies.get(VISITOR_COOKIE)
-    if not token or len(token) > VISITOR_TOKEN_MAX_LENGTH:
-        token = secrets.token_urlsafe(16)
-        response.set_cookie(
-            VISITOR_COOKIE,
-            token,
-            max_age=VISITOR_MAX_AGE,
-            httponly=True,
-            samesite="lax",
-            secure=get_settings().cookie_secure,
-            path="/",
-        )
-
-    return f"guest:{token}"
 
 
 async def get_published_listing(

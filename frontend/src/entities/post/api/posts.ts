@@ -72,6 +72,10 @@ export const writePostWithAi = async (instruction: string, html: string) => {
   return answer.html;
 };
 
+/** Засчитать просмотр поста: один посетитель — один раз в сутки. */
+export const countPostView = (id: number) =>
+  request<void>(`/v1/posts/${id}/view`, { method: "POST" });
+
 /** Поставить или убрать лайк. */
 export const togglePostLike = (id: number, liked: boolean) =>
   request<PostLikes>(`/v1/posts/${id}/like`, { method: liked ? "POST" : "DELETE" });

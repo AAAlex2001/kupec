@@ -15,8 +15,6 @@ export const postCommentsPath = (id: number) => `${postPath(id)}#${COMMENTS_ANCH
 export const BLOG_PATH = "/blog";
 export const NEWS_PATH = "/news";
 export const articlePath = (section: string, slug: string) => `/${section}/${slug}`;
-export const articleCommentsPath = (section: string, slug: string) =>
-  `${articlePath(section, slug)}#${COMMENTS_ANCHOR}`;
 
 export const ACCOUNT_PATH = "/account";
 export const MY_LISTINGS_PATH = "/account/listings";

@@ -123,6 +123,7 @@ def test_viewer_marks_come_from_sets() -> None:
     post.likes_count = 0
     post.comments_count = 0
     post.reposts_count = 0
+    post.views_count = 0
     post.created_at = datetime(2026, 10, 10, tzinfo=timezone.utc)
 
     schema = PostSchema.for_viewer(post, ViewerMarks(liked={post.id}, following={AUTHOR.id}))

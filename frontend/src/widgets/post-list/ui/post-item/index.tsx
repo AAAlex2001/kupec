@@ -1,6 +1,6 @@
 "use client";
 
-import { PostCard, type Post } from "@/entities/post";
+import { PostCard, usePostView, type Post } from "@/entities/post";
 import { useUser } from "@/entities/user";
 import { PostMenu } from "@/features/manage-post";
 import { PostReactions } from "@/features/react-post";
@@ -12,17 +12,20 @@ type PostItemProps = {
   onUnsaved?: () => void;
 };
 
-/** Пост с меню «⋯»: у своего — правка и удаление, у чужого — подписка и объявление. У опубликованного — нижняя панель. */
+/** Пост с меню «⋯»: у своего — правка и удаление, у чужого — подписка и объявление. У опубликованного — нижняя панель и подсчёт просмотра. */
 const PostItem = ({ post, onDeleted, onUnsaved }: PostItemProps) => {
   const { user } = useUser();
+  const published = post.status === "published";
+  const viewRef = usePostView(post.id, published);
   const own = post.author.id === user?.id;
   const menu = own ? <PostMenu post={post} onDeleted={onDeleted} /> : <AuthorMenu post={post} />;
 
   return (
     <PostCard
+      ref={viewRef}
       post={post}
       menu={menu}
-      footer={post.status === "published" && <PostReactions post={post} onUnsaved={onUnsaved} />}
+      footer={published && <PostReactions post={post} onUnsaved={onUnsaved} />}
     />
   );
 };

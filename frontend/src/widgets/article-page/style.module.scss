@@ -27,6 +27,7 @@
 }
 
 .aside {
+  display: none;
   min-width: 0;
 }
 
@@ -105,16 +106,21 @@
   .aside {
     position: sticky;
     top: 100px;
+    display: block;
     flex: none;
     width: 240px;
+  }
+
+  .inlineContents {
+    display: none;
   }
 
   .columns:has(.aside) + .discussion {
     margin-left: 272px;
   }
+
   .page {
     padding-top: 32px;
     padding-bottom: 56px;
   }
-
 }

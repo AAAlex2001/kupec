@@ -1,8 +1,9 @@
-from datetime import datetime
+from datetime import date, datetime
 from enum import StrEnum
 
 from sqlalchemy import (
     CheckConstraint,
+    Date,
     DateTime,
     ForeignKey,
     Index,
@@ -63,6 +64,7 @@ class Article(Base):
     status: Mapped[str] = mapped_column(String(16), default=ArticleStatus.DRAFT)
     likes_count: Mapped[int] = mapped_column(Integer, default=0)
     comments_count: Mapped[int] = mapped_column(Integer, default=0)
+    views_count: Mapped[int] = mapped_column(Integer, default=0)
 
     created_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True), server_default=func.now()
@@ -113,3 +115,15 @@ class ArticleLike(Base):
     created_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True), server_default=func.now()
     )
+
+
+class ArticleView(Base):
+    """Просмотр статьи посетителем за день. Один посетитель — один просмотр в сутки."""
+
+    __tablename__ = "article_views"
+
+    article_id: Mapped[int] = mapped_column(
+        ForeignKey("articles.id", ondelete="CASCADE"), primary_key=True
+    )
+    visitor: Mapped[str] = mapped_column(String(64), primary_key=True)
+    viewed_on: Mapped[date] = mapped_column(Date, primary_key=True)

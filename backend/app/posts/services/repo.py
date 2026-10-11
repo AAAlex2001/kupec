@@ -1,6 +1,6 @@
-"""Репозитории публикаций: запросы к таблицам posts, post_media, post_likes и post_saves."""
+"""Репозитории публикаций: запросы к таблицам posts, post_media, post_likes, post_views и post_saves."""
 
-from datetime import datetime
+from datetime import date, datetime
 
 from sqlalchemy import ColumnElement, delete, func, select, update
 from sqlalchemy.dialects.postgresql import insert
@@ -8,7 +8,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.follows.models import Follow
 from app.listings.models import Listing, ListingStatus
-from app.posts.models import Post, PostLike, PostMedia, PostSave, PostStatus
+from app.posts.models import Post, PostLike, PostMedia, PostSave, PostStatus, PostView
 
 
 class PostRepository:
@@ -190,6 +190,14 @@ class PostRepository:
 
         return await self.db.scalar(select(Post.likes_count).where(Post.id == post_id)) or 0
 
+    async def add_view(self, post_id: int) -> None:
+        """Засчитать просмотр поста."""
+
+        await self.db.execute(
+            update(Post).where(Post.id == post_id).values(views_count=Post.views_count + 1)
+        )
+        await self.db.commit()
+
     async def refresh_reposts(self, post_id: int) -> None:
         """Пересчитать, сколько раз пост репостнули."""
 
@@ -310,6 +318,25 @@ class PostLikeRepository:
         result = await self.db.execute(stmt)
 
         return set(result.scalars().all())
+
+
+class PostViewRepository:
+    """Доступ к таблице post_views. Коммит — вместе со счётчиком поста."""
+
+    def __init__(self, db: AsyncSession) -> None:
+        self.db = db
+
+    async def add_once(self, post_id: int, visitor: str, day: date) -> bool:
+        """Записать просмотр за день. False — этот посетитель сегодня уже смотрел."""
+
+        stmt = (
+            insert(PostView)
+            .values(post_id=post_id, visitor=visitor, viewed_on=day)
+            .on_conflict_do_nothing()
+        )
+        result = await self.db.execute(stmt)
+
+        return result.rowcount == 1
 
 
 class PostSaveRepository:

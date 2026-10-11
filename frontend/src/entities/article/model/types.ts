@@ -12,6 +12,7 @@ export type ArticleCard = {
   published_at: string | null;
   likes_count: number;
   comments_count: number;
+  views_count: number;
 };
 
 export type Article = ArticleCard & {

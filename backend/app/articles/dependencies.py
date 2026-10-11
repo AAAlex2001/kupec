@@ -4,8 +4,13 @@ from fastapi import Depends, HTTPException, status
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.articles.models import Article
-from app.articles.services.repo import ArticleLikeRepository, ArticleRepository
+from app.articles.services.repo import (
+    ArticleLikeRepository,
+    ArticleRepository,
+    ArticleViewRepository,
+)
 from app.articles.services.usecases.comment_article import CreateArticleCommentUseCase
+from app.articles.services.usecases.count_view import CountArticleViewUseCase
 from app.articles.services.usecases.manage_article import (
     DeleteArticleUseCase,
     RemoveArticleCoverUseCase,
@@ -35,11 +40,28 @@ def get_article_like_repository(
     return ArticleLikeRepository(session)
 
 
+def get_article_view_repository(
+    session: AsyncSession = Depends(get_session),
+) -> ArticleViewRepository:
+    """Репозиторий просмотров статей с сессией текущего запроса."""
+
+    return ArticleViewRepository(session)
+
+
+def get_count_article_view_usecase(
+    articles: ArticleRepository = Depends(get_article_repository),
+    views: ArticleViewRepository = Depends(get_article_view_repository),
+) -> CountArticleViewUseCase:
+    """Сценарий подсчёта просмотра статьи."""
+
+    return CountArticleViewUseCase(articles, views)
+
+
 async def get_published_article(
     article_id: int,
     articles: ArticleRepository = Depends(get_article_repository),
 ) -> Article:
-    """Опубликованная статья по id из пути — для лайков и обсуждения. Черновика нет — 404."""
+    """Опубликованная статья по id из пути — для лайков, просмотров и обсуждения. Черновика нет — 404."""
 
     article = await articles.get_published_by_id(article_id)
     if article is None:

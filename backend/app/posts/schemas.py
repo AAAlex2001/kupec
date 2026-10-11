@@ -118,6 +118,7 @@ class PostSchema(BaseModel):
     likes_count: int = Field(..., description="Сколько лайков")
     comments_count: int = Field(..., description="Сколько комментариев")
     reposts_count: int = Field(..., description="Сколько репостов")
+    views_count: int = Field(..., description="Сколько раз смотрели")
     liked: bool = Field(False, description="Вы поставили лайк")
     saved: bool = Field(False, description="Пост у вас в сохранённом")
     following: bool = Field(False, description="Вы подписаны на автора")

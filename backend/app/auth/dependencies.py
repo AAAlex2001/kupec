@@ -1,5 +1,6 @@
-"""Вход: репозитории, фабрики сценариев, cookie сессии и защита ручек."""
+"""Вход: репозитории, фабрики сценариев, cookie сессии и посетителя, защита ручек."""
 
+import secrets
 from datetime import datetime, timezone
 
 from fastapi import Depends, HTTPException, Request, Response, status
@@ -28,6 +29,9 @@ from app.users.services.repo import UserRepository
 
 SESSION_COOKIE = "session"
 SECONDS_IN_DAY = 60 * 60 * 24
+VISITOR_COOKIE = "visitor"
+VISITOR_MAX_AGE = SECONDS_IN_DAY * 365
+VISITOR_TOKEN_MAX_LENGTH = 40
 
 
 def get_code_repository(
@@ -199,3 +203,29 @@ async def get_current_user(
     """Пользователь текущего входа или None для гостя."""
 
     return session.user if session else None
+
+
+def get_visitor(
+    request: Request,
+    response: Response,
+    user: User | None = Depends(get_current_user),
+) -> str:
+    """Кто смотрит: вошедший — по id, гость — по cookie visitor. Новому гостю cookie ставится."""
+
+    if user is not None:
+        return f"user:{user.id}"
+
+    token = request.cookies.get(VISITOR_COOKIE)
+    if not token or len(token) > VISITOR_TOKEN_MAX_LENGTH:
+        token = secrets.token_urlsafe(16)
+        response.set_cookie(
+            VISITOR_COOKIE,
+            token,
+            max_age=VISITOR_MAX_AGE,
+            httponly=True,
+            samesite="lax",
+            secure=get_settings().cookie_secure,
+            path="/",
+        )
+
+    return f"guest:{token}"

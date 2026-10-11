@@ -3,6 +3,7 @@ from fastapi import APIRouter, Depends, HTTPException, Query, status
 from app.articles.dependencies import (
     get_article_like_repository,
     get_article_repository,
+    get_count_article_view_usecase,
     get_create_article_comment_usecase,
     get_published_article,
 )
@@ -10,7 +11,8 @@ from app.articles.models import Article, ArticleSection
 from app.articles.schemas import ArticleCardSchema, ArticlePageSchema, ArticleSchema
 from app.articles.services.repo import ArticleLikeRepository, ArticleRepository
 from app.articles.services.usecases.comment_article import CreateArticleCommentUseCase
-from app.auth.dependencies import get_current_user, require_user
+from app.articles.services.usecases.count_view import CountArticleViewUseCase
+from app.auth.dependencies import get_current_user, get_visitor, require_user
 from app.posts.dependencies import get_load_threads_usecase
 from app.posts.models import PostComment
 from app.posts.schemas import (
@@ -68,6 +70,17 @@ async def unlike_article(
     await likes.remove(user.id, article.id)
 
     return LikesSchema(likes_count=await articles.refresh_likes(article.id), liked=False)
+
+
+@router.post("/{article_id:int}/view", status_code=status.HTTP_204_NO_CONTENT)
+async def count_article_view(
+    article: Article = Depends(get_published_article),
+    visitor: str = Depends(get_visitor),
+    usecase: CountArticleViewUseCase = Depends(get_count_article_view_usecase),
+) -> None:
+    """Засчитать просмотр статьи. Один посетитель — один просмотр в сутки."""
+
+    await usecase.execute(article, visitor)
 
 
 @router.get("/{article_id:int}/comments")

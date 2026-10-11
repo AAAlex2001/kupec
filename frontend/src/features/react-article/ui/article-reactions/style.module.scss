@@ -30,6 +30,22 @@
   color: #70757f;
 }
 
+.views {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 8px;
+
+  height: 40px;
+
+  color: #70757f;
+}
+
+.views svg {
+  width: 24px;
+  height: 24px;
+}
+
 .liked svg {
   color: $favorite;
   fill: $favorite;

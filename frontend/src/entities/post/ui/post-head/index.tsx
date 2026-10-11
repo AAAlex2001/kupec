@@ -10,11 +10,12 @@ type PostHeadProps = {
   author: PostAuthor;
   date: string;
   note?: string;
+  views?: number;
   menu?: ReactNode;
 };
 
-/** Шапка поста: аватар и имя — ссылка на страницу автора, дата с пометкой и меню «⋯». */
-const PostHead = ({ author, date, note, menu }: PostHeadProps) => {
+/** Шапка поста: аватар и имя — ссылка на страницу автора, дата с пометкой, просмотры и меню «⋯». */
+const PostHead = ({ author, date, note, views, menu }: PostHeadProps) => {
   const name = author.name ?? "Пользователь";
 
   return (
@@ -26,6 +27,7 @@ const PostHead = ({ author, date, note, menu }: PostHeadProps) => {
           <span className={styles.date}>
             {formatDate(date)}
             {note && ` · ${note}`}
+            {views !== undefined && ` · Просмотров: ${views}`}
           </span>
         </span>
       </Link>

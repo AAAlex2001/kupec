@@ -3,7 +3,7 @@
 from fastapi import UploadFile
 from sqlalchemy.exc import SQLAlchemyError
 
-from app.core.uploads import remove_file, save_image
+from app.core.uploads import MEGABYTE, remove_file, save_image
 from app.listings.models import ListingPhoto
 from app.listings.services.exceptions import PhotoNotFoundError, TooManyPhotosError
 from app.listings.services.repo import ListingPhotoRepository
@@ -11,6 +11,7 @@ from app.users.models import User
 
 LISTINGS_FOLDER = "listings"
 MAX_FREE_PHOTOS = 30
+MAX_PHOTO_SIZE_BYTES = 50 * MEGABYTE
 
 
 class UploadListingPhotoUseCase:
@@ -25,7 +26,7 @@ class UploadListingPhotoUseCase:
         if await self.photos.count_free(user.id) >= MAX_FREE_PHOTOS:
             raise TooManyPhotosError(user.id)
 
-        path = await save_image(file, LISTINGS_FOLDER)
+        path = await save_image(file, LISTINGS_FOLDER, MAX_PHOTO_SIZE_BYTES)
 
         try:
             return await self.photos.add(ListingPhoto(owner_id=user.id, path=path))

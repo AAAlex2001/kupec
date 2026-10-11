@@ -43,6 +43,7 @@ export type Post = {
   likes_count: number;
   comments_count: number;
   reposts_count: number;
+  views_count: number;
   liked: boolean;
   saved: boolean;
   following: boolean;

@@ -1,6 +1,6 @@
 """Все модели приложения в одном месте, чтобы их видели Alembic и SQLAlchemy."""
 
-from app.articles.models import Article, ArticleLike
+from app.articles.models import Article, ArticleLike, ArticleView
 from app.attributes.models import Attribute, AttributeOption, CategoryAttribute
 from app.auth.models import AuthCode, Session
 from app.catalog.models import Category
@@ -20,6 +20,7 @@ from app.posts.models import (
     PostMedia,
     PostReport,
     PostSave,
+    PostView,
 )
 from app.reviews.models import Review, ReviewPhoto
 from app.units.models import Unit
@@ -29,6 +30,7 @@ __all__ = [
     "Base",
     "Article",
     "ArticleLike",
+    "ArticleView",
     "Attribute",
     "AttributeOption",
     "CategoryAttribute",
@@ -53,6 +55,7 @@ __all__ = [
     "PostListing",
     "PostMedia",
     "PostSave",
+    "PostView",
     "Review",
     "ReviewPhoto",
     "Unit",

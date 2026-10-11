@@ -20,7 +20,9 @@ from app.posts.services.repo import (
     PostMediaRepository,
     PostRepository,
     PostSaveRepository,
+    PostViewRepository,
 )
+from app.posts.services.usecases.count_view import CountPostViewUseCase
 from app.posts.services.usecases.create_comment import CreateCommentUseCase
 from app.posts.services.usecases.create_post import CreatePostUseCase
 from app.posts.services.usecases.create_repost import CreateRepostUseCase
@@ -68,6 +70,23 @@ def get_post_save_repository(
     """Репозиторий сохранённых постов с сессией текущего запроса."""
 
     return PostSaveRepository(session)
+
+
+def get_post_view_repository(
+    session: AsyncSession = Depends(get_session),
+) -> PostViewRepository:
+    """Репозиторий просмотров постов с сессией текущего запроса."""
+
+    return PostViewRepository(session)
+
+
+def get_count_post_view_usecase(
+    posts: PostRepository = Depends(get_post_repository),
+    views: PostViewRepository = Depends(get_post_view_repository),
+) -> CountPostViewUseCase:
+    """Сценарий подсчёта просмотра поста."""
+
+    return CountPostViewUseCase(posts, views)
 
 
 def get_comment_repository(
