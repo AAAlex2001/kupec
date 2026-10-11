@@ -144,6 +144,20 @@ def test_uploaded_photo_is_saved_without_exif(media_dir: Path) -> None:
         assert dict(saved.getexif()) == {}
 
 
+def test_iphone_mpo_photo_is_saved_as_jpeg(media_dir: Path) -> None:
+    buffer = BytesIO()
+    Image.new("RGB", (20, 20)).save(
+        buffer, format="MPO", save_all=True, append_images=[Image.new("RGB", (20, 20))]
+    )
+    user = make_user()
+
+    asyncio.run(SetAvatarUseCase(FakeUserRepository()).execute(user, make_upload(buffer.getvalue())))
+
+    assert user.avatar_path.endswith(".jpg")
+    with Image.open(media_dir / user.avatar_path) as saved:
+        assert saved.format == "JPEG"
+
+
 def test_remove_avatar_deletes_file(media_dir: Path) -> None:
     user = make_user()
     asyncio.run(SetAvatarUseCase(FakeUserRepository()).execute(user, make_upload(png_bytes())))

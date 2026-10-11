@@ -12,7 +12,7 @@ from app.core.config import MEDIA_URL, get_settings
 
 MEGABYTE = 1024 * 1024
 IMAGE_MAX_SIZE_BYTES = 10 * MEGABYTE
-IMAGE_EXTENSIONS = {"JPEG": ".jpg", "PNG": ".png", "WEBP": ".webp"}
+IMAGE_EXTENSIONS = {"JPEG": ".jpg", "MPO": ".jpg", "PNG": ".png", "WEBP": ".webp"}
 JPEG_QUALITY = 90
 
 
@@ -38,10 +38,13 @@ def detect_extension(content: bytes) -> str:
 
 
 def strip_metadata(content: bytes) -> bytes:
-    """Пересохранить картинку без EXIF и XMP: в фото с телефона там координаты места съёмки."""
+    """Пересохранить картинку без EXIF и XMP: в фото с телефона там координаты места съёмки.
+
+    Фото с айфона Pillow видит как MPO — это JPEG с доп. кадрами. Сохраняется обычный JPEG.
+    """
 
     with Image.open(BytesIO(content)) as image:
-        image_format = image.format
+        image_format = "JPEG" if image.format == "MPO" else image.format
         icc_profile = image.info.get("icc_profile")
 
         upright = ImageOps.exif_transpose(image)
