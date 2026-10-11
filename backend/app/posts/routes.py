@@ -2,7 +2,7 @@ import logging
 import math
 from datetime import datetime, timezone
 
-from fastapi import APIRouter, Depends, HTTPException, Query, UploadFile, status
+from fastapi import APIRouter, BackgroundTasks, Depends, HTTPException, Query, UploadFile, status
 
 from app.auth.dependencies import get_current_user, get_visitor, require_user
 from app.core.ai import AiError
@@ -76,6 +76,7 @@ from app.posts.services.usecases.manage_media import (
 )
 from app.posts.services.usecases.update_post import UpdatePostUseCase
 from app.posts.services.usecases.write_with_ai import WritePostWithAiUseCase
+from app.telegram.tasks import publish_post
 from app.users.dependencies import get_user_repository
 from app.users.models import User
 from app.users.services.repo import UserRepository
@@ -279,10 +280,11 @@ async def list_my_posts(
 @router.post("", status_code=status.HTTP_201_CREATED)
 async def create_post(
     payload: PostSaveSchema,
+    background: BackgroundTasks,
     user: User = Depends(require_user),
     usecase: CreatePostUseCase = Depends(get_create_post_usecase),
 ) -> PostSchema:
-    """Опубликовать пост или сохранить черновиком."""
+    """Опубликовать пост или сохранить черновиком. По флажку telegram пост уходит и в канал автора."""
 
     try:
         post = await usecase.execute(user, payload)
@@ -291,6 +293,9 @@ async def create_post(
             status_code=status.HTTP_422_UNPROCESSABLE_CONTENT,
             detail=str(error),
         ) from error
+
+    if payload.telegram and post.status == PostStatus.PUBLISHED:
+        background.add_task(publish_post, post.id)
 
     return PostSchema.model_validate(post)
 

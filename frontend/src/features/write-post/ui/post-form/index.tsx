@@ -10,6 +10,7 @@ import TextEditor from "@/shared/ui/text-editor";
 import { usePostForm } from "../../model/use-post-form";
 import { AI_PANEL } from "../ai-panel";
 import ListingPicker from "../listing-picker";
+import TelegramToggle from "../telegram-toggle";
 import styles from "./style.module.scss";
 
 const MAX_LENGTH = 5000;
@@ -20,7 +21,7 @@ type PostFormProps = {
   post?: Post;
 };
 
-/** Форма поста: автор, редактор, фото и видео, объявления. «Отмена», «В черновик» и «Опубликовать». */
+/** Форма поста: автор, редактор, фото и видео, объявления, у нового — флажок Telegram. «Отмена», «В черновик» и «Опубликовать». */
 const PostForm = ({ post }: PostFormProps) => {
   const form = usePostForm(post);
 
@@ -53,6 +54,8 @@ const PostForm = ({ post }: PostFormProps) => {
       />
 
       <ListingPicker listings={form.listings} max={MAX_LISTINGS} onChange={form.setListings} />
+
+      {!post && <TelegramToggle checked={form.telegram} onChange={form.setTelegram} />}
 
       {form.error && <Notice tone="error">{form.error}</Notice>}
 

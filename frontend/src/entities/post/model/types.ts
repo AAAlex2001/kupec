@@ -63,6 +63,7 @@ export type PostPayload = {
   media_ids: number[];
   listing_ids: number[];
   draft: boolean;
+  telegram: boolean;
 };
 
 export type PostLikes = {

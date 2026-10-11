@@ -39,6 +39,7 @@ class PostSaveSchema(BaseModel):
         [], max_length=MAX_POST_LISTINGS, description="Свои объявления в посте"
     )
     draft: bool = Field(False, description="Сохранить черновиком, не публикуя")
+    telegram: bool = Field(False, description="Опубликовать также в свой Telegram-канал. Только для нового поста")
 
 
 class PostMediaSchema(BaseModel):

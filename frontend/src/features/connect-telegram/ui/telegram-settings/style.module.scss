@@ -1,0 +1,23 @@
+.section {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.title {
+  font-family: "Inter";
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+
+  color: var(--color-text);
+}
+
+.text {
+  font-family: "Inter";
+  font-size: 13px;
+  line-height: 18px;
+
+  color: var(--color-text-muted);
+}

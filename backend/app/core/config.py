@@ -40,6 +40,10 @@ class Settings(BaseSettings):
     ai_model: str = "deepseek/deepseek-v3.2"
     ai_requests_per_hour: int = Field(30, ge=1, description="Запросов к ИИ на человека в час")
 
+    telegram_bot_token: str = Field("", description="Токен бота из BotFather. Пусто — кросспостинг выключен")
+    telegram_bot_username: str = Field("", description="Имя бота без @ для ссылки t.me/<имя>")
+    telegram_webhook_secret: str = Field("", description="Секрет, которым Telegram подписывает webhook")
+
     indexnow_key: str = Field(
         "4bdf9933a4d2d0f9511613b9188be059",
         description="Ключ IndexNow. Публичный: тот же лежит файлом /<ключ>.txt на сайте",

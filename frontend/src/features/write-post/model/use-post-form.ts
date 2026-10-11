@@ -7,12 +7,13 @@ import { MY_POSTS_PATH } from "@/shared/config/routes";
 import { errorMessage } from "@/shared/lib/errors";
 import type { UploadedPhoto } from "@/shared/lib/use-photo-upload";
 
-/** Форма поста: новый или правка своего. Опубликовать или сохранить черновиком — и к своим публикациям. */
+/** Форма поста: новый или правка своего. Опубликовать или сохранить черновиком — и к своим публикациям. Новый можно отправить и в Telegram-канал. */
 export const usePostForm = (post?: Post) => {
   const router = useRouter();
   const [html, setHtml] = useState(post?.html ?? "");
   const [media, setMedia] = useState<UploadedPhoto[]>(post?.media ?? []);
   const [listings, setListings] = useState<AttachedListing[]>(post?.listings ?? []);
+  const [telegram, setTelegram] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [pending, setPending] = useState<"draft" | "publish" | null>(null);
 
@@ -22,6 +23,7 @@ export const usePostForm = (post?: Post) => {
       media_ids: media.map((item) => item.id),
       listing_ids: listings.map((listing) => listing.id),
       draft,
+      telegram,
     };
 
     setPending(draft ? "draft" : "publish");
@@ -38,5 +40,18 @@ export const usePostForm = (post?: Post) => {
 
   const empty = html === "" && media.length === 0 && listings.length === 0;
 
-  return { html, setHtml, media, setMedia, listings, setListings, error, pending, empty, save };
+  return {
+    html,
+    setHtml,
+    media,
+    setMedia,
+    listings,
+    setListings,
+    telegram,
+    setTelegram,
+    error,
+    pending,
+    empty,
+    save,
+  };
 };

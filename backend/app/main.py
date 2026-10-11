@@ -21,6 +21,7 @@ from app.notifications import routes as notifications
 from app.posts import routes as posts
 from app.reviews import routes as reviews
 from app.seo import routes as seo
+from app.telegram import routes as telegram
 from app.users import public_routes as public_users
 from app.users import routes as users
 
@@ -77,6 +78,7 @@ app.include_router(notifications.router, prefix="/api/v1")
 app.include_router(seo.router, prefix="/api/v1")
 app.include_router(articles.router, prefix="/api/v1")
 app.include_router(admin_articles.router, prefix="/api/v1")
+app.include_router(telegram.router, prefix="/api/v1")
 
 Path(settings.media_dir).mkdir(parents=True, exist_ok=True)
 app.mount(MEDIA_URL, StaticFiles(directory=settings.media_dir), name="media")
