@@ -49,7 +49,7 @@ const ListingCard = ({
   <article className={styles.card}>
     <CardLink className={styles.photo} href={href}>
       {photoUrl && (
-        <Image className={styles.image} src={photoUrl} alt="" fill sizes="388px" unoptimized />
+        <Image className={styles.image} src={photoUrl} alt={title} fill sizes="388px" unoptimized />
       )}
     </CardLink>
 

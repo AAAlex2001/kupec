@@ -6,6 +6,7 @@ import {
   type Article,
   type ArticleCardData,
 } from "@/entities/article";
+import type { ThreadPage } from "@/entities/comment";
 import { ArticleReactions } from "@/features/react-article";
 import { COMMENTS_ANCHOR, HOME_PATH } from "@/shared/config/routes";
 import { formatDate } from "@/shared/lib/format";
@@ -24,10 +25,11 @@ export { loadRelated } from "./load";
 type ArticlePageProps = {
   article: Article;
   related: ArticleCardData[];
+  comments: ThreadPage;
 };
 
 /** Статья: путь по разделам, заголовок, дата, обложка, текст, реакции, обсуждение и «Читайте также». Разметка schema.org — для поисковиков. */
-const ArticlePage = ({ article, related }: ArticlePageProps) => {
+const ArticlePage = ({ article, related, comments }: ArticlePageProps) => {
   const section = ARTICLE_SECTIONS[article.section];
   const contents = articleContents(article.html);
   const hasContents = contents.items.length > 0;
@@ -86,6 +88,7 @@ const ArticlePage = ({ article, related }: ArticlePageProps) => {
           id={COMMENTS_ANCHOR}
           target={{ kind: "articles", id: article.id }}
           count={article.comments_count}
+          initial={comments}
         />
       </div>
 

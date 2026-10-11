@@ -1,41 +1,23 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { errorMessage } from "@/shared/lib/errors";
 import { fetchSellerReviews } from "../api/reviews";
-import type { Review } from "./types";
+import { SELLER_REVIEWS_PAGE_SIZE } from "./config";
+import type { ReviewPage } from "./types";
 
-const PAGE_SIZE = 3;
-
-/** Опубликованные отзывы о продавце: первые три и «показать ещё». */
-export const useSellerReviews = (sellerId: number) => {
-  const [items, setItems] = useState<Review[] | null>(null);
-  const [total, setTotal] = useState(0);
+/** Отзывы о продавце: первые пришли с сервера, дальше — «Показать ещё». */
+export const useSellerReviews = (sellerId: number, initial: ReviewPage) => {
+  const [items, setItems] = useState(initial.items);
   const [error, setError] = useState<string | null>(null);
   const [loadingMore, setLoadingMore] = useState(false);
-
-  useEffect(() => {
-    let active = true;
-
-    fetchSellerReviews(sellerId, PAGE_SIZE, 0)
-      .then((page) => {
-        if (!active) return;
-        setItems(page.items);
-        setTotal(page.total);
-      })
-      .catch((failure) => active && setError(errorMessage(failure, "Не удалось загрузить отзывы")));
-
-    return () => {
-      active = false;
-    };
-  }, [sellerId]);
 
   const loadMore = async () => {
     setLoadingMore(true);
 
     try {
-      const page = await fetchSellerReviews(sellerId, PAGE_SIZE, items?.length ?? 0);
-      setItems((current) => [...(current ?? []), ...page.items]);
+      const page = await fetchSellerReviews(sellerId, SELLER_REVIEWS_PAGE_SIZE, items.length);
+      setItems([...items, ...page.items]);
     } catch (failure) {
       setError(errorMessage(failure, "Не удалось загрузить отзывы"));
     }
@@ -43,5 +25,5 @@ export const useSellerReviews = (sellerId: number) => {
     setLoadingMore(false);
   };
 
-  return { items, total, error, loadingMore, loadMore };
+  return { items, total: initial.total, error, loadingMore, loadMore };
 };

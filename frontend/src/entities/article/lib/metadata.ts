@@ -1,24 +1,27 @@
 import type { Metadata } from "next";
 import { articlePath } from "@/shared/config/routes";
+import { pagePath } from "@/shared/lib/pagination";
 import { OG_BASE, ogImages } from "@/shared/lib/seo";
 import type { Article, ArticleSection } from "../model/types";
 import { ARTICLE_SECTIONS } from "./sections";
 import { articleDescription, articleTitle } from "./seo";
 
-/** Метаданные раздела «Новости» или «Блог». */
-export const sectionMetadata = (section: ArticleSection): Metadata => {
+/** Метаданные страницы раздела «Новости» или «Блог». У каждой ?page свой адрес и заголовок. */
+export const sectionMetadata = (section: ArticleSection, pageNumber: number): Metadata => {
   const meta = ARTICLE_SECTIONS[section];
+  const path = pagePath(meta.path, pageNumber);
+  const title = pageNumber > 1 ? `${meta.title} — страница ${pageNumber}` : meta.title;
 
   return {
-    title: meta.title,
+    title,
     description: meta.description,
-    alternates: { canonical: meta.path },
+    alternates: { canonical: path },
     openGraph: {
       ...OG_BASE,
       type: "website",
-      title: meta.title,
+      title,
       description: meta.description,
-      url: meta.path,
+      url: path,
     },
   };
 };

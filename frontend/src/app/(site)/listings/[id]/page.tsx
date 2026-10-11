@@ -4,6 +4,7 @@ import { cache } from "react";
 import { getCategoryPage } from "@/entities/category/server";
 import { listingCover, listingDescription } from "@/entities/listing";
 import { getListing, getListings, getSimilarListings } from "@/entities/listing/server";
+import { getSellerReviews } from "@/entities/review/server";
 import { sessionHeaders } from "@/entities/user/server";
 import { listingPath } from "@/shared/config/routes";
 import { OG_BASE, ogImages } from "@/shared/lib/seo";
@@ -61,9 +62,10 @@ export default async function ListingPage({ params }: ListingPageProps) {
   const listing = await loadListing(Number((await params).id));
   if (!listing) notFound();
 
-  const [{ categories, fields }, sellerListings] = await Promise.all([
+  const [{ categories, fields }, sellerListings, sellerReviews] = await Promise.all([
     loadCategory(listing.category?.slug),
     getListings({ owner: listing.owner.id, exclude: listing.id, limit: RELATED_LIMIT }),
+    getSellerReviews(listing.owner.id),
   ]);
   const narrowFirst = categories.map((category) => category.slug).reverse();
   const similarListings = await getSimilarListings(narrowFirst, listing.id, RELATED_LIMIT);
@@ -76,6 +78,7 @@ export default async function ListingPage({ params }: ListingPageProps) {
         fields={fields}
         sellerListings={sellerListings.items}
         similarListings={similarListings}
+        sellerReviews={sellerReviews}
       />
     </main>
   );

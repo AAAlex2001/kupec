@@ -15,21 +15,23 @@ import Button from "@/shared/ui/button";
 import Loader from "@/shared/ui/loader";
 import Notice from "@/shared/ui/notice";
 import Title from "@/shared/ui/title";
+import { COMMENTS_PAGE_SIZE } from "./config";
 import CommentThread from "./ui/comment-thread";
 import styles from "./style.module.scss";
-
-const PAGE_SIZE = 10;
 
 type CommentsProps = {
   id: string;
   target: CommentTarget;
   count: number;
+  initial: ThreadPage;
 };
 
 /** Обсуждение поста или статьи: счётчик, форма, ветки с ответами и «Загрузить ещё». По ссылке с #id прокручивается сюда. */
-const Comments = ({ id, target, count }: CommentsProps) => {
-  const threads = usePaged<Thread, ThreadPage>(`${target.kind}-${target.id}`, (offset) =>
-    fetchThreads(target, PAGE_SIZE, offset),
+const Comments = ({ id, target, count, initial }: CommentsProps) => {
+  const threads = usePaged<Thread, ThreadPage>(
+    `${target.kind}-${target.id}`,
+    (offset) => fetchThreads(target, COMMENTS_PAGE_SIZE, offset),
+    initial,
   );
   const [replyTo, setReplyTo] = useState<Comment | null>(null);
   useScrollToHash(id, threads.items !== null);

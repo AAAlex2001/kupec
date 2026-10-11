@@ -5,6 +5,7 @@ import { articleMetadata } from "@/entities/article";
 import { getArticle } from "@/entities/article/server";
 import { sessionHeaders } from "@/entities/user/server";
 import ArticlePage, { loadRelated } from "@/widgets/article-page";
+import { loadComments } from "@/widgets/comments/server";
 
 type BlogArticleRouteProps = {
   params: Promise<{ slug: string }>;
@@ -29,9 +30,14 @@ export default async function BlogArticleRoute({ params }: BlogArticleRouteProps
   const article = await loadArticle((await params).slug);
   if (!article) notFound();
 
+  const [related, comments] = await Promise.all([
+    loadRelated(article),
+    loadComments({ kind: "articles", id: article.id }),
+  ]);
+
   return (
     <main>
-      <ArticlePage article={article} related={await loadRelated(article)} />
+      <ArticlePage article={article} related={related} comments={comments} />
     </main>
   );
 }

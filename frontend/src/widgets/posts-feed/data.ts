@@ -2,6 +2,8 @@ import { fetchFeed, fetchFollowingFeed } from "@/entities/post";
 
 export type FeedTab = "all" | "following";
 
+export const FEED_PAGE_SIZE = 20;
+
 export const FEED_TABS: { value: FeedTab; label: string }[] = [
   { value: "all", label: "Для вас" },
   { value: "following", label: "Подписки" },

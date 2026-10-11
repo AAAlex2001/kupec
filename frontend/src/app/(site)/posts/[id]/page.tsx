@@ -6,6 +6,7 @@ import { getPost } from "@/entities/post/server";
 import { sessionHeaders } from "@/entities/user/server";
 import { postPath } from "@/shared/config/routes";
 import { OG_BASE, ogImages } from "@/shared/lib/seo";
+import { loadComments } from "@/widgets/comments/server";
 import PostPage from "@/widgets/post-page";
 
 type PostRouteProps = {
@@ -48,8 +49,9 @@ export async function generateMetadata({ params }: PostRouteProps): Promise<Meta
 
 /** Публикация с комментариями. Открыта всем. */
 export default async function PostRoute({ params }: PostRouteProps) {
-  const post = await loadPost(Number((await params).id));
+  const id = Number((await params).id);
+  const [post, comments] = await Promise.all([loadPost(id), loadComments({ kind: "posts", id })]);
   if (!post) notFound();
 
-  return <PostPage post={post} />;
+  return <PostPage post={post} comments={comments} />;
 }

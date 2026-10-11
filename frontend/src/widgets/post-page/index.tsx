@@ -1,6 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
+import type { ThreadPage } from "@/entities/comment";
 import { postJsonLd, type Post } from "@/entities/post";
 import { COMMENTS_ANCHOR, FEED_PATH } from "@/shared/config/routes";
 import Button from "@/shared/ui/button";
@@ -13,10 +14,11 @@ import styles from "./style.module.scss";
 
 type PostPageProps = {
   post: Post;
+  comments: ThreadPage;
 };
 
 /** Страница публикации: «Назад в ленту», пост и комментарии к нему. Разметка schema.org — для поисковиков. */
-const PostPage = ({ post }: PostPageProps) => {
+const PostPage = ({ post, comments }: PostPageProps) => {
   const router = useRouter();
 
   return (
@@ -35,6 +37,7 @@ const PostPage = ({ post }: PostPageProps) => {
         id={COMMENTS_ANCHOR}
         target={{ kind: "posts", id: post.id }}
         count={post.comments_count}
+        initial={comments}
       />
     </div>
   );

@@ -1,0 +1,1 @@
+export const SELLER_REVIEWS_PAGE_SIZE = 3;

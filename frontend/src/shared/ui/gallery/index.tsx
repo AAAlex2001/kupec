@@ -10,10 +10,11 @@ import styles from "./style.module.scss";
 
 type GalleryProps = {
   photos: string[];
+  alt?: string;
 };
 
-/** Фото объявления: большое фото листается на Keen Slider, по клику открывается на весь экран. */
-const Gallery = ({ photos }: GalleryProps) => {
+/** Фото объявления: большое фото листается на Keen Slider, по клику открывается на весь экран. alt — описание фото для поиска по картинкам. */
+const Gallery = ({ photos, alt = "" }: GalleryProps) => {
   const [current, setCurrent] = useState(0);
   const [openIndex, setOpenIndex] = useState<number | null>(null);
   const [sliderRef, slider] = useKeenSlider<HTMLDivElement>({
@@ -26,7 +27,7 @@ const Gallery = ({ photos }: GalleryProps) => {
     <div className={styles.gallery}>
       <div ref={sliderRef} className="keen-slider">
         {photos.map((src, index) => (
-          <GalleryPhoto key={src} src={src} onOpen={() => setOpenIndex(index)} />
+          <GalleryPhoto key={src} src={src} alt={alt} onOpen={() => setOpenIndex(index)} />
         ))}
       </div>
 

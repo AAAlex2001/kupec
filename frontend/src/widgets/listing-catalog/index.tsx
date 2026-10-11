@@ -19,6 +19,8 @@ type ListingCatalogProps = {
   places: Option[];
   showKind: boolean;
   listings: ListingPage;
+  pageNumber?: number;
+  pagesPath?: string;
 };
 
 /** Объявления с фильтрами: на ПК панель слева, до ПК — кнопка «Фильтры». Сверху порядок ленты. */
@@ -30,6 +32,8 @@ const ListingCatalog = ({
   places,
   showKind,
   listings,
+  pageNumber,
+  pagesPath,
 }: ListingCatalogProps) => {
   const query = filtersQuery(filters);
   const panel = { filters, fields, places, showKind, ranges: listings.ranges ?? {} };
@@ -52,6 +56,8 @@ const ListingCatalog = ({
           city={city}
           initial={listings}
           query={{ category, city: city?.id, filters: query }}
+          pageNumber={pageNumber}
+          pagesPath={pagesPath}
         />
       </div>
     </div>

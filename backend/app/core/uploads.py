@@ -12,6 +12,7 @@ from app.core.config import MEDIA_URL, get_settings
 
 MEGABYTE = 1024 * 1024
 IMAGE_MAX_SIZE_BYTES = 10 * MEGABYTE
+PHOTO_MAX_SIZE_BYTES = 50 * MEGABYTE
 IMAGE_EXTENSIONS = {"JPEG": ".jpg", "MPO": ".jpg", "PNG": ".png", "WEBP": ".webp"}
 JPEG_QUALITY = 90
 

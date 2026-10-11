@@ -1,1 +1,1 @@
-export { getAuthorPosts, getPost } from "./api/load";
+export { getAuthorPosts, getFeed, getPost } from "./api/load";

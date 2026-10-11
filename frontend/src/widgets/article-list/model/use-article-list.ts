@@ -5,18 +5,19 @@ import { fetchArticles, type ArticlePage, type ArticleSection } from "@/entities
 import { errorMessage } from "@/shared/lib/errors";
 import { ARTICLES_PAGE_SIZE } from "./constants";
 
-/** Статьи раздела: первая порция с сервера и подгрузка «Загрузить ещё». */
-export const useArticleList = (section: ArticleSection, initial: ArticlePage) => {
+/** Статьи раздела: страница с сервера и подгрузка следующих. start — с какой по счёту статьи начинается страница. */
+export const useArticleList = (section: ArticleSection, initial: ArticlePage, start: number) => {
   const [page, setPage] = useState(initial);
   const [loadingMore, setLoadingMore] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const next = start + page.items.length;
 
   const loadMore = async () => {
     setLoadingMore(true);
     setError(null);
 
     try {
-      const more = await fetchArticles(section, ARTICLES_PAGE_SIZE, page.items.length);
+      const more = await fetchArticles(section, ARTICLES_PAGE_SIZE, next);
       setPage({ items: [...page.items, ...more.items], total: more.total });
     } catch (failure) {
       setError(errorMessage(failure, "Не удалось загрузить"));
@@ -25,5 +26,5 @@ export const useArticleList = (section: ArticleSection, initial: ArticlePage) =>
     setLoadingMore(false);
   };
 
-  return { page, loadingMore, error, loadMore };
+  return { page, next, hasMore: next < page.total, loadingMore, error, loadMore };
 };

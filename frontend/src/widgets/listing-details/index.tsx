@@ -1,5 +1,6 @@
 import type { CategoryField } from "@/entities/attribute";
 import { listingJsonLd, type Category, type Listing } from "@/entities/listing";
+import type { ReviewPage } from "@/entities/review";
 import Carousel from "@/shared/ui/carousel";
 import Gallery from "@/shared/ui/gallery";
 import JsonLd from "@/shared/ui/json-ld";
@@ -21,6 +22,7 @@ type ListingDetailsProps = {
   fields: CategoryField[];
   sellerListings: Listing[];
   similarListings: Listing[];
+  sellerReviews: ReviewPage;
 };
 
 /** Страница объявления: путь по каталогу, фото, характеристики, описание, место, автор и похожие. Разметка schema.org — для поисковиков. */
@@ -30,6 +32,7 @@ const ListingDetails = ({
   fields,
   sellerListings,
   similarListings,
+  sellerReviews,
 }: ListingDetailsProps) => (
   <div className={styles.page}>
     <JsonLd data={listingJsonLd(listing)} />
@@ -42,11 +45,11 @@ const ListingDetails = ({
 
     <div className={styles.columns}>
       <div className={styles.main}>
-        <Gallery photos={listing.photos.map((photo) => photo.url)} />
+        <Gallery photos={listing.photos.map((photo) => photo.url)} alt={listing.title} />
         <ListingSpecs listing={listing} fields={fields} />
         {listing.description && <ListingDescription text={listing.description} />}
         {listing.city && <ListingLocation listing={listing} city={listing.city} />}
-        <SellerReviews listing={listing} />
+        <SellerReviews listing={listing} reviews={sellerReviews} />
       </div>
 
       <AuthorPanel listing={listing} />

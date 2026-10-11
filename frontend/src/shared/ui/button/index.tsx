@@ -1,6 +1,6 @@
 import cn from "classnames";
 import Link from "next/link";
-import type { ReactNode } from "react";
+import type { MouseEvent, ReactNode } from "react";
 import Spinner from "@/shared/ui/spinner";
 import styles from "./style.module.scss";
 
@@ -11,7 +11,7 @@ type ButtonProps = {
   size?: "md" | "lg" | "icon";
   disabled?: boolean;
   loading?: boolean;
-  onClick?: () => void;
+  onClick?: (event: MouseEvent<HTMLElement>) => void;
   className?: string;
   href?: string;
   ariaLabel?: string;

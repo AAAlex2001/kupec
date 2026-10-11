@@ -21,19 +21,33 @@ const loadAuthor = cache(async (id: number) => {
   return getPublicUser(id, headers ?? undefined);
 });
 
-/** Имя, описание и аватар автора для поисковиков и превью ссылки. */
+/** Публикации и объявления автора. Один запрос на страницу — и для метаданных, и для самой страницы. */
+const loadContent = cache(async (id: number) => {
+  const headers = await sessionHeaders();
+  const [posts, listings] = await Promise.all([
+    getAuthorPosts(id, SLIDER_LIMIT, headers ?? undefined),
+    getListings({ owner: id, limit: SLIDER_LIMIT }),
+  ]);
+
+  return { posts: posts.items, listings: listings.items };
+});
+
+/** Имя, описание и аватар автора. Страница без публикаций и объявлений не индексируется: на ней нечего искать. */
 export async function generateMetadata({ params }: AuthorRouteProps): Promise<Metadata> {
-  const author = await loadAuthor(Number((await params).id));
+  const id = Number((await params).id);
+  const [author, content] = await Promise.all([loadAuthor(id), loadContent(id)]);
   if (!author) return { title: "Пользователь не найден", robots: { index: false } };
 
   const title = author.name ?? "Пользователь";
   const place = author.city ? ` из ${author.city.name}` : "";
   const description = `${title}${place} на «Купце»: публикации и объявления.`;
+  const empty = content.posts.length === 0 && content.listings.length === 0;
 
   return {
     title,
     description,
     alternates: { canonical: userPath(author.id) },
+    robots: { index: !empty },
     openGraph: {
       ...OG_BASE,
       type: "profile",
@@ -48,18 +62,12 @@ export async function generateMetadata({ params }: AuthorRouteProps): Promise<Me
 /** Страница автора: его публикации и объявления. */
 export default async function AuthorRoute({ params }: AuthorRouteProps) {
   const id = Number((await params).id);
-  const author = await loadAuthor(id);
+  const [author, content] = await Promise.all([loadAuthor(id), loadContent(id)]);
   if (!author) notFound();
-
-  const headers = await sessionHeaders();
-  const [posts, listings] = await Promise.all([
-    getAuthorPosts(id, SLIDER_LIMIT, headers ?? undefined),
-    getListings({ owner: id, limit: SLIDER_LIMIT }),
-  ]);
 
   return (
     <main>
-      <AuthorPage author={author} posts={posts.items} listings={listings.items} />
+      <AuthorPage author={author} posts={content.posts} listings={content.listings} />
     </main>
   );
 }

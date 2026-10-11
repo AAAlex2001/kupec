@@ -12,10 +12,11 @@ export { loadArticlePage } from "./load";
 type ArticleListProps = {
   section: ArticleSection;
   page: ArticlePage;
+  pageNumber: number;
 };
 
 /** Раздел «Новости» или «Блог»: заголовок, карточки статей и «Загрузить ещё». */
-const ArticleList = ({ section, page }: ArticleListProps) => {
+const ArticleList = ({ section, page, pageNumber }: ArticleListProps) => {
   const meta = ARTICLE_SECTIONS[section];
 
   return (
@@ -35,7 +36,7 @@ const ArticleList = ({ section, page }: ArticleListProps) => {
         />
       )}
 
-      <ArticleGrid section={section} initial={page} />
+      <ArticleGrid section={section} initial={page} pageNumber={pageNumber} />
     </div>
   );
 };

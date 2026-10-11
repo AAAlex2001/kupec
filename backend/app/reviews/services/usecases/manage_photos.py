@@ -3,7 +3,7 @@
 from fastapi import UploadFile
 from sqlalchemy.exc import SQLAlchemyError
 
-from app.core.uploads import remove_file, save_image
+from app.core.uploads import PHOTO_MAX_SIZE_BYTES, remove_file, save_image
 from app.reviews.models import ReviewPhoto
 from app.reviews.services.exceptions import ReviewPhotoNotFoundError, TooManyReviewPhotosError
 from app.reviews.services.repo import ReviewPhotoRepository
@@ -25,7 +25,7 @@ class UploadReviewPhotoUseCase:
         if await self.photos.count_free(user.id) >= MAX_FREE_PHOTOS:
             raise TooManyReviewPhotosError(user.id)
 
-        path = await save_image(file, REVIEWS_FOLDER)
+        path = await save_image(file, REVIEWS_FOLDER, PHOTO_MAX_SIZE_BYTES)
 
         try:
             return await self.photos.add(ReviewPhoto(owner_id=user.id, path=path))
