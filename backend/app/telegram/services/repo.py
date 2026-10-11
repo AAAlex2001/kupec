@@ -25,7 +25,11 @@ class TelegramLinkRepository:
         return await self.db.scalar(stmt)
 
     async def link_account(self, user_id: int, telegram_user_id: int) -> None:
-        """Привязать аккаунт Telegram к пользователю. Старые привязки обоих снимаются вместе с каналом."""
+        """Привязать аккаунт Telegram к пользователю. Та же пара — канал остаётся, иначе старые привязки снимаются."""
+
+        current = await self.get_by_user(user_id)
+        if current is not None and current.telegram_user_id == telegram_user_id:
+            return
 
         await self.db.execute(
             delete(TelegramLink).where(

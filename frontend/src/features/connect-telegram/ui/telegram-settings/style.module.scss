@@ -5,6 +5,12 @@
   gap: 16px;
 }
 
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
 .text {
   font-family: "Inter";
   font-size: 14px;
