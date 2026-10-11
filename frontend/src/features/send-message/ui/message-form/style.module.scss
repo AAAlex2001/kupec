@@ -4,7 +4,7 @@
   padding: 12px 16px;
   gap: 4px;
 
-  border: 1px solid #f5f6f8;
+  border: 1px solid var(--color-surface-soft);
   border-radius: 16px;
 }
 
@@ -23,5 +23,5 @@
   font-size: 12px;
   line-height: 16px;
 
-  color: #e5243b;
+  color: var(--color-danger);
 }

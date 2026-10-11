@@ -15,8 +15,9 @@
     position: sticky;
     bottom: 0;
 
-    padding: 16px 0;
+    padding: 16px 12px;
 
-    background: #ffffff;
+    background: var(--color-surface);
+    border-radius: 12px;
   }
 }

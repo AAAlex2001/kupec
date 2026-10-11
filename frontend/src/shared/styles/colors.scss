@@ -1,9 +1,16 @@
-$accent: #00a2ff;
-$accent-hover: #0090e6;
-$accent-text: #0077c2;
-$accent-soft: #e6f6ff;
-$accent-ring: rgba(0, 162, 255, 0.2);
-$favorite: #ff3b5c;
-$favorite-soft: #fff0f3;
-$rating: #ffb800;
-$footer: #f3f4f6;
+$accent: var(--color-accent);
+$accent-hover: var(--color-accent-hover);
+$accent-text: var(--color-accent-text);
+$accent-soft: var(--color-accent-soft);
+$accent-ring: var(--color-accent-ring);
+$favorite: var(--color-favorite);
+$favorite-soft: var(--color-favorite-soft);
+$rating: var(--color-rating);
+$footer: var(--color-footer);
+
+// Стили только для тёмной темы.
+@mixin dark-theme {
+  :global(html[data-theme="dark"]) {
+    @content;
+  }
+}

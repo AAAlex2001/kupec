@@ -20,7 +20,7 @@
   line-height: 20px;
   overflow-wrap: anywhere;
 
-  color: #70757f;
+  color: var(--color-text-muted);
 }
 
 .submit {
@@ -34,5 +34,5 @@
   font-size: 12px;
   line-height: 16px;
 
-  color: #70757f;
+  color: var(--color-text-muted);
 }

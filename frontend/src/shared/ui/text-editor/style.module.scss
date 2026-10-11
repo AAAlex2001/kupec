@@ -21,8 +21,8 @@
 
   min-height: 160px;
 
-  background: #ffffff;
-  border: 1px solid #e2e5ea;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
   border-radius: 8px;
   outline: none;
   transition: border-color 0.15s ease;
@@ -37,6 +37,6 @@
   float: left;
   height: 0;
 
-  color: #70757f;
+  color: var(--color-text-muted);
   pointer-events: none;
 }

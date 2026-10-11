@@ -14,6 +14,7 @@ type LogoProps = {
 const Logo = ({ href, ariaLabel, size = "md", className }: LogoProps) => (
   <Link className={cn(styles.logo, styles[size], className)} href={href} aria-label={ariaLabel}>
     <Image className={styles.image} src="/logo.svg" alt="" width={135} height={36} priority unoptimized />
+    <Image className={cn(styles.image, styles.darkImage)} src="/logo-dark.svg" alt="" width={135} height={36} unoptimized />
   </Link>
 );
 

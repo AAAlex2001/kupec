@@ -6,7 +6,7 @@
 
   min-height: 64px;
 
-  border-bottom: 1px solid #e2e5ea;
+  border-bottom: 1px solid var(--color-border);
 }
 
 .thumb {
@@ -16,7 +16,7 @@
   width: 48px;
   height: 36px;
 
-  background: #f5f6f8;
+  background: var(--color-surface-soft);
   border-radius: 6px;
   overflow: hidden;
 }
@@ -40,7 +40,7 @@
   font-size: 14px;
   line-height: 20px;
 
-  color: #1a1a1a;
+  color: var(--color-text);
 }
 
 .meta {
@@ -50,7 +50,7 @@
   white-space: nowrap;
   text-overflow: ellipsis;
 
-  color: #70757f;
+  color: var(--color-text-muted);
   overflow: hidden;
 }
 

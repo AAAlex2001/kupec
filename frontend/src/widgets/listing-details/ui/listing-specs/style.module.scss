@@ -15,10 +15,10 @@
 }
 
 .label {
-  color: #70757f;
+  color: var(--color-text-muted);
 }
 
 .value {
-  color: #1a1a1a;
+  color: var(--color-text);
   overflow-wrap: anywhere;
 }

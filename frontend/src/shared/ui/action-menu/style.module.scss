@@ -16,10 +16,10 @@
 
   min-width: 220px;
 
-  background: #ffffff;
-  border: 1px solid #e2e5ea;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
   border-radius: 8px;
-  box-shadow: 0 12px 32px rgba(26, 26, 26, 0.12);
+  box-shadow: 0 12px 32px var(--color-shadow);
 }
 
 .list .item,
@@ -30,9 +30,9 @@
 }
 
 .list .item {
-  color: #1a1a1a;
+  color: var(--color-text);
 }
 
 .list .item svg {
-  color: #70757f;
+  color: var(--color-text-muted);
 }

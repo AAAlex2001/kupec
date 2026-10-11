@@ -12,7 +12,7 @@
   font-size: 13px;
   line-height: 16px;
 
-  color: #70757f;
+  color: var(--color-text-muted);
 }
 
 .pin {
@@ -26,5 +26,5 @@
 .place {
   font-weight: 600;
 
-  color: #1a1a1a;
+  color: var(--color-text);
 }

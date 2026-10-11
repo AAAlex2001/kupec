@@ -4,7 +4,7 @@
   padding: 16px;
   gap: 12px;
 
-  border: 1px solid #e2e5ea;
+  border: 1px solid var(--color-border);
   border-radius: 8px;
 }
 
@@ -13,7 +13,7 @@
   font-size: 13px;
   line-height: 16px;
 
-  color: #70757f;
+  color: var(--color-text-muted);
 }
 
 .reason {
@@ -25,8 +25,8 @@
   line-height: 20px;
   overflow-wrap: anywhere;
 
-  color: #e5243b;
-  background: #fff1f3;
+  color: var(--color-danger);
+  background: var(--color-danger-soft);
   border-radius: 8px;
 }
 
@@ -36,7 +36,7 @@
   padding: 12px;
   gap: 8px;
 
-  border: 1px solid #e2e5ea;
+  border: 1px solid var(--color-border);
   border-radius: 8px;
 }
 
@@ -47,5 +47,5 @@
   white-space: pre-line;
   overflow-wrap: anywhere;
 
-  color: #1a1a1a;
+  color: var(--color-text);
 }

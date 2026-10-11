@@ -43,6 +43,7 @@ jobs:
       - run: npm ci
       - run: npx eslint src
       - run: npx tsc --noEmit
+      - run: npm run test:theme
 
   deploy:
     name: Деплой на сервер

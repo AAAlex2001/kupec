@@ -11,7 +11,7 @@
   line-height: 16px;
   text-align: center;
 
-  color: #ffffff;
-  background: $favorite;
+  color: var(--color-on-accent);
+  background: var(--color-favorite-fill);
   border-radius: 10px;
 }

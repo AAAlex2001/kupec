@@ -20,8 +20,8 @@
   font-size: 14px;
   line-height: 20px;
 
-  color: #1a1a1a;
-  background: #f5f6f8;
+  color: var(--color-text);
+  background: var(--color-surface-soft);
   border: none;
   border-radius: 8px;
   cursor: pointer;
@@ -31,7 +31,7 @@
 }
 
 .chip:hover {
-  background: #e2e5ea;
+  background: var(--color-surface-hover);
 }
 
 .active,

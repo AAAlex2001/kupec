@@ -13,7 +13,7 @@
   padding: 24px;
   gap: 20px;
 
-  border: 1px solid #e2e5ea;
+  border: 1px solid var(--color-border);
   border-radius: 8px;
 }
 
@@ -27,7 +27,7 @@
   font-size: 20px;
   line-height: 24px;
 
-  color: #1a1a1a;
+  color: var(--color-text);
 }
 
 .unit {
@@ -35,7 +35,7 @@
   font-size: 14px;
   line-height: 20px;
 
-  color: #70757f;
+  color: var(--color-text-muted);
 }
 
 .chip {
@@ -62,7 +62,7 @@
   font-size: 12px;
   line-height: 16px;
 
-  color: #70757f;
+  color: var(--color-text-muted);
 }
 
 @media (min-width: 1440px) {

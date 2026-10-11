@@ -36,7 +36,7 @@
   width: 20px;
   height: 20px;
 
-  color: #70757f;
+  color: var(--color-text-muted);
 }
 
 .input {
@@ -50,14 +50,14 @@
   font-size: 16px;
   line-height: 24px;
 
-  color: #1a1a1a;
+  color: var(--color-text);
   background: transparent;
   border: none;
   outline: none;
 }
 
 .input::placeholder {
-  color: #70757f;
+  color: var(--color-text-muted);
 }
 
 .input::-webkit-search-cancel-button {
@@ -79,7 +79,7 @@
   font-size: 14px;
   line-height: 20px;
 
-  color: #ffffff;
+  color: var(--color-on-primary);
   background: $accent;
   border: none;
   cursor: pointer;
@@ -91,6 +91,6 @@
 }
 
 .submit:focus-visible {
-  outline: 2px solid #ffffff;
+  outline: 2px solid var(--color-on-accent);
   outline-offset: -4px;
 }

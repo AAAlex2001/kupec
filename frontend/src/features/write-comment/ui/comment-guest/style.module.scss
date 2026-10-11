@@ -6,7 +6,7 @@
   padding: 16px;
   gap: 12px;
 
-  background: #f5f6f8;
+  background: var(--color-surface-soft);
   border-radius: 8px;
 }
 
@@ -17,5 +17,5 @@
   font-size: 14px;
   line-height: 20px;
 
-  color: #1a1a1a;
+  color: var(--color-text);
 }

@@ -14,7 +14,7 @@
 .icon {
   display: flex;
 
-  color: #70757f;
+  color: var(--color-text-muted);
 }
 
 .icon svg {
@@ -30,7 +30,7 @@
   line-height: 24px;
   text-align: center;
 
-  color: #1a1a1a;
+  color: var(--color-text);
 }
 
 .text {
@@ -43,7 +43,7 @@
   line-height: 20px;
   text-align: center;
 
-  color: #70757f;
+  color: var(--color-text-muted);
 }
 
 @media (min-width: 768px) {

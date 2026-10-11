@@ -11,8 +11,8 @@
   width: 36px;
   height: 36px;
 
-  color: #70757f;
-  background: #f5f6f8;
+  color: var(--color-text-muted);
+  background: var(--color-surface-soft);
   border: none;
   border-radius: 999px;
   cursor: pointer;
@@ -22,8 +22,8 @@
 }
 
 .close:hover {
-  color: #1a1a1a;
-  background: #e2e5ea;
+  color: var(--color-text);
+  background: var(--color-surface-hover);
 }
 
 .close:focus-visible {
@@ -40,12 +40,12 @@
   width: 28px;
   height: 28px;
 
-  color: #ffffff;
-  background: rgba(0, 0, 0, 0.6);
+  color: var(--color-on-accent);
+  background: var(--color-media-overlay);
 }
 
 .close.dark:hover {
-  background: rgba(0, 0, 0, 0.8);
+  background: var(--color-media-overlay-hover);
 }
 
 .close.dark svg {

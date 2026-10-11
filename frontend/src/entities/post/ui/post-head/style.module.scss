@@ -29,7 +29,7 @@
   font-size: 14px;
   line-height: 20px;
 
-  color: #1a1a1a;
+  color: var(--color-text);
 }
 
 .author:hover .name {
@@ -42,5 +42,5 @@
   font-size: 13px;
   line-height: 20px;
 
-  color: #70757f;
+  color: var(--color-text-muted);
 }

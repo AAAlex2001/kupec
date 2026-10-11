@@ -4,7 +4,7 @@
   padding: 20px;
   gap: 16px;
 
-  border: 1px solid #e2e5ea;
+  border: 1px solid var(--color-border);
   border-radius: 8px;
 }
 
@@ -29,7 +29,7 @@
   font-size: 12px;
   line-height: 16px;
 
-  color: #70757f;
+  color: var(--color-text-muted);
 }
 
 .text {
@@ -39,7 +39,7 @@
   white-space: pre-line;
   overflow-wrap: anywhere;
 
-  color: #1a1a1a;
+  color: var(--color-text);
 }
 
 .reply {
@@ -52,8 +52,8 @@
   font-size: 12px;
   line-height: 16px;
 
-  color: #1a1a1a;
-  background: #f5f6f8;
+  color: var(--color-text);
+  background: var(--color-surface-soft);
   border-radius: 8px;
 }
 

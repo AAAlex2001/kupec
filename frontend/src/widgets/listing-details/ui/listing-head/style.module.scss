@@ -11,7 +11,7 @@
   line-height: 28px;
   overflow-wrap: anywhere;
 
-  color: #1a1a1a;
+  color: var(--color-text);
 }
 
 .meta {
@@ -24,7 +24,7 @@
   font-size: 12px;
   line-height: 16px;
 
-  color: #70757f;
+  color: var(--color-text-muted);
 }
 
 .place {

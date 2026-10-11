@@ -19,7 +19,7 @@
   font-size: 14px;
   line-height: 20px;
 
-  color: #70757f;
+  color: var(--color-text-muted);
 }
 
 .list {
@@ -38,8 +38,8 @@
 
   text-decoration: none;
 
-  background: #ffffff;
-  border: 1px solid #e2e5ea;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
   border-radius: 8px;
   transition: border-color 0.15s ease;
 }
@@ -59,7 +59,7 @@
   font-size: 15px;
   line-height: 22px;
 
-  color: #1a1a1a;
+  color: var(--color-text);
 }
 
 .meta {
@@ -67,6 +67,6 @@
   font-size: 13px;
   line-height: 18px;
 
-  color: #70757f;
+  color: var(--color-text-muted);
   overflow-wrap: anywhere;
 }

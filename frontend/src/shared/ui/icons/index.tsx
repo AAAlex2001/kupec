@@ -57,3 +57,8 @@ export { Heading2Icon } from "./heading2-icon";
 export { Heading3Icon } from "./heading3-icon";
 export { ListIcon } from "./list-icon";
 export { ListOrderedIcon } from "./list-ordered-icon";
+export { SunIcon } from "./sun-icon";
+export { MoonIcon } from "./moon-icon";
+export { LightbulbIcon } from "./lightbulb-icon";
+export { NightIcon } from "./night-icon";
+export { DayIcon } from "./day-icon";

@@ -50,12 +50,12 @@
 }
 
 .danger {
-  color: #e5243b;
+  color: var(--color-danger);
   background: transparent;
 }
 
 .danger:hover:not(:disabled) {
-  background: #fff1f3;
+  background: var(--color-danger-soft);
 }
 
 .lg {
@@ -78,7 +78,7 @@
 }
 
 .primary {
-  color: #ffffff;
+  color: var(--color-on-primary);
   background: $accent;
 }
 
@@ -88,17 +88,17 @@
 
 .secondary {
   color: $accent-text;
-  background: #f5f6f8;
+  background: var(--color-surface-soft);
 }
 
 .secondary:hover:not(:disabled) {
-  background: #e2e5ea;
+  background: var(--color-surface-hover);
 }
 
 .outline {
   color: $accent-text;
-  background: #ffffff;
-  border-color: #e2e5ea;
+  background: var(--color-surface);
+  border-color: var(--color-border);
 }
 
 .outline:hover:not(:disabled) {
@@ -112,21 +112,21 @@
 
 .ghost {
   color: $accent-text;
-  background: #ffffff;
+  background: transparent;
 }
 
 .ghost:hover:not(:disabled) {
-  background: #f5f6f8;
+  background: var(--color-surface-soft);
 }
 
 .tool {
-  color: #70757f;
+  color: var(--color-text-muted);
   background: transparent;
   border-radius: 8px;
 }
 
 .tool:hover:not(:disabled) {
-  background: #e2e5ea;
+  background: var(--color-surface-hover);
 }
 
 .tool[aria-pressed="true"] {
@@ -149,11 +149,11 @@
   font-size: 12px;
   line-height: 16px;
 
-  color: #1a1a1a;
+  color: var(--color-text);
   background: transparent;
   border-radius: 6px;
 }
 
 .chip:hover:not(:disabled) {
-  background: #f5f6f8;
+  background: var(--color-surface-soft);
 }

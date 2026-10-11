@@ -24,7 +24,6 @@ const Footer = ({ categories }: FooterProps) => {
         <div className={styles.brand}>
           <Logo href={HOME_PATH} ariaLabel={`${SITE_NAME} — на главную`} size="sm" />
           <p className={styles.description}>{SITE_DESCRIPTION}</p>
-
         </div>
 
         <div className={styles.groups}>

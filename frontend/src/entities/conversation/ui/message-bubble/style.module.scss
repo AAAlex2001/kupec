@@ -18,7 +18,7 @@
 
   font-family: "Inter";
 
-  background: #f5f6f8;
+  background: var(--color-surface-soft);
   border-radius: 8px;
 }
 
@@ -32,7 +32,7 @@
   white-space: pre-line;
   overflow-wrap: anywhere;
 
-  color: #1a1a1a;
+  color: var(--color-text);
 }
 
 .time {
@@ -40,5 +40,5 @@
   line-height: 16px;
   text-align: right;
 
-  color: #70757f;
+  color: var(--color-text-muted);
 }

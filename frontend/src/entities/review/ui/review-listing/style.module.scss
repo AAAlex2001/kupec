@@ -15,7 +15,7 @@
   width: 88px;
   height: 64px;
 
-  background: #f5f6f8;
+  background: var(--color-surface-soft);
   border-radius: 8px;
   overflow: hidden;
 }
@@ -51,12 +51,12 @@
 }
 
 .removed {
-  color: #70757f;
+  color: var(--color-text-muted);
 }
 
 .seller {
   font-size: 12px;
   line-height: 16px;
 
-  color: #70757f;
+  color: var(--color-text-muted);
 }

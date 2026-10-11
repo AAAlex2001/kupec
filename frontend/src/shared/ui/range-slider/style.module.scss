@@ -23,10 +23,10 @@
 
   background: linear-gradient(
     to right,
-    #e2e5ea var(--from),
+    var(--color-border) var(--from),
     $accent var(--from),
     $accent var(--to),
-    #e2e5ea var(--to)
+    var(--color-border) var(--to)
   );
   border-radius: 2px;
   content: "";
@@ -49,10 +49,10 @@
   width: 22px;
   height: 22px;
 
-  background: #ffffff;
+  background: var(--color-surface);
   border: 2px solid $accent;
   border-radius: 50%;
-  box-shadow: 0 2px 6px rgba(26, 26, 26, 0.16);
+  box-shadow: 0 2px 6px var(--color-shadow-strong);
   cursor: grab;
   pointer-events: auto;
   transition: transform 0.15s ease;
@@ -64,10 +64,10 @@
   width: 22px;
   height: 22px;
 
-  background: #ffffff;
+  background: var(--color-surface);
   border: 2px solid $accent;
   border-radius: 50%;
-  box-shadow: 0 2px 6px rgba(26, 26, 26, 0.16);
+  box-shadow: 0 2px 6px var(--color-shadow-strong);
   cursor: grab;
   pointer-events: auto;
   transition: transform 0.15s ease;

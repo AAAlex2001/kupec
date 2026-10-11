@@ -9,10 +9,10 @@
   width: 320px;
   height: 340px;
 
-  background: #ffffff;
-  border: 1px solid #e2e5ea;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
   border-radius: 8px;
-  box-shadow: 0 8px 24px rgba(26, 26, 26, 0.12);
+  box-shadow: 0 8px 24px var(--color-shadow);
 }
 
 .search {
@@ -25,8 +25,8 @@
   font-size: 16px;
   line-height: 24px;
 
-  color: #1a1a1a;
-  background: #f5f6f8;
+  color: var(--color-text);
+  background: var(--color-surface-soft);
   border: 1px solid transparent;
   border-radius: 8px;
   outline: none;
@@ -51,7 +51,7 @@
   font-size: 13px;
   line-height: 16px;
 
-  color: #70757f;
+  color: var(--color-text-muted);
 }
 
 .picker :global([frimousse-category-header]) {
@@ -62,8 +62,8 @@
   font-size: 12px;
   line-height: 16px;
 
-  color: #70757f;
-  background: #ffffff;
+  color: var(--color-text-muted);
+  background: var(--color-surface);
 }
 
 .picker :global([frimousse-emoji]) {
@@ -83,5 +83,5 @@
 }
 
 .picker :global([frimousse-emoji][data-active]) {
-  background: #f5f6f8;
+  background: var(--color-surface-soft);
 }

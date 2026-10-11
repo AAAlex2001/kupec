@@ -40,7 +40,7 @@ const SellerReviews = ({ listing }: SellerReviewsProps) => {
         </div>
 
         {!isOwner && (
-          <Button variant="ghost" onClick={() => (user ? setWriting(true) : openAuth())}>
+          <Button variant="primary" onClick={() => (user ? setWriting(true) : openAuth())}>
             Написать отзыв
           </Button>
         )}

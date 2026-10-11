@@ -15,9 +15,9 @@
 }
 
 .count {
-  color: #70757f;
+  color: var(--color-text-muted);
 }
 
 .error {
-  color: #e5243b;
+  color: var(--color-danger);
 }

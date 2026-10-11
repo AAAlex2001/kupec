@@ -9,13 +9,13 @@
   font-family: "Inter";
   text-decoration: none;
 
-  background: #ffffff;
+  background: var(--color-surface);
   border-left: 4px solid transparent;
   transition: background-color 0.15s ease;
 }
 
 .item:hover {
-  background: #f5f6f8;
+  background: var(--color-surface-soft);
 }
 
 .active,
@@ -47,7 +47,7 @@
   white-space: nowrap;
   text-overflow: ellipsis;
 
-  color: #1a1a1a;
+  color: var(--color-text);
   overflow: hidden;
 }
 
@@ -57,7 +57,7 @@
   font-size: 12px;
   line-height: 16px;
 
-  color: #70757f;
+  color: var(--color-text-muted);
 }
 
 .listing {
@@ -66,7 +66,7 @@
   white-space: nowrap;
   text-overflow: ellipsis;
 
-  color: #70757f;
+  color: var(--color-text-muted);
   overflow: hidden;
 }
 
@@ -80,6 +80,6 @@
   white-space: nowrap;
   text-overflow: ellipsis;
 
-  color: #1a1a1a;
+  color: var(--color-text);
   overflow: hidden;
 }

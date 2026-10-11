@@ -9,7 +9,7 @@
   overflow-wrap: anywhere;
   font-synthesis: style;
 
-  color: #1a1a1a;
+  color: var(--color-text);
 
   p {
     min-height: 24px;
@@ -23,7 +23,7 @@
   h3 {
     font-weight: 700;
 
-    color: #1a1a1a;
+    color: var(--color-text);
   }
 
   h2 {
@@ -63,8 +63,8 @@
     margin: 8px 0;
     padding-left: 12px;
 
-    color: #70757f;
-    border-left: 3px solid #dce0e7;
+    color: var(--color-text-muted);
+    border-left: 3px solid var(--color-border-subtle);
   }
 
   a {

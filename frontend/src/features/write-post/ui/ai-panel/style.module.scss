@@ -6,7 +6,7 @@
 }
 
 .bar {
-  box-shadow: 0 4px 16px rgba(47, 103, 195, 0.14);
+  box-shadow: 0 4px 16px var(--color-ai-shadow);
 }
 
 .quick {
@@ -21,7 +21,7 @@
   font-size: 12px;
   line-height: 15px;
 
-  color: #1a1a1a;
+  color: var(--color-text);
 }
 
 .actions {
@@ -35,7 +35,7 @@
   width: 6px;
   height: 6px;
 
-  background: rgba(59, 130, 246, 0.4);
+  background: var(--color-ai-highlight);
   border-radius: 50%;
 }
 
@@ -47,11 +47,11 @@
 }
 
 .status {
-  color: #70757f;
+  color: var(--color-text-muted);
 }
 
 .error {
-  color: #e5243b;
+  color: var(--color-danger);
 }
 
 .applied {

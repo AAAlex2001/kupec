@@ -32,7 +32,7 @@
   white-space: nowrap;
   text-decoration: none;
 
-  color: #70757f;
+  color: var(--color-text-muted);
   border-radius: 8px;
   transition:
     color 0.15s ease,
@@ -40,7 +40,7 @@
 }
 
 .segment:hover {
-  color: #1a1a1a;
+  color: var(--color-text);
 }
 
 .segment:focus-visible {
@@ -53,6 +53,6 @@
   font-weight: 600;
 
   color: $accent-text;
-  background: #ffffff;
-  box-shadow: 0 2px 8px rgba(26, 26, 26, 0.08);
+  background: var(--color-surface);
+  box-shadow: 0 2px 8px var(--color-shadow-soft);
 }

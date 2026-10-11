@@ -22,9 +22,9 @@
   line-height: 28px;
   text-align: center;
 
-  color: #1a1a1a;
-  background: #ffffff;
-  border: 1px solid #e2e5ea;
+  color: var(--color-text);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
   border-radius: 8px;
   outline: none;
   caret-color: $accent;
@@ -37,11 +37,11 @@
 
 .invalid,
 .invalid:focus {
-  border-color: #e5243b;
+  border-color: var(--color-danger);
 }
 
 .cell:disabled {
-  background: #f5f6f8;
+  background: var(--color-surface-soft);
 }
 
 @media (min-width: 768px) {

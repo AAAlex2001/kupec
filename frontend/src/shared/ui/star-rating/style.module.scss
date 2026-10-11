@@ -9,7 +9,7 @@
   display: flex;
   padding: 0;
 
-  color: #e2e5ea;
+  color: var(--color-border);
   background: transparent;
   border: none;
   cursor: pointer;
@@ -35,5 +35,5 @@
 }
 
 .invalid {
-  color: #f5b5bf;
+  color: var(--color-rating-muted);
 }

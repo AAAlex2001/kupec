@@ -7,6 +7,7 @@ import { PublishButton } from "@/features/publish-listing";
 import { HOME_PATH } from "@/shared/config/routes";
 import { PlusIcon } from "@/shared/ui/icons";
 import Logo from "@/shared/ui/logo";
+import ThemeToggle from "@/shared/ui/theme-toggle";
 import { HEADER_ACTIONS, PUBLISH_LABEL, SERVICE_LINKS } from "./data";
 import AccountLink from "./ui/account-link";
 import ActionLink from "./ui/action-link";
@@ -30,22 +31,25 @@ const Header = ({ city, tree }: HeaderProps) => (
         ))}
       </nav>
 
-      <nav className={styles.personal} aria-label="Личный раздел">
-        {HEADER_ACTIONS.map(({ href, label, Icon, requiresAuth }) => (
-          <ActionLink
-            key={href}
-            href={href}
-            label={label}
-            icon={<Icon />}
-            requiresAuth={requiresAuth}
-          />
-        ))}
-        <AccountLink />
-        <PublishButton className={styles.publish} variant="ghost">
-          <PlusIcon />
-          {PUBLISH_LABEL}
-        </PublishButton>
-      </nav>
+      <div className={styles.serviceActions}>
+        <ThemeToggle />
+        <nav className={styles.personal} aria-label="Личный раздел">
+          {HEADER_ACTIONS.map(({ href, label, Icon, requiresAuth }) => (
+            <ActionLink
+              key={href}
+              href={href}
+              label={label}
+              icon={<Icon />}
+              requiresAuth={requiresAuth}
+            />
+          ))}
+          <AccountLink />
+          <PublishButton className={styles.publish} variant="ghost">
+            <PlusIcon />
+            {PUBLISH_LABEL}
+          </PublishButton>
+        </nav>
+      </div>
     </div>
 
     <header className={styles.main}>
@@ -53,6 +57,7 @@ const Header = ({ city, tree }: HeaderProps) => (
         <Logo href={HOME_PATH} ariaLabel="Купец — на главную" />
 
         <div className={styles.mobileCity}>
+          <ThemeToggle />
           <LocationButton city={city} />
         </div>
       </div>

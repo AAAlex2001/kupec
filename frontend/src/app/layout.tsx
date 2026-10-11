@@ -3,6 +3,8 @@ import Script from "next/script";
 import { Suspense } from "react";
 import { SITE_DESCRIPTION, SITE_NAME, SITE_TITLE, SITE_URL } from "@/shared/config/site";
 import { OG_BASE } from "@/shared/lib/seo";
+import { THEME_INIT_SCRIPT } from "@/shared/lib/theme/init-script";
+import ThemeController from "@/shared/ui/theme-controller";
 import YandexMetrikaPageViews from "@/shared/ui/yandex-metrika";
 import "./globals.scss";
 
@@ -36,8 +38,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ru" data-scroll-behavior="smooth">
+    <html lang="ru" data-scroll-behavior="smooth" suppressHydrationWarning>
       <body>
+        <script dangerouslySetInnerHTML={{ __html: THEME_INIT_SCRIPT }} />
+        <ThemeController />
         <Script id="yandex-metrika" strategy="beforeInteractive">{`
           (function(m,e,t,r,i,k,a){
             m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};

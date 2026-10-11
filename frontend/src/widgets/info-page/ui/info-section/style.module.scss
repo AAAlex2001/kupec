@@ -13,7 +13,7 @@
   font-size: 14px;
   line-height: 20px;
 
-  color: #70757f;
+  color: var(--color-text-muted);
 }
 
 .steps {
@@ -35,7 +35,7 @@
   font-size: 14px;
   line-height: 24px;
 
-  color: #1a1a1a;
+  color: var(--color-text);
   counter-increment: step;
 }
 

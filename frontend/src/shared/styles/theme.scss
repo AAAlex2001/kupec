@@ -1,0 +1,110 @@
+// Все цвета интерфейса задаются здесь. В компонентах используем --color-*.
+// Палитра переключается атрибутом data-theme на html, без пересборки стилей.
+$light: (
+  page: #ffffff,
+  surface: #ffffff,
+  surface-soft: #f5f6f8,
+  surface-hover: #e2e5ea,
+  surface-active: #e6e6e6,
+  footer: #f3f4f6,
+  glass: rgba(255, 255, 255, 0.6),
+  text: #1a1a1a,
+  text-secondary: #4b515b,
+  text-muted: #70757f,
+  text-strong-secondary: #34383f,
+  footer-text: #343941,
+  border: #e2e5ea,
+  border-strong: #c9ced6,
+  footer-border: #d6d9df,
+  border-subtle: #dce0e7,
+  accent: #00a2ff,
+  accent-hover: #0090e6,
+  accent-text: #0077c2,
+  accent-soft: #e6f6ff,
+  accent-ring: rgba(0, 162, 255, 0.2),
+  accent-decoration: #91d9ff,
+  favorite: #ff3b5c,
+  favorite-fill: #ff3b5c,
+  favorite-soft: #fff0f3,
+  rating: #ffb800,
+  rating-muted: #f5b5bf,
+  danger: #e5243b,
+  danger-soft: #fff1f3,
+  success-soft: #e5f8d5,
+  on-accent: #ffffff,
+  on-primary: #ffffff,
+  shadow-soft: rgba(26, 26, 26, 0.08),
+  shadow: rgba(26, 26, 26, 0.12),
+  shadow-strong: rgba(26, 26, 26, 0.16),
+  overlay: rgba(26, 26, 26, 0.4),
+  media-overlay: rgba(0, 0, 0, 0.6),
+  media-overlay-hover: rgba(0, 0, 0, 0.8),
+  ai-shadow: rgba(47, 103, 195, 0.14),
+  ai-highlight: rgba(59, 130, 246, 0.4),
+  quote-surface: #f5fbff,
+  quote-border: #d6ecfb,
+  mask-solid: #000000,
+);
+
+$dark: (
+  page: #15191f,
+  surface: #1c222b,
+  surface-soft: #242c36,
+  surface-hover: #303b48,
+  surface-active: #364351,
+  footer: #1a2028,
+  glass: rgba(28, 34, 43, 0.88),
+  text: #e8edf3,
+  text-secondary: #bec8d4,
+  text-muted: #9ba8b8,
+  text-strong-secondary: #cbd4de,
+  footer-text: #cbd4de,
+  border: #36414f,
+  border-strong: #526173,
+  footer-border: #36414f,
+  border-subtle: #36414f,
+  accent: #008ff0,
+  accent-hover: #159cf5,
+  accent-text: #70c8ff,
+  accent-soft: #203a4c,
+  accent-ring: rgba(112, 200, 255, 0.22),
+  accent-decoration: #4091bd,
+  favorite: #ff7d99,
+  favorite-fill: #be3456,
+  favorite-soft: #3a2631,
+  rating: #f2bf57,
+  rating-muted: #79604d,
+  danger: #ff8793,
+  danger-soft: #3b2832,
+  success-soft: #34523b,
+  on-accent: #ffffff,
+  on-primary: #ffffff,
+  shadow-soft: rgba(0, 0, 0, 0.18),
+  shadow: rgba(0, 0, 0, 0.24),
+  shadow-strong: rgba(0, 0, 0, 0.32),
+  overlay: rgba(5, 9, 15, 0.7),
+  media-overlay: rgba(0, 0, 0, 0.6),
+  media-overlay-hover: rgba(0, 0, 0, 0.8),
+  ai-shadow: rgba(0, 0, 0, 0.24),
+  ai-highlight: rgba(112, 200, 255, 0.25),
+  quote-surface: #1d2c39,
+  quote-border: #344d62,
+  mask-solid: #000000,
+);
+
+@mixin palette($colors) {
+  @each $name, $value in $colors {
+    --color-#{$name}: #{$value};
+  }
+}
+
+:root {
+  @include palette($light);
+  color-scheme: light;
+}
+
+:root[data-theme="dark"] {
+  @include palette($dark);
+  color-scheme: dark;
+}
+

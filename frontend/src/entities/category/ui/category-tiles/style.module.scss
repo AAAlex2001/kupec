@@ -34,8 +34,8 @@
   line-height: 18px;
   text-decoration: none;
 
-  color: #1a1a1a;
-  background: #f5f6f8;
+  color: var(--color-text);
+  background: var(--color-surface-soft);
   border-radius: 16px;
   overflow: hidden;
   scroll-snap-align: start;
@@ -43,7 +43,7 @@
 }
 
 .tile:hover {
-  background: #e2e5ea;
+  background: var(--color-surface-hover);
 }
 
 .tile:focus-visible {

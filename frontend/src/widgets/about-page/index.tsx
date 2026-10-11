@@ -1,3 +1,4 @@
+import cn from "classnames";
 import Image from "next/image";
 import {
   ABOUT_PATH,
@@ -47,12 +48,21 @@ const AboutPage = () => (
         <p>Находим нужное, делимся полезным и помогаем друг другу каждый день.</p>
       </div>
       <Image
-        className={styles.heroImage}
+        className={cn(styles.heroImage, styles.heroLight)}
         src="/images/about/hero-v3.webp"
         alt="Маленький город на голубом полушарии: люди, дома и вещи, которые объединяют соседей"
         width={1774}
         height={887}
         preload
+        quality={95}
+        sizes="100vw"
+      />
+      <Image
+        className={cn(styles.heroImage, styles.heroDark)}
+        src="/images/about/hero-dark.webp"
+        alt="Маленький город на голубом полушарии: люди, дома и вещи, которые объединяют соседей"
+        width={1774}
+        height={887}
         quality={95}
         sizes="100vw"
       />

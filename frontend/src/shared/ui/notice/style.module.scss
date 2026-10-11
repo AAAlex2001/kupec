@@ -26,7 +26,7 @@
   font-size: 12px;
   line-height: 16px;
 
-  color: #1a1a1a;
+  color: var(--color-text);
 }
 
 .success {
@@ -38,18 +38,18 @@
 }
 
 .error {
-  background: #fff1f3;
+  background: var(--color-danger-soft);
 }
 
 .error svg,
 .error .text {
-  color: #e5243b;
+  color: var(--color-danger);
 }
 
 .info {
-  background: #f5f6f8;
+  background: var(--color-surface-soft);
 }
 
 .info svg {
-  color: #70757f;
+  color: var(--color-text-muted);
 }

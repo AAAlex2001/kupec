@@ -21,7 +21,7 @@
   font-size: 14px;
   line-height: 20px;
 
-  color: #1a1a1a;
+  color: var(--color-text);
 }
 
 .hint,
@@ -35,7 +35,7 @@
 }
 
 .hint {
-  color: #70757f;
+  color: var(--color-text-muted);
 }
 
 .grid {
@@ -60,7 +60,7 @@
   width: 100%;
   aspect-ratio: 4 / 3;
 
-  background: #f5f6f8;
+  background: var(--color-surface-soft);
   border-radius: 8px;
   overflow: hidden;
 }
@@ -95,7 +95,7 @@
 }
 
 .link.danger {
-  color: #e5243b;
+  color: var(--color-danger);
 }
 
 .link:focus-visible {
@@ -121,7 +121,7 @@
   line-height: 20px;
 
   color: $accent-text;
-  background: #f5f6f8;
+  background: var(--color-surface-soft);
   border: none;
   border-radius: 8px;
   cursor: pointer;
@@ -129,7 +129,7 @@
 }
 
 button.tile:hover {
-  background: #e2e5ea;
+  background: var(--color-surface-hover);
 }
 
 .tile:focus-visible {
@@ -147,5 +147,5 @@ button.tile:hover {
 }
 
 .error {
-  color: #e5243b;
+  color: var(--color-danger);
 }

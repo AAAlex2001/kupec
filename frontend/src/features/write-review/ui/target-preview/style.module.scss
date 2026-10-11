@@ -13,7 +13,7 @@
   width: 64px;
   height: 48px;
 
-  background: #f5f6f8;
+  background: var(--color-surface-soft);
   border-radius: 8px;
   overflow: hidden;
 }
@@ -37,12 +37,12 @@
   font-size: 14px;
   line-height: 20px;
 
-  color: #1a1a1a;
+  color: var(--color-text);
 }
 
 .subtitle {
   font-size: 12px;
   line-height: 16px;
 
-  color: #70757f;
+  color: var(--color-text-muted);
 }

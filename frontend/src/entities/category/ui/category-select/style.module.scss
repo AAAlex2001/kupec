@@ -15,9 +15,9 @@
   line-height: 20px;
   text-align: left;
 
-  color: #1a1a1a;
-  background: #ffffff;
-  border: 1px solid #e2e5ea;
+  color: var(--color-text);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
   border-radius: 8px;
   cursor: pointer;
   transition: border-color 0.15s ease;
@@ -31,7 +31,7 @@
 
 .invalid,
 .invalid:focus-visible {
-  border-color: #e5243b;
+  border-color: var(--color-danger);
 }
 
 .value {
@@ -45,7 +45,7 @@
 }
 
 .placeholder {
-  color: #70757f;
+  color: var(--color-text-muted);
 }
 
 .chevron {
@@ -53,5 +53,5 @@
   width: 20px;
   height: 20px;
 
-  color: #70757f;
+  color: var(--color-text-muted);
 }

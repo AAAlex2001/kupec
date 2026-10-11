@@ -10,7 +10,7 @@
   font-size: 14px;
   line-height: 20px;
 
-  color: #1a1a1a;
+  color: var(--color-text);
 }
 
 .hint {
@@ -18,7 +18,7 @@
   font-size: 13px;
   line-height: 18px;
 
-  color: #70757f;
+  color: var(--color-text-muted);
 }
 
 .preview {
@@ -28,7 +28,7 @@
   max-width: 480px;
   aspect-ratio: 16 / 9;
 
-  background: #f5f6f8;
+  background: var(--color-surface-soft);
   border-radius: 8px;
   overflow: hidden;
 

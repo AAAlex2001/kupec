@@ -4,7 +4,7 @@
   height: 280px;
   padding: 0;
 
-  background: #f5f6f8;
+  background: var(--color-surface-soft);
   border: none;
   cursor: zoom-in;
 }
@@ -22,8 +22,8 @@
   height: 32px;
   padding: 8px;
 
-  color: #ffffff;
-  background: rgba(26, 26, 26, 0.4);
+  color: var(--color-on-accent);
+  background: var(--color-overlay);
   border-radius: 8px;
 }
 

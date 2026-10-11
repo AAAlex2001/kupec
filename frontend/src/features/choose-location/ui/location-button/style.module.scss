@@ -9,7 +9,7 @@
 
   max-width: 220px;
 
-  color: #1a1a1a;
+  color: var(--color-text);
   background: transparent;
   border: none;
   cursor: pointer;
@@ -46,7 +46,7 @@
   width: 16px;
   height: 16px;
 
-  color: #70757f;
+  color: var(--color-text-muted);
 }
 
 .button:hover .name {

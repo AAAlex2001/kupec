@@ -17,7 +17,7 @@
   font-size: 14px;
   line-height: 20px;
 
-  color: #1a1a1a;
+  color: var(--color-text);
 }
 
 .error,
@@ -28,9 +28,9 @@
 }
 
 .error {
-  color: #e5243b;
+  color: var(--color-danger);
 }
 
 .hint {
-  color: #70757f;
+  color: var(--color-text-muted);
 }

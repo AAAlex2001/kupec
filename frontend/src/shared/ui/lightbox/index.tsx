@@ -17,7 +17,7 @@ type LightboxProps = {
 
 const PLUGINS = [lgZoom, lgThumbnail];
 
-/** Просмотр фото на весь экран на lightGallery: листание, увеличение, миниатюры. */
+/** Просмотр фото на весь экран на lightGallery: листание, увеличение, миниатюры. Страница под ним не прокручивается. */
 const Lightbox = ({ photos, openIndex, onClose }: LightboxProps) => {
   const gallery = useRef<LightGalleryInstance | null>(null);
 
@@ -32,6 +32,7 @@ const Lightbox = ({ photos, openIndex, onClose }: LightboxProps) => {
       plugins={PLUGINS}
       licenseKey={process.env.NEXT_PUBLIC_LIGHTGALLERY_LICENSE_KEY}
       download={false}
+      hideScrollbar
       onInit={(detail) => {
         gallery.current = detail.instance;
       }}

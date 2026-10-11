@@ -18,7 +18,7 @@
   font-size: 14px;
   line-height: 20px;
 
-  color: #1a1a1a;
+  color: var(--color-text);
 }
 
 .hint,
@@ -27,7 +27,7 @@
   font-size: 14px;
   line-height: 20px;
 
-  color: #70757f;
+  color: var(--color-text-muted);
 }
 
 .link {

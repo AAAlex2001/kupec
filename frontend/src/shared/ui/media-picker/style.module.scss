@@ -12,7 +12,7 @@
   font-size: 14px;
   line-height: 20px;
 
-  color: #1a1a1a;
+  color: var(--color-text);
 }
 
 .grid {
@@ -35,7 +35,7 @@
 
   aspect-ratio: 224 / 200;
 
-  background: #f5f6f8;
+  background: var(--color-surface-soft);
   border-radius: 8px;
   overflow: hidden;
 }
@@ -57,5 +57,5 @@
   font-size: 12px;
   line-height: 16px;
 
-  color: #e5243b;
+  color: var(--color-danger);
 }

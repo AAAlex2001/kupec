@@ -31,3 +31,17 @@
   width: 108px;
   height: 28.8px;
 }
+
+.darkImage {
+  display: none;
+}
+
+@include dark-theme {
+  .image {
+    display: none;
+  }
+
+  .darkImage {
+    display: block;
+  }
+}

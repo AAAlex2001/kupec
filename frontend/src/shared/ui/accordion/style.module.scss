@@ -1,7 +1,7 @@
 @use "shared/styles/colors" as *;
 
 .item {
-  border-bottom: 1px solid #e2e5ea;
+  border-bottom: 1px solid var(--color-border);
 }
 
 .title {
@@ -19,7 +19,7 @@
   line-height: 20px;
   text-align: left;
 
-  color: #1a1a1a;
+  color: var(--color-text);
   background: transparent;
   border: none;
   cursor: pointer;
@@ -40,7 +40,7 @@
   width: 20px;
   height: 20px;
 
-  color: #70757f;
+  color: var(--color-text-muted);
   transition: transform 0.2s ease;
 }
 
@@ -70,5 +70,5 @@
   font-size: 14px;
   line-height: 20px;
 
-  color: #70757f;
+  color: var(--color-text-muted);
 }

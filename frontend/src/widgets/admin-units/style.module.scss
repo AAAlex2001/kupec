@@ -17,7 +17,7 @@
   font-size: 14px;
   line-height: 20px;
 
-  color: #70757f;
+  color: var(--color-text-muted);
 }
 
 .group {
@@ -32,14 +32,14 @@
   font-size: 16px;
   line-height: 22px;
 
-  color: #1a1a1a;
+  color: var(--color-text);
 }
 
 .list {
   display: flex;
   flex-direction: column;
 
-  border-top: 1px solid #e2e5ea;
+  border-top: 1px solid var(--color-border);
 }
 
 .row {
@@ -51,7 +51,7 @@
 
   min-height: 56px;
 
-  border-bottom: 1px solid #e2e5ea;
+  border-bottom: 1px solid var(--color-border);
 }
 
 .name {
@@ -60,11 +60,11 @@
   font-size: 14px;
   line-height: 20px;
 
-  color: #1a1a1a;
+  color: var(--color-text);
 }
 
 .code {
   font-weight: 400;
 
-  color: #70757f;
+  color: var(--color-text-muted);
 }

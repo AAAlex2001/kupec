@@ -6,7 +6,7 @@
   padding: 16px 20px;
   gap: 14px;
 
-  border-bottom: 1px solid #f5f6f8;
+  border-bottom: 1px solid var(--color-surface-soft);
 }
 
 .photo {
@@ -16,7 +16,7 @@
   width: 56px;
   height: 42px;
 
-  background: #f5f6f8;
+  background: var(--color-surface-soft);
   border-radius: 8px;
   overflow: hidden;
 }
@@ -41,7 +41,7 @@
   font-size: 15px;
   line-height: 20px;
 
-  color: #1a1a1a;
+  color: var(--color-text);
 }
 
 .listing {
