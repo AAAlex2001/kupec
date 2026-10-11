@@ -31,14 +31,15 @@ class TelegramClient:
         self.settings = settings
 
     async def call(self, method: str, data: dict, files: dict | None = None) -> dict | list | bool:
-        """Вызвать метод Bot API и вернуть result. Ошибки — TelegramError."""
+        """Вызвать метод Bot API и вернуть result. С TELEGRAM_PROXY — через прокси. Ошибки — TelegramError."""
 
         token = self.settings.telegram_bot_token
         if not token:
             raise TelegramError("Не задан TELEGRAM_BOT_TOKEN")
 
+        proxy = self.settings.telegram_proxy or None
         try:
-            async with httpx.AsyncClient(timeout=TIMEOUT_SECONDS) as client:
+            async with httpx.AsyncClient(timeout=TIMEOUT_SECONDS, proxy=proxy) as client:
                 response = await client.post(f"{API_URL}/bot{token}/{method}", data=data, files=files)
                 answer = response.json()
         except (httpx.HTTPError, ValueError) as error:
