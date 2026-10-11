@@ -23,8 +23,13 @@ def test_every_seed_article_has_wide_cover() -> None:
         if path.name != "editorial-plan.json"
     ]
     initial_slugs = {item["slug"] for item in [*initial, *new]}
-    slugs = initial_slugs | {item["slug"] for item in city_articles}
-    assert len(slugs) == 100
+    extra_articles = [
+        json.loads(path.read_text(encoding="utf-8"))
+        for path in (data / "articles_v4").glob("*.json")
+        if path.name != "editorial-plan.json"
+    ]
+    slugs = initial_slugs | {item["slug"] for item in [*city_articles, *extra_articles]}
+    assert len(slugs) == 130
     assert slugs == {path.stem for path in covers.ASSETS.glob("*.webp")}
     for slug in slugs:
         with Image.open(covers.ASSETS / f"{slug}.webp") as image:
