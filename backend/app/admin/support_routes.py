@@ -9,6 +9,7 @@ from app.support.schemas import (
     AdminSupportPageSchema,
     AdminSupportThreadSchema,
     SupportMessageSchema,
+    SupportUnreadSchema,
 )
 from app.support.services.repo import SupportRepository
 from app.support.services.usecases.send_message import SendSupportMessageUseCase
@@ -41,6 +42,15 @@ async def list_threads(
         total=total,
         unread=await support.count_unread(),
     )
+
+
+@router.get("/unread")
+async def get_unread(
+    support: SupportRepository = Depends(get_support_repository),
+) -> SupportUnreadSchema:
+    """Общее количество непрочитанных сообщений для вкладки поддержки."""
+
+    return SupportUnreadSchema(count=await support.count_unread())
 
 
 @router.get("/{thread_id}")

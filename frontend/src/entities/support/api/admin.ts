@@ -1,6 +1,10 @@
 import { request } from "@/shared/api";
 import { messageBody } from "../lib/message-body";
-import type { AdminSupportDetail, AdminSupportPage, SupportMessage } from "../model/types";
+import type { AdminSupportDetail, AdminSupportPage, SupportMessage, SupportUnread } from "../model/types";
+
+/** Общий счётчик непрочитанных сообщений поддержки. */
+export const fetchAdminSupportUnread = () =>
+  request<SupportUnread>("/v1/admin/support/unread");
 
 /** Обращения в поддержку: сначала без ответа, потом свежие. */
 export const fetchSupportThreads = (limit: number, offset: number) =>

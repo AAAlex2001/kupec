@@ -22,7 +22,7 @@ const AdminSupport = () => {
     <section className={styles.section}>
       <div className={styles.head}>
         <Title as="h1">Поддержка</Title>
-        {unread > 0 && <span className={styles.unread}>ждут ответа: {unread}</span>}
+        {unread > 0 && <span className={styles.unread}>Непрочитанных сообщений: {unread}</span>}
       </div>
 
       {list.error && <Notice tone="error">{list.error}</Notice>}

@@ -30,6 +30,7 @@ export type AdminSupportThread = {
   user: SupportPerson | null;
   preview: string;
   unread_for_admin: boolean;
+  unread_admin_count: number;
   last_message_at: string;
 };
 

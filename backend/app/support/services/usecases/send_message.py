@@ -47,6 +47,8 @@ class SendSupportMessageUseCase:
         thread.preview = (text or "Фото")[:MAX_PREVIEW]
         thread.last_message_at = datetime.now(timezone.utc)
         thread.unread_for_admin = not from_admin
+        if from_admin:
+            thread.unread_admin_count = 0
         thread.unread_for_visitor = thread.unread_for_visitor + 1 if from_admin else 0
 
         try:

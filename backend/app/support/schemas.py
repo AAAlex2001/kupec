@@ -55,6 +55,7 @@ class AdminSupportThreadSchema(BaseModel):
     user: SupportPersonSchema | None = Field(None, description="Пользователь. Нет — гость")
     preview: str = Field(..., description="Начало последнего сообщения")
     unread_for_admin: bool = Field(..., description="Есть сообщение без ответа")
+    unread_admin_count: int = Field(..., ge=0, description="Непрочитанные сообщения посетителя")
     last_message_at: datetime = Field(..., description="Когда было последнее сообщение")
 
 

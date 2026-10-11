@@ -60,6 +60,9 @@ class SupportRepository:
         """Сохранить сообщение вместе с изменениями переписки."""
 
         self.db.add(message)
+        if not message.from_admin:
+            thread = await self.get(message.thread_id)
+            thread.unread_admin_count = SupportThread.unread_admin_count + 1
         await self.db.commit()
         await self.db.refresh(message, ["photos"])
 
@@ -70,6 +73,7 @@ class SupportRepository:
 
         if by_admin:
             thread.unread_for_admin = False
+            thread.unread_admin_count = 0
         else:
             thread.unread_for_visitor = 0
         await self.db.commit()
@@ -93,8 +97,8 @@ class SupportRepository:
         return items, total or 0
 
     async def count_unread(self) -> int:
-        """Сколько переписок ждут ответа поддержки."""
+        """Сколько сообщений посетителей администратор ещё не прочитал."""
 
-        stmt = select(func.count()).where(SupportThread.unread_for_admin.is_(True))
+        stmt = select(func.sum(SupportThread.unread_admin_count))
 
         return await self.db.scalar(stmt) or 0

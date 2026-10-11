@@ -16,7 +16,11 @@ export const useAdminSupportThread = (id: number) => {
 
     const load = () =>
       fetchAdminSupportThread(id)
-        .then((found) => active && setDetail(found))
+        .then((found) => {
+          if (!active) return;
+          setDetail(found);
+          window.dispatchEvent(new Event("support:read"));
+        })
         .catch((failure) => active && setError(errorMessage(failure, "Не удалось открыть обращение")));
 
     load();
@@ -30,6 +34,7 @@ export const useAdminSupportThread = (id: number) => {
 
   const reply = async (text: string, files: File[]) => {
     const message = await replySupport(id, text, files);
+    window.dispatchEvent(new Event("support:read"));
     setDetail((current) => current && { ...current, messages: [...current.messages, message] });
   };
 

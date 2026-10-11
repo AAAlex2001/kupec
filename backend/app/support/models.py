@@ -24,6 +24,7 @@ class SupportThread(Base):
         ForeignKey("users.id", ondelete="CASCADE"), index=True
     )
     unread_for_admin: Mapped[bool] = mapped_column(Boolean, default=False)
+    unread_admin_count: Mapped[int] = mapped_column(Integer, default=0, server_default="0")
     unread_for_visitor: Mapped[int] = mapped_column(Integer, default=0)
     preview: Mapped[str] = mapped_column(String(MAX_PREVIEW), default="")
 

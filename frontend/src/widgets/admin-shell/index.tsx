@@ -17,6 +17,7 @@ import {
 } from "@/shared/config/routes";
 import Logo from "@/shared/ui/logo";
 import SegmentedNav from "@/shared/ui/segmented-nav";
+import { useSupportCount } from "./model/use-support-count";
 import styles from "./style.module.scss";
 
 const SECTIONS = [
@@ -39,6 +40,11 @@ type AdminShellProps = {
 /** Оболочка админки: шапка с логотипом, разделы сегментами во всю ширину и содержимое раздела. */
 const AdminShell = ({ children }: AdminShellProps) => {
   const pathname = usePathname();
+  const supportCount = useSupportCount(pathname);
+  const sections = SECTIONS.map((section) => ({
+    ...section,
+    count: section.href === ADMIN_SUPPORT_PATH ? supportCount : undefined,
+  }));
   const current = SECTIONS.find(({ href }) => pathname.startsWith(href));
 
   return (
@@ -48,7 +54,7 @@ const AdminShell = ({ children }: AdminShellProps) => {
       </header>
 
       <main className={styles.main}>
-        <SegmentedNav ariaLabel="Разделы админки" items={SECTIONS} current={current?.href} />
+        <SegmentedNav ariaLabel="Разделы админки" items={sections} current={current?.href} />
         {children}
       </main>
     </div>

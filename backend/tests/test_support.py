@@ -45,6 +45,15 @@ def test_visitor_message_is_unread_for_admin_and_shows_preview() -> None:
     assert thread.preview == "Не приходит код"
 
 
+def test_admin_reply_resets_unread_message_count() -> None:
+    thread = make_thread()
+    thread.unread_admin_count = 3
+
+    asyncio.run(SendSupportMessageUseCase(FakeSupport()).execute(thread, "Ответ", [], from_admin=True))
+
+    assert thread.unread_admin_count == 0
+
+
 def test_admin_replies_are_counted_for_visitor_until_visitor_writes() -> None:
     usecase = SendSupportMessageUseCase(FakeSupport())
     thread = make_thread()
