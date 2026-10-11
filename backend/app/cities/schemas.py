@@ -8,6 +8,8 @@ class CitySchema(BaseModel):
 
     id: int = Field(..., description="ID населённого пункта")
     name: str = Field(..., description="Название")
+    region: str = Field(..., description="Регион")
+    settlement_type: str | None = Field(None, description="Тип населённого пункта")
     district: str | None = Field(
-        None, description="Район, чтобы различать одноимённые сёла. У городов пусто"
+        None, description="Район и родительский населённый пункт"
     )

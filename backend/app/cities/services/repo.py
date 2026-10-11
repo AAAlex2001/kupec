@@ -1,6 +1,6 @@
 """Репозиторий населённых пунктов: только запросы к таблице cities."""
 
-from sqlalchemy import select
+from sqlalchemy import case, select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.cities.models import City
@@ -17,14 +17,29 @@ class CityRepository:
 
         return await self.db.get(City, city_id)
 
-    async def search(self, query: str | None, limit: int) -> list[City]:
+    async def regions(self) -> list[str]:
+        """Регионы, для которых есть населённые пункты."""
+
+        result = await self.db.execute(select(City.region).distinct().order_by(City.region))
+
+        return list(result.scalars().all())
+
+    async def search(
+        self, query: str | None, limit: int, region: str | None = None
+    ) -> list[City]:
         """Пункты, чьё название начинается с query. Без query — сначала крупные города."""
 
         stmt = select(City)
+        if region:
+            stmt = stmt.where(City.region == region)
         if query:
-            stmt = stmt.where(City.name.istartswith(query, autoescape=True))
+            normalized = query.lower().replace("ё", "е")
+            stmt = stmt.where(City.search_name.startswith(normalized, autoescape=True))
+            stmt = stmt.order_by(case((City.search_name == normalized, 0), else_=1))
 
-        stmt = stmt.order_by(City.sort_order, City.name, City.district).limit(limit)
+        stmt = stmt.order_by(
+            City.sort_order, City.name, City.region, City.district, City.id
+        ).limit(limit)
         result = await self.db.execute(stmt)
 
         return list(result.scalars().all())

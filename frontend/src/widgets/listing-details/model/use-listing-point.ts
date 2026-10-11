@@ -1,9 +1,9 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { cityAddress } from "@/entities/city";
+import { useState } from "react";
+import { useCityCenter } from "@/entities/city";
 import type { Listing } from "@/entities/listing";
-import { geocode, type Coordinates } from "@/shared/ui/yandex-map";
+import type { Coordinates } from "@/shared/ui/yandex-map";
 
 /** Точка, которую автор поставил на карте, или null. */
 const savedPoint = ({ latitude, longitude }: Listing): Coordinates | null =>
@@ -11,19 +11,8 @@ const savedPoint = ({ latitude, longitude }: Listing): Coordinates | null =>
 
 /** Точка объявления на карте: сохранённая автором, а без неё — центр города. */
 export const useListingPoint = (listing: Listing) => {
-  const [point, setPoint] = useState(() => savedPoint(listing));
-  const { city } = listing;
+  const [saved] = useState(() => savedPoint(listing));
+  const center = useCityCenter(saved ? null : listing.city);
 
-  useEffect(() => {
-    if (point || !city) return;
-
-    let active = true;
-    geocode(cityAddress(city)).then((found) => active && setPoint(found));
-
-    return () => {
-      active = false;
-    };
-  }, [point, city]);
-
-  return point;
+  return saved ?? center;
 };

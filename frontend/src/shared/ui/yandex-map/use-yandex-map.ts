@@ -3,11 +3,13 @@
 import { useEffect, useRef, useState, type RefObject } from "react";
 import type { Coordinates, YandexMapInstance } from "./types";
 
-const IRKUTSK: Coordinates = [52.287, 104.281];
+const RUSSIA: Coordinates = [61.5, 105.3];
+
+const COUNTRY_ZOOM = 3;
+
+const CITY_ZOOM = 11;
 
 const ZOOM = 14;
-
-const REGION_ZOOM = 8;
 
 /** Создаёт карту в контейнере, когда скрипт загружен. Клик по карте отдаёт точку в onPick. */
 const useMapInstance = (
@@ -31,8 +33,8 @@ const useMapInstance = (
 
     ymaps.ready(() => {
       created = new ymaps.Map(element, {
-        center: IRKUTSK,
-        zoom: REGION_ZOOM,
+        center: RUSSIA,
+        zoom: COUNTRY_ZOOM,
         controls: ["zoomControl", "geolocationControl"],
       });
       created.events.add("click", (event) => pick.current?.(event.get("coords")));
@@ -45,14 +47,21 @@ const useMapInstance = (
   return map;
 };
 
-/** Карта с меткой в точке point. Без точки — вся область. */
+/** Карта с меткой в точке point. Без точки — центр пункта center, а без него — вся Россия. */
 export const useYandexMap = (
   container: RefObject<HTMLDivElement | null>,
   ready: boolean,
   point: Coordinates | null,
+  center: Coordinates | null,
   onPick?: (point: Coordinates) => void,
 ) => {
   const map = useMapInstance(container, ready, onPick);
+
+  useEffect(() => {
+    if (!map || point || !center) return;
+
+    map.setCenter(center, CITY_ZOOM);
+  }, [map, point, center]);
 
   useEffect(() => {
     const ymaps = window.ymaps;

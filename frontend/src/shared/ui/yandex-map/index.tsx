@@ -12,6 +12,7 @@ export { suggestAddresses, type AddressSuggestion } from "./suggest";
 
 type YandexMapProps = {
   point: Coordinates | null;
+  center?: Coordinates | null;
   onPick?: (point: Coordinates) => void;
 };
 
@@ -19,12 +20,12 @@ const API_KEY = process.env.NEXT_PUBLIC_YANDEX_MAPS_API_KEY;
 
 const SCRIPT_URL = `https://api-maps.yandex.ru/2.1/?apikey=${API_KEY}&lang=ru_RU`;
 
-/** Яндекс Карта с меткой. С onPick точку можно поставить кликом. Без ключа API не показывается. */
-const YandexMap = ({ point, onPick }: YandexMapProps) => {
+/** Яндекс Карта с меткой. Без метки — на центре center. С onPick точку можно поставить кликом. Без ключа API не показывается. */
+const YandexMap = ({ point, center = null, onPick }: YandexMapProps) => {
   const container = useRef<HTMLDivElement>(null);
   const [ready, setReady] = useState(false);
 
-  useYandexMap(container, ready, point, onPick);
+  useYandexMap(container, ready, point, center, onPick);
 
   if (!API_KEY) return null;
 

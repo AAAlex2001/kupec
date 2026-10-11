@@ -1,6 +1,7 @@
 "use client";
 
 import { useId } from "react";
+import { useCityCenter } from "@/entities/city";
 import Field from "@/shared/ui/field";
 import YandexMap from "@/shared/ui/yandex-map";
 import { useLocationPicker } from "../../model/use-location-picker";
@@ -13,10 +14,11 @@ type LocationFieldProps = {
   onChange: (changes: Partial<ListingFields>) => void;
 };
 
-/** Адрес и карта: выбрать адрес из подсказок или поставить точку кликом. */
+/** Адрес и карта: выбрать адрес из подсказок или поставить точку кликом. Карта открывается на выбранном городе. */
 const LocationField = ({ fields, onChange }: LocationFieldProps) => {
   const id = useId();
   const { choose, pick } = useLocationPicker(onChange);
+  const center = useCityCenter(fields.city);
 
   return (
     <div className={styles.location}>
@@ -30,7 +32,7 @@ const LocationField = ({ fields, onChange }: LocationFieldProps) => {
         />
       </Field>
 
-      <YandexMap point={fields.point} onPick={pick} />
+      <YandexMap point={fields.point} center={center} onPick={pick} />
     </div>
   );
 };
