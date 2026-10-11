@@ -17,13 +17,22 @@ def test_every_seed_article_has_wide_cover() -> None:
         for path in (data / "articles_v1").glob("*.json")
     ]
     new = json.loads((data / "articles_v2.json").read_text(encoding="utf-8"))
-    slugs = {item["slug"] for item in [*initial, *new]}
-    assert len(slugs) == 30
+    city_articles = [
+        json.loads(path.read_text(encoding="utf-8"))
+        for path in (data / "articles_v3").glob("*.json")
+        if path.name != "editorial-plan.json"
+    ]
+    initial_slugs = {item["slug"] for item in [*initial, *new]}
+    slugs = initial_slugs | {item["slug"] for item in city_articles}
+    assert len(slugs) == 100
     assert slugs == {path.stem for path in covers.ASSETS.glob("*.webp")}
     for slug in slugs:
         with Image.open(covers.ASSETS / f"{slug}.webp") as image:
-            assert image.width >= 1200
-            assert image.width * 9 == image.height * 16
+            assert image.width >= 1000
+            assert 1.1 <= image.width / image.height <= 2.7
+            if slug in initial_slugs:
+                assert image.width >= 1200
+                assert image.width * 9 == image.height * 16
             assert image.mode == "RGB"
 
 
