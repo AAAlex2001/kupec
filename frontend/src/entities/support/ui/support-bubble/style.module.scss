@@ -1,0 +1,82 @@
+@use "shared/styles/colors" as *;
+
+.row {
+  display: flex;
+}
+
+.mine {
+  justify-content: flex-end;
+}
+
+.bubble {
+  display: flex;
+  flex-direction: column;
+  padding: 10px 14px;
+  gap: 6px;
+
+  max-width: min(520px, 85%);
+
+  font-family: "Inter";
+
+  background: var(--color-surface-soft);
+  border-radius: 12px;
+}
+
+.mine .bubble {
+  background: $accent-soft;
+}
+
+.author {
+  font-weight: 700;
+  font-size: 13px;
+  line-height: 16px;
+
+  color: $accent-text;
+}
+
+.photos {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(96px, 1fr));
+  gap: 6px;
+
+  min-width: 200px;
+}
+
+.photo {
+  position: relative;
+  padding: 0;
+
+  aspect-ratio: 1;
+
+  background: var(--color-surface-hover);
+  border: none;
+  border-radius: 8px;
+  overflow: hidden;
+  cursor: zoom-in;
+
+  img {
+    object-fit: cover;
+  }
+}
+
+.photo:focus-visible {
+  outline: 2px solid $accent;
+  outline-offset: 2px;
+}
+
+.text {
+  font-size: 15px;
+  line-height: 22px;
+  white-space: pre-line;
+  overflow-wrap: anywhere;
+
+  color: var(--color-text);
+}
+
+.time {
+  font-size: 11px;
+  line-height: 16px;
+  text-align: right;
+
+  color: var(--color-text-muted);
+}

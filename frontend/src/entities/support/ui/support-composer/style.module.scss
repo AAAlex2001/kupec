@@ -1,0 +1,46 @@
+.composer {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.photos {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.row .attach {
+  flex: none;
+
+  width: 44px;
+  height: 44px;
+}
+
+.composer .row .attach svg {
+  width: 32px;
+  height: 32px;
+}
+
+.input {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.file {
+  display: none;
+}
+
+.error {
+  font-family: "Inter";
+  font-size: 12px;
+  line-height: 16px;
+
+  color: var(--color-danger);
+}

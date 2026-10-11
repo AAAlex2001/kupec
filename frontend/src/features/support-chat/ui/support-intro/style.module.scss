@@ -1,0 +1,30 @@
+@use "shared/styles/colors" as *;
+
+.intro {
+  display: flex;
+  flex-direction: column;
+  padding: 14px 16px;
+  gap: 6px;
+
+  max-width: min(520px, 85%);
+
+  font-family: "Inter";
+
+  background: var(--color-surface-soft);
+  border-radius: 12px;
+}
+
+.title {
+  font-weight: 700;
+  font-size: 15px;
+  line-height: 22px;
+
+  color: var(--color-text);
+}
+
+.text {
+  font-size: 14px;
+  line-height: 20px;
+
+  color: var(--color-text-secondary);
+}

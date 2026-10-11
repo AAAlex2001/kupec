@@ -12,6 +12,7 @@ import { HEADER_ACTIONS, PUBLISH_LABEL, SERVICE_LINKS } from "./data";
 import AccountLink from "./ui/account-link";
 import ActionLink from "./ui/action-link";
 import CatalogButton from "./ui/catalog-button";
+import SupportLink from "./ui/support-link";
 import styles from "./style.module.scss";
 
 type HeaderProps = {
@@ -32,6 +33,7 @@ const Header = ({ city, tree }: HeaderProps) => (
       </nav>
 
       <div className={styles.serviceActions}>
+        <SupportLink />
         <ThemeToggle />
         <nav className={styles.personal} aria-label="Личный раздел">
           {HEADER_ACTIONS.map(({ href, label, Icon, requiresAuth }) => (

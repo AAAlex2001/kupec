@@ -23,6 +23,7 @@ from app.posts.models import (
     PostView,
 )
 from app.reviews.models import Review, ReviewPhoto
+from app.support.models import SupportMessage, SupportPhoto, SupportThread
 from app.telegram.models import TelegramLink
 from app.units.models import Unit
 from app.users.models import User
@@ -59,6 +60,9 @@ __all__ = [
     "PostView",
     "Review",
     "ReviewPhoto",
+    "SupportMessage",
+    "SupportPhoto",
+    "SupportThread",
     "TelegramLink",
     "Unit",
     "User",

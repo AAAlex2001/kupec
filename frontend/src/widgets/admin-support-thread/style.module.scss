@@ -1,0 +1,22 @@
+@use "shared/styles/colors" as *;
+
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.chat {
+  height: calc(100dvh - 240px);
+  min-height: 480px;
+}
+
+.link {
+  text-decoration: none;
+
+  color: $accent-text;
+}
+
+.link:hover {
+  text-decoration: underline;
+}

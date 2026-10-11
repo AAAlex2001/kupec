@@ -8,6 +8,7 @@ from app.admin import article_routes as admin_articles
 from app.admin import catalog_routes as admin_catalog
 from app.admin import post_routes as admin_posts
 from app.admin import routes as admin
+from app.admin import support_routes as admin_support
 from app.articles import routes as articles
 from app.auth import routes as auth
 from app.catalog import routes as catalog
@@ -21,6 +22,7 @@ from app.notifications import routes as notifications
 from app.posts import routes as posts
 from app.reviews import routes as reviews
 from app.seo import routes as seo
+from app.support import routes as support
 from app.telegram import routes as telegram
 from app.users import public_routes as public_users
 from app.users import routes as users
@@ -79,6 +81,8 @@ app.include_router(seo.router, prefix="/api/v1")
 app.include_router(articles.router, prefix="/api/v1")
 app.include_router(admin_articles.router, prefix="/api/v1")
 app.include_router(telegram.router, prefix="/api/v1")
+app.include_router(support.router, prefix="/api/v1")
+app.include_router(admin_support.router, prefix="/api/v1")
 
 Path(settings.media_dir).mkdir(parents=True, exist_ok=True)
 app.mount(MEDIA_URL, StaticFiles(directory=settings.media_dir), name="media")

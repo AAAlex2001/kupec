@@ -9,6 +9,7 @@ from app.articles.models import ArticleLike
 from app.listings.models import Listing, ListingPhoto
 from app.posts.models import CommentLike, Post, PostComment, PostLike, PostMedia
 from app.reviews.models import Review, ReviewPhoto
+from app.support.models import SupportMessage, SupportPhoto, SupportThread
 from app.users.models import User
 
 
@@ -78,6 +79,12 @@ class AdminUserRepository:
                 *await self.ids(select(ListingPhoto.path).where(ListingPhoto.owner_id == user.id)),
                 *await self.ids(select(PostMedia.path).where(PostMedia.owner_id == user.id)),
                 *await self.ids(select(ReviewPhoto.path).where(ReviewPhoto.owner_id == user.id)),
+                *await self.ids(
+                    select(SupportPhoto.path)
+                    .join(SupportMessage, SupportMessage.id == SupportPhoto.message_id)
+                    .join(SupportThread, SupportThread.id == SupportMessage.thread_id)
+                    .where(SupportThread.user_id == user.id)
+                ),
             ],
             liked_posts=await self.ids(select(PostLike.post_id).where(PostLike.user_id == user.id)),
             reposted_posts=await self.ids(

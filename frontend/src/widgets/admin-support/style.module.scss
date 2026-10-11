@@ -1,0 +1,36 @@
+@use "shared/styles/colors" as *;
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.head {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+}
+
+.unread {
+  font-family: "Inter";
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 20px;
+
+  color: $accent-text;
+}
+
+.empty {
+  font-family: "Inter";
+  font-size: 14px;
+  line-height: 20px;
+
+  color: var(--color-text-muted);
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}

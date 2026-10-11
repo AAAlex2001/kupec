@@ -45,6 +45,8 @@ export const adminUserPath = (id: number) => `${ADMIN_USERS_PATH}/${id}`;
 export const ADMIN_ARTICLES_PATH = "/admin/articles";
 export const NEW_ARTICLE_PATH = "/admin/articles/new";
 export const adminArticlePath = (id: number) => `${ADMIN_ARTICLES_PATH}/${id}`;
+export const ADMIN_SUPPORT_PATH = "/admin/support";
+export const adminSupportPath = (id: number) => `${ADMIN_SUPPORT_PATH}/${id}`;
 
 export const RULES_PATH = "/rules";
 export const TERMS_PATH = "/terms";

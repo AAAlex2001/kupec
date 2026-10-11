@@ -7,6 +7,7 @@ $favorite: var(--color-favorite);
 $favorite-soft: var(--color-favorite-soft);
 $rating: var(--color-rating);
 $footer: var(--color-footer);
+$support: var(--color-support);
 
 // Стили только для тёмной темы.
 @mixin dark-theme {

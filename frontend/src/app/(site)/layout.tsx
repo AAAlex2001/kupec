@@ -4,6 +4,7 @@ import { FavoritesProvider } from "@/entities/favorite";
 import { getFavoriteIds } from "@/entities/favorite/server";
 import { UserProvider } from "@/entities/user";
 import { getSessionUser, sessionHeaders } from "@/entities/user/server";
+import { SupportChat, SupportProvider } from "@/features/support-chat";
 import AuthModal from "@/widgets/auth-modal";
 import Footer from "@/widgets/footer";
 import Header from "@/widgets/header";
@@ -22,11 +23,14 @@ export default async function SiteLayout({ children }: { children: React.ReactNo
   return (
     <UserProvider initialUser={user}>
       <FavoritesProvider key={user?.id ?? "guest"} initialIds={favoriteIds}>
-        <Header city={location} tree={tree} />
-        {children}
-        <Footer categories={tree} />
-        <TabBar />
-        <AuthModal />
+        <SupportProvider>
+          <Header city={location} tree={tree} />
+          {children}
+          <Footer categories={tree} />
+          <TabBar />
+          <SupportChat />
+          <AuthModal />
+        </SupportProvider>
       </FavoritesProvider>
     </UserProvider>
   );
