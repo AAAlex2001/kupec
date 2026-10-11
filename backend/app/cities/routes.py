@@ -11,25 +11,13 @@ router = APIRouter(prefix="/cities", tags=["cities"])
 async def search_cities(
     q: str | None = Query(None, max_length=100, description="Начало названия"),
     limit: int = Query(20, ge=1, le=50),
-    region: str | None = Query(None, max_length=100, description="Название региона"),
     cities: CityRepository = Depends(get_city_repository),
 ) -> list[CitySchema]:
     """Поиск населённого пункта для профиля и объявления. Без q — крупные города."""
 
-    items = await cities.search(
-        q.strip() if q else None, limit, region.strip() if region else None
-    )
+    items = await cities.search(q.strip() if q else None, limit)
 
     return [CitySchema.model_validate(city) for city in items]
-
-
-@router.get("/regions")
-async def get_regions(
-    cities: CityRepository = Depends(get_city_repository),
-) -> list[str]:
-    """Регионы для фильтра населённых пунктов."""
-
-    return await cities.regions()
 
 
 @router.get("/{city_id}")

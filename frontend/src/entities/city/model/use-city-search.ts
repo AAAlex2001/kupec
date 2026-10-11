@@ -7,24 +7,17 @@ import type { City } from "./types";
 
 const SEARCH_DELAY = 250;
 
-type SearchResult = {
-  query: string;
-  region: string;
-  cities: City[];
-};
-
-/** Подсказки пунктов по введённому тексту и региону, пока список открыт. Ответ на старый запрос не показывается. */
-export const useCitySearch = (open: boolean, query: string, region: string) => {
-  const [result, setResult] = useState<SearchResult | null>(null);
-  const text = query.trim();
+/** Подсказки городов по введённому тексту, пока список открыт. */
+export const useCitySearch = (open: boolean, query: string) => {
+  const [cities, setCities] = useState<City[]>([]);
 
   useEffect(() => {
     if (!open) return;
 
     let active = true;
     const timer = setTimeout(() => {
-      searchCities(text, region)
-        .then((cities) => active && setResult({ query: text, region, cities }))
+      searchCities(query.trim())
+        .then((found) => active && setCities(found))
         .catch(reportError);
     }, SEARCH_DELAY);
 
@@ -32,9 +25,7 @@ export const useCitySearch = (open: boolean, query: string, region: string) => {
       active = false;
       clearTimeout(timer);
     };
-  }, [open, text, region]);
+  }, [open, query]);
 
-  const fresh = result?.query === text && result.region === region;
-
-  return fresh ? result.cities : [];
+  return cities;
 };
