@@ -20,6 +20,16 @@ def post_url(site_url: str, post_id: int) -> str:
     return f"{site_url.rstrip('/')}/posts/{post_id}"
 
 
+def message_url(message: dict) -> str:
+    """Ссылка на сообщение в канале. У приватного канала откроется только у подписчиков."""
+
+    chat = message["chat"]
+    if chat.get("username"):
+        return f"https://t.me/{chat['username']}/{message['message_id']}"
+
+    return f"https://t.me/c/{str(chat['id']).removeprefix('-100')}/{message['message_id']}"
+
+
 def post_blocks(post: Post, site_url: str) -> list[Block]:
     """Текст поста и ссылки на прикреплённые объявления."""
 

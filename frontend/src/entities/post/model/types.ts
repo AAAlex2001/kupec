@@ -44,6 +44,7 @@ export type Post = {
   comments_count: number;
   reposts_count: number;
   views_count: number;
+  telegram_url: string | null;
   liked: boolean;
   saved: boolean;
   following: boolean;

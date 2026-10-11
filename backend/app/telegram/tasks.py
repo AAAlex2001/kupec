@@ -17,11 +17,12 @@ async def publish_post(post_id: int) -> None:
 
     settings = get_settings()
     async with SessionLocal() as session:
-        post = await PostRepository(session).get_by_id(post_id)
+        posts = PostRepository(session)
+        post = await posts.get_by_id(post_id)
         if post is None:
             return
 
-        usecase = PublishPostUseCase(TelegramLinkRepository(session), TelegramClient(settings), settings)
+        usecase = PublishPostUseCase(posts, TelegramLinkRepository(session), TelegramClient(settings), settings)
         try:
             await usecase.execute(post)
         except TelegramError as error:

@@ -23,6 +23,7 @@ const PostCard = ({ post, menu, footer, ref }: PostCardProps) => {
         date={post.published_at ?? post.created_at}
         note={post.repost_of ? "репост" : undefined}
         views={views}
+        telegramUrl={post.telegram_url}
         menu={menu}
       />
 

@@ -9,24 +9,23 @@ type TelegramToggleProps = {
   onChange: (checked: boolean) => void;
 };
 
-/** Флажок «Опубликовать также в Telegram-канал». Канал не подключён — кнопка с инструкцией. */
+/** Блок «Telegram» в форме поста: флажок отправки в канал, а без канала — кнопка с инструкцией. */
 const TelegramToggle = ({ checked, onChange }: TelegramToggleProps) => {
   const { link } = useTelegramLink();
 
   if (!link?.enabled) return null;
 
-  if (!link.channel_title) {
-    return (
-      <div className={styles.guide}>
-        <TelegramGuideButton link={link} label="Подключить Telegram-канал" />
-      </div>
-    );
-  }
-
   return (
-    <Checkbox checked={checked} onChange={onChange}>
-      Опубликовать также в Telegram-канал «{link.channel_title}»
-    </Checkbox>
+    <section className={styles.section}>
+      <p className={styles.title}>Telegram</p>
+
+      {link.channel_title && (
+        <Checkbox checked={checked} onChange={onChange}>
+          Опубликовать также в Telegram-канал «{link.channel_title}»
+        </Checkbox>
+      )}
+      {!link.channel_title && <TelegramGuideButton link={link} label="Подключить Telegram-канал" />}
+    </section>
   );
 };
 

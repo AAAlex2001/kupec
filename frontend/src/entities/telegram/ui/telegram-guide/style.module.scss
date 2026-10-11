@@ -5,6 +5,14 @@
   gap: 16px;
 }
 
+.title {
+  padding-right: 40px;
+}
+
+.open {
+  align-self: stretch;
+}
+
 .steps {
   display: flex;
   flex-direction: column;

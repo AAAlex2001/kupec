@@ -7,6 +7,7 @@ from app.posts.models import Post
 from app.telegram.models import TelegramLink
 from app.telegram.services.link_token import create_link_token, read_link_token
 from app.telegram.services.markup import fit_text, html_blocks, join_blocks, text_size
+from app.telegram.services.message import message_url
 from app.telegram.services.usecases.handle_update import HandleUpdateUseCase
 from app.telegram.services.usecases.publish_post import PublishPostUseCase
 
@@ -15,13 +16,24 @@ TELEGRAM_USER_ID = 777
 
 
 class FakeClient:
-    """Запоминает отправленные сообщения."""
+    """Запоминает отправленные сообщения. Канал публичный — @ogorod."""
 
     def __init__(self) -> None:
         self.texts: list[tuple[int, str]] = []
 
-    async def send_text(self, chat_id: int, html: str) -> None:
+    async def send_text(self, chat_id: int, html: str) -> dict:
         self.texts.append((chat_id, html))
+        return {"message_id": len(self.texts), "chat": {"id": chat_id, "username": "ogorod"}}
+
+
+class FakePosts:
+    """Запоминает ссылку на пост в канале."""
+
+    def __init__(self) -> None:
+        self.telegram_url: str | None = None
+
+    async def set_telegram_url(self, post_id: int, url: str) -> None:
+        self.telegram_url = url
 
 
 class FakeLinks:
@@ -94,15 +106,23 @@ def test_link_token_is_signed() -> None:
     assert read_link_token("мусор") is None
 
 
-def test_post_goes_to_linked_channel_only() -> None:
+def test_post_goes_to_linked_channel_only_and_keeps_link() -> None:
     client = FakeClient()
+    posts = FakePosts()
     post = Post(id=1, author_id=5, html="<p>Свежие <strong>огурцы</strong></p>", media=[], listings=[])
     link = TelegramLink(user_id=5, telegram_user_id=TELEGRAM_USER_ID, channel_id=CHANNEL_ID)
 
-    asyncio.run(PublishPostUseCase(FakeLinks(link), client, get_settings()).execute(post))
-    asyncio.run(PublishPostUseCase(FakeLinks(None), client, get_settings()).execute(post))
+    asyncio.run(PublishPostUseCase(posts, FakeLinks(link), client, get_settings()).execute(post))
+    asyncio.run(PublishPostUseCase(posts, FakeLinks(None), client, get_settings()).execute(post))
 
     assert client.texts == [(CHANNEL_ID, "Свежие <b>огурцы</b>")]
+    assert posts.telegram_url == "https://t.me/ogorod/1"
+
+
+def test_private_channel_link_uses_channel_id() -> None:
+    message = {"message_id": 7, "chat": {"id": -1001234567890}}
+
+    assert message_url(message) == "https://t.me/c/1234567890/7"
 
 
 def test_start_links_account_and_admin_rights_link_channel() -> None:

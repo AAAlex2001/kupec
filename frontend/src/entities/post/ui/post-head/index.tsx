@@ -4,6 +4,7 @@ import { userPath } from "@/shared/config/routes";
 import { formatDate } from "@/shared/lib/format";
 import Avatar from "@/shared/ui/avatar";
 import type { PostAuthor } from "../../model/types";
+import TelegramBadge from "../telegram-badge";
 import styles from "./style.module.scss";
 
 type PostHeadProps = {
@@ -11,11 +12,12 @@ type PostHeadProps = {
   date: string;
   note?: string;
   views?: number;
+  telegramUrl?: string | null;
   menu?: ReactNode;
 };
 
-/** Шапка поста: аватар и имя — ссылка на страницу автора, дата с пометкой, просмотры и меню «⋯». */
-const PostHead = ({ author, date, note, views, menu }: PostHeadProps) => {
+/** Шапка поста: аватар и имя — ссылка на страницу автора, дата с пометкой, просмотры, плашка Telegram и меню «⋯». */
+const PostHead = ({ author, date, note, views, telegramUrl, menu }: PostHeadProps) => {
   const name = author.name ?? "Пользователь";
 
   return (
@@ -31,6 +33,7 @@ const PostHead = ({ author, date, note, views, menu }: PostHeadProps) => {
           </span>
         </span>
       </Link>
+      {telegramUrl && <TelegramBadge url={telegramUrl} />}
       {menu}
     </div>
   );

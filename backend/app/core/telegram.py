@@ -51,20 +51,19 @@ class TelegramClient:
 
         return answer["result"]
 
-    async def send_text(self, chat_id: int, html: str) -> None:
-        """Отправить текст с HTML-разметкой."""
+    async def send_text(self, chat_id: int, html: str) -> dict:
+        """Отправить текст с HTML-разметкой. Вернуть сообщение."""
 
-        await self.call("sendMessage", {"chat_id": chat_id, "text": html, "parse_mode": "HTML"})
+        return await self.call("sendMessage", {"chat_id": chat_id, "text": html, "parse_mode": "HTML"})
 
-    async def send_media(self, chat_id: int, items: list[TelegramFile], caption: str) -> None:
-        """Отправить одно фото или видео либо альбом до 10 штук. Подпись — у первого."""
+    async def send_media(self, chat_id: int, items: list[TelegramFile], caption: str) -> dict:
+        """Отправить одно фото или видео либо альбом до 10 штук. Подпись — у первого. Вернуть первое сообщение."""
 
         if len(items) == 1:
             item = items[0]
             method = "sendPhoto" if item.kind == "photo" else "sendVideo"
             data = {"chat_id": chat_id, "caption": caption, "parse_mode": "HTML"}
-            await self.call(method, data, {item.kind: (item.name, item.content)})
-            return
+            return await self.call(method, data, {item.kind: (item.name, item.content)})
 
         media = []
         files = {}
@@ -75,7 +74,9 @@ class TelegramClient:
             media.append(entry)
             files[f"file{index}"] = (item.name, item.content)
 
-        await self.call("sendMediaGroup", {"chat_id": chat_id, "media": json.dumps(media)}, files)
+        messages = await self.call("sendMediaGroup", {"chat_id": chat_id, "media": json.dumps(media)}, files)
+
+        return messages[0]
 
     async def delete_webhook(self) -> None:
         """Снять webhook: пока он включён, Telegram не отдаёт события через getUpdates."""
