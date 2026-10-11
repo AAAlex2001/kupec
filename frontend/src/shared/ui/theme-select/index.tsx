@@ -2,6 +2,7 @@
 
 import { useId } from "react";
 import Dropdown from "@/shared/ui/dropdown";
+import Field from "@/shared/ui/field";
 import { isThemePreference } from "@/shared/lib/theme/config";
 import { setThemePreference, useThemePreference } from "@/shared/lib/theme/store";
 import styles from "./style.module.scss";
@@ -17,10 +18,7 @@ const ThemeSelect = () => {
   const preference = useThemePreference();
 
   return (
-    <div className={styles.control}>
-      <label className={styles.label} htmlFor={id}>
-        Тема оформления
-      </label>
+    <Field className={styles.control} label="Тема оформления" htmlFor={id}>
       <Dropdown
         id={id}
         value={preference}
@@ -30,7 +28,7 @@ const ThemeSelect = () => {
           if (isThemePreference(value)) setThemePreference(value);
         }}
       />
-    </div>
+    </Field>
   );
 };
 
