@@ -2,11 +2,16 @@
 
 Входящие соединения от Telegram до сервера режутся, исходящие через прокси работают.
 Запускается отдельным контейнером в одном экземпляре: python -m app.telegram.polling
+app.models подключает все таблицы, иначе SQLAlchemy не найдёт users для внешнего ключа.
+Журнал httpx выключен: в адресах запросов к Telegram есть токен бота.
 """
 
 import asyncio
 import logging
 
+from sqlalchemy.exc import SQLAlchemyError
+
+import app.models  # noqa: F401
 from app.core.config import get_settings
 from app.core.database import SessionLocal
 from app.core.telegram import TelegramClient, TelegramError
@@ -42,7 +47,7 @@ async def fetch_updates(client: TelegramClient, offset: int) -> list[dict]:
 
 
 async def handle(client: TelegramClient, update: dict) -> None:
-    """Обработать одно событие в своей сессии БД. Бот не смог ответить — в лог."""
+    """Обработать одно событие в своей сессии БД. Сбой Telegram или базы — в лог, бот работает дальше."""
 
     async with SessionLocal() as session:
         usecase = HandleUpdateUseCase(TelegramLinkRepository(session), client, get_settings())
@@ -50,12 +55,15 @@ async def handle(client: TelegramClient, update: dict) -> None:
             await usecase.execute(update)
         except TelegramError as error:
             logger.warning("Бот не ответил в Telegram: %s", error)
+        except SQLAlchemyError as error:
+            logger.error("Событие %s не сохранено: %s", update.get("update_id"), error)
 
 
 async def main() -> None:
     """Забирать события по кругу. offset подтверждает Telegram, что прежние уже обработаны."""
 
     logging.basicConfig(level=logging.INFO)
+    logging.getLogger("httpx").setLevel(logging.WARNING)
     settings = get_settings()
     if not settings.telegram_bot_token:
         logger.info("TELEGRAM_BOT_TOKEN не задан — бот выключен")
