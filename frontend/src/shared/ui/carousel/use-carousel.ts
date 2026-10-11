@@ -11,7 +11,7 @@ export const useCarousel = () => {
   const [canNext, setCanNext] = useState(false);
 
   const [sliderRef, slider] = useKeenSlider<HTMLDivElement>({
-    mode: "free-snap",
+    mode: "snap",
     slides: { perView: "auto", spacing: CARDS_GAP },
     detailsChanged: (instance) => {
       const { abs, minIdx, maxIdx } = instance.track.details;

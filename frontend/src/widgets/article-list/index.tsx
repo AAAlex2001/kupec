@@ -24,7 +24,12 @@ const ArticleList = ({ section, page, pageNumber }: ArticleListProps) => {
       <Breadcrumbs items={[{ label: "Главная", href: HOME_PATH }, { label: meta.title }]} />
 
       <div className={styles.head}>
-        <Title as="h1">{meta.title}</Title>
+        <div className={styles.heading}>
+          <Title as="h1">{meta.title}</Title>
+          <p className={styles.count}>
+            Всего: {page.total} {section === "news" ? "новостей" : "статей"}
+          </p>
+        </div>
         <p className={styles.lead}>{meta.lead}</p>
       </div>
 
