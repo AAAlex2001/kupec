@@ -198,7 +198,7 @@ class PostRepository:
         )
         await self.db.commit()
 
-    async def set_telegram_url(self, post_id: int, url: str) -> None:
+    async def set_telegram_url(self, post_id: int, url: str | None) -> None:
         """Запомнить ссылку на пост в Telegram-канале автора."""
 
         await self.db.execute(update(Post).where(Post.id == post_id).values(telegram_url=url))

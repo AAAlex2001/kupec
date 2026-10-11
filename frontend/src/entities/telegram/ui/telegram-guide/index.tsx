@@ -18,9 +18,9 @@ const TelegramGuide = ({ link, onClose }: TelegramGuideProps) => {
   const openBot = () => window.open(link.connect_url ?? "", "_blank", "noopener");
 
   return (
-    <Modal open onClose={onClose} ariaLabel="Как подключить Telegram-канал">
+    <Modal open onClose={onClose} ariaLabel="Как подключить Telegram">
       <div className={styles.content}>
-        <Title className={styles.title}>Как подключить Telegram-канал</Title>
+        <Title className={styles.title}>Как подключить Telegram</Title>
 
         <ol className={styles.steps}>
           {steps.map((step) => (
@@ -29,7 +29,8 @@ const TelegramGuide = ({ link, onClose }: TelegramGuideProps) => {
         </ol>
 
         <p className={styles.note}>
-          Если бот уже был в канале, удалите его из администраторов и добавьте снова. Приватные каналы тоже подходят.
+          Если бот уже был в канале или группе, удалите его и добавьте снова администратором с того же аккаунта
+          Telegram, который подключили на сайте. Приватные каналы и группы тоже подходят.
         </p>
 
         {!link.linked && (

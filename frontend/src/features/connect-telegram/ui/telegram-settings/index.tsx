@@ -19,7 +19,7 @@ const TelegramSettings = () => {
 
   return (
     <section className={styles.section}>
-      <Title>Telegram-канал</Title>
+      <Title>Telegram</Title>
       <p className={styles.text}>{telegramStatus(link)}</p>
 
       <div className={styles.actions}>

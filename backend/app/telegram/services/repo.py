@@ -63,3 +63,11 @@ class TelegramLinkRepository:
 
         await self.db.execute(delete(TelegramLink).where(TelegramLink.user_id == user_id))
         await self.db.commit()
+
+    async def migrate_chat(self, old_id: int, new_id: int) -> None:
+        """Сохранить подключение при преобразовании группы в супергруппу."""
+
+        await self.db.execute(
+            update(TelegramLink).where(TelegramLink.channel_id == old_id).values(channel_id=new_id)
+        )
+        await self.db.commit()

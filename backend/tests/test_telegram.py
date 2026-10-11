@@ -1,6 +1,7 @@
 """Кросспостинг в Telegram без сети и БД: разметка, обрезка, токен привязки, отправка и события бота."""
 
 import asyncio
+import pytest
 
 from app.core.config import get_settings
 from app.posts.models import Post
@@ -32,7 +33,7 @@ class FakePosts:
     def __init__(self) -> None:
         self.telegram_url: str | None = None
 
-    async def set_telegram_url(self, post_id: int, url: str) -> None:
+    async def set_telegram_url(self, post_id: int, url: str | None) -> None:
         self.telegram_url = url
 
 
@@ -58,6 +59,10 @@ class FakeLinks:
     async def clear_channel(self, channel_id: int) -> None:
         if self.link is not None and self.link.channel_id == channel_id:
             self.link.channel_id = None
+
+    async def migrate_chat(self, old_id: int, new_id: int) -> None:
+        if self.link is not None and self.link.channel_id == old_id:
+            self.link.channel_id = new_id
 
 
 def test_editor_html_becomes_telegram_markup() -> None:
@@ -144,3 +149,70 @@ def test_start_links_account_and_admin_rights_link_channel() -> None:
     asyncio.run(usecase.execute({"my_chat_member": {"chat": channel, "from": sender, "new_chat_member": removed}}))
 
     assert links.link.channel_id is None
+
+
+@pytest.mark.parametrize("chat_type", ["group", "supergroup"])
+def test_group_admin_connects_without_channel_permissions(chat_type: str) -> None:
+    link = TelegramLink(user_id=5, telegram_user_id=TELEGRAM_USER_ID)
+    links = FakeLinks(link)
+    client = FakeClient()
+    chat = {"id": CHANNEL_ID, "type": chat_type, "title": "Соседи"}
+    member = {"chat": chat, "from": {"id": TELEGRAM_USER_ID}, "new_chat_member": {"status": "administrator"}}
+    usecase = HandleUpdateUseCase(links, client, get_settings())
+
+    asyncio.run(usecase.execute({"my_chat_member": member}))
+
+    assert link.channel_id == CHANNEL_ID
+    assert link.channel_title == "Соседи"
+    assert "подключено" in client.texts[0][1]
+
+    member["new_chat_member"] = {"status": "member"}
+    asyncio.run(usecase.execute({"my_chat_member": member}))
+
+    assert link.channel_id is None
+
+
+def test_channel_without_posting_right_clears_connection() -> None:
+    link = TelegramLink(user_id=5, telegram_user_id=TELEGRAM_USER_ID, channel_id=CHANNEL_ID)
+    client = FakeClient()
+    member = {
+        "chat": {"id": CHANNEL_ID, "type": "channel", "title": "Новости"},
+        "from": {"id": TELEGRAM_USER_ID},
+        "new_chat_member": {"status": "administrator", "can_post_messages": False},
+    }
+
+    asyncio.run(HandleUpdateUseCase(FakeLinks(link), client, get_settings()).execute({"my_chat_member": member}))
+
+    assert link.channel_id is None
+    assert "не хватает права" in client.texts[0][1]
+
+
+def test_group_migration_keeps_connection() -> None:
+    link = TelegramLink(user_id=5, telegram_user_id=TELEGRAM_USER_ID, channel_id=-123)
+    usecase = HandleUpdateUseCase(FakeLinks(link), FakeClient(), get_settings())
+    message = {"chat": {"id": -123, "type": "group"}, "migrate_to_chat_id": -100123}
+
+    asyncio.run(usecase.execute({"message": message}))
+
+    assert link.channel_id == -100123
+
+
+def test_basic_group_does_not_generate_invalid_message_link() -> None:
+    assert message_url({"message_id": 7, "chat": {"id": -123, "type": "group"}}) is None
+
+
+def test_post_is_published_in_basic_group_without_message_link() -> None:
+    class GroupClient(FakeClient):
+        async def send_text(self, chat_id: int, html: str) -> dict:
+            self.texts.append((chat_id, html))
+            return {"message_id": 1, "chat": {"id": chat_id, "type": "group"}}
+
+    client = GroupClient()
+    posts = FakePosts()
+    link = TelegramLink(user_id=5, telegram_user_id=TELEGRAM_USER_ID, channel_id=-123)
+    post = Post(id=1, author_id=5, html="<p>Привет, соседи!</p>", media=[], listings=[])
+
+    asyncio.run(PublishPostUseCase(posts, FakeLinks(link), client, get_settings()).execute(post))
+
+    assert client.texts == [(-123, "Привет, соседи!")]
+    assert posts.telegram_url is None

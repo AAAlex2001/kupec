@@ -21,10 +21,10 @@ const TelegramToggle = ({ checked, onChange }: TelegramToggleProps) => {
 
       {link.channel_title && (
         <Checkbox checked={checked} onChange={onChange}>
-          Опубликовать также в Telegram-канал «{link.channel_title}»
+          Опубликовать также в Telegram: «{link.channel_title}»
         </Checkbox>
       )}
-      {!link.channel_title && <TelegramGuideButton link={link} label="Подключить Telegram-канал" />}
+      {!link.channel_title && <TelegramGuideButton link={link} label="Подключить Telegram" />}
     </section>
   );
 };
