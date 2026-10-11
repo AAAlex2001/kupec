@@ -1,5 +1,6 @@
 "use client";
 
+import { DeleteUserButton } from "@/features/delete-user";
 import { ADMIN_USERS_PATH } from "@/shared/config/routes";
 import { formatDate } from "@/shared/lib/format";
 import Avatar from "@/shared/ui/avatar";
@@ -43,6 +44,12 @@ const AdminUser = ({ userId }: AdminUserProps) => {
           </p>
           <RatingLabel rating={user.rating} count={user.reviews_count} />
         </div>
+
+        {!user.is_admin && (
+          <div className={styles.actions}>
+            <DeleteUserButton user={user} />
+          </div>
+        )}
       </div>
 
       <Title>Объявления</Title>

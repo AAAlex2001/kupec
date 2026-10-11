@@ -1,6 +1,10 @@
 from fastapi import APIRouter, Depends, HTTPException, Query, status
 
-from app.admin.dependencies import get_admin_listing_repository, get_admin_user_repository
+from app.admin.dependencies import (
+    get_admin_listing_repository,
+    get_admin_user_repository,
+    get_delete_user_usecase,
+)
 from app.admin.schemas import (
     AdminListingPageSchema,
     AdminReviewPageSchema,
@@ -8,7 +12,9 @@ from app.admin.schemas import (
     AdminUserPageSchema,
     AdminUserSchema,
 )
+from app.admin.services.exceptions import UserNotDeletableError
 from app.admin.services.repo import AdminListingRepository, AdminUserRepository
+from app.admin.services.usecases.delete_user import DeleteUserUseCase
 from app.auth.dependencies import require_admin
 from app.listings.models import ListingStatus
 from app.listings.schemas import ListingCountsSchema, ListingSchema
@@ -29,6 +35,7 @@ from app.reviews.services.usecases.moderate_review import (
     EditReviewTextUseCase,
     RejectReviewUseCase,
 )
+from app.users.models import User
 
 router = APIRouter(prefix="/admin", tags=["admin"], dependencies=[Depends(require_admin)])
 
@@ -66,6 +73,25 @@ async def get_user(
         )
 
     return AdminUserSchema.model_validate(user)
+
+
+@router.delete("/users/{user_id}", status_code=status.HTTP_204_NO_CONTENT)
+async def delete_user(
+    user_id: int,
+    admin: User = Depends(require_admin),
+    users: AdminUserRepository = Depends(get_admin_user_repository),
+    usecase: DeleteUserUseCase = Depends(get_delete_user_usecase),
+) -> None:
+    """Удалить пользователя со всеми объявлениями, публикациями, отзывами, перепиской и файлами."""
+
+    user = await users.get(user_id)
+    if user is None:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Пользователь не найден")
+
+    try:
+        await usecase.execute(admin, user)
+    except UserNotDeletableError as error:
+        raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail=str(error)) from error
 
 
 @router.get("/listings")

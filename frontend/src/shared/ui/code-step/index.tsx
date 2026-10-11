@@ -52,7 +52,9 @@ const CodeStep = ({
   >
     <Title>{title}</Title>
 
-    <p className={styles.text}>Отправили код на {email.trim()}</p>
+    <p className={styles.text}>
+      Отправили код на {email.trim()}. <strong>Не пришёл? Проверьте папку «Спам» — письмо могло попасть туда.</strong>
+    </p>
 
     <CodeInput
       value={code}

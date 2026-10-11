@@ -1,5 +1,5 @@
 export type { AdminUser, AdminUserPage, PublicUser, User, UserChanges } from "./model/types";
-export { fetchAdminUser, fetchAdminUsers } from "./api/admin";
+export { deleteAdminUser, fetchAdminUser, fetchAdminUsers } from "./api/admin";
 export { UserProvider, useUser } from "./model/user";
 export {
   confirmEmail,

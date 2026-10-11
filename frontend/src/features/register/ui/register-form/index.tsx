@@ -79,7 +79,10 @@ const RegisterForm = ({ onSuccess }: RegisterFormProps) => {
       <Button type="submit" loading={form.pending}>
         Зарегистрироваться
       </Button>
-      <p className={styles.hint}>Отправим на почту код, чтобы подтвердить её.</p>
+      <p className={styles.hint}>
+        Отправим на почту код, чтобы подтвердить её.{" "}
+        <strong>Если письма нет пару минут — загляните в папку «Спам».</strong>
+      </p>
     </form>
   );
 };

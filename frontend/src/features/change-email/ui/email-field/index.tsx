@@ -46,7 +46,14 @@ const EmailField = ({ user }: EmailFieldProps) => {
       label={isCodeStep ? "Код из письма" : "Новая электронная почта"}
       htmlFor={id}
       error={state.error}
-      hint={isCodeStep && `Отправили код на ${state.email}. Он действует 10 минут.`}
+      hint={
+        isCodeStep && (
+          <>
+            Отправили код на {state.email}. Он действует 10 минут.{" "}
+            <strong>Не пришёл? Проверьте папку «Спам».</strong>
+          </>
+        )
+      }
     >
       <div className={styles.edit}>
         {isCodeStep ? (

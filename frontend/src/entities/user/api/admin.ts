@@ -9,3 +9,7 @@ export const fetchAdminUsers = (query: string, limit: number, offset: number) =>
 
 /** Пользователь для админки. */
 export const fetchAdminUser = (id: number) => request<AdminUser>(`/v1/admin/users/${id}`);
+
+/** Удалить пользователя со всеми его объявлениями, публикациями, отзывами и перепиской. */
+export const deleteAdminUser = (id: number) =>
+  request<void>(`/v1/admin/users/${id}`, { method: "DELETE" });

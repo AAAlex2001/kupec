@@ -1,10 +1,29 @@
-"""Запросы админки: все пользователи и все объявления сайта."""
+"""Запросы админки: все пользователи и все объявления сайта, удаление пользователя."""
 
-from sqlalchemy import ColumnElement, func, or_, select
+from dataclasses import dataclass
+
+from sqlalchemy import ColumnElement, Select, delete, func, or_, select
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from app.listings.models import Listing
+from app.articles.models import ArticleLike
+from app.listings.models import Listing, ListingPhoto
+from app.posts.models import CommentLike, Post, PostComment, PostLike, PostMedia
+from app.reviews.models import Review, ReviewPhoto
 from app.users.models import User
+
+
+@dataclass
+class UserTraces:
+    """Что остаётся от пользователя вне каскада: файлы на диске и чужие счётчики, которые надо пересчитать."""
+
+    files: list[str]
+    liked_posts: list[int]
+    reposted_posts: list[int]
+    commented_posts: list[int]
+    commented_articles: list[int]
+    liked_comments: list[int]
+    liked_articles: list[int]
+    reviewed_sellers: list[int]
 
 
 class AdminUserRepository:
@@ -49,6 +68,44 @@ class AdminUserRepository:
         """Пользователь по id или None."""
 
         return await self.db.get(User, user_id)
+
+    async def traces(self, user: User) -> UserTraces:
+        """Файлы пользователя и чужие записи, у которых после его удаления изменятся счётчики."""
+
+        return UserTraces(
+            files=[
+                *([user.avatar_path] if user.avatar_path else []),
+                *await self.ids(select(ListingPhoto.path).where(ListingPhoto.owner_id == user.id)),
+                *await self.ids(select(PostMedia.path).where(PostMedia.owner_id == user.id)),
+                *await self.ids(select(ReviewPhoto.path).where(ReviewPhoto.owner_id == user.id)),
+            ],
+            liked_posts=await self.ids(select(PostLike.post_id).where(PostLike.user_id == user.id)),
+            reposted_posts=await self.ids(
+                select(Post.repost_of_id).where(Post.author_id == user.id, Post.repost_of_id.is_not(None))
+            ),
+            commented_posts=await self.ids(
+                select(PostComment.post_id).where(PostComment.author_id == user.id, PostComment.post_id.is_not(None))
+            ),
+            commented_articles=await self.ids(
+                select(PostComment.article_id).where(
+                    PostComment.author_id == user.id, PostComment.article_id.is_not(None)
+                )
+            ),
+            liked_comments=await self.ids(select(CommentLike.comment_id).where(CommentLike.user_id == user.id)),
+            liked_articles=await self.ids(select(ArticleLike.article_id).where(ArticleLike.user_id == user.id)),
+            reviewed_sellers=await self.ids(select(Review.seller_id).where(Review.author_id == user.id)),
+        )
+
+    async def ids(self, stmt: Select) -> list:
+        """Значения одной колонки без повторов."""
+
+        return list((await self.db.scalars(stmt.distinct())).all())
+
+    async def delete(self, user_id: int) -> None:
+        """Удалить пользователя. Его объявления, посты, отзывы, переписку и лайки база удаляет каскадом."""
+
+        await self.db.execute(delete(User).where(User.id == user_id))
+        await self.db.commit()
 
 
 class AdminListingRepository:
