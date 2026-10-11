@@ -14,10 +14,11 @@ import styles from "./style.module.scss";
 type ProfileFormProps = {
   user: User;
   emailField: ReactNode;
+  telegramSection: ReactNode;
 };
 
-/** Форма профиля: имя, город, телефон и уведомления. Поле почты приходит слотом. */
-const ProfileForm = ({ user, emailField }: ProfileFormProps) => {
+/** Форма профиля: имя, город, телефон, Telegram и уведомления. Поле почты и раздел Telegram приходят слотами. */
+const ProfileForm = ({ user, emailField, telegramSection }: ProfileFormProps) => {
   const id = useId();
   const { state, change, reset, save } = useProfileForm(user);
   const { fields } = state;
@@ -60,6 +61,8 @@ const ProfileForm = ({ user, emailField }: ProfileFormProps) => {
           />
         </Field>
       </section>
+
+      {telegramSection}
 
       <NotificationFields fields={fields} onChange={change} />
 

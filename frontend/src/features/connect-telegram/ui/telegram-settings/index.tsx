@@ -3,6 +3,7 @@
 import { useTelegramLink } from "@/entities/telegram";
 import Button from "@/shared/ui/button";
 import Notice from "@/shared/ui/notice";
+import Title from "@/shared/ui/title";
 import { telegramStatus } from "../../lib/status";
 import { useDisconnectTelegram } from "../../model/use-disconnect-telegram";
 import styles from "./style.module.scss";
@@ -18,7 +19,7 @@ const TelegramSettings = () => {
 
   return (
     <section className={styles.section}>
-      <p className={styles.title}>Telegram-канал</p>
+      <Title>Telegram-канал</Title>
       <p className={styles.text}>{telegramStatus(link)}</p>
 
       {!link.linked && <Button onClick={connect}>Подключить Telegram</Button>}
